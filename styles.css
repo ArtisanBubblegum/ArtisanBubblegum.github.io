@@ -2,8 +2,20 @@ body {
   background-color: #ffd6db;
 }
 h1 {
-  color: pink;
+  color: #ea4486;
+  font-size: 80px;
+  text-align: center;
+}
+h2 {
+  color: black;
+  font-size: 24px;
+  text-align: center;
+  background-color: lightblue;
 }
 p {
-  color: red;
+  color: #ea4486;
+  text-align: center;
+}
+a {
+  color: #ea4486;
 }
