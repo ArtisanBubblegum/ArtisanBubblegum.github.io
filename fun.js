@@ -19,7 +19,7 @@ var inputData;
 
 function changeBGColor() 
 {
-  inputData = document.getElementById("bagcolor");
+  inputData = document.getElementById("bagcolor").value;
   document.getElementById("body1").style.backgroundColor = inputData;
   alert(inputData);
 }
