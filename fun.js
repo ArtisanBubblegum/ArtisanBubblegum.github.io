@@ -1,7 +1,15 @@
 
-
+var i = 0;
 
 function myFunction() {
-  document.getElementById("demo").innerHTML = "No, why? Why did you click that button?";
-  //document.setAttribute("demo", "set new value to para");
+  if (i = 0)
+  {
+    document.getElementById("demo").innerHTML = "No, why? Why did you click that button?";
+    i += 1;
+  }
+  if (i = 1)
+  {
+    document.getElementById("demo").innerHTML = "Word Famous Artisan";
+    i += -1;
+  }
 }
