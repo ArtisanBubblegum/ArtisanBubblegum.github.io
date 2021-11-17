@@ -30,8 +30,10 @@ var inputData;
 function changeColors() 
 {
   inputData = document.getElementById("bagcolor").value;
-  document.getElementById("body1").style.backgroundColor = inputData;
+  document.getElementById("body1").style.backgroundColor = document.getElementById("bagcolor").value;
+  document.cookie = "bagcolor="+document.getElementById("bagcolor");
   document.getElementById("header1").style.color = document.getElementById("header1color").value;
+  
 }
 
 function setCookie(cname,cvalue,exdays)
