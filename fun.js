@@ -15,7 +15,11 @@ function myFunction()
   }
 }
 
+var inputData;
+
 function changeBGColor() 
 {
-  document.getElementById("body1").style.backgroundColor = document.getElementById("bagcolor");
+  inputData = document.getElementById("bagcolor");
+  document.getElementById("body1").style.backgroundColor = inputData;
+  alert(inputData);
 }
