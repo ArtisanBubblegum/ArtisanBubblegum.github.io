@@ -17,5 +17,5 @@ function myFunction()
 
 function changeBGColor() 
 {
-  document.getElementById("BodyStyle").style.backgroundColor = "purple";
+  document.getElementById("body1").style.backgroundColor = "purple";
 }
