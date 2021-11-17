@@ -1,1 +1,4 @@
-document.getElementById("demo").innerHTML = "Hello JavaScript";
+
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Paragraph changed.";
+}
