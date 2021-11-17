@@ -17,8 +17,9 @@ function myFunction()
 
 var inputData;
 
-function changeBGColor() 
+function changeColors() 
 {
   inputData = document.getElementById("bagcolor").value;
   document.getElementById("body1").style.backgroundColor = inputData;
+  document.getElementById("header1").style.color = document.getElementById("header1color").value;
 }
