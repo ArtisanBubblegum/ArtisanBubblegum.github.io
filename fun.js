@@ -1,7 +1,8 @@
 
 var i = 0;
 
-function myFunction() {
+function myFunction() 
+{
   if (i == 0)
   {
     document.getElementById("header1").innerHTML = "No, why? Why did you click that button?";
@@ -12,4 +13,9 @@ function myFunction() {
     document.getElementById("header1").innerHTML = "Word Famous Artisan";
     i += -1;
   }
+}
+
+function changeBGColor() 
+{
+  document.getElementById("BodyStyle").style.backgroundColor = "purple";
 }
