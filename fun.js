@@ -4,6 +4,9 @@ var i = 0;
 function cookieStart()
 {
   alert(getCookie("bagcolor"));
+  document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
+  document.getElementById("header1").style.color = getCookie("header1color");
+  
 }
 
 function myFunction() 
@@ -34,7 +37,6 @@ var inputData;
 
 function changeColors() 
 {
-  inputData = document.getElementById("bagcolor").value;
   document.getElementById("body1").style.backgroundColor = document.getElementById("bagcolor").value;
   document.cookie = "bagcolor="+document.getElementById("bagcolor").value;
   document.getElementById("header1").style.color = document.getElementById("header1color").value;
