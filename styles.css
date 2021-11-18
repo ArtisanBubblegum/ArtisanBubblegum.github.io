@@ -14,6 +14,7 @@ h2 {
 p {
   color: #ea4486;
   text-align: center;
+  max-width: 120px;
 }
 a {
   color: #ea4486;
