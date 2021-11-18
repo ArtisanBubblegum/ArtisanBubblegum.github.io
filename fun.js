@@ -40,7 +40,7 @@ function changeColors()
   document.getElementById("body1").style.backgroundColor = document.getElementById("bagcolor").value;
   document.cookie = "bagcolor="+document.getElementById("bagcolor").value;
   document.getElementById("header1").style.color = document.getElementById("header1color").value;
-  
+  document.cookie = "header1color="+document.getElementById("header1color").value;
 }
 
 function setCookie(cname,cvalue,exdays)
