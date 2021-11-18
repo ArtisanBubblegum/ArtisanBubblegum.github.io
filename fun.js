@@ -5,7 +5,7 @@ function cookieStart()
 {
   document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
   document.getElementById("header1").style.color = getCookie("header1color");
-  
+  document.getElementById("p1").styel.color = getCookie("header1color");
 }
 
 function myFunction() 
@@ -39,6 +39,7 @@ function changeColors()
   document.getElementById("body1").style.backgroundColor = document.getElementById("bagcolor").value;
   document.cookie = "bagcolor="+document.getElementById("bagcolor").value;
   document.getElementById("header1").style.color = document.getElementById("header1color").value;
+  document.getElementById("p1").style.color = document.getElementById("header1color").value;
   document.cookie = "header1color="+document.getElementById("header1color").value;
 }
 
