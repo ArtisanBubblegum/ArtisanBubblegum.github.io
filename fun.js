@@ -3,7 +3,6 @@ var i = 0;
 
 function cookieStart()
 {
-  alert(getCookie("bagcolor"));
   document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
   document.getElementById("header1").style.color = getCookie("header1color");
   
