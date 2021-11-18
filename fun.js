@@ -3,7 +3,7 @@ var i = 0;
 
 function cookieStart()
 {
-  alert(getCookie("bagcolor");
+  alert(getCookie("bagcolor"));
 }
 
 function myFunction() 
