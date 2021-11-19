@@ -10,6 +10,7 @@ function cookieStart()
   {
     cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
   }
+  alert(getCookie("DoesnotExist"));
 }
 
 function myFunction() 
