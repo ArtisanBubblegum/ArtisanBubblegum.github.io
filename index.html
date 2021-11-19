@@ -52,7 +52,7 @@
   </body>
   
   <div id="threeddiv" width="100%" style="position:fixed; top:0; left:0; z-index:-1;">
-    <canvas id="threedcanvas" width=window.innerWidth/4 height=window.innerWidth/4 style="border:4px solid #0e0730;display:inline;"></canvas>
+    <canvas id="threedcanvas" width=window.innerWidth height=window.innerWidth style="border:4px solid #0e0730;display:inline;"></canvas>
   </div>
   
   <div class="fixed">
@@ -63,7 +63,7 @@
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
       
         const renderer = new THREE.WebGLRenderer( { canvas: threedcanvas, alpha: true } );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
         <!--- document.body.appendChild( renderer.domElement ); --->
         
         const geometry = new THREE.BoxGeometry();
