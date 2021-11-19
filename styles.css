@@ -6,6 +6,15 @@ div.3dback {
   top: 0;
   right: 0;
 }
+div.fixed 
+{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+
 h1 {
   color: #ea4486;
   font-size: 80px;
