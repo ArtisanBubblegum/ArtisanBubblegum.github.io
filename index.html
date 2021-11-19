@@ -70,8 +70,15 @@
         const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         const cube = new THREE.Mesh( geometry, material );
         scene.add( cube );
+        changeColors();
 
         camera.position.z = 5;
+        
+        function changeColors()
+        {
+          cube.material.color.setHex( document.getElementById("threecolor").value );
+          document.cookie = "threecolor="+document.getElementById("threecolor").value;
+        }
         
         function animate() {
           requestAnimationFrame( animate );
@@ -90,6 +97,7 @@
     <br>
      <input type="color" id="header1color" name="header1color" value="#ea4486">
      <input type="color" id="bagcolor" name="bagcolor" value="#ffd6db">
+     <input type="color" id="threecolor" name="threecolor" value="#1aofbj">
      <br>
     <button type="button" onclick="changeColors()">Apply</button>
   </form>
