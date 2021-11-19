@@ -6,13 +6,9 @@ function cookieStart()
   document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
   document.getElementById("header1").style.color = getCookie("header1color");
   document.getElementById("p1").style.color = getCookie("header1color");
-  if(getCookie("threecolor") != null)
-  {
-    cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
-    alert("null happened");
-  }
   if(getCookie("threecolor") != "")
   {
+    cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
     alert("'' happened");
   }
   else
