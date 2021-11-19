@@ -6,6 +6,7 @@ function cookieStart()
   document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
   document.getElementById("header1").style.color = getCookie("header1color");
   document.getElementById("p1").style.color = getCookie("header1color");
+  cube.material.color.setHex( getCookie("threecolor") );
 }
 
 function myFunction() 
@@ -41,6 +42,8 @@ function changeColors()
   document.getElementById("header1").style.color = document.getElementById("header1color").value;
   document.getElementById("p1").style.color = document.getElementById("header1color").value;
   document.cookie = "header1color="+document.getElementById("header1color").value;
+  cube.material.color.setHex( document.getElementById("threecolor").value );
+  document.cookie = "threecolor="+document.getElementById("threecolor").value;
 }
 
 function setCookie(cname,cvalue,exdays)
