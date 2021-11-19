@@ -1,6 +1,11 @@
 body {
   background-color: #ffd6db;
 }
+#3dback {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
 h1 {
   color: #ea4486;
   font-size: 80px;
