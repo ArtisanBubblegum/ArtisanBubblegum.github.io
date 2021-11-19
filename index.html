@@ -51,6 +51,8 @@
     <br>
   </body>
   
+  <canvas id="threedcanvas" width="200" height="100" style="border:1px solid #000000;"></canvas>
+  
   <div class="fixed">
     the rappa
     <p> para
@@ -60,7 +62,8 @@
       
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
-        document.body.appendChild( renderer.domElement );
+        <!--- document.body.appendChild( renderer.domElement ); --->
+        var renderer = new THREE.WebGLRenderer( { canvas: threedcanvas } );
         
         const geometry = new THREE.BoxGeometry();
         const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
