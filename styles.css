@@ -1,7 +1,7 @@
 body {
   background-color: #ffd6db;
 }
-#3dback {
+div.3dback {
   position: fixed;
   bottom: 0;
   right: 0;
