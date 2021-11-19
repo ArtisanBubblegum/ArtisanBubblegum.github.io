@@ -1,17 +1,7 @@
 body {
   background-color: #ffd6db;
 }
-div.3dback {
-  position: fixed;
-  top: 0;
-  right: 0;
-}
-.threeddiv{
-  z-index: -100;
-  position: fixed;
-  top: window.innerHeight/2;
-  left: window.innerwidth/2;
-}
+
 div.fixed 
 {
   position: fixed;
