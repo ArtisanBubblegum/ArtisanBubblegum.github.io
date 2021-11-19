@@ -38,8 +38,18 @@
     <br> ArtisanBubblegum</p>
     <br>
   </body>
-	
-  <div class="3dback" style="position:fixed;z-index:-100">
+  
+  <style>
+    div.fixed {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 300px;
+      border: 3px solid #73AD21;
+    }
+  </style>
+  
+  <div class="fixed" style="position:fixed;z-index:-100">
     <script>
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
