@@ -9,8 +9,17 @@ function cookieStart()
   if(getCookie("threecolor") != null)
   {
     cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
+    alert("null happened");
   }
-  alert("a"+getCookie("DoesnotExist"));
+  if(getCookie("threecolor") != "")
+  {
+    alert("'' happened");
+  }
+  else
+  {
+    cube.material.color.setHex( "0x774659")
+    alert("else happened");
+  }
 }
 
 function myFunction() 
