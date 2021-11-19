@@ -9,12 +9,10 @@ function cookieStart()
   if(getCookie("threecolor") != "")
   {
     cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
-    alert("'' happened");
   }
   else
   {
     cube.material.color.setHex( "0x774659")
-    alert("else happened");
   }
 }
 
