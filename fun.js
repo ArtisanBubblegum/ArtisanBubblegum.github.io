@@ -1,11 +1,6 @@
 
 var i = 0;
 
-function animate() {
-	requestAnimationFrame( animate );
-	renderer.render( scene, camera );
-}
-
 function cookieStart()
 {
   document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
