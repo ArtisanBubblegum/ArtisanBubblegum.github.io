@@ -64,9 +64,14 @@
     <!--- document.body.appendChild( renderer.domElement ); --->
     
     const geometry = new THREE.TorusGeometry( 12, 4, 16, 100 );
-    const material = new THREE.MeshBasicMaterial( { color: 0x774659 } );
+    <!--- const material = new THREE.MeshBasicMaterial( { color: 0x774659 } ); --->
+    const material = new Three.MeshLambertMaterial( { color: 0x774659 } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
+    
+    const light = new THREE.PointLight( 0xff0000, 1, 100 );
+    light.position.set( 0, 1, 6 );
+    scene.add( light );
 
     camera.position.z = 5;
         
