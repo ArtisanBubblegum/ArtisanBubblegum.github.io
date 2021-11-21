@@ -72,7 +72,7 @@ function changeCookies()
   }
   else
   {
-    document.getElementById("threeddiv").style.display = "block:
+    document.getElementById("threeddiv").style.display = "block";
   }
 }
 
