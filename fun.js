@@ -14,6 +14,18 @@ function cookieStart()
   {
     cube.material.color.setHex( "0x774659")
   }
+  if(getCookie("threebool"))
+  {
+    document.getElementById("threeddiv").style.display = "none";
+  }
+  else if(!getCookie("threebool"))
+  {
+    document.getElementById("threeddiv").sytle.display = "block";
+  }
+  else
+  {
+    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value)
+  }
 }
 
 function myFunction() 
@@ -42,15 +54,31 @@ function myFunction()
 
 var inputData;
 
-function changeColors() 
+function changeCookies() 
 {
   document.getElementById("body1").style.backgroundColor = document.getElementById("bagcolor").value;
   document.cookie = "bagcolor="+document.getElementById("bagcolor").value;
+  
   document.getElementById("header1").style.color = document.getElementById("header1color").value;
   document.getElementById("p1").style.color = document.getElementById("header1color").value;
   document.cookie = "header1color="+document.getElementById("header1color").value;
+  
   document.cookie = "threecolor="+document.getElementById("threecolor").value;
   cube.material.color.setHex( "0x"+getCookie("threecolor").substring(1));
+  
+  document.cookie = "threebool="+document.getElementById("threebool").value;
+  if(getCookie("threebool"))
+  {
+    document.getElementById("threeddiv").style.display = "none";
+  }
+  else if(!getCookie("threebool"))
+  {
+    document.getElementById("threeddiv").sytle.display = "block";
+  }
+  else
+  {
+    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value)
+  }
 }
 
 function setCookie(cname,cvalue,exdays)
