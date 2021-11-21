@@ -18,7 +18,7 @@ function cookieStart()
   {
     document.getElementById("threeddiv").style.display = "none";
   }
-  else if(!getCookie("threebool"))
+  else if(getCookie("threebool") == false)
   {
     document.getElementById("threeddiv").sytle.display = "block";
   }
@@ -71,7 +71,7 @@ function changeCookies()
   {
     document.getElementById("threeddiv").style.display = "none";
   }
-  else if(!getCookie("threebool"))
+  else if(getCookie("threebool") == false)
   {
     document.getElementById("threeddiv").sytle.display = "block";
   }
