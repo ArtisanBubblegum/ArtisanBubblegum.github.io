@@ -4,8 +4,10 @@ var i = 0;
 function cookieStart()
 {
   document.getElementById("body1").style.backgroundColor = getCookie("bagcolor");
+  
   document.getElementById("header1").style.color = getCookie("header1color");
   document.getElementById("p1").style.color = getCookie("header1color");
+  
   if(getCookie("threecolor") != "")
   {
     cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
@@ -14,17 +16,20 @@ function cookieStart()
   {
     cube.material.color.setHex( "0x774659")
   }
-  if(getCookie("threebool"))
+  
+  if(getCookie("threebool") == "true")
   {
+    alert("none");
     document.getElementById("threeddiv").style.display = "none";
   }
-  else if(getCookie("threebool") == false)
+  else if(getCookie("threebool") == "false")
   {
+    alert("block");
     document.getElementById("threeddiv").sytle.display = "block";
   }
   else
   {
-    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value)
+    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value);
   }
 }
 
@@ -67,17 +72,20 @@ function changeCookies()
   cube.material.color.setHex( "0x"+getCookie("threecolor").substring(1));
   
   document.cookie = "threebool="+document.getElementById("threebool").checked;
-  if(getCookie("threebool"))
+  if(getCookie("threebool") == "true")
   {
+    alert("true");
     document.getElementById("threeddiv").style.display = "none";
   }
-  else if(getCookie("threebool") == false)
+  else if(getCookie("threebool") == "false")
   {
+    alert("false");
     document.getElementById("threeddiv").sytle.display = "block";
   }
   else
   {
-    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value)
+    alert("oh no");
+    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value);
   }
 }
 
