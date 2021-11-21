@@ -68,7 +68,6 @@ function changeCookies()
   document.cookie = "threebool="+document.getElementById("threebool").checked;
   if(getCookie("threebool") == "false")
   {
-    alert("false");
     document.getElementById("threeddiv").style.display = "none";
   }
   else
