@@ -17,19 +17,13 @@ function cookieStart()
     cube.material.color.setHex( "0x774659")
   }
   
-  if(getCookie("threebool") == "true")
+  if(getCookie("threebool") == "false")
   {
-    alert("none");
-    document.getElementById("threeddiv").style.display = "block";
-  }
-  else if(getCookie("threebool") == "false")
-  {
-    alert("block");
     document.getElementById("threeddiv").style.display = "none";
   }
   else
   {
-    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value);
+    document.cookie = "threebool="+document.getElementById("threebool").checked;
   }
 }
 
@@ -72,20 +66,14 @@ function changeCookies()
   cube.material.color.setHex( "0x"+getCookie("threecolor").substring(1));
   
   document.cookie = "threebool="+document.getElementById("threebool").checked;
-  if(getCookie("threebool") == "true")
-  {
-    alert("true");
-    document.getElementById("threeddiv").style.display = "block";
-  }
-  else if(getCookie("threebool") == "false")
+  if(getCookie("threebool") == "false")
   {
     alert("false");
     document.getElementById("threeddiv").style.display = "none";
   }
   else
   {
-    alert("oh no");
-    alert("else : " + getCookie("threebool") + " ; " + getCookie("threebool").value);
+    document.getElementById("threeddiv").style.display = "block:
   }
 }
 
