@@ -66,7 +66,7 @@ function changeCookies()
   document.cookie = "threecolor="+document.getElementById("threecolor").value;
   cube.material.color.setHex( "0x"+getCookie("threecolor").substring(1));
   
-  document.cookie = "threebool="+document.getElementById("threebool").value;
+  document.cookie = "threebool="+document.getElementById("threebool").checked;
   if(getCookie("threebool"))
   {
     document.getElementById("threeddiv").style.display = "none";
