@@ -20,12 +20,12 @@ function cookieStart()
   if(getCookie("threebool") == "true")
   {
     alert("none");
-    document.getElementById("threeddiv").style.display = "none";
+    document.getElementById("threeddiv").style.display = "block";
   }
   else if(getCookie("threebool") == "false")
   {
     alert("block");
-    document.getElementById("threeddiv").sytle.display = "block";
+    document.getElementById("threeddiv").sytle.display = "none";
   }
   else
   {
@@ -75,12 +75,12 @@ function changeCookies()
   if(getCookie("threebool") == "true")
   {
     alert("true");
-    document.getElementById("threeddiv").style.display = "none";
+    document.getElementById("threeddiv").style.display = "block";
   }
   else if(getCookie("threebool") == "false")
   {
     alert("false");
-    document.getElementById("threeddiv").sytle.display = "block";
+    document.getElementById("threeddiv").sytle.display = "none";
   }
   else
   {
