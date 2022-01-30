@@ -77,10 +77,16 @@
     const material = new THREE.MeshBasicMaterial( { color: 0x774659 } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
-    const geo2 = new THREE.TorusGeometry( 7, 3, 8, 50);
-    const cube2 = new THREE.Mesh( geo2, material );
+    const cube2 = new THREE.Mesh( geometry, material );
     scene.add( cube2 );
-    cube2.position.z = -451;
+    cube2.position.z = -50;
+    const cube3 = new THREE.Mesh( geometry, material );
+    scene.add( cube3 );
+    cube2.position.z = -100;
+    const cube4 = new THREE.Mesh( geometry, material );
+    scene.add( cube4 );
+    cube2.position.z = -150;
+    
     
     camera.position.z = 5;
         
@@ -91,12 +97,26 @@
         {
           cube.position.z = 0;
         }
-      cube2.position.z += 0.1;
-      cube.rotation.x += -0.001;
+      cube2.position.z += -0.1;
+      if (cube2.position.z <= -500)
+        {
+          cube2.position.z = 0;
+        }
+      cube3.position.z += -0.1;
+      if (cube3.position.z <= -500)
+        {
+          cube3.position.z = 0;
+        }
+      cube4.position.z += -0.1;
+      if (cube4.position.z <= -500)
+        {
+          cube4.position.z = 0;
+        }
+      <!--- cube.rotation.x += -0.001;
       cube2.rotation.x += 0.001;
       cube.rotation.y += 0.003;
       cube2.rotation.y += -0.003
-      renderer.render( scene, camera );
+      renderer.render( scene, camera ); --->
     }
     animate();
   </script>
