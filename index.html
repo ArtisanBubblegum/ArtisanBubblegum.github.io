@@ -96,10 +96,13 @@
     {
       let x = makeCube();
       scene.add( x.mesh );
-      x.mesh.position.z = i * 50;
       cubelist.push(x);
     }
     
+    for (let i = 0; i < 10 ; i += 1)
+    {
+      cubelist[i].mesh.position.z = i * 50;
+    }
     
     camera.position.z = 5;
         
