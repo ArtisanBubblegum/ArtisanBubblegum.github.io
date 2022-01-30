@@ -86,8 +86,12 @@
         
     function animate() {
       requestAnimationFrame( animate );
-      cube.position.z += -0.01;
-      cube2.position.z += 0.01;
+      cube.position.z += -0.1;
+      if (cube.position.z <= -500)
+        {
+          cube.position.z = 0;
+        }
+      cube2.position.z += 0.1;
       cube.rotation.x += -0.001;
       cube2.rotation.x += 0.001;
       cube.rotation.y += 0.003;
