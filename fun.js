@@ -10,9 +10,10 @@ function cookieStart()
   
   if(getCookie("threecolor") != "")
   {
-    cubelist.forEach(b)
+    cubelist.forEach(colorChange)
+    function colorChange(item)
     {
-      b.mesh.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
+      item.mesh.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
     }
   }
   else
