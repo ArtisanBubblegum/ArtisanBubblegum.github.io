@@ -75,46 +75,38 @@
     
     const geometry = new THREE.TorusGeometry( 14, 3, 16, 100 );
     const material = new THREE.MeshBasicMaterial( { color: 0x774659 } );
-    const cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
-    const cube2 = new THREE.Mesh( geometry, material );
-    scene.add( cube2 );
-    cube2.position.z = -50;
-    const cube3 = new THREE.Mesh( geometry, material );
-    scene.add( cube3 );
-    cube3.position.z = -100;
-    const cube4 = new THREE.Mesh( geometry, material );
-    scene.add( cube4 );
-    cube4.position.z = -150;
+    
+    function makeCube()
+    {
+      const mesh = new THREE.Mesh( geometry, material)
+      
+      function update()
+      {
+        mesh.position.z += -0.1;
+        if (mesh.position.z <= -500)
+        {
+          mesh.position.z = 0;
+        }
+      }
+      return {mesh, update};
+    }
+    
+    const cubelist = [];
+    for (let i = 0; i < 10 ; i += 1)
+    {
+      let x = makeCube();
+      scene.add( x.mesh );
+      x.position.z = i * 50;
+      cubelist.push(x);
+    }
     
     
     camera.position.z = 5;
         
     function animate() {
       requestAnimationFrame( animate );
-      cube.position.z += -0.1;
-      if (cube.position.z <= -500)
-        {
-          cube.position.z = 0;
-        }
       
-      cube2.position.z += -0.1;
-      if (cube2.position.z <= -500)
-        {
-          cube2.position.z = 0;
-        }
-      
-      cube3.position.z += -0.1;
-      if (cube3.position.z <= -500)
-        {
-          cube3.position.z = 0;
-        }
-      
-      cube4.position.z += -0.1;
-      if (cube4.position.z <= -500)
-        {
-          cube4.position.z = 0;
-        }
+      cubelist.foreach( b => b.update());
       
       renderer.render( scene, camera );
     }
