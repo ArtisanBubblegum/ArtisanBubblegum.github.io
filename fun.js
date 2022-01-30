@@ -12,7 +12,7 @@ function cookieStart()
   {
     cubelist.forEach(b)
     {
-      b.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
+      b.mesh.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
     }
   }
   else
