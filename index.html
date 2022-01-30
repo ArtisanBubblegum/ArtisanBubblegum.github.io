@@ -66,7 +66,8 @@
   </div>
   
   <script>
-    const meshNumber = 25;
+    const meshNumber = 10;
+    const meshDis = -150;
     
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -85,7 +86,7 @@
       function update()
       {
         mesh.position.z += -0.1;
-        if (mesh.position.z <= meshNumber * -50)
+        if (mesh.position.z <= meshNumber * meshDis)
         {
           mesh.position.z = 0;
         }
@@ -103,7 +104,7 @@
     
     for (let i = 0; i < meshNumber ; i += 1)
     {
-      cubelist[i].mesh.position.z = i * -50;
+      cubelist[i].mesh.position.z = i * meshDis;
     }
     
     camera.position.z = 5;
