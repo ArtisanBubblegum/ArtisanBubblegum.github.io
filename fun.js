@@ -10,7 +10,10 @@ function cookieStart()
   
   if(getCookie("threecolor") != "")
   {
-    cube.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
+    cubelist.forEach(b)
+    {
+      b.material.color.setHex( "0x" + getCookie("threecolor").substring(1) );
+    }
   }
   else
   {
