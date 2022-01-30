@@ -85,7 +85,7 @@
       
       function update()
       {
-        mesh.position.z += -0.1;
+        mesh.position.z += -0.01;
         if (mesh.position.z <= meshNumber * meshDis)
         {
           mesh.position.z = 0;
@@ -107,7 +107,7 @@
       cubelist[i].mesh.position.z = i * meshDis;
     }
     
-    camera.position.z = 0;
+    camera.position.z = -5;
         
     function animate() {
       requestAnimationFrame( animate );
