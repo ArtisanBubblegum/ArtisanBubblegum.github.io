@@ -66,6 +66,8 @@
   </div>
   
   <script>
+    const meshNumber = 25;
+    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
   
@@ -73,7 +75,7 @@
     renderer.setSize( window.innerWidth-2, window.innerHeight-2 );
     <!--- document.body.appendChild( renderer.domElement ); --->
     
-    const geometry = new THREE.TorusGeometry( 14, 3, 16, 100 );
+    const geometry = new THREE.TorusGeometry( 14, 1, 16, 100 );
     const material = new THREE.MeshBasicMaterial( { color: 0x774659 } );
     
     function makeCube()
@@ -83,7 +85,7 @@
       function update()
       {
         mesh.position.z += -0.1;
-        if (mesh.position.z <= -500)
+        if (mesh.position.z <= meshNumber * -50)
         {
           mesh.position.z = 0;
         }
@@ -92,14 +94,14 @@
     }
     
     const cubelist = [];
-    for (let i = 0; i < 10 ; i += 1)
+    for (let i = 0; i < meshNumber ; i += 1)
     {
       let x = makeCube();
       scene.add( x.mesh );
       cubelist.push(x);
     }
     
-    for (let i = 0; i < 10 ; i += 1)
+    for (let i = 0; i < meshNumber ; i += 1)
     {
       cubelist[i].mesh.position.z = i * -50;
     }
