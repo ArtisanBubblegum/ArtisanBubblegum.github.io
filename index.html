@@ -92,7 +92,7 @@
         if (mesh.position.z <= meshNumber * meshDis)
         {
           mesh.position.z = 0;
-          mesh = new Three.Mesh( geometry, material);
+          mesh = new THREE.Mesh( geometry, material);
         }
       }
       return {mesh, update};
