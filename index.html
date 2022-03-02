@@ -83,14 +83,16 @@
     
     function makeCube()
     {
-      const mesh = new THREE.Mesh( geometry, material)
+      const mesh = new THREE.Mesh( geometry, material);
       
       function update()
       {
         mesh.position.z += -0.01;
+        mesh = new THREE.Mesh( new Three.TorusGeometry(5 * ((meshNumber * meshDis)/mesh.position.z), 1, 16, 100 ), material);
         if (mesh.position.z <= meshNumber * meshDis)
         {
           mesh.position.z = 0;
+          mesh = new Three.Mesh( geometry, material);
         }
       }
       return {mesh, update};
