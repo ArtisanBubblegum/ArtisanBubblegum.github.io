@@ -88,7 +88,7 @@
       function update()
       {
         mesh.position.z += -0.01;
-        mesh.scale = new THREE.Vector3((meshNumber * meshDis)/mesh.position.z,(meshNumber * meshDis)/mesh.position.z,(meshNumber * meshDis)/mesh.position.z);
+        mesh.scale = new THREE.Vector3(1-((meshNumber * meshDis)/mesh.position.z),1-((meshNumber * meshDis)/mesh.position.z),1-((meshNumber * meshDis)/mesh.position.z));
         if (mesh.position.z <= meshNumber * meshDis)
         {
           mesh.position.z = -0.1;
