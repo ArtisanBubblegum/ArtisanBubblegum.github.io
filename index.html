@@ -88,7 +88,7 @@
       function update()
       {
         mesh.position.z += -0.01;
-        mesh = new THREE.Mesh( new THREE.TorusGeometry(5 * ((meshNumber * meshDis)/mesh.position.z), 1, 16, 100 ), material);
+        mesh.scale = new Vector3(1,1,1);
         if (mesh.position.z <= meshNumber * meshDis)
         {
           mesh.position.z = 0;
