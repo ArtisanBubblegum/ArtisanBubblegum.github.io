@@ -88,11 +88,10 @@
       function update()
       {
         mesh.position.z += -0.01;
-        mesh.scale = new THREE.Vector3(1,1,1);
+        mesh.scale = new THREE.Vector3((meshNumber * meshDis)/mesh.position.z,(meshNumber * meshDis)/mesh.position.z,(meshNumber * meshDis)/mesh.position.z);
         if (mesh.position.z <= meshNumber * meshDis)
         {
-          mesh.position.z = 0;
-          mesh = new THREE.Mesh( geometry, material);
+          mesh.position.z = -0.1;
         }
       }
       return {mesh, update};
@@ -108,7 +107,7 @@
     
     for (let i = 0; i < meshNumber ; i += 1)
     {
-      cubelist[i].mesh.position.z = i * meshDis;
+      cubelist[i].mesh.position.z = (i * meshDis)-1;
     }
     
     camera.position.z = -5;
