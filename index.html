@@ -80,11 +80,11 @@
       
       function update()
       {
-        mesh.position.z += -0.05;
+        mesh.position.z += 0.05;
         mesh.scale = new THREE.Vector3(1-(mesh.position.z/(meshNumber * meshDis)),1-(mesh.position.z/(meshNumber * meshDis)),1-(mesh.position.z/(meshNumber * meshDis)));
-        if (mesh.position.z <= meshNumber * meshDis)
+        if (mesh.position.z >= 0)
         {
-          mesh.position.z = -0.1;
+          mesh.position.z = meshNumber * meshDis;
         }
       }
       return {mesh, update};
