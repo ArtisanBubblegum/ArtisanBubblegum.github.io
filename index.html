@@ -61,7 +61,7 @@
   </div>
   
   <script>
-    const meshNumber = 7;
+    const meshNumber = 1;
     const meshDis = -75;
     
     const scene = new THREE.Scene();
@@ -80,8 +80,9 @@
       
       function update()
       {
-        mesh.position.z += 0.05;
-        mesh.scale = new THREE.Vector3(1-(mesh.position.z/(meshNumber * meshDis)),1-(mesh.position.z/(meshNumber * meshDis)),1-(mesh.position.z/(meshNumber * meshDis)));
+        mesh.rotation.x += 0.05;
+        mesh.rotation.y += 0.1;
+        mesh.rotation.z += 0.03;
         if (mesh.position.z >= 0)
         {
           mesh.position.z = meshNumber * meshDis;
