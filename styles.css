@@ -1,0 +1,32 @@
+body {
+  background-color: #ffd6db;
+}
+
+div.fixed 
+{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  border: 3px solid #73AD21;
+}
+
+h1 {
+  color: #ea4486;
+  font-size: 80px;
+  text-align: center;
+}
+h2 {
+  color: black;
+  font-size: 24px;
+  text-align: center;
+}
+p {
+  color: #ea4486;
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+}
+a {
+  color: #ea4486;
+}
