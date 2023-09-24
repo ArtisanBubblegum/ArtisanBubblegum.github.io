@@ -1,0 +1,32 @@
+html, body {
+  overflow: hidden;
+  width: 100%;
+  height: 50%;
+  margin: 0;
+  padding: 0;
+  background-color: pink;
+}
+
+#renderCanvas {
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+#divCanvas {
+  width: 100%;
+  height: 85%;
+  position:fixed;
+  top: 10%;
+  left:0;
+}
+
+h1{
+  z-index: 1;
+  color: darkred;
+}
+
+h2{
+  z-index: 1;
+}
+
