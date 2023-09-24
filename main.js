@@ -1,4 +1,4 @@
-import * as BABYLON from '/@babylonjs/core/index.js';
+import * as BABYLON from '@babylonjs/core';
 
 const canvas = document.getElementById('renderCanvas');
 
