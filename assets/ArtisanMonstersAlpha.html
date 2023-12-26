@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Famous Artisan</title>
+    <!-- <link rel="icon" type="image/x-icon" href="/assets/favicon-50403814.ico" /> -->
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="/assets/index-45778437.css"> -->
+</head>
+<body>
+    <h1 id="header1"> World Famous Artisan </h1>
+    <h2 id="readonly"> 
+      | <a href="/index.html">Home</a> |
+      <a href="https://m.youtube.com/channel/UCj1pLz_ytvqdNwIVP03ck9g" target="_blank">Videos</a> |
+      <a href="https://bubblegumstudios.itch.io/" target="_blank">Games</a> |
+      <a href="https://questden.org/wiki/ArtisanBubblegum" target="_blank">Comics</a> |
+      <a href="https://www.patreon.com/artisanbubblegum" target="_blank">Patreon</a> |
+      <a href="ArtisanMonstersAlpha.html" target="_blank">Artisan Monsters Alpha</a> |
+      <a href="https://discord.gg/hpcAA9cdy" target="_blank">Discord</a> |
+    </h2>
+    <br>
+    <h3>Artisan Monsters: Alpha</h3>
+    <table>
+        <tr>
+            <td>
+                <p id="MapCanvas" style="white-space: pre;">
+                    MapCanvis.
+                </p>
+                <table id="ArrowKeys" style="scale: 1">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Up" onclick="stepFunction([0,-1])">
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="Left" onclick="stepFunction([-1,0])">
+                        </td>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Right" onclick="stepFunction([1,0])">
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="button" value="B" onclick="StepBattle('defend')">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Down" onclick="stepFunction([0,1])">
+                        </td>
+                        <td></td>
+                        <td>
+                            Artisan
+                        </td>
+                        <td>
+                            <input type="button" value="A" onclick="StepBattle('attack')">
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </td>
+            <td>
+                <p id="MonCanvas" style="white-space: pre; text-align: left;">
+                    MonCavis.
+                </p>
+            </td>
+        </tr>
+    </table>
+    <p>
+        *This is a Work In Progress!* <br>
+        Click on directions to move player, ~20% of encountering a Giant Centepede.<br>
+        Click A to Attack, Click B to Defend.<br>
+        To-Do:<br>
+        1. develop remaining MVP Systems.
+    </p>
+    <script src="StartHere.js"></script>
+    <script src="Monsters.js"></script>
+    <script src="BattleSys.js"></script>
+</body>
+</html>
