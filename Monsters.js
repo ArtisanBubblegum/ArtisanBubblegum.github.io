@@ -11,7 +11,7 @@ var Ally1 = {
         "HPCur" : 20,
         "MPMax" : 100,
         "MPCur" : 100,
-        "Attack" : 15,
+        "Attack" : 16,
         "Defence" : 5,
         "Defending": false,
         "Wisdom" : 10,
