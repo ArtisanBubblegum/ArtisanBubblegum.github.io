@@ -5,6 +5,7 @@ let Player = {
     "Atk" : 7,
     "Battle Stats" : {"ATK": 8, "DEF": 14, "MP" : 25},
     "Position" : [3,3],
+    "InCombat" : false
 }
 
 function mapMaker(x, y){
@@ -87,6 +88,7 @@ function stepFunction(input){
     if (typeof input == "string"){
         alert("Invalid Input Type: String.")
         //This will eventually be used for other inputes.
+        return;
     }
     else if (typeof input == "object"){
         if (typeof input[0] == "number"){
@@ -95,10 +97,12 @@ function stepFunction(input){
         }
         else {
             alert("Invalid Array Type: Other.")
+            return;
         }
     }
     else {
         alert("Invalid Input Type: Other.")
+        return;
     }
 
     DrawMap(Player.Position, Map1);
@@ -106,14 +110,24 @@ function stepFunction(input){
 
 //sub-functions of update:
 function TryToMove(dir){
-    switch(GetMapID([Player.Position[0] + dir[0], Player.Position[1] + dir[1]], Map1)[0]){
-        case 0:
-            Player.Position[0] += dir[0];
-            Player.Position[1] += dir[1];
-            console.log("Moved to ", Player.Position);
-            break;
-        default:
-            console.log("Stopped at ", Player.Position);
-            break;
+    if (Player.InCombat == false){
+        switch(GetMapID([Player.Position[0] + dir[0], Player.Position[1] + dir[1]], Map1)[0]){
+            case 0:
+                Player.Position[0] += dir[0];
+                Player.Position[1] += dir[1];
+                console.log("Moved to ", Player.Position);
+                if (Math.floor(Math.random()*5) == 0){
+                    Player.InCombat = true;
+                    alert("A Giant Centipede Attacks!")
+                    drawMon();
+                }
+                break;
+            default:
+                console.log("Stopped at ", Player.Position);
+                break;
+        }
+    }
+    else {
+        alert("Player Can't move while in Combat!")
     }
 }
