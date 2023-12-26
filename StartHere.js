@@ -1,5 +1,6 @@
 let Player = {
     "Name" : "player one",
+    "Class" : "None",
     "HP" : 100,
     "Atk" : 7,
     "Battle Stats" : {"ATK": 8, "DEF": 14, "MP" : 25},
