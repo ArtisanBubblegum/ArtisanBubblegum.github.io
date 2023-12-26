@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>World Famous Artisan</title>
-    <link rel="icon" type="image/x-icon" href="/assets/favicon-50403814.ico" /> 
+    <link rel="icon" type="image/x-icon" href="/assets/favicon-50403814.ico" />
     <style>
         td {
             text-align: center;
@@ -25,50 +25,62 @@
     </h2>
     <br>
     <h3>Artisan Monsters: Alpha</h3>
-    <p id="MapCanvas" style="white-space: pre;">
-        MapCanvis.
-    </p>
-    <table id="ArrowKeys" style="scale: 1">
-        <tr>
-            <td></td>
-            <td>
-                <input type="button" value="Up" onclick="stepFunction([0,-1])">
-            </td>
-            <td></td>
-        </tr>
+    <table>
         <tr>
             <td>
-                <input type="button" value="Left" onclick="stepFunction([-1,0])">
+                <p id="MapCanvas" style="white-space: pre;">
+                    MapCanvis.
+                </p>
+                <table id="ArrowKeys" style="scale: 1">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Up" onclick="stepFunction([0,-1])">
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" value="Left" onclick="stepFunction([-1,0])">
+                        </td>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Right" onclick="stepFunction([1,0])">
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="button" value="B" onclick="StepBattle('defend')">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="Down" onclick="stepFunction([0,1])">
+                        </td>
+                        <td></td>
+                        <td>
+                            Artisan
+                        </td>
+                        <td>
+                            <input type="button" value="A" onclick="StepBattle('attack')">
+                        </td>
+                    </tr>
+                </table>
+                <br>
             </td>
-            <td></td>
             <td>
-                <input type="button" value="Right" onclick="stepFunction([1,0])">
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-                <input type="button" value="B" onclick="stepFunction('B')">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="button" value="Down" onclick="stepFunction([0,1])">
-            </td>
-            <td></td>
-            <td>
-                Artisan
-            </td>
-            <td>
-                <input type="button" value="A" onclick="stepFunction('A')">
+                <p id="MonCanvas" style="white-space: pre;">
+                    MonCavis.
+                </p>
             </td>
         </tr>
     </table>
-    <br>
     <p>
         *This is a Work In Progress!* <br>
         Currently proving 2D Map Generation and 2D Movement System.
     </p>
     <script src="StartHere.js"></script>
+    <script src="Monster.js"></script>
 </body>
 </html>
