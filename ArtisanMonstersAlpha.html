@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Artisan Monsters</h1>
+    <p id="MapCanvas" style="white-space: pre;">
+        MapCanvis.
+    </p>
+    <table id="ArrowKeys">
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" value="Up" onclick="stepFunction([0,-1])">
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Left" onclick="stepFunction([-1,0])">
+            </td>
+            <td></td>
+            <td>
+                <input type="button" value="Right" onclick="stepFunction([1,0])">
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="button" value="B" onclick="stepFunction('B')">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" value="Down" onclick="stepFunction([0,1])">
+            </td>
+            <td></td>
+            <td>
+                Artisan
+            </td>
+            <td>
+                <input type="button" value="A" onclick="stepFunction('A')">
+            </td>
+        </tr>
+    </table>
+    <!-- <table id="LetterKeys" align="right">
+        <tr>
+            <td>
+                <input type="button" value="A" onclick="stepFunction('A')">
+            </td>
+            <td>
+                <input type="button" value="B" onclick="stepFunction('B')">
+            </td>
+        </tr>
+    </table> -->
+    <script src="StartHere.js"></script>
+</body>
+</html>
