@@ -32,6 +32,7 @@ function mapMaker(x, y){
 }
 
 let Map1 = mapMaker (7,7); //mapMaker(prompt("Horizontal Size of Map: ", 10),prompt("Vertical Size of Map: ", 10));
+// var Map1Monsters = [Giant_Rat, Giant_Centipede, Carniverous_Canary];
 
 let Map2 = [[5,5],
     [1,0], [1,0], [1,0], [1,0], [1,0],
@@ -118,7 +119,8 @@ function TryToMove(dir){
                 console.log("Moved to ", Player.Position);
                 if (Math.floor(Math.random()*5) == 0){
                     Player.InCombat = true;
-                    alert("A Giant Centipede Attacks!")
+                    alert("A Wild Monster Attacks!")
+                    newEnemy();
                     drawMon();
                 }
                 break;

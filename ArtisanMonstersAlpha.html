@@ -6,8 +6,12 @@
     <title>World Famous Artisan</title>
     <link rel="icon" type="image/x-icon" href="/assets/favicon-50403814.ico" />
     <style>
+        table {
+            border: 1px solid red;
+        }
         td {
             text-align: center;
+            border: 1px solid black;
         }
     </style>
     <link rel="stylesheet" href="/assets/index-45778437.css">
@@ -25,19 +29,33 @@
     </h2>
     <br>
     <h3>Artisan Monsters: Alpha</h3>
-    <table>
+    <table id="PrimaryTable" style="width: 700px;">
         <tr>
             <td>
-                <p id="MapCanvas" style="white-space: pre;">
+                <p id="MapCanvas" style="white-space: pre; width: 350px;">
                     MapCanvis.
                 </p>
-                <table id="ArrowKeys" style="scale: 1">
+            </td>
+            <td>
+                <p id="MonCanvas" style="white-space: pre; text-align: left; width: 350px;">
+                    MonCavis.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 100%;">
+                <table id="InputsTable" style="width: 100%;">
                     <tr>
-                        <td></td>
-                        <td>
+                        <td style="width: 100px;"></td>
+                        <td style="width: 100px;">
                             <input type="button" value="Up" onclick="stepFunction([0,-1])">
                         </td>
-                        <td></td>
+                        <td style="width: 100px;"></td>
+
+                        <td style="width: 100px;"></td>
+                        <td style="width: 100px;"></td>
+                        <td style="width: 100px;"></td>
+                        <td style="width: 100px;"></td>
                     </tr>
                     <tr>
                         <td>
@@ -47,11 +65,13 @@
                         <td>
                             <input type="button" value="Right" onclick="stepFunction([1,0])">
                         </td>
+                        
                         <td></td>
                         <td></td>
                         <td>
                             <input type="button" value="B" onclick="StepBattle('defend')">
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -59,20 +79,17 @@
                             <input type="button" value="Down" onclick="stepFunction([0,1])">
                         </td>
                         <td></td>
+                        
                         <td>
                             Artisan
                         </td>
                         <td>
                             <input type="button" value="A" onclick="StepBattle('attack')">
                         </td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </table>
-                <br>
-            </td>
-            <td>
-                <p id="MonCanvas" style="white-space: pre; text-align: left;">
-                    MonCavis.
-                </p>
             </td>
         </tr>
     </table>
@@ -81,13 +98,23 @@
         Click on directions to move player, ~20% of encountering a Giant Centepede.<br>
         Click A to Attack, Click B to Defend.<br>
         To-Do:<br>
-        1. Expand cast of Monsters<br>
-        2. Improve Battle Command System<br>
-        3. Add Magic (Heal, Zap, Crag, etc.)<br>
-        4. Identify more To-Do Items.
+        1. Improve Battle Command System<br>
+        2. Add Magic (Heal, Zap, Crag, etc.)<br>
+        3. MP Regen<br>
+        4. Pause Menue<br>
+        5. Out of Battle Healing<br>
+        6. EXP and Leveling<br>
+        7. Develop a backend Map Builder<br>
+        8. Develop additional Maps<br>
+        9. Develop system to travel between maps<br>
+        10. Expand cast of Monsters, and limit certain monsters to certain maps.<br>
+        11. Develop a Town Map and a Healer.<br>
+        12. Expand Team Size to 2 Monsters.<br>
+        13. More To-Do Items.<br>
     </p>
     <script src="StartHere.js"></script>
     <script src="Monsters.js"></script>
+    <script src="WildMonsters.js"></script>
     <script src="BattleSys.js"></script>
 </body>
 </html>

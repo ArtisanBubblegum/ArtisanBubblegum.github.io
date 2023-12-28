@@ -1,41 +1,19 @@
 let allyList = [Ally1];
+let EnemyList = [];
 
-let Enemy1 = {
-    "Name" : "Giant Centipede",
-    "Age" : 1,
-    "Level" : 1,
-    "EXP" : 0,
-    "lvlUP" : 100,
-    "BattleStats" : {
-        "HPMax" : 12,
-        "HPCur" : 12,
-        "MPMax" : 120,
-        "MPCur" : 120,
-        "Attack" : 11,
-        "Defence" : 7,
-        "Defending": false,
-        "Wisdom" : 13,
-        "Speed" : 13,
-        "Luck" : 3,
-        "Aflictions" : []
-    },
-    "Action" : "defend",
-    "Target" : {},
-
-    reset(){
-        this.BattleStats.HPCur = this.BattleStats.HPMax;
-        this.BattleStats.Defending = false;
-    }
+function newEnemy(){ //Called in StartHere.js when Battle is triggered.
+    EnemyList = [wildMonsterList[Math.floor(Math.random()*wildMonsterList.length)]];
+    EnemyList[0].reset();
+    allyList[0].Target = EnemyList[0];
+    EnemyList[0].Target = allyList[0];
+    return;
 }
 
-Ally1.Target = Enemy1;
-Enemy1.Target = Ally1;
-
 function drawMon(){
-    document.getElementById("MonCanvas").textContent = "Giant Rat VS Giant Centipede";
+    // document.getElementById("MonCanvas").textContent = "Giant Rat VS Giant Centipede";
     let text = "";
-    text += Enemy1.Name + ":\nHP: " + Enemy1.BattleStats.HPCur + " / " + Enemy1.BattleStats.HPMax + "\n\n";
-    text += Ally1.Name + ":\nHP: " + Ally1.BattleStats.HPCur + " / " + Ally1.BattleStats.HPMax + "\n\n";
+    text += EnemyList[0].Name + ":\nHP: " + EnemyList[0].BattleStats.HPCur + " / " + EnemyList[0].BattleStats.HPMax + "\n\n";
+    text += allyList[0].Name + ":\nHP: " + allyList[0].BattleStats.HPCur + " / " + allyList[0].BattleStats.HPMax + "\n\n";
     text += "\n\n\n";
     document.getElementById("MonCanvas").textContent = text;
 }
@@ -47,16 +25,16 @@ function StepBattle(input){
     }
 
     if (input == "attack"){
-        Ally1.Action = input;
+        allyList[0].Action = input;
     }
     else if (input == "defend"){
-        Ally1.Action = input;
+        allyList[0].Action = input;
     }
     else if (input == "cast"){
-        Ally1.Action = input;
+        allyList[0].Action = input;
     }
     else if (input == "Not in combat"){
-        alert(Ally1.Name + " looks confused.")
+        alert(allyList[0].Name + " looks confused.")
         return;
     }
     else{
@@ -64,11 +42,11 @@ function StepBattle(input){
         return;
     }
 
-    if (Math.random() >= Enemy1.BattleStats.HPCur/Enemy1.BattleStats.HPMax || Enemy1.BattleStats.HPCur == Enemy1.BattleStats.HPMax){
-        Enemy1.Action = "attack";
+    if (Math.random() >= EnemyList[0].BattleStats.HPCur/EnemyList[0].BattleStats.HPMax || EnemyList[0].BattleStats.HPCur == EnemyList[0].BattleStats.HPMax){
+        EnemyList[0].Action = "attack";
     }
     else {
-        Enemy1.Action = "defend";
+        EnemyList[0].Action = "defend";
     }
 
     let alive = checkAlive();
@@ -94,7 +72,7 @@ function StepBattle(input){
         }
 
         turnIndex = 0;
-        while (turnIndex < fastest.length){
+        while (turnIndex < fastest.length && alive.length > 1){
             if (fastest[turnIndex].Action == "attack"){
                 TryAttack(fastest[turnIndex], fastest[turnIndex].Target)
                 fastest[turnIndex].BattleStats.Defending = false;
@@ -107,64 +85,77 @@ function StepBattle(input){
                 alert("Invalid Action!");
             }
             turnIndex++;
-            drawMon();
+            alive = checkAlive();
         }
     }
-
-    alive = checkAlive();
 }
 
 function checkAlive(){
     let list = [];
-    if (Ally1.BattleStats.HPCur > 0){
-        list.push(Ally1);
+    if (allyList[0].BattleStats.HPCur > 0){
+        list.push(allyList[0]);
     }
-    if (Enemy1.BattleStats.HPCur > 0){
-        list.push(Enemy1);
+    if (EnemyList[0].BattleStats.HPCur > 0){
+        list.push(EnemyList[0]);
     }
     
     if (list.length == 1){
         alert(list[0].Name + " has Survived the Battle!")
-        if (Ally1.BattleStats.HPCur <= 0){
-            Ally1.reset();
+        if (allyList[0].BattleStats.HPCur <= 0){
+            allyList[0].reset();
         }
-        Enemy1.reset();
         Player.InCombat = false;
         drawStatus(); //Monsters.JS -> drawStatus();
+    }
+    else {
+        drawMon();
     }
     return list;
 }
 
 function TryAttack(user, target) {
     if (user.BattleStats.HPCur > 0){
+        let criticalHit = false;
         if (user.BattleStats.Attack > target.BattleStats.Defence){
-            damage = Math.floor(Math.random()*(user.BattleStats.Attack-target.BattleStats.Defence))
+            damage = Math.floor(Math.random()*(user.BattleStats.Attack-target.BattleStats.Defence+1))
+            if (Math.floor(Math.random()*1000) <= user.luck){
+                if (damage < 1){damage = 1};
+                damage *= 3;
+                criticalHit = true;
+            }
             if (target.BattleStats.Defending){
-                damage -= Math.floor(target.BattleStats.Defence / 2);
+                damage -= Math.floor(target.BattleStats.Defence / 10);
             }
             if (damage > 0){
                 target.BattleStats.HPCur -= damage;
                 drawMon();
-                alert(user.Name + " Delt " + damage + " damage to " + target.Name + "!")
+                if (criticalHit) {alert("CRITICAL HIT!!!")}
+                alert(user.Name + " delt " + damage + " damage to " + target.Name + "!")
             }
             else{
                 drawMon();
-                alert(user.Name + " Delt Zero damage to " + target.Name + "!")
+                alert(user.Name + " delt Zero damage to " + target.Name + "!")
             }
         }
         else {
             damage = Math.floor(Math.random()*(user.BattleStats.Attack / (user.BattleStats.Defence / 2)));
+            if (Math.floor(Math.random()*1000) <= user.luck){
+                if (damage < 1){damage = 1};
+                damage *= 3;
+                criticalHit = true;
+            }
             if (target.BattleStats.Defending){
-                damage -= Math.floor(target.BattleStats.Defence / 2);
+                damage -= Math.floor(Math.random()*(target.BattleStats.Defence/10))
             }
             if (damage > 0){
                 target.BattleStats.HPCur -= damage;
                 drawMon();
-                alert(user.Name + " Delt " + damage + " damage to " + target.Name + " despite their Defences!")
+                if (criticalHit) {alert("CRITICAL HIT!!!")}
+                alert(user.Name + " delt " + damage + " damage to " + target.Name + " despite their Defences!")
             }
             else {
                 drawMon();
-                alert(user.Name + " Delt Zero damage to " + target.Name + "!")
+                alert(user.Name + " delt Zero damage to " + target.Name + "!")
             }
         }
     }
