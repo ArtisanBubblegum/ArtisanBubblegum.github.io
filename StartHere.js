@@ -5,6 +5,7 @@ let Player = {
     "Atk" : 7,
     "Battle Stats" : {"ATK": 8, "DEF": 14, "MP" : 25},
     "Position" : [3,3],
+    "Faceing" : [0,-1],
     "InCombat" : false
 }
 
@@ -31,8 +32,48 @@ function mapMaker(x, y){
     return map;
 }
 
+function testFun(a){
+    return "It worked." + a;
+}
+
+let testList = [0, 1, function testFun2(b){
+    return "It worked2." + b;
+}];
+
+alert(testList[2]("!! AHHH"));
+
+function spawnMonster(map){
+    let x = 1;
+    let list = [];
+    while (x < map.length){
+        switch(GetMapID([x,1], map)[0]){
+            case 0:
+                list.push(x);
+                break;
+        }
+        x++;
+    }
+    map[list[Math.floor(Math.random()*list.length)]] = ["M", "-"];
+}
+function despawnMonster(mapLoc, map){
+    let mapIndex = map[0][0]*mapLoc[1];
+    mapIndex -= map[0][0];
+    mapIndex += mapLoc[0];
+    if (GetMapID(mapLoc, map)[0] = "M"){
+        map[mapIndex] = [0,0];
+        spawnMonster(map);
+        DrawMap(Player.Position, map);
+    }
+    else {
+        alert("Could not locate Monster on Map.")
+    }
+}
+
 let Map1 = mapMaker (7,7); //mapMaker(prompt("Horizontal Size of Map: ", 10),prompt("Vertical Size of Map: ", 10));
 // var Map1Monsters = [Giant_Rat, Giant_Centipede, Carniverous_Canary];
+spawnMonster(Map1);
+spawnMonster(Map1);
+spawnMonster(Map1);
 
 let Map2 = [[5,5],
     [1,0], [1,0], [1,0], [1,0], [1,0],
@@ -77,7 +118,8 @@ function GetMapID (location, map){
     }
     else {
         console.log("Invalid Map Index: ", mapIndex);
-        return false;
+        console.log(typeof mapIndex[0])
+        return [0,0]//false;
     }
 }
 
@@ -112,18 +154,19 @@ function stepFunction(input){
 //sub-functions of update:
 function TryToMove(dir){
     if (Player.InCombat == false){
+        Player.Faceing=dir;
         switch(GetMapID([Player.Position[0] + dir[0], Player.Position[1] + dir[1]], Map1)[0]){
             case 0:
                 Player.Position[0] += dir[0];
                 Player.Position[1] += dir[1];
                 console.log("Moved to ", Player.Position);
-                if (Math.floor(Math.random()*5) == 0){
-                    Player.InCombat = true;
-                    alert("A Wild Monster Attacks!")
-                    newEnemy();
-                    drawMon();
-                }
                 break;
+            case "M":
+                console.log("Fight Monster.");
+                Player.InCombat = true;
+                alert("A Wild Monster Attacks!");
+                newEnemy();
+                drawMon();
             default:
                 console.log("Stopped at ", Player.Position);
                 break;
@@ -132,4 +175,8 @@ function TryToMove(dir){
     else {
         alert("Player Can't move while in Combat!")
     }
+}
+
+function random3 (){
+    return (Math.random()+Math.random()+Math.random())/3;
 }

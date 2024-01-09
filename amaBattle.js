@@ -20,7 +20,7 @@ function drawMon(){
 
 function StepBattle(input){
     input = input.toLowerCase();
-    if (Player.InCombat == false){
+    if (MapObj.mapActive){
         input = "Not in combat";
     }
 
@@ -104,9 +104,8 @@ function checkAlive(){
         if (allyList[0].BattleStats.HPCur <= 0){
             allyList[0].reset();
         }
-        Player.InCombat = false;
         drawStatus(); //Monsters.JS -> drawStatus();
-        despawnMonster([(Player.Position[0] + Player.Faceing[0]) , (Player.Position[1] + Player.Faceing[1])], Map1)
+        MapObj.despawnMonster();
     }
     else {
         drawMon();
