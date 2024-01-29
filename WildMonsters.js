@@ -49,12 +49,18 @@ var Giant_Rat = {
         "Luck" : 1,
         "Aflictions" : []
     },
-    Tactics(){
-        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+    "Spells" : ["Meditate", "Earth Bolt"],
+    Tactics(){ //Aggressive
+        if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
         }
         else {
-            this.Action = "defend";
+            if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
+                this.Action = "Meditate";
+            }
+            else {
+                this.Action = "defend";
+            }
         }
     },
     "Action" : "fight",
@@ -87,9 +93,15 @@ var Giant_Centipede = {
         "Luck" : 5,
         "Aflictions" : []
     },
-    Tactics(){
-        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
-            this.Action = "attack";
+    "Spells" : ["Earth Bolt"],
+    Tactics(){ //Aggressive
+        if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
+                this.Action = "Earth Bolt"
+            }
+            else {
+                this.Action = "attack";
+            }
         }
         else {
             this.Action = "defend";
@@ -125,7 +137,8 @@ var Bed_Biter = {
         "Luck" : 10,
         "Aflictions" : []
     },
-    Tactics(){
+    "Spells" : [],
+    Tactics(){ //Defensive
         if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
             this.Action = "attack";
         }
@@ -151,20 +164,21 @@ var Error_Ant = {
     "EXP" : 0,
     "lvlUP" : 100,
     "BattleStats" : {
-        "HPMax" : 11,
-        "HPCur" : 11,
-        "MPMax" : 90,
-        "MPCur" : 90,
-        "Attack" : 14,
-        "Defence" : 10,
+        "HPMax" : 13,
+        "HPCur" : 13,
+        "MPMax" : 70,
+        "MPCur" : 70,
+        "Attack" : 16,
+        "Defence" : 11,
         "Defending": false,
         "Wisdom" : 10,
         "Speed" : 13,
-        "Luck" : 8,
+        "Luck" : 5,
         "Aflictions" : []
     },
-    Tactics(){
-        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+    "Spells" : [],
+    Tactics(){ //very aggressive
+        if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
             this.Action = "attack";
         }
         else {
@@ -201,9 +215,15 @@ var Carniverous_Canary = {
         "Luck" : 10,
         "Aflictions" : []
     },
-    Tactics(){
-        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+    "Spells" : ["Earth Bolt"],
+    Tactics(){//very aggressive
+        if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
+            if (this.BattleStats.MPCur >= 5){
+                this.Action = "Earth Bolt";
+            }
+            else {
             this.Action = "attack";
+            }
         }
         else {
             this.Action = "defend";
@@ -239,13 +259,9 @@ var Magic_Sword = {
         "Luck" : 5,
         "Aflictions" : []
     },
-    Tactics(){
-        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
-            this.Action = "attack";
-        }
-        else {
-            this.Action = "defend";
-        }
+    "Spells" : [],
+    Tactics(){//mindlessly aggressive
+        this.Action = "attack";
     },
     "Action" : "fight",
     "Target" : {},

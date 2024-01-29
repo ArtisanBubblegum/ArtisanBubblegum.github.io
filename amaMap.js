@@ -126,59 +126,34 @@ let MapObj = {
         document.getElementById("MapCanvas").textContent = mapText;
         return mapText;
     },
-    update (input){
-        if (typeof input == "string"){
-            alert("Invalid Input Type: String.")
-            //This will eventually be used for other inputes.
-            return;
-        }
-        else if (typeof input == "object"){
-            if (typeof input[0] == "number"){
-                //Direction
-                this.TryToMove(input);
-            }
-            else {
-                alert("Invalid Array Type: Other.")
-                return;
-            }
-        }
-        else {
-            alert("Invalid Input Type: Other.")
-            return;
-        }
-    
-        this.drawMap();
-    },
     TryToMove(dir){
-        if (this.mapActive){
-            let location = [this.PlayerPosition[0]+dir[0] , this.PlayerPosition[1]+dir[1]];
-            switch(this.GetMapID(location)[0]){
-                case 0:
-                    this.PlayerPosition[0] += dir[0];
-                    this.PlayerPosition[1] += dir[1];
-                    console.log("Moved to ", this.PlayerPosition);
-                    break;
-                case "M":
-                    console.log("Fight Monster.");
-                    this.mapActive = false;
-                    let curIndex = 0;
-                    while (curIndex < this.MonsterPositions.length){
-                        if (location[0] == this.MonsterPositions[curIndex][0] && location[1] == this.MonsterPositions[curIndex][1]){
-                            this.MonsterPositions[curIndex][2] = true;
-                            curIndex = this.MonsterPositions.length;
-                        }
-                        curIndex++;
+        let location = [this.PlayerPosition[0]+dir[0] , this.PlayerPosition[1]+dir[1]];
+        switch(this.GetMapID(location)[0]){
+            case 0:
+                this.PlayerPosition[0] += dir[0];
+                this.PlayerPosition[1] += dir[1];
+                if (Ally1.BattleStats.MPCur < Math.floor(Math.random()*(Ally1.BattleStats.MPMax+1))){
+                    Ally1.BattleStats.MPCur += 1;
+                }
+                console.log("Moved to ", this.PlayerPosition);
+                drawStatus();
+                break;
+            case "M":
+                console.log("Fight Monster.");
+                this.mapActive = false;
+                let curIndex = 0;
+                while (curIndex < this.MonsterPositions.length){
+                    if (location[0] == this.MonsterPositions[curIndex][0] && location[1] == this.MonsterPositions[curIndex][1]){
+                        this.MonsterPositions[curIndex][2] = true;
+                        curIndex = this.MonsterPositions.length;
                     }
-                    alert("A Wild Monster Attacks!");
-                    newEnemy();
-                    //drawMon();
-                default:
-                    console.log("Stopped at ", this.PlayerPosition);
-                    break;
-            }
-        }
-        else {
-            alert("Player Can't move while in Combat!")
+                    curIndex++;
+                }
+                alert("A Wild Monster Attacks!");
+                newEnemy();
+            default:
+                console.log("Stopped at ", this.PlayerPosition);
+                break;
         }
     }
 }

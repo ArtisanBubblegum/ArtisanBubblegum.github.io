@@ -2,8 +2,12 @@ let allyList = [Ally1];
 let EnemyList = [];
 let monstersList = []
 
-let menuList = ["Fight", "Attack", "Defend"];
+let battleList = ["Fight", "Commands"];
+let cmdList = ["Attack", "Defend", "Spells"]
+let spellList = allyList[0].Spells
+let menuList = battleList;
 let selection = 0;
+let selectingSpell = false;
 let turnReady = false;
 
 function newEnemy(){ //Called in StartHere.js when Battle is triggered.
@@ -14,79 +18,12 @@ function newEnemy(){ //Called in StartHere.js when Battle is triggered.
     monstersList.push(allyList[0]);
     monstersList.push(EnemyList[0]);
     changeState("battle");
+    drawBattle();
     return;
 }
 
-function StepBattle(input){
-    input = input.toLowerCase();
-    if (MapObj.mapActive){
-        input = "Not in combat";
-    }
-
-    if (input == "A"){
-        allyList[0].Action = "attack";
-    }
-    else if (input == "B"){
-        allyList[0].Action = "defend";
-    }
-    // else if (input == "Not in combat"){
-    //     alert(allyList[0].Name + " looks confused.")
-    //     return;
-    // }
-    else{
-        alert("Invalid Battle Entry.")
-        return;
-    }
-
-    if (Math.random() >= EnemyList[0].BattleStats.HPCur/EnemyList[0].BattleStats.HPMax || EnemyList[0].BattleStats.HPCur == EnemyList[0].BattleStats.HPMax){
-        EnemyList[0].Action = "attack";
-    }
-    else {
-        EnemyList[0].Action = "defend";
-    }
-
-    let alive = checkAlive();
-    
-    if (alive.length > 1){
-        aliveIndex = 1;
-        let fastest = [alive[0]];
-        while (aliveIndex < alive.length){
-            fastIndex = 0;
-            slowest = true;
-            while (fastIndex < fastest.length){
-                if (alive[aliveIndex].BattleStats.Speed > fastest[fastIndex].BattleStats.Speed){
-                    fastest.splice(fastIndex,0,alive[aliveIndex]);
-                    fastIndex = fastest.length;
-                    slowest = false;
-                }
-                fastIndex++;
-            }
-            if (slowest){
-                fastest.push(alive[aliveIndex]);
-            }
-            aliveIndex++;
-        }
-
-        turnIndex = 0;
-        while (turnIndex < fastest.length && alive.length > 1){
-            if (fastest[turnIndex].Action == "attack"){
-                TryAttack(fastest[turnIndex], fastest[turnIndex].Target)
-                fastest[turnIndex].BattleStats.Defending = false;
-            }
-            else if (fastest[turnIndex].Action == "defend"){
-                fastest[turnIndex].BattleStats.Defending = true;
-                alert(fastest[turnIndex].Name + " takes a Defensive Stance!")
-            }
-            else{
-                alert("Invalid Action!");
-            }
-            turnIndex++;
-            alive = checkAlive();
-        }
-    }
-}
-
 function BattleCommands(input){
+    EnemyList[0].Action = "fight";
     switch(input[1]){
         case 1:
             selection++;
@@ -101,8 +38,42 @@ function BattleCommands(input){
             }
             break;
         case "A":
-            allyList[0].Action = menuList[selection].toLowerCase();
-            return true;
+            if (selectingSpell){
+                selectingSpell = false;
+                allyList[0].Action = menuList[selection];
+                menuList = battleList;
+                selection = 0;
+                return true;
+            }
+            switch (menuList[selection]){
+                case "Fight":
+                case "Attack":
+                case "Defend":
+                    allyList[0].Action = menuList[selection].toLowerCase();
+                    menuList = battleList;
+                    selection = 0;
+                    return true;
+                case "Commands":
+                    menuList = cmdList;
+                    selection = 0;
+                    break;
+                case "Spells":
+                    menuList = spellList;
+                    selection = 0;
+                    selectingSpell = true;
+            }
+            break;
+        case "B":
+            if (menuList == cmdList){
+                menuList = battleList;
+                selection = 0;
+            }
+            else if (menuList == spellList){
+                menuList = cmdList;
+                selection = 0;
+                selectingSpell = false;
+            }
+            break;
     }
 }
 
@@ -124,6 +95,8 @@ function BattleTurns(){
                 monstersList[index].BattleStats.Defending = true;
                 alert(monstersList[index].Name + " takes a Defensive Stance!")
                 break;
+            default:
+                CastSpell(monstersList[index].Action, monstersList[index], monstersList[index].Target)
         }
         checkAlive();
     }
@@ -147,9 +120,9 @@ function checkAlive(){
         MapObj.despawnMonster();
         changeState("map");
     }
-    // else {
-    //     drawMon();
-    // }
+    else {
+        drawBattle();
+    }
     monstersList = list;
     //return list;
 }
@@ -209,9 +182,10 @@ function TryAttack(user, target) {
 function drawBattle(){
     // document.getElementById("MonCanvas").textContent = "Giant Rat VS Giant Centipede";
     let text = "";
-    text += EnemyList[0].Name + ":\nHP: " + EnemyList[0].BattleStats.HPCur + " / " + EnemyList[0].BattleStats.HPMax + "\n\n";
-    text += allyList[0].Name + ":\nHP: " + allyList[0].BattleStats.HPCur + " / " + allyList[0].BattleStats.HPMax + "\n\n";
-    text += "\n";
+    text += EnemyList[0].Name + ":\nHP: " + EnemyList[0].BattleStats.HPCur + " / " + EnemyList[0].BattleStats.HPMax + "\n";
+    text += "MP: "+ EnemyList[0].BattleStats.MPCur +" / "+ EnemyList[0].BattleStats.MPMax + "\n\n";
+    text += allyList[0].Name + ":\nHP: " + allyList[0].BattleStats.HPCur + " / " + allyList[0].BattleStats.HPMax + "\n";
+    text += "MP: "+ allyList[0].BattleStats.MPCur +" / "+ allyList[0].BattleStats.MPMax + "\n\n";
     text += drawMenu();
     document.getElementById("MonCanvas").textContent = text;
 }
@@ -229,14 +203,4 @@ function drawMenu(){
         menuText += "\n"
     }
     return menuText;
-}
-
-
-
-function BattleLoop ( ){
-    //GetPlayerInput();
-    //OrganizeMonstersBySpeed();
-    //MonsterTurn();
-    //CheckAlive();
-    //CheckVictory();
 }

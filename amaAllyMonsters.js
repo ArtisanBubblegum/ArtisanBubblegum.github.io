@@ -19,12 +19,18 @@ var Ally1 = {
         "Luck" : 1,
         "Aflictions" : []
     },
-    Tactics(){
-        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+    "Spells" : ["Meditate", "Earth Bolt"],
+    Tactics(){ //aggressive
+        if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
         }
         else {
-            this.Action = "defend";
+            if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
+                this.Action = "Meditate";
+            }
+            else {
+                this.Action = "defend";
+            }
         }
     },
     "Action" : "defend",
@@ -32,6 +38,7 @@ var Ally1 = {
 
     reset(){
         this.BattleStats.HPCur = this.BattleStats.HPMax;
+        this.BattleStats.MPCur = this.BattleStats.MPMax;
         this.BattleStats.Defending = false;
         this.Age++;
     }

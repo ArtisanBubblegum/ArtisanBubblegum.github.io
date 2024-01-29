@@ -4,6 +4,7 @@ function LoadGame(){
     MapObj.Map = MapObj.mapMaker(7, 7)
     MapObj.spawnMonster(3);
     MapObj.drawMap();
+    drawStatus();
 }
 LoadGame()
 
@@ -20,10 +21,6 @@ function MainLoop(input){
             break;
     }
 }
-//while(true){
-    //setTimeout(MainLoop(), 1000/30);
-//    MainLoop();
-//}
 
 function MapLoop(input){
     MapObj.TryToMove(checkInput(input));
@@ -35,7 +32,7 @@ function BattleLoop(input){
         OrderMonstersBySpeed();
         BattleTurns();
     }
-    drawBattle();
+    //drawBattle();
 }
 
 function PauseLoop(input){
@@ -69,7 +66,8 @@ function changeState(state){
     gameState = state;
     switch (gameState){
         case "map":
-            drawMap();
+            MapObj.drawMap();
+            drawStatus();
             break;
         case "battle":
             drawBattle();
