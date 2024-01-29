@@ -142,6 +142,44 @@ var Bed_Biter = {
     }
 }
 
+var Error_Ant = {
+    "Name" : "Error Ant",
+    "Genus" : "Error Ant",
+    "Family" : "Insect",
+    "Age" : 1,
+    "Level" : 1,
+    "EXP" : 0,
+    "lvlUP" : 100,
+    "BattleStats" : {
+        "HPMax" : 11,
+        "HPCur" : 11,
+        "MPMax" : 90,
+        "MPCur" : 90,
+        "Attack" : 14,
+        "Defence" : 10,
+        "Defending": false,
+        "Wisdom" : 10,
+        "Speed" : 13,
+        "Luck" : 8,
+        "Aflictions" : []
+    },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
+    },
+    "Action" : "defend",
+    "Target" : {},
+
+    reset(){
+        this.BattleStats.HPCur = this.BattleStats.HPMax;
+        this.BattleStats.Defending = false;
+    }
+}
+
 var Carniverous_Canary = {
     "Name" : "Carniverous Canary",
     "Genus" : "Carniverous Canary",
@@ -218,4 +256,6 @@ var Magic_Sword = {
     }
 }
 
-wildMonsterList = [Giant_Rat,Giant_Centipede,Bed_Biter,Carniverous_Canary,Magic_Sword];
+
+
+wildMonsterList = [Giant_Rat,Giant_Centipede,Bed_Biter,Carniverous_Canary,Magic_Sword,Error_Ant];

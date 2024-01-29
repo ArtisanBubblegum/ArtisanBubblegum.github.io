@@ -210,7 +210,7 @@ function drawBattle(){
     let text = "";
     text += EnemyList[0].Name + ":\nHP: " + EnemyList[0].BattleStats.HPCur + " / " + EnemyList[0].BattleStats.HPMax + "\n\n";
     text += allyList[0].Name + ":\nHP: " + allyList[0].BattleStats.HPCur + " / " + allyList[0].BattleStats.HPMax + "\n\n";
-    text += "\n\n\n";
+    text += "\n";
     text += drawMenu();
     document.getElementById("MonCanvas").textContent = text;
 }
