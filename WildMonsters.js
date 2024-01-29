@@ -57,7 +57,7 @@ var Giant_Rat = {
             this.Action = "defend";
         }
     },
-    "Action" : "defend",
+    "Action" : "fight",
     "Target" : {},
 
     reset(){
@@ -95,7 +95,7 @@ var Giant_Centipede = {
             this.Action = "defend";
         }
     },
-    "Action" : "defend",
+    "Action" : "fight",
     "Target" : {},
 
     reset(){
@@ -133,7 +133,7 @@ var Bed_Biter = {
             this.Action = "defend";
         }
     },
-    "Action" : "defend",
+    "Action" : "fight",
     "Target" : {},
 
     reset(){
@@ -171,7 +171,7 @@ var Error_Ant = {
             this.Action = "defend";
         }
     },
-    "Action" : "defend",
+    "Action" : "fight",
     "Target" : {},
 
     reset(){
@@ -209,7 +209,7 @@ var Carniverous_Canary = {
             this.Action = "defend";
         }
     },
-    "Action" : "defend",
+    "Action" : "fight",
     "Target" : {},
 
     reset(){
@@ -247,7 +247,7 @@ var Magic_Sword = {
             this.Action = "defend";
         }
     },
-    "Action" : "defend",
+    "Action" : "fight",
     "Target" : {},
 
     reset(){
