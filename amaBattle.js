@@ -125,6 +125,7 @@ function BattleTurns(){
                 alert(monstersList[index].Name + " takes a Defensive Stance!")
                 break;
         }
+        checkAlive();
     }
 }
 

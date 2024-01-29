@@ -34,7 +34,6 @@ function BattleLoop(input){
     if (BattleCommands(checkInput(input))){
         OrderMonstersBySpeed();
         BattleTurns();
-        checkAlive();
     }
     drawBattle();
 }
