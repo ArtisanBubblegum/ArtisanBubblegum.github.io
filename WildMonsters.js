@@ -49,6 +49,14 @@ var Giant_Rat = {
         "Luck" : 1,
         "Aflictions" : []
     },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
+    },
     "Action" : "defend",
     "Target" : {},
 
@@ -78,6 +86,14 @@ var Giant_Centipede = {
         "Speed" : 13,
         "Luck" : 5,
         "Aflictions" : []
+    },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
     },
     "Action" : "defend",
     "Target" : {},
@@ -109,6 +125,14 @@ var Bed_Biter = {
         "Luck" : 10,
         "Aflictions" : []
     },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
+    },
     "Action" : "defend",
     "Target" : {},
 
@@ -139,6 +163,14 @@ var Carniverous_Canary = {
         "Luck" : 10,
         "Aflictions" : []
     },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
+    },
     "Action" : "defend",
     "Target" : {},
 
@@ -168,6 +200,14 @@ var Magic_Sword = {
         "Speed" : 12,
         "Luck" : 5,
         "Aflictions" : []
+    },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
     },
     "Action" : "defend",
     "Target" : {},

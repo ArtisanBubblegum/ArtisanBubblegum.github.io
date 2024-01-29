@@ -171,7 +171,7 @@ let MapObj = {
                     }
                     alert("A Wild Monster Attacks!");
                     newEnemy();
-                    drawMon();
+                    //drawMon();
                 default:
                     console.log("Stopped at ", this.PlayerPosition);
                     break;
@@ -182,7 +182,3 @@ let MapObj = {
         }
     }
 }
-
-MapObj.Map = MapObj.mapMaker(7, 7)
-MapObj.spawnMonster(3);
-MapObj.drawMap();

@@ -48,7 +48,8 @@
                     <tr>
                         <td style="width: 100px;"></td>
                         <td style="width: 100px;">
-                            <input type="button" value="Up" onclick="MapObj.update([0,-1])">
+                            <!-- <input type="button" value="Up" onclick="MapObj.update([0,-1])"> -->
+                            <input type="button" value="Up" onclick="MainLoop([0,-1])">
                         </td>
                         <td style="width: 100px;"></td>
 
@@ -59,24 +60,28 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" value="Left" onclick="MapObj.update([-1,0])">
+                            <!-- <input type="button" value="Left" onclick="MapObj.update([-1,0])"> -->
+                            <input type="button" value="Left" onclick="MainLoop([-1,0])">
                         </td>
                         <td></td>
                         <td>
-                            <input type="button" value="Right" onclick="MapObj.update([1,0])">
+                            <!-- <input type="button" value="Right" onclick="MapObj.update([1,0])"> -->
+                            <input type="button" value="Right" onclick="MainLoop([1,0])">
                         </td>
                         
                         <td></td>
                         <td></td>
                         <td>
-                            <input type="button" value="B" onclick="StepBattle('defend')">
+                            <!-- <input type="button" value="B" onclick="StepBattle('defend')"> -->
+                            <input type="button" value="B" onclick="MainLoop([0,'B'])">
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
-                            <input type="button" value="Down" onclick="MapObj.update([0,1])">
+                            <!-- <input type="button" value="Down" onclick="MapObj.update([0,1])"> -->
+                            <input type="button" value="Down" onclick="MainLoop([0,1])">
                         </td>
                         <td></td>
                         
@@ -84,7 +89,8 @@
                             Artisan
                         </td>
                         <td>
-                            <input type="button" value="A" onclick="StepBattle('attack')">
+                            <!-- <input type="button" value="A" onclick="StepBattle('attack')"> -->
+                            <input type="button" value="A" onclick="MainLoop([0,'A'])">
                         </td>
                         <td></td>
                         <td></td>
@@ -112,10 +118,10 @@
         12. Expand Team Size to 2 Monsters.<br>
         13. More To-Do Items.<br>
     </p>
-    <script src="amaMain.js"></script>
     <script src="amaMap.js"></script>
     <script src="amaAllyMonsters.js"></script>
     <script src="WildMonsters.js"></script>
     <script src="amaBattle.js"></script>
+    <script src="amaMain.js"></script>
 </body>
 </html>

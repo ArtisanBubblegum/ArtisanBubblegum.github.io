@@ -19,6 +19,14 @@ var Ally1 = {
         "Luck" : 1,
         "Aflictions" : []
     },
+    Tactics(){
+        if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            this.Action = "defend";
+        }
+    },
     "Action" : "defend",
     "Target" : {},
 
