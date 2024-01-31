@@ -75,6 +75,7 @@ function BattleCommands(input){
             }
             break;
     }
+    drawBattle();
 }
 
 function OrderMonstersBySpeed(){
@@ -96,7 +97,7 @@ function BattleTurns(){
                 alert(monstersList[index].Name + " takes a Defensive Stance!")
                 break;
             default:
-                CastSpell(monstersList[index].Action, monstersList[index], monstersList[index].Target)
+                monstersList[index].Action.Cast(monstersList[index],monstersList[index].Target);
         }
         checkAlive();
     }
@@ -199,8 +200,15 @@ function drawMenu(){
         else {
             menuText += "- "
         }
-        menuText += menuList[menuIndex];
+        menuText += objectToString(menuList[menuIndex]);
         menuText += "\n"
     }
     return menuText;
+}
+
+function objectToString(thing) {
+    if (typeof thing == "object"){
+        thing = thing.Name;
+    }
+    return thing;
 }

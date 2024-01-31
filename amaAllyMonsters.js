@@ -9,24 +9,25 @@ var Ally1 = {
     "BattleStats" : {
         "HPMax" : 20,
         "HPCur" : 20,
-        "MPMax" : 100,
+        "MPMax" : 100,  //Water
         "MPCur" : 100,
-        "Attack" : 16,
-        "Defence" : 5,
+        "Attack" : 16,  //Fire
+        "Defence" : 5,  //Earth
         "Defending": false,
-        "Wisdom" : 10,
-        "Speed" : 5,
+        "Wisdom" : 10,  //Void
+        "Speed" : 5,  //Air
         "Luck" : 1,
         "Aflictions" : []
     },
-    "Spells" : ["Meditate", "Earth Bolt"],
+    "Spells" : [Meditate, EarthBolt],
     Tactics(){ //aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
         }
         else {
-            if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
-                this.Action = "Meditate";
+            if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax || 
+                    (this.BattleStats.HPCur < 5 && this.BattleStats.MPCur >= 15)){
+                this.Action = Meditate;
             }
             else {
                 this.Action = "defend";

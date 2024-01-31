@@ -49,18 +49,62 @@ var Giant_Rat = {
         "Luck" : 1,
         "Aflictions" : []
     },
-    "Spells" : ["Meditate", "Earth Bolt"],
+    "Spells" : [Meditate, EarthBolt],
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
         }
         else {
             if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
-                this.Action = "Meditate";
+                this.Action = Meditate;
             }
             else {
                 this.Action = "defend";
             }
+        }
+    },
+    "Action" : "fight",
+    "Target" : {},
+
+    reset(){
+        this.BattleStats.HPCur = this.BattleStats.HPMax;
+        this.BattleStats.Defending = false;
+    }
+}
+
+var Mud_Slipper = {
+    "Name" : "Mud Slipper",
+    "Genus" : "Mud Slipper",
+    "Family" : "Aquatic",
+    "Age" : 1,
+    "Level" : 1,
+    "EXP" : 0,
+    "lvlUP" : 100,
+    "BattleStats" : {
+        "HPMax" : 8,
+        "HPCur" : 8,
+        "MPMax" : 120,
+        "MPCur" : 120,
+        "Attack" : 5,
+        "Defence" : 8,
+        "Defending": false,
+        "Wisdom" : 15,
+        "Speed" : 12,
+        "Luck" : 5,
+        "Aflictions" : []
+    },
+    "Spells" : [WaterBolt],
+    Tactics(){ //Aggressive
+        if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
+            if(this.BattleStats.MPCur >= 4){
+                this.Action = WaterBolt;
+            }
+            else{
+                this.Action = "attack";
+            }
+        }
+        else {
+            this.Action = "defend";
         }
     },
     "Action" : "fight",
@@ -93,11 +137,11 @@ var Giant_Centipede = {
         "Luck" : 5,
         "Aflictions" : []
     },
-    "Spells" : ["Earth Bolt"],
+    "Spells" : [VoidBolt],
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
             if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
-                this.Action = "Earth Bolt"
+                this.Action = VoidBolt;
             }
             else {
                 this.Action = "attack";
@@ -215,11 +259,11 @@ var Carniverous_Canary = {
         "Luck" : 10,
         "Aflictions" : []
     },
-    "Spells" : ["Earth Bolt"],
+    "Spells" : [AirBolt],
     Tactics(){//very aggressive
         if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
             if (this.BattleStats.MPCur >= 5){
-                this.Action = "Earth Bolt";
+                this.Action = AirBolt;
             }
             else {
             this.Action = "attack";
@@ -241,7 +285,7 @@ var Carniverous_Canary = {
 var Magic_Sword = {
     "Name" : "Magic Sword",
     "Genus" : "Magic Sword",
-    "Family" : "Arcane",
+    "Family" : "Material",
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
@@ -272,6 +316,45 @@ var Magic_Sword = {
     }
 }
 
+var Orange_Ooze = {
+    "Name" : "Orange Ooze",
+    "Genus" : "Orange Ooze",
+    "Family" : "Slime",
+    "Age" : 1,
+    "Level" : 1,
+    "EXP" : 0,
+    "lvlUP" : 100,
+    "BattleStats" : {
+        "HPMax" : 16,
+        "HPCur" : 16,
+        "MPMax" : 60,
+        "MPCur" : 60,
+        "Attack" : 12,
+        "Defence" : 8,
+        "Defending": false,
+        "Wisdom" : 14,
+        "Speed" : 5,
+        "Luck" : 4,
+        "Aflictions" : []
+    },
+    "Spells" : [FireBolt],
+    Tactics(){ //Mindlessly Aggressive
+        if(this.BattleStats.MPCur >= 5){
+            this.Action = FireBolt;
+        }
+        else{
+            this.Action = "attack";
+        }
+    },
+    "Action" : "fight",
+    "Target" : {},
+
+    reset(){
+        this.BattleStats.HPCur = this.BattleStats.HPMax;
+        this.BattleStats.Defending = false;
+    }
+}
 
 
-wildMonsterList = [Giant_Rat,Giant_Centipede,Bed_Biter,Carniverous_Canary,Magic_Sword,Error_Ant];
+
+wildMonsterList = [Giant_Rat, Mud_Slipper, Giant_Centipede, Bed_Biter, Error_Ant, Carniverous_Canary, Magic_Sword, Orange_Ooze];
