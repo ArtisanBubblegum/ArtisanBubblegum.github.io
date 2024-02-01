@@ -112,7 +112,16 @@ let MapObj = {
         while (curIndex < this.Map.length){
             mapText += "["
             if ( curIndex == playerIndex){
-                mapText += "P, -";
+                mapText += " P ";
+            }
+            else if (this.GetMapID(curIndex)[0] == 1){
+                mapText += "|||"
+            }
+            else if (this.GetMapID(curIndex)[0] == 0){
+                mapText += "     "
+            }
+            else if (this.GetMapID(curIndex)[0] == "M"){
+                mapText += " M "
             }
             else {
                 mapText += this.GetMapID(curIndex);
