@@ -23,7 +23,6 @@ function newEnemy(){ //Called in StartHere.js when Battle is triggered.
 }
 
 function BattleCommands(input){
-    EnemyList[0].Action = "fight";
     switch(input[1]){
         case 1:
             selection++;
@@ -99,6 +98,7 @@ function BattleTurns(){
             default:
                 monstersList[index].Action.Cast(monstersList[index],monstersList[index].Target);
         }
+        monstersList[index].Action = "fight";
         checkAlive();
     }
 }
@@ -117,6 +117,7 @@ function checkAlive(){
         if (allyList[0].BattleStats.HPCur <= 0){
             allyList[0].reset();
         }
+        allyList[0].Target = noValidTarget;
         drawStatus(); //Monsters.JS -> drawStatus();
         MapObj.despawnMonster();
         changeState("map");
@@ -204,11 +205,4 @@ function drawMenu(){
         menuText += "\n"
     }
     return menuText;
-}
-
-function objectToString(thing) {
-    if (typeof thing == "object"){
-        thing = thing.Name;
-    }
-    return thing;
 }

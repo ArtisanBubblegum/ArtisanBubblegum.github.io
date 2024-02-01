@@ -127,6 +127,11 @@ let MapObj = {
         return mapText;
     },
     TryToMove(dir){
+        if (dir[1] == "A"){
+            changeState("pause");
+            return null;
+        }
+        
         let location = [this.PlayerPosition[0]+dir[0] , this.PlayerPosition[1]+dir[1]];
         switch(this.GetMapID(location)[0]){
             case 0:

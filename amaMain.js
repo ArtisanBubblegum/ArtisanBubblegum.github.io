@@ -1,4 +1,5 @@
 gameState = "map" //Map, Battle, Pause
+noValidTarget = {};
 
 function LoadGame(){
     MapObj.Map = MapObj.mapMaker(7, 7)
@@ -24,7 +25,9 @@ function MainLoop(input){
 
 function MapLoop(input){
     MapObj.TryToMove(checkInput(input));
-    MapObj.drawMap();
+    if (gameState == "map"){
+        MapObj.drawMap();
+    }
 }
 
 function BattleLoop(input){
@@ -36,7 +39,10 @@ function BattleLoop(input){
 }
 
 function PauseLoop(input){
-
+    PauseMenuInputHandler(checkInput(input));
+    if (gameState == "pause"){   
+        drawPauseMenu();
+    }
 }
 
 function checkInput(input){
@@ -70,13 +76,23 @@ function changeState(state){
             drawStatus();
             break;
         case "battle":
+            menuList = battleList;
             drawBattle();
             break;
         case "pause":
+            menuList = pauseList;
+            drawPauseMenu();
             break;
     }
 }
 
 function random3 (){
     return (Math.random()+Math.random()+Math.random())/3;
+}
+
+function objectToString(thing) {
+    if (typeof thing == "object"){
+        return thing.Name;
+    }
+    return thing;
 }
