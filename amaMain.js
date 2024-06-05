@@ -53,12 +53,10 @@ function checkInput(input){
     }
     else if (typeof input == "object"){
         if (typeof input[0] == "number"){
-            //Direction
-            //this.TryToMove(input);
             return input;
         }
         else {
-            alert("Invalid Array Type: Object>Other.")
+            alert("Invalid Type in Array: Object>Other.")
             return;
         }
     }
