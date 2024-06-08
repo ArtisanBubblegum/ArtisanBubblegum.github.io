@@ -2,8 +2,8 @@ gameState = "map" //Map, Battle, Pause
 noValidTarget = {};
 
 function LoadGame(){
-    MapObj.Map = MapObj.mapMaker(7, 7)
-    MapObj.spawnMonster(4);
+    MapObj.Map = MapObj.mapMaker(15, 15)
+    MapObj.spawnMonster(7);
     MapObj.drawMap();
     drawStatus();
 }
@@ -35,7 +35,9 @@ function BattleLoop(input){
         OrderMonstersBySpeed();
         BattleTurns();
     }
-    //drawBattle();
+    if (gameState == "battle"){
+        drawBattle
+    }
 }
 
 function PauseLoop(input){
@@ -53,10 +55,12 @@ function checkInput(input){
     }
     else if (typeof input == "object"){
         if (typeof input[0] == "number"){
+            //Direction
+            //this.TryToMove(input);
             return input;
         }
         else {
-            alert("Invalid Type in Array: Object>Other.")
+            alert("Invalid Array Type: Object>Other.")
             return;
         }
     }

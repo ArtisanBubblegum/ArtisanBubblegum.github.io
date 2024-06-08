@@ -7,8 +7,6 @@ let MapObj = {
         [1,0], [1,0], [1,0], [1,0], [1,0], 
             ],
     PlayerPosition : [3, 3],
-    MonsterPositions : [],
-    mapActive : true,
 
     mapMaker(x, y){
         if (x < 5) { x = 5;}
@@ -19,14 +17,26 @@ let MapObj = {
         this.Map.push([x,y]);
         let mapSize = x*y;
         let curIndex = 1;
+        let previousTile = 1;
         while (curIndex <= mapSize){
             if (curIndex <= x || curIndex % x == 0 || (curIndex-1) % x == 0 || curIndex > mapSize-x){
                 //Generate Walls on Boarder of Map.
                 this.Map.push([1,0]);
             }
             else{
-                //Generate Floors everywhere else.
-                this.Map.push([0,0]);
+                if (previousTile==0 && this.indexToLocation(curIndex)!=this.locationToIndex(this.PlayerPosition)){
+                    if (random3() > 0.5){
+                        this.Map.push([1,0]);
+                        previousTile = 3;
+                    }
+                    else{
+                        this.Map.push([0,0]);
+                    }
+                }
+                else{
+                    this.Map.push([0,0])
+                    previousTile -= 1;
+                }
             }
             curIndex++;
         }
@@ -68,11 +78,13 @@ let MapObj = {
     },
     spawnMonster (quantity){
         let curIndex = 1;
-        let spawnLocations = [];
+        let spawnLocations = []; //list of locations that are open
         while (curIndex < this.Map.length){
             switch(this.GetMapID(curIndex)[0]){
                 case 0:
-                    spawnLocations.push(curIndex);
+                    if (this.Map[curIndex]!=this.locationToIndex(this.PlayerPosition)){
+                        spawnLocations.push(curIndex);    
+                    }
                     break;
             }
             curIndex++;
@@ -83,27 +95,9 @@ let MapObj = {
             spawnIndex = Math.floor(Math.random()*spawnLocations.length);
             mapIndex = spawnLocations[spawnIndex];
             this.Map[mapIndex] = ["M", "-"];
-            let monsterLocation = this.indexToLocation(mapIndex);
-            this.MonsterPositions.push([monsterLocation[0],monsterLocation[1],false])
             spawnLocations.splice(spawnIndex, 1);
             quantity--;
         }
-    },
-    despawnMonster (){
-        let curIndex = 0;
-        while ( curIndex<this.MonsterPositions.length ){
-            if (this.MonsterPositions[curIndex][2]){
-                let mapPos = [this.MonsterPositions[curIndex][0],this.MonsterPositions[curIndex][1]];
-                let mapIndex = this.locationToIndex(mapPos);
-                this.Map[mapIndex] = [0,0];
-                this.MonsterPositions.splice(curIndex, 1);
-                curIndex = this.MonsterPositions.length;
-                this.spawnMonster(1);
-            }
-            curIndex++;
-        }
-        this.mapActive = true;
-        this.drawMap();
     },
     drawMap (){
         let mapText = "";
@@ -154,15 +148,8 @@ let MapObj = {
                 break;
             case "M":
                 console.log("Fight Monster.");
-                this.mapActive = false;
-                let curIndex = 0;
-                while (curIndex < this.MonsterPositions.length){
-                    if (location[0] == this.MonsterPositions[curIndex][0] && location[1] == this.MonsterPositions[curIndex][1]){
-                        this.MonsterPositions[curIndex][2] = true;
-                        curIndex = this.MonsterPositions.length;
-                    }
-                    curIndex++;
-                }
+                this.Map[this.locationToIndex(location)]=[0,0];
+                this.spawnMonster(1);
                 alert("A Wild Monster Attacks!");
                 newEnemy();
             default:

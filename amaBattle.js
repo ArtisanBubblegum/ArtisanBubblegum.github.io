@@ -10,8 +10,9 @@ let selection = 0;
 let selectingSpell = false;
 let turnReady = false;
 
-function newEnemy(){ //Called in StartHere.js when Battle is triggered.
-    EnemyList = [wildMonsterList[Math.floor(Math.random()*wildMonsterList.length)]];
+function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
+    let SpecificMonster = wildMonsterList[Math.floor(Math.random()*wildMonsterList.length)];
+    EnemyList = [SpecificMonster];
     EnemyList[0].reset();
     allyList[0].Target = EnemyList[0];
     EnemyList[0].Target = allyList[0];
@@ -22,7 +23,7 @@ function newEnemy(){ //Called in StartHere.js when Battle is triggered.
     return;
 }
 
-function BattleCommands(input){
+function BattleCommands(input){ //Manages Menues and gates when Turn's are Exectuted by returning True
     switch(input[1]){
         case 1:
             selection++;
@@ -77,11 +78,11 @@ function BattleCommands(input){
     drawBattle();
 }
 
-function OrderMonstersBySpeed(){
+function OrderMonstersBySpeed(){ //called in BattleLoop in amaMain.js, this is gated by BattleCommands returning true
     monstersList.sort(function(a,b){return a.BattleStats.Speed-b.BattleStats.Speed})
 }
 
-function BattleTurns(){
+function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersBySpeed
     for (index = 0; index<monstersList.length; index++){
         if (monstersList[index].Action == "fight"){
             monstersList[index].Tactics();
@@ -118,15 +119,12 @@ function checkAlive(){
             allyList[0].reset();
         }
         allyList[0].Target = noValidTarget;
-        drawStatus(); //Monsters.JS -> drawStatus();
-        MapObj.despawnMonster();
         changeState("map");
     }
     else {
-        drawBattle();
+        //drawBattle();
     }
     monstersList = list;
-    //return list;
 }
 
 function TryAttack(user, target) {
@@ -144,13 +142,11 @@ function TryAttack(user, target) {
             }
             if (damage > 0){
                 target.BattleStats.HPCur -= damage;
-                //drawMon();
                 drawBattle();
                 if (criticalHit) {alert("CRITICAL HIT!!!")}
                 alert(user.Name + " delt " + damage + " damage to " + target.Name + "!")
             }
             else{
-                //drawMon();
                 drawBattle();
                 alert(user.Name + " delt Zero damage to " + target.Name + "!")
             }
@@ -167,13 +163,11 @@ function TryAttack(user, target) {
             }
             if (damage > 0){
                 target.BattleStats.HPCur -= damage;
-                //drawMon();
                 drawBattle();
                 if (criticalHit) {alert("CRITICAL HIT!!!")}
                 alert(user.Name + " delt " + damage + " damage to " + target.Name + " despite their Defences!")
             }
             else {
-                //drawMon();
                 drawBattle();
                 alert(user.Name + " failed to break " + target.Name + "'s defences!")
             }
