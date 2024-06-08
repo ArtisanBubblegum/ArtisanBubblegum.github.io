@@ -135,7 +135,7 @@ let MapObj = {
         document.getElementById("MapCanvas").textContent = mapText;
         return mapText;
     },
-    TryToMove(dir){
+    Step(dir){
         if (dir[1] == "A"){
             changeState("pause");
             return null;
