@@ -2,8 +2,8 @@ gameState = "map" //Map, Battle, Pause
 noValidTarget = {};
 
 function LoadGame(){
-    MapObj.Map = MapObj.mapMaker(12, 7)
-    MapObj.spawnMonster(5);
+    MapObj.Map = MapObj.mapMaker(7, 7)
+    MapObj.spawnMonster(4);
     MapObj.drawMap();
     drawStatus();
 }
