@@ -2,8 +2,8 @@ gameState = "map" //Map, Battle, Pause
 noValidTarget = {};
 
 function LoadGame(){
-    MapObj.Map = MapObj.mapMaker(7, 7)
-    MapObj.spawnMonster(3);
+    MapObj.Map = MapObj.mapMaker(12, 7)
+    MapObj.spawnMonster(5);
     MapObj.drawMap();
     drawStatus();
 }
@@ -24,7 +24,7 @@ function MainLoop(input){
 }
 
 function MapLoop(input){
-    MapObj.TryToMove(checkInput(input));
+    MapObj.Step(checkInput(input));
     if (gameState == "map"){
         MapObj.drawMap();
     }
