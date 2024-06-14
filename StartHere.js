@@ -1,3 +1,5 @@
+alert("Depricated Script Running, OH NO!");
+
 let Player = {
     "Name" : "player one",
     "Class" : "None",

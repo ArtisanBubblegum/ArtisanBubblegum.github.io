@@ -1,3 +1,5 @@
+alert ("Running Depricated Battle System, OH NO!");
+
 let allyList = [Ally1];
 let EnemyList = [];
 

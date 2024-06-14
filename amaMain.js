@@ -36,7 +36,7 @@ function BattleLoop(input){
         BattleTurns();
     }
     if (gameState == "battle"){
-        drawBattle
+        drawBattle();
     }
 }
 
@@ -80,6 +80,7 @@ function changeState(state){
         case "battle":
             menuList = battleList;
             drawBattle();
+            MapObj.undrawMap();
             break;
         case "pause":
             menuList = pauseList;
