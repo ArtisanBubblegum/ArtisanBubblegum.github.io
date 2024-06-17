@@ -5,9 +5,10 @@ function LoadGame(){
     MapObj.Map = MapObj.mapMaker(15, 15)
     MapObj.spawnMonster(7);
     MapObj.drawMap();
+    Ally1.populate(Giant_Rat);
     drawStatus();
 }
-LoadGame()
+LoadGame();
 
 function MainLoop(input){
     switch(gameState){

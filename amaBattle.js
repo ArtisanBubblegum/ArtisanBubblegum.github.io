@@ -16,6 +16,7 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     EnemyList[0].reset();
     allyList[0].Target = EnemyList[0];
     EnemyList[0].Target = allyList[0];
+    monstersList = []
     monstersList.push(allyList[0]);
     monstersList.push(EnemyList[0]);
     changeState("battle");
@@ -79,10 +80,19 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
 }
 
 function OrderMonstersBySpeed(){ //called in BattleLoop in amaMain.js, this is gated by BattleCommands returning true
-    monstersList.sort(function(a,b){return a.BattleStats.Speed-b.BattleStats.Speed})
+    //pass = 1;
+    //alert("Mon List Presorted: " + monstersList[0].Name + ", " + monstersList[1].Name);
+    monstersList.sort(function(a,b){
+        //alert(a.Name + " Speed " + a.BattleStats.Speed);
+        //alert(b.Name + " Speed " + b.BattleStats.Speed);
+        //pass += 1;
+        //alert(b.BattleStats.Speed-a.BattleStats.Speed);
+        return b.BattleStats.Speed-a.BattleStats.Speed})
+    //alert("Mon List: " + monstersList[0].Name + ", " + monstersList[1].Name);
 }
 
 function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersBySpeed
+    //alert("Mon List at BattleTurns: " + monstersList[0].Name + ", " + monstersList[1].Name);
     for (index = 0; index<monstersList.length; index++){
         if (monstersList[index].Action == "fight"){
             monstersList[index].Tactics();
@@ -101,6 +111,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
         }
         monstersList[index].Action = "fight";
         checkAlive();
+        OrderMonstersBySpeed();
     }
 }
 
@@ -118,13 +129,20 @@ function checkAlive(){
         if (allyList[0].BattleStats.HPCur <= 0){
             allyList[0].reset();
         }
+        else {
+            allyList[0].EXP += 10;
+            if (allyList[0].EXP >= allyList[0].expToLevel){
+                allyList[0].levelUP();
+            }
+        }
         allyList[0].Target = noValidTarget;
         changeState("map");
     }
     else {
         //drawBattle();
     }
-    monstersList = list;
+    //monstersList = list; // this breaks the OrderMonstersBySpeed() call
+    OrderMonstersBySpeed();
 }
 
 function TryAttack(user, target) {

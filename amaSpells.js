@@ -111,7 +111,10 @@ var FireBolt = {
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             target.BattleStats.MPCur -= amount;
-            if (target.BattleStats.MPCur < 0) {target.BattleStats.MPCur = 0;}
+            if (target.BattleStats.MPCur < 0) {
+                //target.BattleStats.HPCur += target.BattleStats.MPCur;
+                target.BattleStats.MPCur = 0;
+            }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
         }

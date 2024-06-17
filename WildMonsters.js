@@ -5,7 +5,7 @@
 //     "Age" : 1,
 //     "Level" : 1,
 //     "EXP" : 0,
-//     "lvlUP" : 100,
+//     "expToLevel" : 20,
 //     "BattleStats" : {
 //         "HPMax" : 10,
 //         "HPCur" : 10,
@@ -35,19 +35,29 @@ var Giant_Rat = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
-        "HPMax" : 20,
-        "HPCur" : 20,
+        "HPMax" : 20, // +10
+        "HPCur" : 20, // +10
         "MPMax" : 100,
         "MPCur" : 100,
-        "Attack" : 18,
-        "Defence" : 8,
+        "Attack" : 18, // +8
+        "Defence" : 8, // -2
         "Defending": false,
-        "Wisdom" : 13,
-        "Speed" : 5,
-        "Luck" : 1,
+        "Wisdom" : 13, // +3
+        "Speed" : 5, // -5
+        "Luck" : 1, //-4
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt],
     Tactics(){ //Aggressive
@@ -79,7 +89,7 @@ var Mud_Slipper = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 8,
         "HPCur" : 8,
@@ -92,6 +102,16 @@ var Mud_Slipper = {
         "Speed" : 12,
         "Luck" : 5,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [WaterBolt],
     Tactics(){ //Aggressive
@@ -123,7 +143,7 @@ var Giant_Centipede = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 12,
         "HPCur" : 12,
@@ -136,6 +156,16 @@ var Giant_Centipede = {
         "Speed" : 13,
         "Luck" : 5,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [VoidBolt],
     Tactics(){ //Aggressive
@@ -167,7 +197,7 @@ var Bed_Biter = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 13,
         "HPCur" : 13,
@@ -180,6 +210,16 @@ var Bed_Biter = {
         "Speed" : 10,
         "Luck" : 10,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
     Tactics(){ //Defensive
@@ -206,7 +246,7 @@ var Error_Ant = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 13,
         "HPCur" : 13,
@@ -219,6 +259,16 @@ var Error_Ant = {
         "Speed" : 13,
         "Luck" : 5,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
     Tactics(){ //very aggressive
@@ -245,7 +295,7 @@ var Carniverous_Canary = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 8,
         "HPCur" : 8,
@@ -258,6 +308,16 @@ var Carniverous_Canary = {
         "Speed" : 15,
         "Luck" : 10,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [AirBolt],
     Tactics(){//very aggressive
@@ -289,7 +349,7 @@ var Magic_Sword = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 5,
         "HPCur" : 5,
@@ -302,6 +362,16 @@ var Magic_Sword = {
         "Speed" : 12,
         "Luck" : 5,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
     Tactics(){//mindlessly aggressive
@@ -323,7 +393,7 @@ var Orange_Ooze = {
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "lvlUP" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
         "HPMax" : 16,
         "HPCur" : 16,
@@ -336,6 +406,16 @@ var Orange_Ooze = {
         "Speed" : 5,
         "Luck" : 4,
         "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
+        "Speed" : 1, //0
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [FireBolt],
     Tactics(){ //Mindlessly Aggressive
