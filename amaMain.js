@@ -3,7 +3,7 @@ noValidTarget = {};
 
 function LoadGame(){
     MapObj.Map = MapObj.mapMaker(15, 15)
-    MapObj.spawnMonster(7);
+    MapObj.spawnMonster(21);
     MapObj.drawMap();
     Ally1.populate(Giant_Rat);
     drawStatus();

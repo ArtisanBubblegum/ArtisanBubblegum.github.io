@@ -16,6 +16,7 @@ var Ally1 = {
         "Defending": false,
         "Wisdom" : 10,  //Void
         "Speed" : 5,  //Air
+        "TurnValue" : 0,
         "Luck" : 1,
         "Aflictions" : []
     },
@@ -63,6 +64,7 @@ var Ally1 = {
         this.BattleStats.Defence = target.BattleStats.Defence;
         this.BattleStats.Wisdom = target.BattleStats.Wisdom;
         this.BattleStats.Speed = target.BattleStats.Speed;
+        this.BattleStats.TurnValue = target.BattleStats.TurnValue;
         this.BattleStats.Luck = target.BattleStats.Luck;
         this.GrowthStats.HP = target.GrowthStats.HP;
         this.GrowthStats.MP = target.GrowthStats.MP;

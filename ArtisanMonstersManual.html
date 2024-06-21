@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Famous Artisan</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon-50403814.ico" />
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        table {
+            border: 1px solid red;
+        }
+        td {
+            text-align: center;
+            border: 1px solid black;
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/index-45778437.css">
+</head>
+<body style="background-color: pink;">
+    <h1>Interactive Media</h1>
+    <h2 id="readonly"> 
+        | <a href="/passive-media.html">Passive Media</a> |
+        <a href="/index.html">Home</a> |
+        <a href="/performative-media.html">Performative Media</a> |
+    </h2>
+    <br>
+    <h3>Artisan Monsters: Alpha</h3>
+    <a href="/ArtisanMonstersAlpha.html">Return to Game</a>
+    <h4>User Manual</h4>
+    <h5 style="font-size: 150%;">Combat</h5>
+    <p>
+        This is a work in progress, these sections are to help illucidate systems and concepts that don't have proper in game explination.<br>
+        Many of these systems are likely to change drasticly as development continues.<br>
+        <br>
+        <b>Fight</b>, will allow your monster to decide what to do on the fly.<br>
+        This is generally preferable, as they can react to what other monsters do. Healing if they are suddenly hit with a heavy attack, for example.<br>
+        George Markus II has a low speed stat, and is more likly to cast Meditate to Heal as his health get's low.<br>
+        <br>
+        <b>Commands</b>, will open the Commands Menu allowing you to give your monster orders.<br>
+        Note: for now your monster is perfectly loyal, I plan to eventually make this not the case.<br>
+        <br>
+        <b>Attack</b>, will order your monster to try to attack their opponent physically.<br>
+        <b>Defend</b>, will order your monster to take a defensive stance, giving them a defensive boost for 1 turn.<br>
+        <b>Spells</b>, will open the Spells Menu, letting you order your monster to cast a specific spell.<br>
+        <br>
+        Normal Attacks deal a random amount of damage up to the maximum calculated below:<br>
+
+        <h6 style="font-size: 100%;">Maximum Attack Damage = (Attacker.EffectiveAttack/2) - (Defender.EffectiveDefence/4)</h6>
+        
+        Effective attack is: <i>Attack * ( HP/( MaxHP/2 ) )</i><br>
+        Effective defence is: <i>Defence * ( HP/( MaxHP/2 ) )</i><br>
+        Each monster also has a Luck Stat, when a monster attacks they have a (Luck/1000) chance to score a critical hit, tripling the damage that attack would deal.<br>
+        (Note: Minimum Damage roll is normally 0. But on a critical attack, a roll of 0 is increased to 1, before multiplying.)<br>
+        <br>
+    </p>
+    <h5 style="font-size: 150%;">Turn Order / Speed</h5>
+    <p>
+        Turns are determined by Speed.<br>
+        Faster monsters will sometimes get to act multiple times before their oponents get an opportunity to act.<br>
+        Currently an arbitrary timeline of 100 points is set. Then each monster takes turns progressing down this time line at their speed value.<br>
+        When a Monster reaches or passes 100 points, it retains any excess points as it's sent back to the beginning of the timeline, and get's to take an action.<br>
+        <br>
+        For example: Monster A has 25 Speed, and Monster B has 20 Speed.<br>
+        their turn order will be: A, B, A, B, A, B, A, A, B, repeat.<br>
+        <table>
+            <th></th><th>Step 1</th><th>Step 2</th><th>Step 3</th><th>Step 4</th><th>Step 5</th><th>Step 6</th><th>Step 7</th><th>Step 8</th><th>Step 9</th><th>Step 10</th><th>Step 11</th><th>Step 12</th><th>Step 13</th><th>Step 14</th><th>Step 15</th><th>Step 16</th><th>Step 17</th><th>Step 18</th><th>Step 19</th><th>Step 20</th>
+            <tr>
+                <td>Monster A: </td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td>
+            </tr>
+            <tr>
+                <td>Monster B: </td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td>
+            </tr>
+            <tr>
+                <td>Turn: </td> <td></td> <td></td> <td></td> <td>A</td> <td>B</td> <td></td> <td></td> <td>A</td> <td></td> <td>B</td> <td></td> <td>A</td> <td></td> <td></td> <td>B</td> <td>A</td> <td></td> <td></td> <td></td> <td>A, B</td>
+            </tr>
+        </table>
+        You will have an opportunity to issue your monster new orders each time it takes an action.<br>
+        
+
+    </p>
+    <h5 style="font-size: 150%;">Magic</h5>
+    <p>
+        Magic has recieved a substatial buff with the update to Effective Wisdom based on MP. Dealing Double Damage if the user has Full MP.<br>
+        This will be balanced out later, when I introduce the 'Magic Contamination' system.<br>
+        <br>
+        Natural Magic is derived from the Five Pillars (Fire, Earth, Metal, Water, and Wood).<br>
+        <b>Fire</b> is the element of consumption and death.<br>
+        <b>Earth</b> is the element of stability and growth.<br>
+        <b>Metal</b> is the element of division and luck.<br>
+        <b>Water</b> is the element of change and adaptability.<br>
+        <b>Wood</b> is the element of life and theft.<br>
+        <br>
+        Spells cost MP to cast. (Some spells also cost HP) If you command your monster to cast a spell that it can't afford, it will waste it's turn trying!<br>
+        Outside of battle, your monster will regain MP. Each time you take a step there is a % Chance to regain 1MP, based on how much MP is missing. (MP Missing/MP Maximum)<br>
+        <br>
+        Spells deal a random amount of damage up to the maximum calculated below:<br>
+
+        <h6 style="font-size: 100%;">Amount = (Caster.EffectiveWisdom/2) - (Target.EffectiveWisdom/8) - (Target.EffectiveDefence/8) </h6>
+        
+        Effective wisdom is: <i>Wisdom * ( MP/( MaxMP/2 ) )</i><br>
+        Most Spells do <i>NOT</i> benefit from critical hits.<br>
+    </p>
+    <a href="/ArtisanMonstersAlpha.html">Return to Game</a>
+</body>
+</html>

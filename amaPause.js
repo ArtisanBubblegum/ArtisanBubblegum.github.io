@@ -13,6 +13,9 @@ function drawPauseMenu(){
             menuText += "- "
         }
         menuText += objectToString(menuList[menuIndex]);
+        if (selectingSpell && menuIndex == selection){
+            menuText += "\n  " + menuList[menuIndex].Description;
+        }
         menuText += "\n"
     }
     document.getElementById("MapCanvas").textContent = menuText;

@@ -46,6 +46,7 @@ var Giant_Rat = {
         "Defending": false,
         "Wisdom" : 13, // +3
         "Speed" : 5, // -5
+        "TurnValue" : 0,
         "Luck" : 1, //-4
         "Aflictions" : []
     },
@@ -59,7 +60,7 @@ var Giant_Rat = {
         "Luck" : 0, //-1
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
-    "Spells" : [Meditate, EarthBolt],
+    "Spells" : [Meditate, EarthBolt], // MetalBolt, WaterBolt, WoodBolt, FireBolt],
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
@@ -100,6 +101,7 @@ var Mud_Slipper = {
         "Defending": false,
         "Wisdom" : 15,
         "Speed" : 12,
+        "TurnValue" : 0,
         "Luck" : 5,
         "Aflictions" : []
     },
@@ -154,6 +156,7 @@ var Giant_Centipede = {
         "Defending": false,
         "Wisdom" : 15,
         "Speed" : 13,
+        "TurnValue" : 0,
         "Luck" : 5,
         "Aflictions" : []
     },
@@ -208,6 +211,7 @@ var Bed_Biter = {
         "Defending": false,
         "Wisdom" : 15,
         "Speed" : 10,
+        "TurnValue" : 0,
         "Luck" : 10,
         "Aflictions" : []
     },
@@ -257,6 +261,7 @@ var Error_Ant = {
         "Defending": false,
         "Wisdom" : 10,
         "Speed" : 13,
+        "TurnValue" : 0,
         "Luck" : 5,
         "Aflictions" : []
     },
@@ -306,6 +311,7 @@ var Carniverous_Canary = {
         "Defending": false,
         "Wisdom" : 17,
         "Speed" : 15,
+        "TurnValue" : 0,
         "Luck" : 10,
         "Aflictions" : []
     },
@@ -360,6 +366,7 @@ var Magic_Sword = {
         "Defending": false,
         "Wisdom" : 12,
         "Speed" : 12,
+        "TurnValue" : 0,
         "Luck" : 5,
         "Aflictions" : []
     },
@@ -404,6 +411,7 @@ var Orange_Ooze = {
         "Defending": false,
         "Wisdom" : 14,
         "Speed" : 5,
+        "TurnValue" : 0,
         "Luck" : 4,
         "Aflictions" : []
     },
