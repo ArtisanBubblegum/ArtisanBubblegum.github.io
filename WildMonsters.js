@@ -28,6 +28,8 @@
 //     }
 // }
 
+
+
 var Giant_Rat = {
     "Name" : "Giant Rat",
     "Genus" : "Giant Rat",
@@ -61,6 +63,7 @@ var Giant_Rat = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt], // MetalBolt, WaterBolt, WoodBolt, FireBolt],
+    "Tactic" : aggressiveHealer,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
@@ -116,6 +119,7 @@ var Mud_Slipper = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [WaterBolt],
+    "Tactic" : aggressiveMagical,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             if(this.BattleStats.MPCur >= 4){
@@ -171,6 +175,7 @@ var Giant_Centipede = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [VoidBolt],
+    "Tactic" : aggressiveMagical,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
             if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
@@ -226,6 +231,7 @@ var Bed_Biter = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
+    "Tactic" : defensivePhysical,
     Tactics(){ //Defensive
         if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
             this.Action = "attack";
@@ -276,6 +282,7 @@ var Error_Ant = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
+    "Tactic" : mindlessPhysical,
     Tactics(){ //very aggressive
         if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
             this.Action = "attack";
@@ -293,9 +300,9 @@ var Error_Ant = {
     }
 }
 
-var Carniverous_Canary = {
-    "Name" : "Carniverous Canary",
-    "Genus" : "Carniverous Canary",
+var Carnivorous_Canary = {
+    "Name" : "Carnivorous Canary",
+    "Genus" : "Carnivorous Canary",
     "Family" : "Avian",
     "Age" : 1,
     "Level" : 1,
@@ -326,6 +333,7 @@ var Carniverous_Canary = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [AirBolt],
+    "Tactic" : aggressiveMagical,
     Tactics(){//very aggressive
         if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
             if (this.BattleStats.MPCur >= 5){
@@ -381,6 +389,7 @@ var Magic_Sword = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
+    "Tactic" : mindlessPhysical,
     Tactics(){//mindlessly aggressive
         this.Action = "attack";
     },
@@ -426,6 +435,7 @@ var Orange_Ooze = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [FireBolt],
+    "Tactic" : mindlessMagical,
     Tactics(){ //Mindlessly Aggressive
         if(this.BattleStats.MPCur >= 5){
             this.Action = FireBolt;
@@ -443,6 +453,4 @@ var Orange_Ooze = {
     }
 }
 
-
-
-wildMonsterList = [Giant_Rat, Mud_Slipper, Giant_Centipede, Bed_Biter, Error_Ant, Carniverous_Canary, Magic_Sword, Orange_Ooze];
+wildMonsterList = [Giant_Rat, Mud_Slipper, Giant_Centipede, Bed_Biter, Error_Ant, Carnivorous_Canary, Magic_Sword, Orange_Ooze];

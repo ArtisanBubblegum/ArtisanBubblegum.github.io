@@ -1,7 +1,5 @@
-
-
-var Ally1 = {
-    "Name" : "George Markus",
+var Enemy1 = {
+    "Name" : "Bahd Guie",
     "Genus" : "Giant Rat",
     "Family" : "Beast",
     "Age" : 1,
@@ -33,12 +31,12 @@ var Ally1 = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt],
-    "Tactic" : mindlessMagical,
+    "Tactic" : aggressivePhysical,
     "Action" : "defend",
     "Target" : {},
 
     populate(target){
-        this.Name = "George Markus II";
+        this.Name = target.Name;
         this.Genus = target.Genus;
         this.Family = target.Family;
         this.Age = 1;
@@ -87,23 +85,6 @@ var Ally1 = {
         this.Level += 1;
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
         this.expToLevel = Math.floor(this.expToLevel);
-        alert (this.Name + " Gained a Level!");
+        //alert (this.Name + " Gained a Level!");
     }
 }
-
-function drawStatus() {
-    let text = "";
-    text += Ally1.Name + ": (" + Ally1.Genus+ ", " + Ally1.Family + ")\n";
-    text += "Level: " + Ally1.Level + " (" + Ally1.EXP + "/" + Ally1.expToLevel + ")\n";
-    //text += "EXP: " + Ally1.EXP + " / " + Ally1.expToLevel + "\n";
-    text += "HP: " + Ally1.BattleStats.HPCur + " / " + Ally1.BattleStats.HPMax +"\n";
-    text += "MP:" + Ally1.BattleStats.MPCur + " / " + Ally1.BattleStats.MPMax + "\n";
-    text += "Attack: " + Ally1.BattleStats.Attack + "\n";
-    text += "Defence: " + Ally1.BattleStats.Defence + "\n";
-    text += "Wisdom: " + Ally1.BattleStats.Wisdom + "\n";
-    text += "Speed: " + Ally1.BattleStats.Speed + "\n";
-    text += "Luck: " + Ally1.BattleStats.Luck + "\n";
-    text += "Generation: " + Ally1.Age + "\n";
-    document.getElementById("MonCanvas").textContent = text;
-}
-//drawStatus();

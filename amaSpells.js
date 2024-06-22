@@ -37,7 +37,7 @@ var FireBolt = {
         if (user.BattleStats.MPCur >= 5){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
@@ -61,7 +61,7 @@ var FireT1 = {
         if (user.BattleStats.MPCur >= 5){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount < 0) {amount = 0};
             target.BattleStats.MPCur -= amount;
             if (target.BattleStats.MPCur < 0) {
@@ -89,7 +89,7 @@ var FireT2 = {
         if (user.BattleStats.MPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             target.BattleStats.MPCur -= amount;
@@ -118,7 +118,7 @@ var FireT3 = {
         if (user.BattleStats.MPCur >= 15){
             user.BattleStats.MPCur -= 15;
             effectiveWisdom = GetEffectiveWisdom(user);
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             target.BattleStats.HPMax -= Math.floor(amount/2);
@@ -156,7 +156,7 @@ var EarthBolt = {  //Giant Rat
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
             user.BattleStats.HPCur -= 5;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             amount *= 2;
             if (amount <= 0) {
                 amount = 0;
@@ -319,7 +319,7 @@ var MetalBolt = {
         if (user.BattleStats.MPCur >= 5){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
@@ -343,7 +343,7 @@ var MetalT1Def = {
         if (user.BattleStats.MPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Defence -= amount;
             if (target.BattleStats.Defence < 0){
@@ -370,7 +370,7 @@ var MetalT1Atk = {
         if (user.BattleStats.MPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Attack -= amount;
             if (target.BattleStats.Attack < 0){
@@ -397,7 +397,7 @@ var MetalT1Spd = {
         if (user.BattleStats.MPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Speed -= amount;
             if (target.BattleStats.Speed < 0){
@@ -424,7 +424,7 @@ var MetalT1Wis = {
         if (user.BattleStats.MPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Wisdom -= amount;
             if (target.BattleStats.Wisdom < 0){
@@ -451,7 +451,7 @@ var MetalT2Crit = {
         if (user.BattleStats.MPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user) * 2;
             user.BattleStats.MPCur -= 10;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (Math.floor(Math.random()*1000) <= (user.BattleStats.Luck * 3)){
                 if (amount < 1) {amount = 1};
                 amount * 3;
@@ -490,9 +490,9 @@ var MetalT3Multi = {
             while (attackNum < 5 && dropped == false){
                 attackNum++;
                 
-                let maxAmount = (effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6);
+                let maxAmount = (effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6);
                 maxAmount = Math.floor(maxAmount/5);
-                let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/7.6) - (target.BattleStats.Defence/7.6)));
+                let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
                 amount = Math.floor(amount/5);
                 if (Math.floor(Math.random()*1000) <= (user.BattleStats.Luck)){
                     if (amount < 1) {amount = 1};
@@ -531,7 +531,7 @@ var WaterBolt = {
         if (user.BattleStats.MPCur >= 5){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount <= 0) {
                 amount = 0
             }
@@ -787,6 +787,7 @@ var WaterT2WistoStr = {
 
 var WoodBolt = {
     "Name" : "Wood Bolt",
+    "Description" : "    Cost: 5mp\n" + "    generates a bolt of earth to be flung at the target, draining some HP.",
     Cast(user, target){
         if (Object.keys(target) == 0){
             alert("No Valid Target!");
@@ -796,16 +797,182 @@ var WoodBolt = {
         if (user.BattleStats.MPCur >= 5){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
-            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Defence/8)));
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount < 0) {amount = 0}
             else {
                 user.BattleStats.HPCur += Math.floor(amount/2)+1;
             }
-            user.BattleStats.HPCur += Math.floor(amount/2);
             target.BattleStats.HPCur -= amount;
-            target.BattleStats.MPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" heals "+ Math.floor(amount/2) +" and flings a Wood Bolt at "+ target.Name +" dealing "+ amount +" damage!\n And Heals " + (Math.floor(amount/2)+1) + " Health!");
+        }
+        else{
+            alert("Not Enough MP!")
+        }
+    }
+}
+
+var WoodT1HP = {
+    "Name" : "Drain Life",
+    "Description" : "    Cost: 10mp\n" + "    Magical Vines latch onto the target, draining them of their life force.",
+    Cast(user, target){
+        if (Object.keys(target) == 0){
+            alert("No Valid Target!");
+            return;
+        }
+
+        if (user.BattleStats.MPCur >= 10){
+            effectiveWisdom = GetEffectiveWisdom(user);
+            user.BattleStats.MPCur -= 10;
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
+            if (amount > target.BattleStats.HPCur) {amount = targe.BattleStats.HPCur}
+            if (amount < 0) {amount = 0}
+            else {
+                user.BattleStats.HPCur += amount;
+            }
+            target.BattleStats.HPCur -= amount;
+            if(gameState == "battle") {drawBattle();}
+            alert(user.Name +" summons magic vines that drain "+ amount +" of HP from "+ target.Name +"!");
+        }
+        else{
+            alert("Not Enough MP!")
+        }
+    }
+}
+
+var WoodT1MP = {
+    "Name" : "Drain Mind",
+    "Description" : "    Cost: 10mp\n" + "    Magical Vines latch onto the target, draining them of their mental force.",
+    Cast(user, target){
+        if (Object.keys(target) == 0){
+            alert("No Valid Target!");
+            return;
+        }
+
+        if (user.BattleStats.MPCur >= 10){
+            effectiveWisdom = GetEffectiveWisdom(user);
+            user.BattleStats.MPCur -= 10;
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
+            if (amount > target.BattleStats.MPCur) {amount = targe.BattleStats.MPCur}
+            if (amount < 0) {amount = 0}
+            else {
+                user.BattleStats.MPCur += amount;
+            }
+            target.BattleStats.MPCur -= amount;
+            if(gameState == "battle") {drawBattle();}
+            alert(user.Name +" summons magic vines that drain "+ amount +" of MP from "+ target.Name +"!");
+        }
+        else{
+            alert("Not Enough MP!")
+        }
+    }
+}
+
+var WoodT2Atk = {
+    "Name" : "Drain Muscle",
+    "Description" : "    Cost: 10mp\n" + "    Summons a swarm of insects that harmlessly transplants the target's muscles into the user.",
+    Cast(user, target){
+        if (Object.keys(target) == 0){
+            alert("No Valid Target!");
+            return;
+        }
+
+        if (user.BattleStats.MPCur >= 10){
+            effectiveWisdom = GetEffectiveWisdom(user) * 2;
+            user.BattleStats.MPCur -= 10;
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
+            if (amount > target.BattleStats.Attack) {amount = targe.BattleStats.Attack - 1}
+            if (amount < 0) {amount = 0}
+            else {
+                user.BattleStats.Attack += amount;
+            }
+            target.BattleStats.Attack -= amount;
+            if(gameState == "battle") {drawBattle();}
+            alert("A swarm of insects appear ripping away " + amount +" attack from "+ target.Name +"! "+ user.Name +" grows stronger!");
+        }
+        else{
+            alert("Not Enough MP!")
+        }
+    }
+}
+
+var WoodT2Spd = {
+    "Name" : "Drain Blood",
+    "Description" : "    Cost: 10mp\n" + "    Summons a swarm of insects that harmlessly transfuses the target's blood into the user.",
+    Cast(user, target){
+        if (Object.keys(target) == 0){
+            alert("No Valid Target!");
+            return;
+        }
+
+        if (user.BattleStats.MPCur >= 10){
+            effectiveWisdom = GetEffectiveWisdom(user) * 2;
+            user.BattleStats.MPCur -= 10;
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
+            if (amount > target.BattleStats.Speed) {amount = targe.BattleStats.Speed - 1}
+            if (amount < 0) {amount = 0}
+            else {
+                user.BattleStats.Speed += amount;
+            }
+            target.BattleStats.Speed -= amount;
+            if(gameState == "battle") {drawBattle();}
+            alert("A swarm of insects appear and extract blood from " + target.Name +", draining "+ amount +" speed! "+ user.Name +" grows more agile!");
+        }
+        else{
+            alert("Not Enough MP!")
+        }
+    }
+}
+
+var WoodT3Def = {
+    "Name" : "Drain Skin",
+    "Description" : "    Cost: 10mp\n" + "    the target's skin peels itself away and layers onto the users.",
+    Cast(user, target){
+        if (Object.keys(target) == 0){
+            alert("No Valid Target!");
+            return;
+        }
+
+        if (user.BattleStats.MPCur >= 10){
+            effectiveWisdom = GetEffectiveWisdom(user) * 3;
+            user.BattleStats.MPCur -= 10;
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
+            if (amount > target.BattleStats.Defence) {amount = targe.BattleStats.Defence - 1}
+            if (amount < 0) {amount = 0}
+            else {
+                user.BattleStats.Defence += amount;
+            }
+            target.BattleStats.Defence -= amount;
+            if(gameState == "battle") {drawBattle();}
+            alert(target.Name + "'s skin starts to peel off and attach to " + user.Name +", draining "+ amount +" defence!");
+        }
+        else{
+            alert("Not Enough MP!")
+        }
+    }
+}
+
+var WoodT3Wis = {
+    "Name" : "Drain Skin",
+    "Description" : "    Cost: 10mp\n" + "    Mind eating fungus sprouts from the target, the spores expand the users mind.",
+    Cast(user, target){
+        if (Object.keys(target) == 0){
+            alert("No Valid Target!");
+            return;
+        }
+
+        if (user.BattleStats.MPCur >= 10){
+            effectiveWisdom = GetEffectiveWisdom(user) * 3;
+            user.BattleStats.MPCur -= 10;
+            let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
+            if (amount > target.BattleStats.Wisdom) {amount = targe.BattleStats.Wisdom - 1}
+            if (amount < 0) {amount = 0}
+            else {
+                user.BattleStats.Wisdom += amount;
+            }
+            target.BattleStats.Wisdom -= amount;
+            if(gameState == "battle") {drawBattle();}
+            alert("Fungus suddenly sprouts from " + target.Name + "! Their mind start's to fade as they release their spores! Losing " + amount + " wisdom!");
         }
         else{
             alert("Not Enough MP!")

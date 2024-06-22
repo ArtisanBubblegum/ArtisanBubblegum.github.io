@@ -1,5 +1,7 @@
+
 let allyList = [Ally1];
-let EnemyList = [];
+let EnemyList = [Enemy1];
+
 let monstersList = []
 
 let battleList = ["Fight", "Commands"];
@@ -17,15 +19,24 @@ let combatDone = false;
 
 function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     let SpecificMonster = wildMonsterList[Math.floor(Math.random()*wildMonsterList.length)];
-    EnemyList = [SpecificMonster];
-    EnemyList[0].reset();
+    EnemyList[0].populate(SpecificMonster);
+    
+    let enemyLevel = Math.floor( random3() * (allyList[0].Level * 2) ) + 1;
+    if (allyList[0].Level <= 3 && enemyLevel > allyList[0].Level) { enemyLevel = allyList[0].Level};
+    while (EnemyList[0].Level < enemyLevel){
+        EnemyList[0].levelUP();
+    }
+    
     allyList[0].Target = EnemyList[0];
     EnemyList[0].Target = allyList[0];
+    
     monstersList = []
     monstersList.push(allyList[0]);
     monstersList.push(EnemyList[0]);
+
     changeState("battle");
     drawBattle();
+    
     return;
 }
 
@@ -85,40 +96,11 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
     drawBattle();
 }
 
-function OrderMonstersBySpeed(){ //called in BattleLoop in amaMain.js, this is gated by BattleCommands returning true
-    //pass = 1;
-    //alert("Mon List Presorted: " + monstersList[0].Name + ", " + monstersList[1].Name);
+function OrderMonstersBySpeed(){
     monstersList.sort(function(a,b){return b.BattleStats.Speed-a.BattleStats.Speed});
-    //targetTurnValue = monstersList[0].BattleStats.TurnValue;
-    //alert("Mon List: " + monstersList[0].Name + ", " + monstersList[1].Name);
 }
 
-// function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersBySpeed
-//     //alert("Mon List at BattleTurns: " + monstersList[0].Name + ", " + monstersList[1].Name);
-//     for (index = 0; index<monstersList.length; index++){
-//         if (monstersList[index].Action == "fight"){
-//             monstersList[index].Tactics();
-//         }
-//         switch (monstersList[index].Action){
-//             case "attack":
-//                 TryAttack(monstersList[index], monstersList[index].Target)
-//                 monstersList[index].BattleStats.Defending = false;
-//                 break;
-//             case "defend":
-//                 monstersList[index].BattleStats.Defending = true;
-//                 alert(monstersList[index].Name + " takes a Defensive Stance!")
-//                 break;
-//             default:
-//                 monstersList[index].Action.Cast(monstersList[index],monstersList[index].Target);
-//         }
-//         monstersList[index].Action = "fight";
-//         checkAlive();
-//         OrderMonstersBySpeed();
-//     }
-// }
-
 function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersBySpeed
-    //alert("Mon List at BattleTurns: " + monstersList[0].Name + ", " + monstersList[1].Name);
     OrderMonstersBySpeed();
     allyAttacked = false;
     combatDone = false;
@@ -135,7 +117,10 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                 }
                 monstersList[index].BattleStats.TurnValue -= targetTurnValue;
                 if (monstersList[index].Action == "fight"){
-                    monstersList[index].Tactics();
+                    monstersList[index].Tactic.think(monstersList[index]);
+                    if (monstersList[index].Action == "fight"){
+                        alert("Error, Fialed to think.");
+                    }
                 }
                 switch (monstersList[index].Action){
                     case "attack":
@@ -148,6 +133,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         break;
                     default:
                         monstersList[index].Action.Cast(monstersList[index],monstersList[index].Target);
+                        //break;
                 }
                 monstersList[index].Action = "fight";
                 checkAlive();
@@ -172,7 +158,7 @@ function checkAlive(){
             allyList[0].reset();
         }
         else {
-            allyList[0].EXP += 10;
+            allyList[0].EXP += (EnemyList[0].Level * 10) * (EnemyList[0].Level/allyList[0].Level);
             if (allyList[0].EXP >= allyList[0].expToLevel){
                 allyList[0].levelUP();
             }
@@ -181,10 +167,6 @@ function checkAlive(){
         changeState("map");
         combatDone = true;
     }
-    else {
-        //drawBattle();
-    }
-    //monstersList = list; // this breaks the OrderMonstersBySpeed() call
     OrderMonstersBySpeed();
 }
 
@@ -240,7 +222,7 @@ function TryAttack(user, target) {
 function drawBattle(){
     // document.getElementById("MonCanvas").textContent = "Giant Rat VS Giant Centipede";
     let text = "";
-    text += EnemyList[0].Name + ":\nHP: " + EnemyList[0].BattleStats.HPCur + " / " + EnemyList[0].BattleStats.HPMax + "\n";
+    text += EnemyList[0].Name + " (Level: " + EnemyList[0].Level + "):\nHP: " + EnemyList[0].BattleStats.HPCur + " / " + EnemyList[0].BattleStats.HPMax + "\n";
     text += "MP: "+ EnemyList[0].BattleStats.MPCur +" / "+ EnemyList[0].BattleStats.MPMax + "\n\n";
     text += allyList[0].Name + ":\nHP: " + allyList[0].BattleStats.HPCur + " / " + allyList[0].BattleStats.HPMax + "\n";
     text += "MP: "+ allyList[0].BattleStats.MPCur +" / "+ allyList[0].BattleStats.MPMax + "\n\n";

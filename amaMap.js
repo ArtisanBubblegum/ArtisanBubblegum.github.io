@@ -17,27 +17,29 @@ let MapObj = {
         if (y > 50) {y = 50;}
         this.Map = [];
         this.Map.push([x,y]);
+        this.PlayerPosition = [Math.floor(this.Map[0][0]/2),Math.floor(this.Map[0][1]/2)]
         let mapSize = x*y;
         let curIndex = 1;
         let previousTile = 1;
+        let wallChance = 0.5;
         while (curIndex <= mapSize){
             if (curIndex <= x || curIndex % x == 0 || (curIndex-1) % x == 0 || curIndex > mapSize-x){
                 //Generate Walls on Boarder of Map.
                 this.Map.push([1,0]);
             }
             else{
-                if (previousTile==0 && curIndex!=this.locationToIndex(this.PlayerPosition)){
-                    if (random3() > 0.5){
+                if (curIndex!=this.locationToIndex(this.PlayerPosition)){
+                    if (random3() > wallChance){
                         this.Map.push([1,0]);
-                        previousTile = 3;
+                        wallChance *= 1.25;
                     }
                     else{
                         this.Map.push([0,0]);
+                        wallChance *= 0.9;
                     }
                 }
                 else{
                     this.Map.push([0,0])
-                    previousTile -= 1;
                 }
             }
             curIndex++;
