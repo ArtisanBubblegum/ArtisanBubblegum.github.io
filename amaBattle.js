@@ -4,7 +4,7 @@ let EnemyList = [Enemy1];
 
 let monstersList = []
 
-let battleList = ["Fight", "Commands"];
+let battleList = ["Fight", "Commands", "Flee"];
 let cmdList = ["Attack", "Defend", "Spells"]
 let spellList = allyList[0].Spells
 let menuList = battleList;
@@ -15,6 +15,7 @@ let turnReady = false;
 let targetTurnValue = 100;
 let allyAttacked = false;
 let combatDone = false;
+let fleeBonus = 0;
     
 
 function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
@@ -79,7 +80,23 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
                     menuList = spellList;
                     selection = 0;
                     selectingSpell = true;
-            }
+                    break;
+                case "Flee":
+                    allyList[0].Action = "flee";
+                    selection = 0
+                    if ( Math.random() < fleeBonus + ( allyList[0].BattleStats.Speed/( EnemyList[0].BattleStats.Speed*2 ) ) ){
+                        alert(allyList[0].Name + " escapes!")
+                        fleeBonus = 0;
+                        allyList[0].Target = noValidTarget;
+                        changeState("map");
+                    }
+                    else {
+                        alert(allyList[0].Name + " fails to escape!")
+                        fleeBonus += 0.1;
+                        return true;
+                    }
+                    break;
+                }
             break;
         case "B":
             if (menuList == cmdList){
@@ -108,6 +125,9 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
         for (index = 0; index<monstersList.length && combatDone == false; index++){
             monstersList[index].BattleStats.TurnValue += monstersList[index].BattleStats.Speed;
             if (monstersList[index].BattleStats.TurnValue >= targetTurnValue){
+                monstersList[index].BattleStats.TurnValue -= targetTurnValue;
+                console.log(monstersList[index].Name + " takes a turn.")
+
                 if (monstersList[index] === allyList[0]){
                     allyAttacked = true;
                     //alert("Ally Attacked");
@@ -115,7 +135,24 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                 else {
                     //alert("Not yet + " + allyList[0].BattleStats.TurnValue + " / " + targetTurnValue);
                 }
-                monstersList[index].BattleStats.TurnValue -= targetTurnValue;
+                
+                if (monstersList[index].BattleStats.Aflictions.length > 0){
+                    for (item = monstersList[index].BattleStats.Aflictions.length - 1; item >= 0; item--){
+                        switch (monstersList[index].BattleStats.Aflictions[item]){
+                            case "Trip" :                               
+                                if (Math.random() < 0.5 && monstersList[index].Action != "skip"){
+                                    monstersList[index].Action = "skip";
+                                    alert(monstersList[index].Name + " trips and misses their turn.");
+                                }
+                                monstersList[index].BattleStats.Aflictions.splice(item, 1);
+                                break;
+                            default :
+                                alert(monstersList[index].BattleStats.Aflictions[item] + " Doesn't exist.");
+                                break;
+                        }
+                    }
+                }
+
                 if (monstersList[index].Action == "fight"){
                     monstersList[index].Tactic.think(monstersList[index]);
                     if (monstersList[index].Action == "fight"){
@@ -131,6 +168,11 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         monstersList[index].BattleStats.Defending = true;
                         alert(monstersList[index].Name + " takes a Defensive Stance!")
                         break;
+                    case "flee":
+                        alert("Stands around.")
+                        break;
+                    case "skip":
+                        break;
                     default:
                         monstersList[index].Action.Cast(monstersList[index],monstersList[index].Target);
                         //break;
@@ -144,6 +186,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
 }
 
 function checkAlive(){
+    console.log("checking Alive.");
     let list = [];
     if (allyList[0].BattleStats.HPCur > 0){
         list.push(allyList[0]);
@@ -153,16 +196,24 @@ function checkAlive(){
     }
     
     if (list.length == 1){
-        alert(list[0].Name + " has Survived the Battle!")
+        alert(list[0].Name + " has Survived the Battle!");
         if (allyList[0].BattleStats.HPCur <= 0){
             allyList[0].reset();
         }
         else {
             allyList[0].EXP += (EnemyList[0].Level * 10) * (EnemyList[0].Level/allyList[0].Level);
             if (allyList[0].EXP >= allyList[0].expToLevel){
+                console.log("Calling Level up in checkAlive");
                 allyList[0].levelUP();
             }
         }
+        allyList[0].Target = noValidTarget;
+        changeState("map");
+        combatDone = true;
+    }
+    else if (list.length == 0){
+        alert("Neither Monster Survives the Battle!");
+        allyList[0].reset();
         allyList[0].Target = noValidTarget;
         changeState("map");
         combatDone = true;
@@ -175,7 +226,7 @@ function TryAttack(user, target) {
         let criticalHit = false;
         if (user.BattleStats.Attack > target.BattleStats.Defence){
             //damage = Math.floor(random3() * ((user.BattleStats.Attack/2) - (target.BattleStats.Defence/4)));
-            damage = Math.floor(random3() * ((GetEffectiveAttack(user)/2) - (GetEffectiveDefence(user)/4)));
+            damage = Math.floor(random3() * ((GetEffectiveAttack(user)/2) - (GetEffectiveDefence(target)/4)));
             if (target.BattleStats.Defending){
                 damage -= Math.floor(random3()*target.BattleStats.Defence / 5);
             }
@@ -196,7 +247,7 @@ function TryAttack(user, target) {
             }
         }
         else {
-            damage = Math.floor(random3() * ((user.BattleStats.Attack/2) - (user.BattleStats.Defence/4)));
+            damage = Math.floor(random3() * ((GetEffectiveAttack(user)/2) - (GetEffectiveDefence(target)/4)));
             if (target.BattleStats.Defending){
                 damage -= Math.floor((target.BattleStats.Defence/5))
             }

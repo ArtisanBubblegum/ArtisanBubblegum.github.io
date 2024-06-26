@@ -31,6 +31,7 @@ var Enemy1 = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt],
+    "LearnableSpells" : [],
     "Tactic" : aggressivePhysical,
     "Action" : "defend",
     "Target" : {},
@@ -63,7 +64,16 @@ var Enemy1 = {
         this.GrowthStats.GrowthRate = target.GrowthStats.GrowthRate;
         this.Spells = [];
         for (const spell in target.Spells){
-            this.Spells.push(target.Spells[spell]);
+            if (target.Spells[spell].CanLearn(this)){
+                this.Spells.push(target.Spells[spell]);
+            }
+            else {
+                this.LearnableSpells.push(target.Spells[spell]);
+            }
+        }
+        this.LearnableSpells = [];
+        for (const SpellIndex in target.LearnableSpells){
+            this.LearnableSpells.push(target.LearnableSpells[SpellIndex]);
         }
         this.Tactic = target.Tactic;
     },
@@ -82,6 +92,12 @@ var Enemy1 = {
         this.BattleStats.Wisdom += this.GrowthStats.Wisdom;
         this.BattleStats.Speed += this.GrowthStats.Speed;
         this.BattleStats.Luck += this.GrowthStats.Luck;
+        for (learnableSpellIndex = this.LearnableSpells.length - 1; learnableSpellIndex >= 0 ; learnableSpellIndex--){
+            if (this.LearnableSpells[learnableSpellIndex].CanLearn(this) == true){
+                this.Spells.push(this.LearnableSpells[learnableSpellIndex]);
+                this.LearnableSpells.splice(learnableSpellIndex, 1);
+            }
+        }
         this.Level += 1;
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
         this.expToLevel = Math.floor(this.expToLevel);

@@ -38,23 +38,23 @@ var Giant_Rat = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 20, // +10
-        "HPCur" : 20, // +10
-        "MPMax" : 100,
-        "MPCur" : 100,
-        "Attack" : 18, // +8
-        "Defence" : 8, // -2
+    "BattleStats" : { //10
+        "HPMax" : 20, //+10
+        "HPCur" : 20, 
+        "MPMax" : 10, //+0
+        "MPCur" : 10,
+        "Attack" : 18, //+8
+        "Defence" : 8, //-2
         "Defending": false,
-        "Wisdom" : 13, // +3
-        "Speed" : 5, // -5
+        "Wisdom" : 13, //+3
+        "Speed" : 5, //-5
         "TurnValue" : 0,
         "Luck" : 1, //-4
         "Aflictions" : []
     },
-    "GrowthStats" : {
+    "GrowthStats" : { //5
         "HP" : 2, //+1
-        "MP" : 20, //+1
+        "MP" : 2, //+1
         "Attack" : 3, //+2
         "Defence" : 2, //+1
         "Wisdom" : 2, //+1
@@ -63,7 +63,8 @@ var Giant_Rat = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt], // MetalBolt, WaterBolt, WoodBolt, FireBolt],
-    "Tactic" : aggressiveHealer,
+    "LearnableSpells" : [WoodBolt, FireT3, MetalT2Crit],
+    "Tactic" : aggressivePhysical,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
             this.Action = "attack";
@@ -94,31 +95,32 @@ var Mud_Slipper = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 8,
+    "BattleStats" : {//10
+        "HPMax" : 8, //-2
         "HPCur" : 8,
-        "MPMax" : 120,
-        "MPCur" : 120,
-        "Attack" : 5,
-        "Defence" : 8,
+        "MPMax" : 15, //+5
+        "MPCur" : 15,
+        "Attack" : 5, //-5
+        "Defence" : 8, //-2
         "Defending": false,
-        "Wisdom" : 15,
-        "Speed" : 12,
+        "Wisdom" : 15, //+5
+        "Speed" : 12, //+2
         "TurnValue" : 0,
-        "Luck" : 5,
+        "Luck" : 7, //+7
         "Aflictions" : []
     },
-    "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
-        "Attack" : 3, //+2
-        "Defence" : 2, //+1
+    "GrowthStats" : {//5
+        "HP" : 1, //0
+        "MP" : 4, //+3
+        "Attack" : 1, //0
+        "Defence" : 1, //0
         "Wisdom" : 2, //+1
         "Speed" : 1, //0
-        "Luck" : 0, //-1
+        "Luck" : 2, //+1
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [WaterBolt],
+    "LearnableSpells" : [MetalT1Spd, EarthT3HP],
     "Tactic" : aggressiveMagical,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
@@ -150,31 +152,32 @@ var Giant_Centipede = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 12,
-        "HPCur" : 12,
-        "MPMax" : 120,
-        "MPCur" : 120,
-        "Attack" : 11,
-        "Defence" : 7,
+    "BattleStats" : {//10
+        "HPMax" : 11, //+1
+        "HPCur" : 11,
+        "MPMax" : 11, //+1
+        "MPCur" : 11,
+        "Attack" : 11, //+1
+        "Defence" : 5, //-5
         "Defending": false,
-        "Wisdom" : 15,
-        "Speed" : 13,
+        "Wisdom" : 15, //+5
+        "Speed" : 13, //+3
         "TurnValue" : 0,
-        "Luck" : 5,
+        "Luck" : 4, //+4
         "Aflictions" : []
     },
-    "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
+    "GrowthStats" : {//5
+        "HP" : 1, //0
+        "MP" : 1, //0
         "Attack" : 3, //+2
-        "Defence" : 2, //+1
-        "Wisdom" : 2, //+1
-        "Speed" : 1, //0
-        "Luck" : 0, //-1
+        "Defence" : 1, //0
+        "Wisdom" : 3, //+2
+        "Speed" : 2, //+1
+        "Luck" : 1, //0
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [VoidBolt],
+    "LearnableSpells" : [FireT2, MetalT3Multi],
     "Tactic" : aggressiveMagical,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
@@ -206,23 +209,23 @@ var Bed_Biter = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 13,
+    "BattleStats" : { //10
+        "HPMax" : 13, //+3
         "HPCur" : 13,
-        "MPMax" : 90,
-        "MPCur" : 90,
-        "Attack" : 13,
-        "Defence" : 5,
+        "MPMax" : 4, //-6
+        "MPCur" : 4,
+        "Attack" : 13, //+3
+        "Defence" : 9, //-1
         "Defending": false,
-        "Wisdom" : 15,
-        "Speed" : 10,
+        "Wisdom" : 15, //+5
+        "Speed" : 10, //0
         "TurnValue" : 0,
-        "Luck" : 10,
+        "Luck" : 5, //+5
         "Aflictions" : []
     },
-    "GrowthStats" : {
+    "GrowthStats" : { //5
         "HP" : 2, //+1
-        "MP" : 20, //+1
+        "MP" : 2, //+1
         "Attack" : 3, //+2
         "Defence" : 2, //+1
         "Wisdom" : 2, //+1
@@ -231,6 +234,7 @@ var Bed_Biter = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
+    "LearnableSpells" : [WoodT1HP, WoodT3Def, FireT1],
     "Tactic" : defensivePhysical,
     Tactics(){ //Defensive
         if (Math.random() >= this.BattleStats.HPCur/this.BattleStats.HPMax || this.BattleStats.HPCur == this.BattleStats.HPMax){
@@ -257,31 +261,32 @@ var Error_Ant = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 13,
+    "BattleStats" : { //10
+        "HPMax" : 13, //+3
         "HPCur" : 13,
-        "MPMax" : 70,
-        "MPCur" : 70,
-        "Attack" : 16,
-        "Defence" : 11,
+        "MPMax" : 7, //-3
+        "MPCur" : 7,
+        "Attack" : 16, //+6
+        "Defence" : 11, //+1
         "Defending": false,
-        "Wisdom" : 10,
-        "Speed" : 13,
+        "Wisdom" : 7, //-3
+        "Speed" : 11, //+1
         "TurnValue" : 0,
-        "Luck" : 5,
+        "Luck" : 5, //+5
         "Aflictions" : []
     },
-    "GrowthStats" : {
+    "GrowthStats" : { //5
         "HP" : 2, //+1
-        "MP" : 20, //+1
+        "MP" : 1, //0
         "Attack" : 3, //+2
         "Defence" : 2, //+1
-        "Wisdom" : 2, //+1
-        "Speed" : 1, //0
-        "Luck" : 0, //-1
+        "Wisdom" : 1, //0
+        "Speed" : 2, //+1
+        "Luck" : 1, //0
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
+    "LearnableSpells" : [MetalT2Crit],
     "Tactic" : mindlessPhysical,
     Tactics(){ //very aggressive
         if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
@@ -308,31 +313,32 @@ var Carnivorous_Canary = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 8,
-        "HPCur" : 8,
-        "MPMax" : 130,
-        "MPCur" : 130,
-        "Attack" : 5,
-        "Defence" : 7,
+    "BattleStats" : {//10
+        "HPMax" : 8, //-2
+        "HPCur" : 8, 
+        "MPMax" : 13, //+3
+        "MPCur" : 13,
+        "Attack" : 5, //-5
+        "Defence" : 7, //-3
         "Defending": false,
-        "Wisdom" : 17,
-        "Speed" : 15,
+        "Wisdom" : 17, //+7
+        "Speed" : 15, //+5
         "TurnValue" : 0,
-        "Luck" : 10,
+        "Luck" : 5, //+5
         "Aflictions" : []
     },
-    "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
-        "Attack" : 3, //+2
-        "Defence" : 2, //+1
+    "GrowthStats" : {//5
+        "HP" : 1, //0
+        "MP" : 2, //+1
+        "Attack" : 2, //+1
+        "Defence" : 1, //0
         "Wisdom" : 2, //+1
-        "Speed" : 1, //0
-        "Luck" : 0, //-1
+        "Speed" : 3, //+2
+        "Luck" : 1, //0
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [AirBolt],
+    "LearnableSpells" : [WaterBolt, WoodT2Spd, MetalT3Multi],
     "Tactic" : aggressiveMagical,
     Tactics(){//very aggressive
         if (Math.random() <= ((this.BattleStats.HPCur/this.BattleStats.HPMax)+1)/2){
@@ -364,31 +370,32 @@ var Magic_Sword = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 5,
+    "BattleStats" : {//15
+        "HPMax" : 5, //-5
         "HPCur" : 5,
-        "MPMax" : 130,
-        "MPCur" : 130,
-        "Attack" : 15,
-        "Defence" : 13,
+        "MPMax" : 13, //+3
+        "MPCur" : 13,
+        "Attack" : 15, //+5
+        "Defence" : 13, //+3
         "Defending": false,
-        "Wisdom" : 12,
-        "Speed" : 12,
+        "Wisdom" : 12, //+2
+        "Speed" : 12, //+2
         "TurnValue" : 0,
-        "Luck" : 5,
+        "Luck" : 5, //+5
         "Aflictions" : []
     },
-    "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
-        "Attack" : 3, //+2
+    "GrowthStats" : {//0
+        "HP" : 1, //0
+        "MP" : 1, //0
+        "Attack" : 2, //+1
         "Defence" : 2, //+1
-        "Wisdom" : 2, //+1
+        "Wisdom" : 0, //-1
         "Speed" : 1, //0
         "Luck" : 0, //-1
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
+    "LearnableSpells" : [MetalBolt, MetalT1Def],
     "Tactic" : mindlessPhysical,
     Tactics(){//mindlessly aggressive
         this.Action = "attack";
@@ -410,31 +417,32 @@ var Orange_Ooze = {
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
-    "BattleStats" : {
-        "HPMax" : 16,
+    "BattleStats" : { //10
+        "HPMax" : 16, // +6
         "HPCur" : 16,
-        "MPMax" : 60,
-        "MPCur" : 60,
-        "Attack" : 12,
-        "Defence" : 8,
+        "MPMax" : 10, // 0
+        "MPCur" : 10,
+        "Attack" : 13, // +3
+        "Defence" : 8, // -2
         "Defending": false,
-        "Wisdom" : 14,
-        "Speed" : 5,
+        "Wisdom" : 15, // +5
+        "Speed" : 4, // -6
         "TurnValue" : 0,
-        "Luck" : 4,
+        "Luck" : 4, // +4
         "Aflictions" : []
     },
-    "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
-        "Attack" : 3, //+2
-        "Defence" : 2, //+1
-        "Wisdom" : 2, //+1
+    "GrowthStats" : { //5
+        "HP" : 3, //+2
+        "MP" : 2, //+1
+        "Attack" : 1, //0
+        "Defence" : 1, //0
+        "Wisdom" : 3, //+2
         "Speed" : 1, //0
-        "Luck" : 0, //-1
+        "Luck" : 1, //0
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [FireBolt],
+    "LearnableSpells" : [FireT1, FireT2, FireT3, MetalT1Def, WoodT3Wis],
     "Tactic" : mindlessMagical,
     Tactics(){ //Mindlessly Aggressive
         if(this.BattleStats.MPCur >= 5){

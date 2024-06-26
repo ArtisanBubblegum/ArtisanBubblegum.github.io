@@ -33,6 +33,7 @@ var Ally1 = {
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt],
+    "LearnableSpells" : [],
     "Tactic" : mindlessMagical,
     "Action" : "defend",
     "Target" : {},
@@ -43,7 +44,7 @@ var Ally1 = {
         this.Family = target.Family;
         this.Age = 1;
         this.Level = 1;
-        this.EXP = 0;
+        this.EXP = 10;
         this.expToLevel = target.expToLevel;
         this.BattleStats.HPMax = target.BattleStats.HPMax;
         this.BattleStats.HPCur = target.BattleStats.HPCur;
@@ -65,8 +66,19 @@ var Ally1 = {
         this.GrowthStats.GrowthRate = target.GrowthStats.GrowthRate;
         this.Spells = [];
         for (const spell in target.Spells){
-            this.Spells.push(target.Spells[spell]);
+            if (target.Spells[spell].CanLearn(this)){
+                this.Spells.push(target.Spells[spell]);
+            }
+            else {
+                this.LearnableSpells.push(target.Spells[spell]);
+            }
         }
+        this.LearnableSpells = [];
+        for (const SpellIndex in target.LearnableSpells){
+            console.log("adding spell to learnable spells :" + target.LearnableSpells[SpellIndex].Name);
+            this.LearnableSpells.push(target.LearnableSpells[SpellIndex]);
+        }
+        console.log("Total Learnable Spells " + this.LearnableSpells.length);
         this.Tactic = target.Tactic;
     },
     reset(){
@@ -75,6 +87,7 @@ var Ally1 = {
         this.Age = PreviousAge + 1;
     },
     levelUP(){
+        alert (this.Name + " Gained a Level!");
         this.BattleStats.HPMax += this.GrowthStats.HP;
         this.BattleStats.HPCur += this.GrowthStats.HP;
         this.BattleStats.MPMax += this.GrowthStats.MP;
@@ -84,10 +97,17 @@ var Ally1 = {
         this.BattleStats.Wisdom += this.GrowthStats.Wisdom;
         this.BattleStats.Speed += this.GrowthStats.Speed;
         this.BattleStats.Luck += this.GrowthStats.Luck;
+        for (learnableSpellIndex = this.LearnableSpells.length - 1; learnableSpellIndex >= 0 ; learnableSpellIndex--){
+            console.log("checking learnable spell: " + learnableSpellIndex + " " + this.LearnableSpells[learnableSpellIndex].Name);
+            if (this.LearnableSpells[learnableSpellIndex].CanLearn(this) == true){
+                alert(this.Name + " learned a new spell!\n" + this.LearnableSpells[learnableSpellIndex].Name)
+                this.Spells.push(this.LearnableSpells[learnableSpellIndex]);
+                this.LearnableSpells.splice(learnableSpellIndex, 1);
+            }
+        }
         this.Level += 1;
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
         this.expToLevel = Math.floor(this.expToLevel);
-        alert (this.Name + " Gained a Level!");
     }
 }
 

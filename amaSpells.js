@@ -46,6 +46,25 @@ var FireBolt = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -74,6 +93,28 @@ var FireT1 = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value > target.BattleStats.MPCur){
+                value = target.BattleStats.MPCur;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -103,6 +144,31 @@ var FireT2 = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value > target.BattleStats.MPCur){
+                value += target.BattleStats.MPCur;
+            }
+            else {
+                value *= 2;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -138,6 +204,33 @@ var FireT3 = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 15){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value > target.BattleStats.MPCur){
+                value += Math.floor(value/2) + target.BattleStats.MPCur + Math.floor(value/2);
+            }
+            else {
+                value += Math.floor(value/2) + value + Math.floor(value/2);
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 15 &&
+            Mon.BattleStats.Wis >= 20
+        ){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -168,6 +261,30 @@ var EarthBolt = {  //Giant Rat
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5 ||
+            user.BattleStats.HPCur <= 5
+        ){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            value *= 2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5 &&
+            Mon.BattleStats.HPMax >= 5
+        ){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -190,6 +307,25 @@ var EarthT1Def = {  //Giant Rat
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = GetEffectiveWisdom(user)/2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -212,6 +348,25 @@ var EarthT1Spd = {  //Giant Rat
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = GetEffectiveWisdom(user)/2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -234,6 +389,25 @@ var EarthT2Atk = {  //Giant Rat
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = GetEffectiveWisdom(user)/2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -256,6 +430,25 @@ var EarthT2Wis = {  //Giant Rat
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = GetEffectiveWisdom(user)/2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -279,6 +472,26 @@ var EarthT3HP = {  //Giant Rat
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = GetEffectiveWisdom(user)/2;
+            value *= 2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -290,7 +503,7 @@ var EarthT3MP = {  //Giant Rat
         if (user.BattleStats.HPCur >= 10){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.HPCur -= 10;
-            let amount = Math.floor(random3() * (effectiveWisdom/2) * 5);
+            let amount = Math.floor(random3() * (effectiveWisdom/2));
             if (amount <= 0) {
                 amount = 0;
             }
@@ -302,6 +515,26 @@ var EarthT3MP = {  //Giant Rat
         else{
             alert("Not Enough HP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = GetEffectiveWisdom(user)/2;
+            value *= 2;
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.HPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -328,6 +561,25 @@ var MetalBolt = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6));
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -346,8 +598,9 @@ var MetalT1Def = {
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Defence -= amount;
-            if (target.BattleStats.Defence < 0){
-                target.BattleStats.Defence = 0;
+            if (target.BattleStats.Defence < 1){
+                amount = target.BattleStats.Defence - 1;
+                target.BattleStats.Defence = 1;
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" defence!");
@@ -355,6 +608,28 @@ var MetalT1Def = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value >= target.BattleStats.Defence){
+                value = target.BattleStats.Defence - 1;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -373,8 +648,9 @@ var MetalT1Atk = {
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Attack -= amount;
-            if (target.BattleStats.Attack < 0){
-                target.BattleStats.Attack = 0;
+            if (target.BattleStats.Attack < 1){
+                amount = target.BattleStats.Attack - 1;
+                target.BattleStats.Attack = 1;
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" attack!");
@@ -382,6 +658,28 @@ var MetalT1Atk = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value >= target.BattleStats.Attack){
+                value = target.BattleStats.Attack - 1;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -400,8 +698,9 @@ var MetalT1Spd = {
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Speed -= amount;
-            if (target.BattleStats.Speed < 0){
-                target.BattleStats.Speed = 0;
+            if (target.BattleStats.Speed < 1){
+                amount = target.BattleStats.Speed - 1;
+                target.BattleStats.Speed = 1;
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" speed!");
@@ -409,6 +708,28 @@ var MetalT1Spd = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value >= target.BattleStats.Speed){
+                value = target.BattleStats.Speed - 1;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -427,8 +748,9 @@ var MetalT1Wis = {
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)));
             if (amount < 0) {amount = 0};
             target.BattleStats.Wisdom -= amount;
-            if (target.BattleStats.Wisdom < 0){
-                target.BattleStats.Wisdom = 0;
+            if (target.BattleStats.Wisdom < 1){
+                amount = target.BattleStats.Wisdom - 1;
+                target.BattleStats.Wisdom = 1;
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" wisdom!");
@@ -436,6 +758,28 @@ var MetalT1Wis = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6));
+            if (value < 0){
+                value = 0;
+            }
+            else if (value >= target.BattleStats.Wisdom){
+                value = target.BattleStats.Wisdom - 1;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -456,20 +800,41 @@ var MetalT2Crit = {
                 if (amount < 1) {amount = 1};
                 amount * 3;
                 user.BattleStats.Luck -= 1;
-                alert("CRITICAL HIT!!!" + user.Name + " loses 1 Luck!");
+                alert("CRITICAL HIT!!!" + user.Name + " loses 1 Luck.");
             }
             else {
                 user.BattleStats.Luck += 10;
-                alert("MISS!!! " + user.Name + " gains 10 Luck!")
+                alert("Normal hit... " + user.Name + " gains 10 Luck!")
             }
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" defence!");
+            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" health!");
         }
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = (((GetEffectiveWisdom(user)/2)*2) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6)); //Effective Wisdom has a teir bonus of *2
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -514,6 +879,25 @@ var MetalT3Multi = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 15){
+            value = 0;
+        }
+        else {
+            value = (((GetEffectiveWisdom(user)/2)*3) - (GetEffectiveWisdom(target)/7.6) - (GetEffectiveDefence(target)/7.6));//effective wisdom gets a teir bonus of *3
+            if (value < 0){
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 15){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -534,18 +918,41 @@ var WaterBolt = {
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount <= 0) {
                 amount = 0
+                alert(user.Name +" flings a Water Bolt, but misses "+ target.Name +"!");
             }
             else {
                 target.BattleStats.Aflictions.push("Trip");
                 //alert(target.BattleStats.Aflictions[0]);
+                target.BattleStats.HPCur -= amount;
+                alert(user.Name +" flings a Water Bolt at "+ target.Name +" dealing "+ amount +" damage and making the floor slippery!");
             }
-            target.BattleStats.HPCur -= amount;
-            if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings a Water Bolt at "+ target.Name +" dealing "+ amount +" damage and making the floor slippery!");
+            if(gameState == "battle") {drawBattle();}    
         }
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += 5; //Because of Trip Effect
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -572,6 +979,16 @@ var WaterT1DeftoSpd = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -598,6 +1015,16 @@ var WaterT1SpdtoDef = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -624,6 +1051,16 @@ var WaterT1DeftoStr = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -650,6 +1087,16 @@ var WaterT1StrtoDef = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -676,6 +1123,16 @@ var WaterT1SpdtoStr = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -702,6 +1159,16 @@ var WaterT1StrtoSpd = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -728,6 +1195,16 @@ var WaterT2WistoDef = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -754,6 +1231,16 @@ var WaterT2WistoSpd = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -780,6 +1267,16 @@ var WaterT2WistoStr = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -809,6 +1306,28 @@ var WoodBolt = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += Math.floor(value/2)+1;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -825,10 +1344,10 @@ var WoodT1HP = {
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
-            if (amount > target.BattleStats.HPCur) {amount = targe.BattleStats.HPCur}
+            if (amount > target.BattleStats.HPCur) {amount = target.BattleStats.HPCur}
             if (amount < 0) {amount = 0}
             else {
-                user.BattleStats.HPCur += amount;
+                user.BattleStats.HPCur += amount; //this spell is intended to overheal.
             }
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
@@ -837,6 +1356,29 @@ var WoodT1HP = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value > target.BattleStats.HPCur) {value = target.BattleStats.HPCur}
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += value;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10 ){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -853,10 +1395,10 @@ var WoodT1MP = {
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 10;
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
-            if (amount > target.BattleStats.MPCur) {amount = targe.BattleStats.MPCur}
+            if (amount > target.BattleStats.MPCur) {amount = target.BattleStats.MPCur}
             if (amount < 0) {amount = 0}
             else {
-                user.BattleStats.MPCur += amount;
+                user.BattleStats.MPCur += amount; //this is meant to overcharge mp
             }
             target.BattleStats.MPCur -= amount;
             if(gameState == "battle") {drawBattle();}
@@ -865,6 +1407,29 @@ var WoodT1MP = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = ((GetEffectiveWisdom(user)/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8));
+            if (value > target.BattleStats.MPCur) {value = target.BattleStats.MPCur}
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += value;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -881,7 +1446,7 @@ var WoodT2Atk = {
             effectiveWisdom = GetEffectiveWisdom(user) * 2;
             user.BattleStats.MPCur -= 10;
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
-            if (amount > target.BattleStats.Attack) {amount = targe.BattleStats.Attack - 1}
+            if (amount > target.BattleStats.Attack) {amount = target.BattleStats.Attack - 1}
             if (amount < 0) {amount = 0}
             else {
                 user.BattleStats.Attack += amount;
@@ -893,6 +1458,29 @@ var WoodT2Atk = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = (((GetEffectiveWisdom(user)/2)*2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)); //effective wisdom gets a teir bonus of *2
+            if (value > target.BattleStats.Attack) {value = target.BattleStats.Attack - 1}
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += value;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -909,7 +1497,7 @@ var WoodT2Spd = {
             effectiveWisdom = GetEffectiveWisdom(user) * 2;
             user.BattleStats.MPCur -= 10;
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
-            if (amount > target.BattleStats.Speed) {amount = targe.BattleStats.Speed - 1}
+            if (amount > target.BattleStats.Speed) {amount = target.BattleStats.Speed - 1}
             if (amount < 0) {amount = 0}
             else {
                 user.BattleStats.Speed += amount;
@@ -921,6 +1509,29 @@ var WoodT2Spd = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = (((GetEffectiveWisdom(user)/2)*2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)); //effective wisdom gets a teir bonus of *2
+            if (value > target.BattleStats.Speed) {value = target.BattleStats.Speed - 1}
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += value;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -937,7 +1548,7 @@ var WoodT3Def = {
             effectiveWisdom = GetEffectiveWisdom(user) * 3;
             user.BattleStats.MPCur -= 10;
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
-            if (amount > target.BattleStats.Defence) {amount = targe.BattleStats.Defence - 1}
+            if (amount > target.BattleStats.Defence) {amount = target.BattleStats.Defence - 1}
             if (amount < 0) {amount = 0}
             else {
                 user.BattleStats.Defence += amount;
@@ -949,6 +1560,29 @@ var WoodT3Def = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = (((GetEffectiveWisdom(user)/2)*3) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)); //effective wisdom gets a teir bonus of *3
+            if (value > target.BattleStats.Defence) {value = target.BattleStats.Defence - 1}
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += value;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -965,7 +1599,7 @@ var WoodT3Wis = {
             effectiveWisdom = GetEffectiveWisdom(user) * 3;
             user.BattleStats.MPCur -= 10;
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
-            if (amount > target.BattleStats.Wisdom) {amount = targe.BattleStats.Wisdom - 1}
+            if (amount > target.BattleStats.Wisdom) {amount = target.BattleStats.Wisdom - 1}
             if (amount < 0) {amount = 0}
             else {
                 user.BattleStats.Wisdom += amount;
@@ -977,6 +1611,29 @@ var WoodT3Wis = {
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 10){
+            value = 0;
+        }
+        else {
+            value = (((GetEffectiveWisdom(user)/2)*3) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)); //effective wisdom gets a teir bonus of *3
+            if (value > target.BattleStats.Wisdom) {value = target.BattleStats.Wisdom - 1}
+            if (value < 0){
+                value = 0;
+            }
+            else {
+                value += value;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -984,11 +1641,11 @@ var WoodT3Wis = {
 
 var Meditate = {  //Giant Rat
     "Name" : "Meditate",
-    "Description" : "    Cost: 15mp\n" + "    The user focuses their mind and body on recovery. (Does NOT overheal)",
+    "Description" : "    Cost: 1mp\n" + "    The user focuses their mind and body on recovery. (Does NOT overheal)",
     Cast(user, target){
-        if (user.BattleStats.MPCur >= 15){
-            user.BattleStats.MPCur -= 15;
-            let amount = Math.floor(random3()*user.BattleStats.Wisdom)
+        if (user.BattleStats.MPCur >= 1){
+            user.BattleStats.MPCur -= 1;
+            let amount = 1; //Math.floor(random3()*effectiveWisdom(user))
             if(amount <= 0 ){
                 amount = 1;
             }
@@ -1003,6 +1660,29 @@ var Meditate = {  //Giant Rat
         else {
             alert("Not Enough MP!")
         }    
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 1){
+            value = 0;
+        }
+        else {
+            if (user.BattleStats.HPCur < user.BattleStats.HPMax){
+                value  = 1;
+            }
+            else {
+                value = 0;
+            }
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 10 &&
+            Mon.BattleStats.Wisdom >= 10
+        ){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -1026,6 +1706,25 @@ var AirBolt = {  //Carn Canary
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = (( (user.BattleStats.Wisdom + (user.BattleStats.Speed/2)) /2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Wisdom/8)); //effective wisdom gets a teir bonus of *3
+            if (value < 0){value = 0;}
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 5 &&
+            Mon.BattleStats.Speed >= 15
+        ){    
+            return true;
+        }
+        return false;
     }
 }
 
@@ -1049,5 +1748,22 @@ var VoidBolt = {  //Giant Cent
         else{
             alert("Not Enough MP!")
         }
+    },
+    getValue(user, target){
+        let value = 0;
+        if (user.BattleStats.MPCur < 5){
+            value = 0;
+        }
+        else {
+            value = (( (user.BattleStats.Wisdom + (user.BattleStats.Wisdom/2)) /2) - (target.BattleStats.Wisdom/8) - (target.BattleStats.Wisdom/8)); //effective wisdom gets a teir bonus of *3
+            if (value < 0){value = 0;}
+        }
+        return value;
+    },
+    CanLearn(Mon){
+        if (Mon.BattleStats.MPMax >= 7){    
+            return true;
+        }
+        return false;
     }
 }
