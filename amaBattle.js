@@ -169,8 +169,6 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         alert(monstersList[index].Name + " takes a Defensive Stance!")
                         break;
                     case "flee":
-                        alert("Stands around.")
-                        break;
                     case "skip":
                         break;
                     default:
