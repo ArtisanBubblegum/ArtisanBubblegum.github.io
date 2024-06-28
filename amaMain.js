@@ -2,8 +2,12 @@ gameState = "map" //Map, Battle, Pause
 noValidTarget = {};
 
 function LoadGame(){
-    MapObj.Map = MapObj.mapMaker(30, 30)
-    MapObj.spawnMonster(100);
+    //MapObj.Map = farmMap.Map;
+    //MapObj.PlayerPosition = farmMap.PlayerPosition;
+    //MapObj.spawnMonster(1);
+    //MapObj.Door1 = farmMap.Door1;
+    //MapObj.Map = MapObj.mapMaker(30, 30)
+    //MapObj.spawnMonster(100);
     MapObj.drawMap();
     Ally1.populate(Giant_Rat);
     drawStatus();

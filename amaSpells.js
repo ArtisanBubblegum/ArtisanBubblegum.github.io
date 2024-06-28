@@ -42,6 +42,7 @@ var FireBolt = {
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            user.addMagicCon(1, 0, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -89,6 +90,7 @@ var FireT1 = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings an Arcane Flame at "+ target.Name +" burning away "+ amount +" Mana!");
+            user.addMagicCon(3, 0, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -140,6 +142,7 @@ var FireT2 = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" ignites "+ target.Name +"'s Mana, burning away "+ amount +" Mana and dealing " + (Math.floor(amount/2)+1) + " Damage!");
+            user.addMagicCon(5, 0, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -200,6 +203,7 @@ var FireT3 = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            user.addMagicCon(7, 0, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -257,6 +261,7 @@ var EarthBolt = {  //Giant Rat
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings an Earth Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            user.addMagicCon(0, 1, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -303,6 +308,7 @@ var EarthT1Def = {  //Giant Rat
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" hardens their body, gaining "+ amount +" defence!");
+            user.addMagicCon(0, 3, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -344,6 +350,7 @@ var EarthT1Spd = {  //Giant Rat
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" refines their body, gaining "+ amount +" speed!");
+            user.addMagicCon(0, 3, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -385,6 +392,7 @@ var EarthT2Atk = {  //Giant Rat
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flexes their muscles, gaining "+ amount +" attack!");
+            user.addMagicCon(0, 5, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -426,6 +434,7 @@ var EarthT2Wis = {  //Giant Rat
             user.BattleStats.Wisdom += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" ruminates and mumbles to themselves, gaining "+ amount +" wisdom!");
+            user.addMagicCon(0, 5, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -468,6 +477,7 @@ var EarthT3HP = {  //Giant Rat
             user.BattleStats.HPMax += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" bows and starts to glow red, gaining "+ amount +" Maximum HP!");
+            user.addMagicCon(0, 7, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -511,6 +521,7 @@ var EarthT3MP = {  //Giant Rat
             user.BattleStats.MPMax += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" bows and starts to glow blue, gaining "+ amount +" Maximum MP!");
+            user.addMagicCon(0, 7, 0, 0, 0, 0);
         }
         else{
             alert("Not Enough HP!")
@@ -557,6 +568,7 @@ var MetalBolt = {
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings a Metal Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            user.addMagicCon(0, 0, 1, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -604,6 +616,7 @@ var MetalT1Def = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" defence!");
+            user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -654,6 +667,7 @@ var MetalT1Atk = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" attack!");
+            user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -704,6 +718,7 @@ var MetalT1Spd = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" speed!");
+            user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -754,6 +769,7 @@ var MetalT1Wis = {
             }
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" wisdom!");
+            user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -810,6 +826,7 @@ var MetalT2Crit = {
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" health!");
+            user.addMagicCon(0, 0, 5, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -875,6 +892,7 @@ var MetalT3Multi = {
             if (dropped){
                 alert("All remaining globs of Lucky Metal miss their target.")
             }
+            user.addMagicCon(0, 0, 7, 0, 0, 0);
         }
         else{
             alert("Not Enough MP!")
@@ -926,7 +944,8 @@ var WaterBolt = {
                 target.BattleStats.HPCur -= amount;
                 alert(user.Name +" flings a Water Bolt at "+ target.Name +" dealing "+ amount +" damage and making the floor slippery!");
             }
-            if(gameState == "battle") {drawBattle();}    
+            //if(gameState == "battle") {drawBattle();}   
+            user.addMagicCon(0, 0, 0, 1, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -974,7 +993,8 @@ var WaterT1DeftoSpd = {
             user.BattleStats.Defence -= amount;
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" Shakes off some extra weight, and stretches as they gain "+ amount +" speed! Losing " + amount + " defence!" );
+            alert(user.Name +" Shakes off some extra weight, and stretches as they gain "+ amount +" speed! Losing " + amount + " defence!" );  
+            user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1011,6 +1031,7 @@ var WaterT1SpdtoDef = {
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" swells up gaining "+ amount +" defence! Losing " + amount + " speed!" );
+            user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1047,6 +1068,7 @@ var WaterT1DeftoStr = {
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" burns away their bulk, gaining "+ amount +" attack! Losing " + amount + " defence!" );
+            user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1083,6 +1105,7 @@ var WaterT1StrtoDef = {
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" burns away their muscle, gaining "+ amount +" defence! Losing " + amount + " attack!" );
+            user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1119,6 +1142,7 @@ var WaterT1SpdtoStr = {
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" grows their muscles, gaining "+ amount +" attack! Losing " + amount + " speed!" );
+            user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1155,6 +1179,7 @@ var WaterT1StrtoSpd = {
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" slims their muscles, gaining "+ amount +" speed! Losing " + amount + " attack!" );
+            user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1191,6 +1216,7 @@ var WaterT2WistoDef = {
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" creates a mental barrior on their body gaining "+ amount +" defence! Losing " + amount + " wisdom!" );
+            user.addMagicCon(0, 0, 0, 5, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1227,6 +1253,7 @@ var WaterT2WistoSpd = {
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" let's out a sigh of relief, gaining "+ amount +" speed! Losing " + amount + " wisdom!" );
+            user.addMagicCon(0, 0, 0, 5, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1263,6 +1290,7 @@ var WaterT2WistoStr = {
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" get's all worked up and upset, gaining "+ amount +" attack! Losing " + amount + " wisdom!" );
+            user.addMagicCon(0, 0, 0, 5, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1302,6 +1330,7 @@ var WoodBolt = {
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" heals "+ Math.floor(amount/2) +" and flings a Wood Bolt at "+ target.Name +" dealing "+ amount +" damage!\n And Heals " + (Math.floor(amount/2)+1) + " Health!");
+            user.addMagicCon(0, 0, 0, 0, 1, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1352,6 +1381,7 @@ var WoodT1HP = {
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" summons magic vines that drain "+ amount +" of HP from "+ target.Name +"!");
+            user.addMagicCon(0, 0, 0, 0, 3, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1403,6 +1433,7 @@ var WoodT1MP = {
             target.BattleStats.MPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" summons magic vines that drain "+ amount +" of MP from "+ target.Name +"!");
+            user.addMagicCon(0, 0, 0, 0, 3, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1454,6 +1485,7 @@ var WoodT2Atk = {
             target.BattleStats.Attack -= amount;
             if(gameState == "battle") {drawBattle();}
             alert("A swarm of insects appear ripping away " + amount +" attack from "+ target.Name +"! "+ user.Name +" grows stronger!");
+            user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1505,6 +1537,7 @@ var WoodT2Spd = {
             target.BattleStats.Speed -= amount;
             if(gameState == "battle") {drawBattle();}
             alert("A swarm of insects appear and extract blood from " + target.Name +", draining "+ amount +" speed! "+ user.Name +" grows more agile!");
+            user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1556,6 +1589,7 @@ var WoodT3Def = {
             target.BattleStats.Defence -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(target.Name + "'s skin starts to peel off and attach to " + user.Name +", draining "+ amount +" defence!");
+            user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1607,6 +1641,7 @@ var WoodT3Wis = {
             target.BattleStats.Wisdom -= amount;
             if(gameState == "battle") {drawBattle();}
             alert("Fungus suddenly sprouts from " + target.Name + "! Their mind start's to fade as they release their spores! Losing " + amount + " wisdom!");
+            user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1702,6 +1737,7 @@ var AirBolt = {  //Carn Canary
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings an Air Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            user.addMagicCon(1, 0, 0, 1, 0, 0); 
         }
         else{
             alert("Not Enough MP!")
@@ -1744,6 +1780,8 @@ var VoidBolt = {  //Giant Cent
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
             alert(user.Name +" flings a Void Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            user.addMagicCon(0, 0, 0, 0, 0, 1);
+            target.addMagicCon(0, 0, 0, 0, 0, 1);
         }
         else{
             alert("Not Enough MP!")

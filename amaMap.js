@@ -1,14 +1,38 @@
-let MapObj = {
+ranchMap = {
+    Name : "ranchMap",
     Map : [[5,5],
-        [1,0], [1,0], [1,0], [1,0], [1,0], 
-        [1,0], [0,0], [0,0], [0,0], [1,0], 
+        [1,0], [1,0], ["D1",0], [1,0], [1,0], 
+        [1,0], [0,0], [0,0], ["H",0], [1,0], 
         [1,0], [0,0], [0,0], [0,0], [1,0], 
         [1,0], [0,0], [0,0], [0,0], [1,0], 
         [1,0], [1,0], [1,0], [1,0], [1,0], 
             ],
-    PlayerPosition : [3, 3],
+    MapLevel : 0,
+    PlayerPosition : [3, 3]
+}
+
+cityMap = {
+    Name : "cityMap",
+    Map : [[7,6],
+        [1,0], [1,0], [1,0], [ranchMap,0], [1,0], [1,0], [1,0],
+        [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
+        [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
+        [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
+        [1,0], [1,0], [1,0], [1,0], [1,0], [1,0], [1,0],
+        [1,0],["Pla"], ["ce"], [" H"], ["old"], ["er"], [1,0],
+            ],
+    MapLevel : 0,
+    PlayerPosition : [4, 2]
+}
+
+ranchMap.Map[23][0] = cityMap;
+
+let MapObj = {
+    Name : ranchMap.Name,
+    Map : ranchMap.Map,
+    MapLevel : 0,
+    PlayerPosition : ranchMap.PlayerPosition,
     ViewRange : 3,
-    //ViewArea : ((ViewRange + (((ViewRange * 2)+1)*ViewRange))*2)+1,
 
     mapMaker(x, y){
         if (x < 5) { x = 5;}
@@ -18,6 +42,7 @@ let MapObj = {
         this.Map = [];
         this.Map.push([x,y]);
         this.PlayerPosition = [Math.floor(this.Map[0][0]/2),Math.floor(this.Map[0][1]/2)]
+        this.PlayerPosition[1] = y-1;
         let mapSize = x*y;
         let curIndex = 1;
         let previousTile = 1;
@@ -25,29 +50,46 @@ let MapObj = {
         while (curIndex <= mapSize){
             if (curIndex <= x || curIndex % x == 0 || (curIndex-1) % x == 0 || curIndex > mapSize-x){
                 //Generate Walls on Boarder of Map.
-                this.Map.push([1,0]);
+                if (this.indexToLocation(curIndex)[0] == this.PlayerPosition[0] && curIndex > x){
+                    if (this.MapLevel == 1){
+                        this.Map.push([ranchMap,0])   
+                    }    
+                    else {
+                        this.Map.push(["D2",0])
+                    }
+                }
+                else if (this.indexToLocation(curIndex)[0] == this.PlayerPosition[0] && curIndex <= x){
+                    this.Map.push(["D1",0])
+                }
+                else {
+                    this.Map.push([1,0]);
+                }
             }
             else{
                 if (curIndex!=this.locationToIndex(this.PlayerPosition)){
-                    if (random3() > wallChance){
+                    if (random3() < wallChance && this.indexToLocation(curIndex)[0] != this.PlayerPosition[0]){
                         this.Map.push([1,0]);
-                        wallChance *= 1.25;
+                        wallChance *= 0.5;
                     }
                     else{
                         this.Map.push([0,0]);
-                        wallChance *= 0.9;
+                        wallChance *= 1.1;
                     }
                 }
                 else{
                     this.Map.push([0,0])
                 }
             }
+            
             curIndex++;
         }
         return this.Map;
     },
     locationToIndex(location){
-        if(typeof location != "object") {alert("can't pass a number to locationToIndex")};
+        if(typeof location != "object") {
+            alert("can't pass a number to locationToIndex")
+            return null;
+        }
         let index = location[1]*this.Map[0][0]; //location[Y] * map[Width] "+Y=South, -Y=North"
         index -= this.Map[0][0]; //-map[width]
         index += location[0]; // +location[X] "+X=East, -Y=West"  
@@ -150,6 +192,20 @@ let MapObj = {
                 else if (this.GetMapID(curIndex)[0] == "M"){
                     mapText += "[ M ]";
                 }
+                else if (this.GetMapID(curIndex)[0] == "H"){
+                    mapText += "<H>"
+                }
+                else if (this.GetMapID(curIndex)[0] == "D1" || this.GetMapID(curIndex)[0] == "D2"){
+                    mapText += "[ D ]";
+                }
+                else if (typeof(this.GetMapID(curIndex)[0]) == "object"){
+                    if (this.Name == "dungeon"){
+                        mapText += "[ E ]"
+                    }
+                    else {
+                        mapText += "[     ]"
+                    }
+                }
                 else {
                     mapText += this.GetMapID(curIndex);
                 }
@@ -179,36 +235,6 @@ let MapObj = {
         document.getElementById("MapCanvas").textContent = mapText;
         return mapText;
     },
-    // drawMap (){
-    //     let mapText = "";
-    //     let curIndex = 1;
-    //     let playerIndex = this.locationToIndex(this.PlayerPosition)
-    //     while (curIndex < this.Map.length){
-    //         //mapText += "["
-    //         if ( curIndex == playerIndex){
-    //             mapText += "[ P ]";
-    //         }
-    //         else if (this.GetMapID(curIndex)[0] == 1){
-    //             mapText += "[|||]"
-    //         }
-    //         else if (this.GetMapID(curIndex)[0] == 0){
-    //             mapText += "        "
-    //         }
-    //         else if (this.GetMapID(curIndex)[0] == "M"){
-    //             mapText += "[ M ]"
-    //         }
-    //         else {
-    //             mapText += this.GetMapID(curIndex);
-    //         }
-    //         //mapText += "] "
-    //         if (curIndex % this.Map[0][0] == 0){
-    //             mapText += "\r\n";
-    //         }
-    //         curIndex++;
-    //     }
-    //     document.getElementById("MapCanvas").textContent = mapText;
-    //     return mapText;
-    // },
     undrawMap (){
         document.getElementById("MapCanvas").textContent = "";
         return "";
@@ -220,26 +246,56 @@ let MapObj = {
         }
         
         let location = [this.PlayerPosition[0]+dir[0] , this.PlayerPosition[1]+dir[1]];
-        switch(this.GetMapID(location)[0]){
-            case 0:
-                this.PlayerPosition[0] += dir[0];
-                this.PlayerPosition[1] += dir[1];
-                if (Ally1.BattleStats.MPCur < Math.floor(Math.random()*(Ally1.BattleStats.MPMax+1))){
-                    Ally1.BattleStats.MPCur += 1;
-                }
-                console.log("Moved to ", this.PlayerPosition);
-                drawStatus();
-                break;
-            case "M":
-                console.log("Fight Monster.");
-                this.Map[this.locationToIndex(location)]=[0,0];
-                this.spawnMonster(1);
-                alert("A Wild Monster Attacks!");
-                //changeState("battle"); This is done in newEnemy();
-                newEnemy();
-            default:
-                console.log("Stopped at ", this.PlayerPosition);
-                break;
+        if (typeof(this.GetMapID(location)[0]) == "object"){
+            locObject = this.GetMapID(location)[0];
+            this.Name = locObject.Name;
+            this.Map = locObject.Map;
+            this.MapLevel = locObject.MapLevel;
+            //alert(this.MapLevel);
+            this.PlayerPosition = locObject.PlayerPosition;
+            //this.PlayerPosition = [locObject.PlayerPosition[0],locObject.PlayerPosition[1]];
+        }
+        else {
+            switch(this.GetMapID(location)[0]){
+                case 0:
+                    this.PlayerPosition[0] += dir[0];
+                    this.PlayerPosition[1] += dir[1];
+                    if (Ally1.BattleStats.MPCur < Math.floor(Math.random()*(Ally1.BattleStats.MPMax+1))){
+                        Ally1.BattleStats.MPCur += 1;
+                    }
+                    console.log("Moved to ", this.PlayerPosition);
+                    drawStatus();
+                    break;
+                case "M":
+                    console.log("Fight Monster.");
+                    this.Map[this.locationToIndex(location)]=[0,0];
+                    this.spawnMonster(1);
+                    alert("A Wild Monster Attacks!");
+                    //changeState("battle"); This is done in newEnemy();
+                    newEnemy();
+                    break;
+                case "H":
+                    Ally1.BattleStats.HPCur = Ally1.BattleStats.HPMax;
+                    Ally1.BattleStats.MPCur = Ally1.BattleStats.MPMax;
+                    drawStatus();
+                    alert(Ally1.Name + " is fully healed!");
+                    break;
+                case "D1" :
+                    this.Name = "dungeon";
+                    this.MapLevel += 1;
+                    this.mapMaker(30,30);
+                    this.spawnMonster(100);
+                    break
+                case "D2" :
+                    this.MapLevel -= 1;
+                    this.mapMaker(30,30);
+                    this.PlayerPosition[1] = 2;
+                    this.spawnMonster(100);
+                    break;
+                default:
+                    console.log("Stopped at ", this.PlayerPosition);
+                    break;
+            }
         }
     }
 }

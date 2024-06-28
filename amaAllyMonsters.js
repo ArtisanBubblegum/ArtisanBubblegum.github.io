@@ -30,7 +30,15 @@ var Ally1 = {
         "Wisdom" : 2, //+1
         "Speed" : 1, //0
         "Luck" : 0, //-1
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.25 //1+(stat_value/10)?
+    },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
     },
     "Spells" : [Meditate, EarthBolt],
     "LearnableSpells" : [],
@@ -64,6 +72,12 @@ var Ally1 = {
         this.GrowthStats.Speed = target.GrowthStats.Speed;
         this.GrowthStats.Luck = target.GrowthStats.Luck;
         this.GrowthStats.GrowthRate = target.GrowthStats.GrowthRate;
+        this.MagicCon.FireCon = 0;
+        this.MagicCon.EarthCon = 0;
+        this.MagicCon.MetalCon = 0;
+        this.MagicCon.WaterCon = 0;
+        this.MagicCon.WoodCon = 0;
+        this.MagicCon.VoidCon = 0;
         this.Spells = [];
         for (const spell in target.Spells){
             if (target.Spells[spell].CanLearn(this)){
@@ -85,6 +99,12 @@ var Ally1 = {
         var PreviousAge = this.Age;
         this.populate(Giant_Rat);
         this.Age = PreviousAge + 1;
+        MapObj.Name = ranchMap.Name;
+        MapObj.Map = ranchMap.Map;
+        MapObj.MapLevel = 0;
+        MapObj.PlayerPosition = ranchMap.PlayerPosition;
+        MapObj.PlayerPosition[0] = 3;
+        MapObj.PlayerPosition[1] = 3;
     },
     levelUP(){
         alert (this.Name + " Gained a Level!");
@@ -108,13 +128,188 @@ var Ally1 = {
         this.Level += 1;
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
         this.expToLevel = Math.floor(this.expToLevel);
+    },
+    addMagicCon (fireAdd, earthAdd, metalAdd, waterAdd, woodAdd, voidAdd){
+        let startingFire = this.MagicCon.FireCon;
+        let startingEarth = this.MagicCon.EarthCon;
+        let startingMetal = this.MagicCon.MetalCon;
+        let startingWater = this.MagicCon.WaterCon;
+        let startingWood = this.MagicCon.WoodCon;
+        let startingVoid = this.MagicCon.VoidCon;
+        
+        if (fireAdd > 0){ // Fire Overcomes Metal, Metal Generates Water
+            if (this.MagicCon.MetalCon >= fireAdd){ // 2 1
+                this.MagicCon.WaterCon += fireAdd; // 3 1
+                this.MagicCon.MetalCon -= fireAdd; // 2 1
+                fireAdd = 0; // 1
+            }
+            else {
+                this.MagicCon.WaterCon += this.MagicCon.MetalCon; // 3 2
+                fireAdd -= this.MagicCon.MetalCon; // 1 2
+                this.MagicCon.MetalCon = 0; // 2
+            }
+            this.MagicCon.FireCon += fireAdd; // 1 1
+        }
+
+        if (earthAdd > 0){ // Earth overcomes Water, Water Generates Wood
+            if (this.MagicCon.WaterCon >= earthAdd){ // 2 1
+                this.MagicCon.WoodCon += earthAdd; // 3 1
+                this.MagicCon.WaterCon -= earthAdd; // 2 1
+                earthAdd = 0; // 1
+            }
+            else {
+                this.MagicCon.WoodCon += this.MagicCon.WaterCon; // 3 2
+                earthAdd -= this.MagicCon.WaterCon; // 1 2
+                this.MagicCon.WaterCon = 0; // 2
+            }
+            this.MagicCon.EarthCon += earthAdd; // 1 1
+        }
+
+        if (metalAdd > 0){ // Metal overcomes Wood, Wood Generates Fire
+            if (this.MagicCon.WoodCon >= metalAdd){ // 2 1
+                this.MagicCon.FireCon += metalAdd; // 3 1
+                this.MagicCon.WoodCon -= metalAdd; // 2 1
+                metalAdd = 0; // 1
+            }
+            else {
+                this.MagicCon.FireCon += this.MagicCon.WoodCon; // 3 2
+                metalAdd -= this.MagicCon.WoodCon; // 1 2
+                this.MagicCon.WoodCon = 0; // 2
+            }
+            this.MagicCon.MetalCon += metalAdd; // 1 1
+        }
+
+        if (waterAdd > 0){ // Water overcomes Fire, Fire Generates Earth
+            if (this.MagicCon.FireCon >= waterAdd){ // 2 1
+                this.MagicCon.EarthCon += waterAdd; // 3 1
+                this.MagicCon.FireCon -= waterAdd; // 2 1
+                waterAdd = 0; // 1
+            }
+            else {
+                this.MagicCon.EarthCon += this.MagicCon.FireCon; // 3 2
+                waterAdd -= this.MagicCon.FireCon; // 1 2
+                this.MagicCon.FireCon = 0; // 2
+            }
+            this.MagicCon.WaterCon += waterAdd; // 1 1
+        }
+
+        if (woodAdd > 0){ // Wood overcomes Earth, Earth Generates Metal
+            if (this.MagicCon.EarthCon >= woodAdd){ // 2 1
+                this.MagicCon.MetalCon += woodAdd; // 3 1
+                this.MagicCon.EarthCon -= woodAdd; // 2 1
+                woodAdd = 0; // 1
+            }
+            else {
+                this.MagicCon.MetalCon += this.MagicCon.EarthCon; // 3 2
+                woodAdd -= this.MagicCon.EarthCon; // 1 2
+                this.MagicCon.EarthCon = 0; // 2
+            }
+            this.MagicCon.WoodCon += woodAdd; // 1 1
+        }
+
+        if (voidAdd > 0){
+            this.MagicCon.VoidCon += voidAdd;
+        }
+
+        while (this.MagicCon.FireCon > 0
+            && this.MagicCon.EarthCon > 0
+            && this.MagicCon.MetalCon > 0
+            && this.MagicCon.WaterCon > 0
+            && this.MagicCon.WoodCon > 0
+        ){
+            this.MagicCon.FireCon -= 1;
+            this.MagicCon.EarthCon -= 1;
+            this.MagicCon.MetalCon -= 1;
+            this.MagicCon.WaterCon -= 1;
+            this.MagicCon.WoodCon -= 1;
+            this.MagicCon.VoidCon += 1;
+        }
+        
+        if (this.MagicCon.FireCon >= 100){
+            alert(this.Name + " combusts into acrane fire, dieing of Fire Contamination.");
+            if (gameState = "battle"){
+                this.BattleStats.HPCur = 0;
+            }
+            else {
+                this.reset()
+            }
+        }
+        else if (this.MagicCon.Fire >= 50 && startingFire < 50){
+            alert("A visable steam starts to billow out from " + this.Name + ".")
+        }
+        
+        if (this.MagicCon.EarthCon >= 100){
+            alert(this.Name + " crumbles into arcane dust, dieing of Earth Contamination.");
+            if (gameState = "battle"){
+                this.BattleStats.HPCur = 0;
+            }
+            else {
+                this.reset()
+            }
+        }
+        else if (this.MagicCon.EarthCon >= 50 && startingEarth < 50){
+            alert(this.Name + "'s body starts to crack grind like stone.")
+        }
+        
+        if (this.MagicCon.MetalCon >= 100){
+            alert(this.Name + " suddenlty falls over lifelessly, dieing of Metal Contamination.");
+            if (gameState = "battle"){
+                this.BattleStats.HPCur = 0;
+            }
+            else {
+                this.reset()
+            }
+        }
+        else if (this.MagicCon.MetalCon >= 50 && startingMetal < 50){
+            alert("You get an unluck feeling about " + this.Name + ".")
+        }
+        
+        if (this.MagicCon.WaterCon >= 100){
+            alert(this.Name + " slumps into a floppy piles as their inside liquefy, dieing of Water Contamination.");
+            if (gameState = "battle"){
+                this.BattleStats.HPCur = 0;
+            }
+            else {
+                this.reset()
+            }
+        }
+        else if (this.MagicCon.WaterCon >= 50 && startingWater < 50){
+            alert("" + this.Name + " seems to wobble and jiggle as they move.")
+        }
+        
+        if (this.MagicCon.WoodCon >= 100){
+            alert(this.Name + " bursts open sprouting vines and mushrooms, dieing of Wood Contamination.");
+            if (gameState = "battle"){
+                this.BattleStats.HPCur = 0;
+            }
+            else {
+                this.reset()
+            }
+        }
+        else if (this.MagicCon.WoodCon >= 50 && startingWood < 50){
+            alert("" + this.Name + "'s body starts to bloat, and moldy oder eminates from them.")
+        }
+        
+        if (this.MagicCon.VoidCon >= 100){
+            alert(this.Name + " fades out of existance, dieing of Void Contamination.");
+            if (gameState = "battle"){
+                this.BattleStats.HPCur = 0;
+            }
+            else {
+                this.reset()
+            }
+        }
+        else if (this.MagicCon.VoidCon >= 50 && startingVoid < 50){
+            alert("" + this.Name + " become a little blurry around the edges.")
+        }
+        
     }
 }
 
 function drawStatus() {
     let text = "";
     text += Ally1.Name + ": (" + Ally1.Genus+ ", " + Ally1.Family + ")\n";
-    text += "Level: " + Ally1.Level + " (" + Ally1.EXP + "/" + Ally1.expToLevel + ")\n";
+    text += "Level: " + Ally1.Level + " (" + Math.floor(Ally1.EXP) + "/" + Ally1.expToLevel + ")\n";
     //text += "EXP: " + Ally1.EXP + " / " + Ally1.expToLevel + "\n";
     text += "HP: " + Ally1.BattleStats.HPCur + " / " + Ally1.BattleStats.HPMax +"\n";
     text += "MP:" + Ally1.BattleStats.MPCur + " / " + Ally1.BattleStats.MPMax + "\n";
@@ -123,6 +318,7 @@ function drawStatus() {
     text += "Wisdom: " + Ally1.BattleStats.Wisdom + "\n";
     text += "Speed: " + Ally1.BattleStats.Speed + "\n";
     text += "Luck: " + Ally1.BattleStats.Luck + "\n";
+    text += "Magic Contamination: Fi" + Ally1.MagicCon.FireCon + "/ Ea" + Ally1.MagicCon.EarthCon + "/ Me" + Ally1.MagicCon.MetalCon + "/ Wa" + Ally1.MagicCon.WaterCon + "/ Wo" + Ally1.MagicCon.WoodCon + "/ Vo" + Ally1.MagicCon.VoidCon + "\n";
     text += "Generation: " + Ally1.Age + "\n";
     document.getElementById("MonCanvas").textContent = text;
 }

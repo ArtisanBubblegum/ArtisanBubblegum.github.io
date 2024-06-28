@@ -39,8 +39,12 @@
         This is generally preferable, as they can react to what other monsters do. Healing if they are suddenly hit with a heavy attack, for example.<br>
         George Markus II has a low speed stat, and is more likly to cast Meditate to Heal as his health get's low.<br>
         <br>
-        <b>Commands</b>, will open the Commands Menu allowing you to give your monster orders.<br>
+        <b>Commands</b>, will open the Commands Menu allowing you to give your monster orders. The current commands are "Attack", "Defend", and "Spells". each are detailed below.<br>
         Note: for now your monster is perfectly loyal, I plan to eventually make this not the case.<br>
+        <b>Flee</b>, will allow you <i>and your monster</i> to try to run from a battle you believe to be a lost cause.<br>
+        Escape Change is calculate below:<br>
+        <h6 style="font-size: 100%;">Escape Chance = (AllyMonster.Speed)/(EnemyMonster.Speed * 2) + (0.1 * Failed Attempts this Battle)</h6>
+        this means that against a faster monster, you'll need to identify a losing battle sooner to have a chance at escaping.<br>
         <br>
         <b>Attack</b>, will order your monster to try to attack their opponent physically.<br>
         <b>Defend</b>, will order your monster to take a defensive stance, giving them a defensive boost for 1 turn.<br>
@@ -102,6 +106,61 @@
         
         Effective wisdom is: <i>Wisdom * ( MP/( MaxMP/2 ) )</i><br>
         Most Spells do <i>NOT</i> benefit from critical hits.<br>
+        <br>
+    </p>
+
+    
+    <h5 style="font-size: 150%;">Magic Contamination:</h5>
+    <p>
+        Each time a monster Casts a spell, they build up a small amount of Contamination. There is no known way to remove contamination from a monster, but there are methods manage it.<br>
+        Each of the Five Pillars are associated to two other pillers, via Generation and Subjugation.<br>
+        <br>
+        
+        <b>Fire</b> generates Earth, and Subjugates Metal.<br>
+        <b>Earth</b> generates Metal, and Subjugates Water.<br>
+        <b>Metal</b> generates Water, and Subjugates Wood.<br>
+        <b>Water</b> generates Wood, and Subjugates Fire.<br>
+        <b>Wood</b> generates Fire, and Subjugates Earth.<br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Wu_Xing.png" width="300px" alt="Diagram of elemental progression already described above.">
+        <br>
+        When a monster acumulates new contamination, that contamination will try to subjugate it's appropriate element, consuming both and causing the subjugated element to generate the next element.<br>
+        <table style="border: 1px;">
+            <td style="text-align: left;">
+                <b>Example:</b> <i>If Monster A has the following Contamination: Fi0/Ea15/Me2/Wa7/Wo20, and gains 5 Earth Contamination. The 5 new Earth Contamination reacts with the 5 of the 7 Water Contamination and generates 5 Wood Contamination. resulting is a final Contamination of Fi0/Ea15/Me2/Wa2/Wo25</i><br>
+                <b>start:</b> Fi0/Ea15/Me2/Wa7/Wo20<br>
+                <b>New:</b> 5 Earth, (Earth Subjugates Water, Water Generates Wood)<br>
+                <b>Change:</b> +0 Earth, -5 Water, +5 Wood<br>
+                <b>end:</b> Fi0/Ea15/Me2/Wa2/Wo25<br>
+            </td>  
+        </table>
+        <br>
+        <table style="border: 1px;">
+            <td style="text-align: left;">
+                <b>start:</b> Fi0/Ea15/Me2/Wa2/Wo25<br>
+                <b>New:</b> 20 Wood, (Wood Subjugates Earth, Earth Generates Metal) but this time there is less Earth to subjugate, so some Wood remains.<br>
+                <b>Change:</b> +5 Wood, -15 Earth, +15 Metal<br>
+                <b>end:</b> Fi0/Ea0/Me17/Wa2/Wo30<br>
+            </td>  
+        </table>
+        <br>
+        As you can see, by ensuring that any new contamination can subjugate another contamination, the total stays the same. (Example 1 had a net change of 0, but Example 2 hat a net change of +5 because they took on more Wood Contamination than they had Earth for it to subjugate)<br>
+        <br>
+        While each type of contamination can be managed by subjugating and generating the 5 pillars, there is another type of contamination that cannot be Subjugated.<br>
+        <b><i>Void Contamination:</i></b> is generated when a monster has at least 1 Contamination in all 5 Pillars (after a new contamination has subjugated pre-existing contamination).<br>
+        <table style="border: 1px;">
+            <td style="text-align: left;">
+                <b>Example:</b> Fi0/Ea50/Me40/Wa30/Wo20<br>
+                <b>New:</b> 15 Metal, (Metal Subjugates Wood, Wood Generates Fire)<br>
+                <b>Change:</b> +0 Metal, -15 Wood, +15 Fire<br>
+                <b>result:</b> Fi15/Ea50/Me40/Wa30/Wo5<br>
+                <b>Finally:</b> All five pillars have more than 0 Contamination, so we -1 from each pillar and +1 Void Contamination. (Repeat until at least one pillar is back to 0 Contamination)<br>
+                <b>Change:</b> -5 each Pillar, +5 Void<br>
+            </td>  
+        </table>
+        <br>
+        The net change to Contamination was -20 this time, but 5 more of this monsters contamination can never again be subjugated.<br>
+        If a monster has a really high contamination that makes it hard to manage, converting it into Void Contamination can give you more breathing room, but doing this will inevitably kill your monster.<br>
+        Good Management of Magic Contamination is the approach, and will prolong the life of your monster.<br>
     </p>
 
     <h5 style="font-size: 150%;">Monsters</h5>

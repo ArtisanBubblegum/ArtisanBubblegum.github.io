@@ -2,6 +2,9 @@ function getAttackValue(user, target){
     let value = 0;
     value = (GetEffectiveAttack(user)/2) - (GetEffectiveDefence(target)/4)
     if (value < 0) {value = 0}
+    if (value > target.BattleStats.HPCur * 2){
+        value *= 2;
+    }
     return value;
 }
 
@@ -18,7 +21,7 @@ var aggressivePhysical = {
                     bestSpell = mon.Spells[spell];
                 }
             }
-            if (bestSpell.getValue(mon, mon.Target) * 0.9 > getAttackValue(mon, mon.Target)){
+            if (bestSpell.getValue(mon, mon.Target) * 0.9 * (1 - mon.BattleStats.HPCur/mon.BattleStats.HPMax) > getAttackValue(mon, mon.Target)){
                 bestChoice = bestSpell;
             }
         }
@@ -48,7 +51,7 @@ var defensivePhysical = {
                     bestSpell = mon.Spells[spell];
                 }
             }
-            if (bestSpell.getValue(mon, mon.Target) * 0.9 > getAttackValue(mon, mon.Target)){
+            if (bestSpell.getValue(mon, mon.Target) * 0.9 * (1 - mon.BattleStats.HPCur/mon.BattleStats.HPMax) > getAttackValue(mon, mon.Target)){
                 bestChoice = bestSpell;
             }
         }

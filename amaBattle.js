@@ -22,8 +22,8 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     let SpecificMonster = wildMonsterList[Math.floor(Math.random()*wildMonsterList.length)];
     EnemyList[0].populate(SpecificMonster);
     
-    let enemyLevel = Math.floor( random3() * (allyList[0].Level * 2) ) + 1;
-    if (allyList[0].Level <= 3 && enemyLevel > allyList[0].Level) { enemyLevel = allyList[0].Level};
+    let enemyLevel = Math.floor( random3() * MapObj.MapLevel ) + 1;
+    //if (allyList[0].Level <= 3 && enemyLevel > allyList[0].Level) { enemyLevel = allyList[0].Level};
     while (EnemyList[0].Level < enemyLevel){
         EnemyList[0].levelUP();
     }
@@ -31,7 +31,7 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     allyList[0].Target = EnemyList[0];
     EnemyList[0].Target = allyList[0];
     
-    monstersList = []
+    monstersList = [];
     monstersList.push(allyList[0]);
     monstersList.push(EnemyList[0]);
 
@@ -92,6 +92,7 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
                     }
                     else {
                         alert(allyList[0].Name + " fails to escape!")
+                        allyList[0].Action = "skip"
                         fleeBonus += 0.1;
                         return true;
                     }
@@ -169,6 +170,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         alert(monstersList[index].Name + " takes a Defensive Stance!")
                         break;
                     case "flee":
+                        console.log("flee successful, skipping check alive and order by speed.");
                     case "skip":
                         break;
                     default:
@@ -176,8 +178,10 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         //break;
                 }
                 monstersList[index].Action = "fight";
-                checkAlive();
-                OrderMonstersBySpeed();
+                if (monstersList[index].Action != "flee"){
+                    checkAlive();
+                    OrderMonstersBySpeed();
+                }
             }
         }
     }
@@ -200,7 +204,7 @@ function checkAlive(){
         }
         else {
             allyList[0].EXP += (EnemyList[0].Level * 10) * (EnemyList[0].Level/allyList[0].Level);
-            if (allyList[0].EXP >= allyList[0].expToLevel){
+            while (allyList[0].EXP >= allyList[0].expToLevel){
                 console.log("Calling Level up in checkAlive");
                 allyList[0].levelUP();
             }
