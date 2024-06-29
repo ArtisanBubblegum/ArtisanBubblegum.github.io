@@ -146,7 +146,6 @@ let MapObj = {
         }
     },
     drawMap (){
-        //alert("drawMap");
         let mapText = "";
         let curIndex = 1;
         let playerIndex = this.locationToIndex(this.PlayerPosition)
@@ -160,26 +159,18 @@ let MapObj = {
         
         while (curIndex < this.Map.length){
             xDistance = (this.indexToLocation(curIndex)[0] - this.PlayerPosition[0]);
-            // if (xDistance == this.ViewRange && curIndex % this.Map[0][0] != 0){
-            //     //alert(xDistance + ", " + this.ViewRange + ", " + curIndex)
-            //     mapText += "\r\n";
-            // }
             xDistanceAbs = Math.abs(xDistance);
-            //alert(xDistance);
             yDistanceAbs = Math.abs((this.indexToLocation(curIndex)[1] - this.PlayerPosition[1]));
-            //alert(yDistance);
             
             if (xDistanceAbs <= this.ViewRange && yDistanceAbs <= this.ViewRange){
                 if (this.PlayerPosition[0] < this.ViewRange + 1 && (curIndex == 1 || (curIndex-1) % this.Map[0][0] == 0) ){
                     count = this.ViewRange - this.PlayerPosition[0] + 1;
                     while (count > 0){
-                        //alert("left Working");
                         mapText += "        ";
                         count--;
                     }
                 }
                 
-                //alert("We're IN!")
                 if ( curIndex == playerIndex){
                     mapText += "[ P ]";
                 }
@@ -213,9 +204,7 @@ let MapObj = {
                 if (curIndex % this.Map[0][0] == 0 || xDistance == this.ViewRange){
                     count = this.Map[0][0] - this.ViewRange;
                     count = this.PlayerPosition[0] - count;
-                    //alert(count);
                     while (count > 0){
-                        //alert("right Working")
                         mapText += "        ";
                         count--;
                     }
@@ -251,11 +240,13 @@ let MapObj = {
             this.Name = locObject.Name;
             this.Map = locObject.Map;
             this.MapLevel = locObject.MapLevel;
-            //alert(this.MapLevel);
             this.PlayerPosition = locObject.PlayerPosition;
             //this.PlayerPosition = [locObject.PlayerPosition[0],locObject.PlayerPosition[1]];
         }
         else {
+            if (gameState == "map"){
+                dialogObj.write("");    
+            }
             switch(this.GetMapID(location)[0]){
                 case 0:
                     this.PlayerPosition[0] += dir[0];
@@ -264,21 +255,21 @@ let MapObj = {
                         Ally1.BattleStats.MPCur += 1;
                     }
                     console.log("Moved to ", this.PlayerPosition);
-                    drawStatus();
+                    //undrawStatus();
                     break;
                 case "M":
                     console.log("Fight Monster.");
                     this.Map[this.locationToIndex(location)]=[0,0];
                     this.spawnMonster(1);
-                    alert("A Wild Monster Attacks!");
+                    dialogObj.write("A Wild Monster Attacks!");
                     //changeState("battle"); This is done in newEnemy();
                     newEnemy();
                     break;
                 case "H":
                     Ally1.BattleStats.HPCur = Ally1.BattleStats.HPMax;
                     Ally1.BattleStats.MPCur = Ally1.BattleStats.MPMax;
-                    drawStatus();
-                    alert(Ally1.Name + " is fully healed!");
+                    //undrawStatus();
+                    dialogObj.write(Ally1.Name + " is fully healed!");
                     break;
                 case "D1" :
                     this.Name = "dungeon";

@@ -30,7 +30,7 @@ var FireBolt = {
     "Description" : "    Cost: 5mp\n" + "    Flings a Bolt made of mundane fire to burn a target.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -41,11 +41,11 @@ var FireBolt = {
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            dialogObj.write(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
             user.addMagicCon(1, 0, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -74,7 +74,7 @@ var FireT1 = {
     "Description" : "    Cost: 5mp\n" + "    Flings a Bolt made of arcane fire to burn a target. (Damages MP)",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -89,11 +89,11 @@ var FireT1 = {
                 target.BattleStats.MPCur = 0;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings an Arcane Flame at "+ target.Name +" burning away "+ amount +" Mana!");
+            dialogObj.write(user.Name +" flings an Arcane Flame at "+ target.Name +" burning away "+ amount +" Mana!");
             user.addMagicCon(3, 0, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -125,7 +125,7 @@ var FireT2 = {
     "Description" : "    Cost: 10mp\n" + "    Ignites the target's Mana to Burn their body with their own power!",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -141,11 +141,11 @@ var FireT2 = {
                 target.BattleStats.MPCur = 0;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" ignites "+ target.Name +"'s Mana, burning away "+ amount +" Mana and dealing " + (Math.floor(amount/2)+1) + " Damage!");
+            dialogObj.write(user.Name +" ignites "+ target.Name +"'s Mana, burning away "+ amount +" Mana and dealing " + (Math.floor(amount/2)+1) + " Damage!");
             user.addMagicCon(5, 0, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -180,7 +180,7 @@ var FireT3 = {
     "Description" : "    Cost: 15mp\n" + "    Ignites the target's very essence, to purmanently burn away their mind and body.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -202,11 +202,11 @@ var FireT3 = {
                 target.BattleStats.MPMax = 0;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            dialogObj.write(user.Name +" flings a Fire Bolt at "+ target.Name +" dealing "+ amount +" damage!");
             user.addMagicCon(7, 0, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -245,7 +245,7 @@ var EarthBolt = {  //Giant Rat
     "Description" : "    Cost: 5mp & 5hp\n" + "    Hardens a part of the users body into rock to be flung at the target, dealing heavy damage.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -260,11 +260,11 @@ var EarthBolt = {  //Giant Rat
             }
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings an Earth Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            dialogObj.write(user.Name +" flings an Earth Bolt at "+ target.Name +" dealing "+ amount +" damage!");
             user.addMagicCon(0, 1, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -307,11 +307,11 @@ var EarthT1Def = {  //Giant Rat
             }
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" hardens their body, gaining "+ amount +" defence!");
+            dialogObj.write(user.Name +" hardens their body, gaining "+ amount +" defence!");
             user.addMagicCon(0, 3, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -349,11 +349,11 @@ var EarthT1Spd = {  //Giant Rat
             }
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" refines their body, gaining "+ amount +" speed!");
+            dialogObj.write(user.Name +" refines their body, gaining "+ amount +" speed!");
             user.addMagicCon(0, 3, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -391,11 +391,11 @@ var EarthT2Atk = {  //Giant Rat
             }
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flexes their muscles, gaining "+ amount +" attack!");
+            dialogObj.write(user.Name +" flexes their muscles, gaining "+ amount +" attack!");
             user.addMagicCon(0, 5, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -433,11 +433,11 @@ var EarthT2Wis = {  //Giant Rat
             }
             user.BattleStats.Wisdom += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" ruminates and mumbles to themselves, gaining "+ amount +" wisdom!");
+            dialogObj.write(user.Name +" ruminates and mumbles to themselves, gaining "+ amount +" wisdom!");
             user.addMagicCon(0, 5, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -476,11 +476,11 @@ var EarthT3HP = {  //Giant Rat
             user.BattleStats.HPCur += amount;
             user.BattleStats.HPMax += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" bows and starts to glow red, gaining "+ amount +" Maximum HP!");
+            dialogObj.write(user.Name +" bows and starts to glow red, gaining "+ amount +" Maximum HP!");
             user.addMagicCon(0, 7, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -520,11 +520,11 @@ var EarthT3MP = {  //Giant Rat
             user.BattleStats.MPCur += amount;
             user.BattleStats.MPMax += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" bows and starts to glow blue, gaining "+ amount +" Maximum MP!");
+            dialogObj.write(user.Name +" bows and starts to glow blue, gaining "+ amount +" Maximum MP!");
             user.addMagicCon(0, 7, 0, 0, 0, 0);
         }
         else{
-            alert("Not Enough HP!")
+            dialogObj.write("Not Enough HP!")
         }
     },
     getValue(user, target){
@@ -556,7 +556,7 @@ var MetalBolt = {
     "Description" : "    Cost: 5mp\n" + "    generates a glob of metal to be flung at the target, pearing through their defences.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -567,11 +567,11 @@ var MetalBolt = {
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings a Metal Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            dialogObj.write(user.Name +" flings a Metal Bolt at "+ target.Name +" dealing "+ amount +" damage!");
             user.addMagicCon(0, 0, 1, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -600,7 +600,7 @@ var MetalT1Def = {
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their defences.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -615,11 +615,11 @@ var MetalT1Def = {
                 target.BattleStats.Defence = 1;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" defence!");
+            dialogObj.write(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" defence!");
             user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -651,7 +651,7 @@ var MetalT1Atk = {
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their will to fight.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -666,11 +666,11 @@ var MetalT1Atk = {
                 target.BattleStats.Attack = 1;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" attack!");
+            dialogObj.write(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" attack!");
             user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -702,7 +702,7 @@ var MetalT1Spd = {
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their agility.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -717,11 +717,11 @@ var MetalT1Spd = {
                 target.BattleStats.Speed = 1;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" speed!");
+            dialogObj.write(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" speed!");
             user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -753,7 +753,7 @@ var MetalT1Wis = {
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their thoughts.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -768,11 +768,11 @@ var MetalT1Wis = {
                 target.BattleStats.Wisdom = 1;
             }
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" wisdom!");
+            dialogObj.write(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" wisdom!");
             user.addMagicCon(0, 0, 3, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -804,7 +804,7 @@ var MetalT2Crit = {
     "Description" : "    Cost: 10mp\n" + "    The user coats themselves in a lucky metal for an all out attack! (Triple Crit Chance)",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -816,20 +816,20 @@ var MetalT2Crit = {
                 if (amount < 1) {amount = 1};
                 amount * 3;
                 user.BattleStats.Luck -= 1;
-                alert("CRITICAL HIT!!!" + user.Name + " loses 1 Luck.");
+                dialogObj.write("CRITICAL HIT!!!" + user.Name + " loses 1 Luck.");
             }
             else {
                 user.BattleStats.Luck += 10;
-                alert("Normal hit... " + user.Name + " gains 10 Luck!")
+                dialogObj.write("Normal hit... " + user.Name + " gains 10 Luck!")
             }
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" health!");
+            dialogObj.write(user.Name +" swings a Metal Blade at "+ target.Name +" cutting away "+ amount +" health!");
             user.addMagicCon(0, 0, 5, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -860,7 +860,7 @@ var MetalT3Multi = {
     "Description" : "    Cost: 15mp\n" + "    The user flings multiple globs of lucky metal at the target. (0-5 Attacks)",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -883,19 +883,19 @@ var MetalT3Multi = {
                 if (amount < 0) {amount = 0};
                 target.BattleStats.HPCur -= amount;
                 if(gameState == "battle") {drawBattle();}
-                alert(user.Name +" flings glob " + attackNum + " of lucky metal at "+ target.Name +" causing "+ amount +" damage!");
+                dialogObj.write(user.Name +" flings glob " + attackNum + " of lucky metal at "+ target.Name +" causing "+ amount +" damage!");
                 
                 if (Math.floor(random3()*maxAmount)+1 > amount && attackNum < 5){
                     dropped = true;
                 }
             }
             if (dropped){
-                alert("All remaining globs of Lucky Metal miss their target.")
+                dialogObj.write("All remaining globs of Lucky Metal miss their target.")
             }
             user.addMagicCon(0, 0, 7, 0, 0, 0);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -926,7 +926,7 @@ var WaterBolt = {
     "Description" : "    Cost: 5mp\n" + "    generates a bolt of water to be flung at the target, sometimes making them trip.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -936,19 +936,19 @@ var WaterBolt = {
             let amount = Math.floor(random3() * ((effectiveWisdom/2) - (GetEffectiveWisdom(target)/8) - (GetEffectiveDefence(target)/8)));
             if (amount <= 0) {
                 amount = 0
-                alert(user.Name +" flings a Water Bolt, but misses "+ target.Name +"!");
+                dialogObj.write(user.Name +" flings a Water Bolt, but misses "+ target.Name +"!");
             }
             else {
                 target.BattleStats.Aflictions.push("Trip");
-                //alert(target.BattleStats.Aflictions[0]);
+                //dialogObj.write(target.BattleStats.Aflictions[0]);
                 target.BattleStats.HPCur -= amount;
-                alert(user.Name +" flings a Water Bolt at "+ target.Name +" dealing "+ amount +" damage and making the floor slippery!");
+                dialogObj.write(user.Name +" flings a Water Bolt at "+ target.Name +" dealing "+ amount +" damage and making the floor slippery!");
             }
             //if(gameState == "battle") {drawBattle();}   
             user.addMagicCon(0, 0, 0, 1, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -993,11 +993,11 @@ var WaterT1DeftoSpd = {
             user.BattleStats.Defence -= amount;
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" Shakes off some extra weight, and stretches as they gain "+ amount +" speed! Losing " + amount + " defence!" );  
+            dialogObj.write(user.Name +" Shakes off some extra weight, and stretches as they gain "+ amount +" speed! Losing " + amount + " defence!" );  
             user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1030,11 +1030,11 @@ var WaterT1SpdtoDef = {
             user.BattleStats.Speed -= amount;
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" swells up gaining "+ amount +" defence! Losing " + amount + " speed!" );
+            dialogObj.write(user.Name +" swells up gaining "+ amount +" defence! Losing " + amount + " speed!" );
             user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1067,11 +1067,11 @@ var WaterT1DeftoStr = {
             user.BattleStats.Defence -= amount;
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" burns away their bulk, gaining "+ amount +" attack! Losing " + amount + " defence!" );
+            dialogObj.write(user.Name +" burns away their bulk, gaining "+ amount +" attack! Losing " + amount + " defence!" );
             user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1104,11 +1104,11 @@ var WaterT1StrtoDef = {
             user.BattleStats.Attack -= amount;
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" burns away their muscle, gaining "+ amount +" defence! Losing " + amount + " attack!" );
+            dialogObj.write(user.Name +" burns away their muscle, gaining "+ amount +" defence! Losing " + amount + " attack!" );
             user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1141,11 +1141,11 @@ var WaterT1SpdtoStr = {
             user.BattleStats.Speed -= amount;
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" grows their muscles, gaining "+ amount +" attack! Losing " + amount + " speed!" );
+            dialogObj.write(user.Name +" grows their muscles, gaining "+ amount +" attack! Losing " + amount + " speed!" );
             user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1178,11 +1178,11 @@ var WaterT1StrtoSpd = {
             user.BattleStats.Attack -= amount;
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" slims their muscles, gaining "+ amount +" speed! Losing " + amount + " attack!" );
+            dialogObj.write(user.Name +" slims their muscles, gaining "+ amount +" speed! Losing " + amount + " attack!" );
             user.addMagicCon(0, 0, 0, 3, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1215,11 +1215,11 @@ var WaterT2WistoDef = {
             user.BattleStats.Wisdom -= amount;
             user.BattleStats.Defence += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" creates a mental barrior on their body gaining "+ amount +" defence! Losing " + amount + " wisdom!" );
+            dialogObj.write(user.Name +" creates a mental barrior on their body gaining "+ amount +" defence! Losing " + amount + " wisdom!" );
             user.addMagicCon(0, 0, 0, 5, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1252,11 +1252,11 @@ var WaterT2WistoSpd = {
             user.BattleStats.Wisdom -= amount;
             user.BattleStats.Speed += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" let's out a sigh of relief, gaining "+ amount +" speed! Losing " + amount + " wisdom!" );
+            dialogObj.write(user.Name +" let's out a sigh of relief, gaining "+ amount +" speed! Losing " + amount + " wisdom!" );
             user.addMagicCon(0, 0, 0, 5, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1289,11 +1289,11 @@ var WaterT2WistoStr = {
             user.BattleStats.Wisdom -= amount;
             user.BattleStats.Attack += amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" get's all worked up and upset, gaining "+ amount +" attack! Losing " + amount + " wisdom!" );
+            dialogObj.write(user.Name +" get's all worked up and upset, gaining "+ amount +" attack! Losing " + amount + " wisdom!" );
             user.addMagicCon(0, 0, 0, 5, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1315,7 +1315,7 @@ var WoodBolt = {
     "Description" : "    Cost: 5mp\n" + "    generates a bolt of earth to be flung at the target, draining some HP.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1329,11 +1329,11 @@ var WoodBolt = {
             }
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" heals "+ Math.floor(amount/2) +" and flings a Wood Bolt at "+ target.Name +" dealing "+ amount +" damage!\n And Heals " + (Math.floor(amount/2)+1) + " Health!");
+            dialogObj.write(user.Name +" heals "+ Math.floor(amount/2) +" and flings a Wood Bolt at "+ target.Name +" dealing "+ amount +" damage!\n And Heals " + (Math.floor(amount/2)+1) + " Health!");
             user.addMagicCon(0, 0, 0, 0, 1, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1365,7 +1365,7 @@ var WoodT1HP = {
     "Description" : "    Cost: 10mp\n" + "    Magical Vines latch onto the target, draining them of their life force.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1380,11 +1380,11 @@ var WoodT1HP = {
             }
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" summons magic vines that drain "+ amount +" of HP from "+ target.Name +"!");
+            dialogObj.write(user.Name +" summons magic vines that drain "+ amount +" of HP from "+ target.Name +"!");
             user.addMagicCon(0, 0, 0, 0, 3, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1417,7 +1417,7 @@ var WoodT1MP = {
     "Description" : "    Cost: 10mp\n" + "    Magical Vines latch onto the target, draining them of their mental force.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1432,11 +1432,11 @@ var WoodT1MP = {
             }
             target.BattleStats.MPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" summons magic vines that drain "+ amount +" of MP from "+ target.Name +"!");
+            dialogObj.write(user.Name +" summons magic vines that drain "+ amount +" of MP from "+ target.Name +"!");
             user.addMagicCon(0, 0, 0, 0, 3, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1469,7 +1469,7 @@ var WoodT2Atk = {
     "Description" : "    Cost: 10mp\n" + "    Summons a swarm of insects that harmlessly transplants the target's muscles into the user.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1484,11 +1484,11 @@ var WoodT2Atk = {
             }
             target.BattleStats.Attack -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert("A swarm of insects appear ripping away " + amount +" attack from "+ target.Name +"! "+ user.Name +" grows stronger!");
+            dialogObj.write("A swarm of insects appear ripping away " + amount +" attack from "+ target.Name +"! "+ user.Name +" grows stronger!");
             user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1521,7 +1521,7 @@ var WoodT2Spd = {
     "Description" : "    Cost: 10mp\n" + "    Summons a swarm of insects that harmlessly transfuses the target's blood into the user.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1536,11 +1536,11 @@ var WoodT2Spd = {
             }
             target.BattleStats.Speed -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert("A swarm of insects appear and extract blood from " + target.Name +", draining "+ amount +" speed! "+ user.Name +" grows more agile!");
+            dialogObj.write("A swarm of insects appear and extract blood from " + target.Name +", draining "+ amount +" speed! "+ user.Name +" grows more agile!");
             user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1573,7 +1573,7 @@ var WoodT3Def = {
     "Description" : "    Cost: 10mp\n" + "    the target's skin peels itself away and layers onto the users.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1588,11 +1588,11 @@ var WoodT3Def = {
             }
             target.BattleStats.Defence -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(target.Name + "'s skin starts to peel off and attach to " + user.Name +", draining "+ amount +" defence!");
+            dialogObj.write(target.Name + "'s skin starts to peel off and attach to " + user.Name +", draining "+ amount +" defence!");
             user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1625,7 +1625,7 @@ var WoodT3Wis = {
     "Description" : "    Cost: 10mp\n" + "    Mind eating fungus sprouts from the target, the spores expand the users mind.",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1640,11 +1640,11 @@ var WoodT3Wis = {
             }
             target.BattleStats.Wisdom -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert("Fungus suddenly sprouts from " + target.Name + "! Their mind start's to fade as they release their spores! Losing " + amount + " wisdom!");
+            dialogObj.write("Fungus suddenly sprouts from " + target.Name + "! Their mind start's to fade as they release their spores! Losing " + amount + " wisdom!");
             user.addMagicCon(0, 0, 0, 0, 5, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1690,10 +1690,10 @@ var Meditate = {  //Giant Rat
             }
             user.BattleStats.HPCur+=amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name + " Healed " + amount + " HP!")
+            dialogObj.write(user.Name + " Healed " + amount + " HP!")
         }
         else {
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }    
     },
     getValue(user, target){
@@ -1725,7 +1725,7 @@ var AirBolt = {  //Carn Canary
     "Name" : "Air Bolt",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1736,11 +1736,11 @@ var AirBolt = {  //Carn Canary
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings an Air Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            dialogObj.write(user.Name +" flings an Air Bolt at "+ target.Name +" dealing "+ amount +" damage!");
             user.addMagicCon(1, 0, 0, 1, 0, 0); 
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){
@@ -1768,7 +1768,7 @@ var VoidBolt = {  //Giant Cent
     "Name" : "Void Bolt",
     Cast(user, target){
         if (Object.keys(target) == 0){
-            alert("No Valid Target!");
+            dialogObj.write("No Valid Target!");
             return;
         }
 
@@ -1779,12 +1779,12 @@ var VoidBolt = {  //Giant Cent
             if (amount < 0) {amount = 0};
             target.BattleStats.HPCur -= amount;
             if(gameState == "battle") {drawBattle();}
-            alert(user.Name +" flings a Void Bolt at "+ target.Name +" dealing "+ amount +" damage!");
+            dialogObj.write(user.Name +" flings a Void Bolt at "+ target.Name +" dealing "+ amount +" damage!");
             user.addMagicCon(0, 0, 0, 0, 0, 1);
             target.addMagicCon(0, 0, 0, 0, 0, 1);
         }
         else{
-            alert("Not Enough MP!")
+            dialogObj.write("Not Enough MP!")
         }
     },
     getValue(user, target){

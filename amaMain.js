@@ -10,7 +10,7 @@ function LoadGame(){
     //MapObj.spawnMonster(100);
     MapObj.drawMap();
     Ally1.populate(Giant_Rat);
-    drawStatus();
+    //undrawStatus();
 }
 LoadGame();
 
@@ -80,7 +80,8 @@ function changeState(state){
     switch (gameState){
         case "map":
             MapObj.drawMap();
-            drawStatus();
+            //drawStatus();
+            //undrawStatus();
             break;
         case "battle":
             menuList = battleList;

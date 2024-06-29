@@ -1,7 +1,14 @@
-// let selection = 0;
+//selection = 0;
 // let selectingSpell = false;
 let pauseList = ["Resume", Ally1, "Restart"]
 menuList = pauseList;
+
+statusOfMon = {
+    Name : "Status",
+    Cast(user, target){
+        console.log("Cannot Cast Status.");
+    }
+}
 
 function drawPauseMenu(){
     let menuText = "";
@@ -12,15 +19,25 @@ function drawPauseMenu(){
         else {
             menuText += "- "
         }
-        menuText += objectToString(menuList[menuIndex]);
-        if (selectingSpell && menuIndex == selection){
-            menuText += "\n  " + menuList[menuIndex].Description;
+        if (typeof(menuList[menuIndex]) == "object"){
+            menuText += menuList[menuIndex].Name;
+        }
+        else {
+            menuText += menuList[menuIndex];
         }
         menuText += "\n"
     }
     document.getElementById("MapCanvas").textContent = menuText;
-    //document.getElementById("MapCanvas").textContent = "--- Paused! ---";
-    drawStatus();
+    
+    if (menuList[selection] == statusOfMon){
+        document.getElementById("DialogCanvas").textContent = getStatusText();
+    }
+    else if (selectingSpell){
+        document.getElementById("DialogCanvas").textContent = menuList[selection].Description;
+    }
+    else{
+        dialogObj.write("");
+    }
 }
 
 function PauseMenuInputHandler(input){
@@ -47,7 +64,8 @@ function PauseMenuInputHandler(input){
                     changeState("map");
                     break;
                 case Ally1:
-                    menuList = Ally1.Spells;
+                    menuList = [...Ally1.Spells];
+                    menuList.splice(0,0,statusOfMon);
                     selectingSpell = true;
                     selection = 0;
                     break;
@@ -57,7 +75,9 @@ function PauseMenuInputHandler(input){
             }
             break;
         case "B":
-            if (menuList == Ally1.Spells){
+            dialogObj.write("");
+            //undrawStatus();
+            if (selectingSpell == true){//menuList == Ally1.Spells){
                 selectingSpell = false;
                 menuList = pauseList;
                 selection = 0;

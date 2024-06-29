@@ -107,7 +107,9 @@ var Ally1 = {
         MapObj.PlayerPosition[1] = 3;
     },
     levelUP(){
-        alert (this.Name + " Gained a Level!");
+        dialogObj.write("-");
+        dialogObj.write(this.Name + " Gained a Level!");
+        //alert (this.Name + " Gained a Level!");
         this.BattleStats.HPMax += this.GrowthStats.HP;
         this.BattleStats.HPCur += this.GrowthStats.HP;
         this.BattleStats.MPMax += this.GrowthStats.MP;
@@ -120,7 +122,8 @@ var Ally1 = {
         for (learnableSpellIndex = this.LearnableSpells.length - 1; learnableSpellIndex >= 0 ; learnableSpellIndex--){
             console.log("checking learnable spell: " + learnableSpellIndex + " " + this.LearnableSpells[learnableSpellIndex].Name);
             if (this.LearnableSpells[learnableSpellIndex].CanLearn(this) == true){
-                alert(this.Name + " learned a new spell!\n" + this.LearnableSpells[learnableSpellIndex].Name)
+                dialogObj.write(this.Name + " learned a new spell!\n" + "~ " + this.LearnableSpells[learnableSpellIndex].Name + " ~");
+                //alert(this.Name + " learned a new spell!\n" + this.LearnableSpells[learnableSpellIndex].Name)
                 this.Spells.push(this.LearnableSpells[learnableSpellIndex]);
                 this.LearnableSpells.splice(learnableSpellIndex, 1);
             }
@@ -307,6 +310,10 @@ var Ally1 = {
 }
 
 function drawStatus() {
+    document.getElementById("DialogCanvas").textContent = getStatusText();
+}
+
+function getStatusText() {
     let text = "";
     text += Ally1.Name + ": (" + Ally1.Genus+ ", " + Ally1.Family + ")\n";
     text += "Level: " + Ally1.Level + " (" + Math.floor(Ally1.EXP) + "/" + Ally1.expToLevel + ")\n";
@@ -320,6 +327,10 @@ function drawStatus() {
     text += "Luck: " + Ally1.BattleStats.Luck + "\n";
     text += "Magic Contamination: Fi" + Ally1.MagicCon.FireCon + "/ Ea" + Ally1.MagicCon.EarthCon + "/ Me" + Ally1.MagicCon.MetalCon + "/ Wa" + Ally1.MagicCon.WaterCon + "/ Wo" + Ally1.MagicCon.WoodCon + "/ Vo" + Ally1.MagicCon.VoidCon + "\n";
     text += "Generation: " + Ally1.Age + "\n";
-    document.getElementById("MonCanvas").textContent = text;
+    return text;
 }
+
+// function undrawStatus() {
+//     //document.getElementById("DialogCanvas").textContent = "";
+// }
 //drawStatus();

@@ -32,7 +32,7 @@ var aggressivePhysical = {
         }
 
         if (bestChoice == "skip"){
-            alert(mon.Name + " Can't decide what to do!");
+            dialogObj.write(mon.Name + " Can't decide what to do!");
         }
         mon.Action = bestChoice;
     }
@@ -62,7 +62,7 @@ var defensivePhysical = {
         }
 
         if (bestChoice == "skip"){
-            alert(mon.Name + " Can't decide what to do!");
+            dialogObj.write(mon.Name + " Can't decide what to do!");
         }
         mon.Action = bestChoice;
     }
@@ -92,7 +92,7 @@ var aggressiveMagical ={
         }
 
         if (bestChoice == "skip"){
-            alert(mon.Name + " Can't decide what to do!");
+            dialogObj.write(mon.Name + " Can't decide what to do!");
         }
         mon.Action = bestChoice;
     }
@@ -122,7 +122,7 @@ var defensiveMagical = {
         }
 
         if (bestChoice == "skip"){
-            alert(mon.Name + " Can't decide what to do!");
+            dialogObj.write(mon.Name + " Can't decide what to do!");
         }
         mon.Action = bestChoice;
     }
@@ -135,7 +135,7 @@ var mindlessPhysical = {
         }
         else {
             mon.Action = "skip"
-            alert(mon.Name + " flails wildly!")
+            dialogObj.write(mon.Name + " flails wildly!")
         }
     }
 }
@@ -156,7 +156,7 @@ var mindlessMagical = {
         }
 
         if (bestChoice == "skip"){
-            alert(mon.Name + " stares into the distance!");
+            dialogObj.write(mon.Name + " stares into the distance!");
         }
         mon.Action = bestChoice;
     }

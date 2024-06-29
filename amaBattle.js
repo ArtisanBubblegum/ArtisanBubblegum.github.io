@@ -57,6 +57,7 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
             break;
         case "A":
             if (selectingSpell){
+                dialogObj.write("");
                 selectingSpell = false;
                 allyList[0].Action = menuList[selection];
                 menuList = battleList;
@@ -67,6 +68,7 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
                 case "Fight":
                 case "Attack":
                 case "Defend":
+                    dialogObj.write("");
                     allyList[0].Action = menuList[selection].toLowerCase();
                     menuList = battleList;
                     selection = 0;
@@ -82,16 +84,18 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
                     selectingSpell = true;
                     break;
                 case "Flee":
+                    dialogObj.write("");
                     allyList[0].Action = "flee";
                     selection = 0
                     if ( Math.random() < fleeBonus + ( allyList[0].BattleStats.Speed/( EnemyList[0].BattleStats.Speed*2 ) ) ){
-                        alert(allyList[0].Name + " escapes!")
+                        dialogObj.write("");
+                        dialogObj.write(allyList[0].Name + " escapes!")
                         fleeBonus = 0;
                         allyList[0].Target = noValidTarget;
                         changeState("map");
                     }
                     else {
-                        alert(allyList[0].Name + " fails to escape!")
+                        dialogObj.write(allyList[0].Name + " fails to escape!")
                         allyList[0].Action = "skip"
                         fleeBonus += 0.1;
                         return true;
@@ -120,21 +124,19 @@ function OrderMonstersBySpeed(){
 
 function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersBySpeed
     OrderMonstersBySpeed();
+    dialogObj.write("");
     allyAttacked = false;
     combatDone = false;
     while (allyAttacked == false && combatDone == false){
         for (index = 0; index<monstersList.length && combatDone == false; index++){
             monstersList[index].BattleStats.TurnValue += monstersList[index].BattleStats.Speed;
+
             if (monstersList[index].BattleStats.TurnValue >= targetTurnValue){
                 monstersList[index].BattleStats.TurnValue -= targetTurnValue;
                 console.log(monstersList[index].Name + " takes a turn.")
 
                 if (monstersList[index] === allyList[0]){
                     allyAttacked = true;
-                    //alert("Ally Attacked");
-                }
-                else {
-                    //alert("Not yet + " + allyList[0].BattleStats.TurnValue + " / " + targetTurnValue);
                 }
                 
                 if (monstersList[index].BattleStats.Aflictions.length > 0){
@@ -143,7 +145,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                             case "Trip" :                               
                                 if (Math.random() < 0.5 && monstersList[index].Action != "skip"){
                                     monstersList[index].Action = "skip";
-                                    alert(monstersList[index].Name + " trips and misses their turn.");
+                                    dialogObj.write(monstersList[index].Name + " trips and misses their turn.");
                                 }
                                 monstersList[index].BattleStats.Aflictions.splice(item, 1);
                                 break;
@@ -167,7 +169,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         break;
                     case "defend":
                         monstersList[index].BattleStats.Defending = true;
-                        alert(monstersList[index].Name + " takes a Defensive Stance!")
+                        dialogObj.write(monstersList[index].Name + " takes a Defensive Stance!");
                         break;
                     case "flee":
                         console.log("flee successful, skipping check alive and order by speed.");
@@ -198,7 +200,8 @@ function checkAlive(){
     }
     
     if (list.length == 1){
-        alert(list[0].Name + " has Survived the Battle!");
+        dialogObj.write("-");
+        dialogObj.write(list[0].Name + " has Survived the Battle!")
         if (allyList[0].BattleStats.HPCur <= 0){
             allyList[0].reset();
         }
@@ -214,7 +217,8 @@ function checkAlive(){
         combatDone = true;
     }
     else if (list.length == 0){
-        alert("Neither Monster Survives the Battle!");
+        dialogObj.write("-");
+        dialogObj.write("Neither Monster Survives the Battle!")
         allyList[0].reset();
         allyList[0].Target = noValidTarget;
         changeState("map");
@@ -240,12 +244,12 @@ function TryAttack(user, target) {
             if (damage > 0){
                 target.BattleStats.HPCur -= damage;
                 drawBattle();
-                if (criticalHit) {alert("CRITICAL HIT!!!")}
-                alert(user.Name + " delt " + damage + " damage to " + target.Name + "!")
+                if (criticalHit) {dialogObj.write("CRITICAL HIT!!!")}
+                dialogObj.write(user.Name + " delt " + damage + " damage to " + target.Name + "!")
             }
             else{
                 drawBattle();
-                alert(user.Name + " delt Zero damage to " + target.Name + "!")
+                dialogObj.write(user.Name + " delt Zero damage to " + target.Name + "!")
             }
         }
         else {
@@ -261,12 +265,12 @@ function TryAttack(user, target) {
             if (damage > 0){
                 target.BattleStats.HPCur -= damage;
                 drawBattle();
-                if (criticalHit) {alert("CRITICAL HIT!!!")}
-                alert(user.Name + " delt " + damage + " damage to " + target.Name + " despite their Defences!")
+                if (criticalHit) {dialogObj.write("CRITICAL HIT!!!")}
+                dialogObj.write(user.Name + " delt " + damage + " damage to " + target.Name + " despite their Defences!")
             }
             else {
                 drawBattle();
-                alert(user.Name + " failed to break " + target.Name + "'s defences!")
+                dialogObj.write(user.Name + " failed to break " + target.Name + "'s defences!")
             }
         }
     }
@@ -280,7 +284,7 @@ function drawBattle(){
     text += allyList[0].Name + ":\nHP: " + allyList[0].BattleStats.HPCur + " / " + allyList[0].BattleStats.HPMax + "\n";
     text += "MP: "+ allyList[0].BattleStats.MPCur +" / "+ allyList[0].BattleStats.MPMax + "\n\n";
     text += drawMenu();
-    document.getElementById("MonCanvas").textContent = text;
+    document.getElementById("MapCanvas").textContent = text;
 }
 
 function drawMenu(){
