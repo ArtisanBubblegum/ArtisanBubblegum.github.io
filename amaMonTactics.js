@@ -9,6 +9,7 @@ function getAttackValue(user, target){
 }
 
 var aggressivePhysical = {
+    Name: "aggressivePhysical",
     think (mon){
         let bestChoice = "skip";
         if (getAttackValue(mon, mon.Target) > 0){
@@ -39,6 +40,7 @@ var aggressivePhysical = {
 }
 
 var defensivePhysical = {
+    Name: "defensivePhysical",
     think (mon){
         let bestChoice = "skip";
         if (getAttackValue(mon, mon.Target) > 0){
@@ -69,6 +71,7 @@ var defensivePhysical = {
 }
 
 var aggressiveMagical ={ 
+    Name: "aggressiveMagical",
     think (mon){
         let bestChoice = "skip";
         if (getAttackValue(mon, mon.Target) > 0){
@@ -99,6 +102,7 @@ var aggressiveMagical ={
 }
 
 var defensiveMagical = {
+    Name: "defensiveMagical",
     think (mon){
         let bestChoice = "skip";
         if (getAttackValue(mon, mon.Target) > 0){
@@ -129,6 +133,7 @@ var defensiveMagical = {
 }
 
 var mindlessPhysical = {
+    Name: "mindlessPhysical",
     think(mon){
         if (getAttackValue(mon, mon.Target) > 0){
             mon.Action = "attack"
@@ -141,6 +146,7 @@ var mindlessPhysical = {
 }
 
 var mindlessMagical = { 
+    Name: "mindlessMagical",
     think (mon){
         let bestChoice = "skip";
         if (mon.Spells.length > 0){
@@ -163,6 +169,7 @@ var mindlessMagical = {
 }
 
 var aggressiveHealer = {
+    Name: "aggressiveHealer",
     think(mon){
         alert("ERROR #80085: Depricated Tactics Block in use, please alert developer!")
         if (Math.random() <= mon.BattleStats.HPCur/mon.BattleStats.HPMax){

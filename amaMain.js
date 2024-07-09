@@ -1,18 +1,20 @@
+// Main Variables
 gameState = "map" //Map, Battle, Pause
-noValidTarget = {};
+//noValidTarget = {};
 
 function LoadGame(){
-    //MapObj.Map = farmMap.Map;
-    //MapObj.PlayerPosition = farmMap.PlayerPosition;
-    //MapObj.spawnMonster(1);
-    //MapObj.Door1 = farmMap.Door1;
-    //MapObj.Map = MapObj.mapMaker(30, 30)
-    //MapObj.spawnMonster(100);
     MapObj.drawMap();
-    Ally1.populate(Giant_Rat);
-    //undrawStatus();
+    LoadParty();
+    LoadPause();
 }
 LoadGame();
+
+//Common Variables
+// var menuList = [];
+// var selection = 0;
+// var selectingSpell = false;
+// var pauseList = ["Resume", PartyList[0], PartyList[1], "Restart"]
+// var partyIndex = 0;
 
 function MainLoop(input){
     switch(gameState){
@@ -48,7 +50,7 @@ function BattleLoop(input){
 function PauseLoop(input){
     PauseMenuInputHandler(checkInput(input));
     if (gameState == "pause"){   
-        drawPauseMenu();
+        //drawPauseMenu();
     }
 }
 
@@ -84,12 +86,13 @@ function changeState(state){
             //undrawStatus();
             break;
         case "battle":
-            menuList = battleList;
+            //menuList = battleList;
+            //MapObj.undrawMap();
             drawBattle();
-            MapObj.undrawMap();
             break;
         case "pause":
-            menuList = pauseList;
+            //menuList = pauseList;
+            LoadPause();
             drawPauseMenu();
             break;
     }
@@ -104,4 +107,47 @@ function objectToString(thing) {
         return thing.Name;
     }
     return thing;
+}
+
+function numToAlpha(num){
+    let text = "";
+    while (num != 0){
+        while (num > 10){
+            num *= 0.1;
+        }
+        switch (Math.floor(num)){
+            case 1:
+                text += "A";
+            break;
+            case 2:
+                text += "B";
+            break;
+            case 3:
+                text += "C";
+            break;
+            case 4:
+                text += "D";
+            break;
+            case 5:
+                text += "E";
+            break;
+            case 6:
+                text += "F";
+            break;
+            case 7:
+                text += "G";
+            break;
+            case 8:
+                text += "H";
+            break;
+            case 9:
+                text += "I";
+            break;
+        }
+        num -= Math.floor(num);
+        while (num < 0 && num !=0){
+            num *= 10;
+        }
+    }
+    return text;
 }

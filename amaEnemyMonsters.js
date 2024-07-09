@@ -1,33 +1,33 @@
 var Enemy1 = {
     "Name" : "Bahd Guie",
-    "Genus" : "Giant Rat",
-    "Family" : "Beast",
+    "Genus" : "Place Holder",
+    "Family" : "None",
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
     "BattleStats" : {
-        "HPMax" : 20,
-        "HPCur" : 20,
-        "MPMax" : 100,  //Water
-        "MPCur" : 100,
-        "Attack" : 16,  //Fire
-        "Defence" : 5,  //Earth
+        "HPMax" : 10,
+        "HPCur" : 10,
+        "MPMax" : 10,
+        "MPCur" : 10,
+        "Attack" : 10,
+        "Defence" : 10,
         "Defending": false,
-        "Wisdom" : 10,  //Void
-        "Speed" : 5,  //Air
+        "Wisdom" : 10,
+        "Speed" : 10,
         "TurnValue" : 0,
-        "Luck" : 1,
+        "Luck" : 0,
         "Aflictions" : []
     },
     "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
-        "Attack" : 3, //+2
-        "Defence" : 2, //+1
-        "Wisdom" : 2, //+1
-        "Speed" : 1, //0
-        "Luck" : 0, //-1
+        "HP" : 1,
+        "MP" : 1,
+        "Attack" : 1,
+        "Defence" : 1,
+        "Wisdom" : 1,
+        "Speed" : 1,
+        "Luck" : 1,
         "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
     },
     "MagicCon" : {
@@ -38,11 +38,13 @@ var Enemy1 = {
         "WoodCon" : 0,
         "VoidCon" : 0
     },
-    "Spells" : [Meditate, EarthBolt],
+    "Spells" : [],
     "LearnableSpells" : [],
-    "Tactic" : aggressivePhysical,
+    "Tactic" : {},
     "Action" : "defend",
     "Target" : {},
+    //"Cell" : "E0",
+    "isWild" : true,
 
     populate(target){
         this.Name = target.Name;

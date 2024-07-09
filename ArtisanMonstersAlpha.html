@@ -12,9 +12,17 @@
         }
         td {
             text-align: center;
-           word-wrap: break-word;
             border: 1px solid black;
         }
+        /* #EnemyRow {
+            height: 100%;
+        }
+        #AllyRow {
+            height: auto;
+        }
+        #CommandRow {
+            height: 0px;
+        } */
     </style>
     <link rel="stylesheet" href="/assets/index-45778437.css">
 </head>
@@ -28,12 +36,12 @@
     <br>
     <h3>Artisan Monsters: Alpha</h3>
     <h4>Monster Battler Game</h4>
-    <table id="PrimaryTable" style="width: 0px; aspect-ratio: 1/1; margin-left: auto; margin-right: auto;">
+    <table id="PrimaryTable" style="width: 500px; min-height: 500px; margin-left: auto; margin-right: auto;"> <!-- aspect-ratio: 1/1; -->
         <tr style="height: 100%;">
-            <td>
-                <p id="MapCanvas" style="white-space: pre; width: auto;">
+            <td id="MapCanvas" style="white-space: pre; width: auto;">
+                <!-- <p id="MapCanvas" style="white-space: pre; width: auto;">
                     MapCanvis.
-                </p>
+                </p> -->
             </td>
             <!-- <td>
                 <p id="MonCanvas" style="white-space: pre; text-align: left; width: auto;">
@@ -41,16 +49,16 @@
                 </p>
             </td> -->
         </tr>
-        <tr style="height: auto;">
+        <tr style="height: auto; width: 100%;">
             <td colspan="2">
-                <p id="DialogCanvas" style="white-space: pre; width: 500px; margin-bottom: 1px; margin-top: 1px;">
+                <p id="DialogCanvas" style="white-space: pre; min-width: 500px; margin-bottom: 1px; margin-top: 1px; margin-left: auto; margin-right: auto;">
                     Dialog.
                 </p>
             </td>
         </tr>
         <tr style="height: 0;">
-            <td colspan="2" style="width: 100%;">
-                <table id="InputsTable" style="width: 100%; margin-bottom: 1px; margin-top: 1px;">
+            <td colspan="2">
+                <table id="InputsTable" style="width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 1px; margin-top: 1px;">
                     <tr>
                         <td style="width: 100px;"></td>
                         <td style="width: 100px;">
@@ -111,7 +119,6 @@
         Click A to Pause/Select, Click B to Cancel.<br>
         <a href="/ArtisanMonstersManual.html">AMA Manual</a><br>
         To-Do:<br>
-        1. Fix Spell Descriptions so that they don't overflow the virtual game screen<br>
         2. Add NPCs that you can talk to, and design Town Map to replace "PlaceHolder" Map.<br>
         3. Add optional tutorial<br>
         4. Let the Player select starting Monster.<br>

@@ -29,7 +29,7 @@ var FireBolt = {
     "Name" : "Fire Bolt",
     "Description" : "    Cost: 5mp\n" + "    Flings a Bolt made of mundane fire to burn a target.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -73,7 +73,7 @@ var FireT1 = {
     "Name" : "Mana Burn",
     "Description" : "    Cost: 5mp\n" + "    Flings a Bolt made of arcane fire to burn a target. (Damages MP)",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -124,7 +124,7 @@ var FireT2 = {
     "Name" : "Arcan Combustion",
     "Description" : "    Cost: 10mp\n" + "    Ignites the target's Mana to Burn their body with their own power!",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -179,7 +179,7 @@ var FireT3 = {
     "Name" : "Essence to Ashes",
     "Description" : "    Cost: 15mp\n" + "    Ignites the target's very essence, to purmanently burn away their mind and body.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -244,12 +244,12 @@ var EarthBolt = {  //Giant Rat
     "Name" : "Earth Bolt",
     "Description" : "    Cost: 5mp & 5hp\n" + "    Hardens a part of the users body into rock to be flung at the target, dealing heavy damage.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
 
-        if (user.BattleStats.MPCur >= 5){
+        else if (user.BattleStats.MPCur >= 5){
             effectiveWisdom = GetEffectiveWisdom(user);
             user.BattleStats.MPCur -= 5;
             user.BattleStats.HPCur -= 5;
@@ -555,7 +555,7 @@ var MetalBolt = {
     "Name" : "Metal Bolt",
     "Description" : "    Cost: 5mp\n" + "    generates a glob of metal to be flung at the target, pearing through their defences.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -599,7 +599,7 @@ var MetalT1Def = {
     "Name" : "Shell Cutter",
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their defences.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -650,7 +650,7 @@ var MetalT1Atk = {
     "Name" : "Arms Cutter",
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their will to fight.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -701,7 +701,7 @@ var MetalT1Spd = {
     "Name" : "Speed Cutter",
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their agility.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -752,7 +752,7 @@ var MetalT1Wis = {
     "Name" : "Mind Cutter",
     "Description" : "    Cost: 10mp\n" + "    An arcane blade is swung at the target to cut their thoughts.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -803,7 +803,7 @@ var MetalT2Crit = {
     "Name" : "Metalic Surge!",
     "Description" : "    Cost: 10mp\n" + "    The user coats themselves in a lucky metal for an all out attack! (Triple Crit Chance)",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -859,7 +859,7 @@ var MetalT3Multi = {
     "Name" : "Lucky Volley",
     "Description" : "    Cost: 15mp\n" + "    The user flings multiple globs of lucky metal at the target. (0-5 Attacks)",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -925,7 +925,7 @@ var WaterBolt = {
     "Name" : "Water Bolt",
     "Description" : "    Cost: 5mp\n" + "    generates a bolt of water to be flung at the target, sometimes making them trip.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1314,7 +1314,7 @@ var WoodBolt = {
     "Name" : "Wood Bolt",
     "Description" : "    Cost: 5mp\n" + "    generates a bolt of earth to be flung at the target, draining some HP.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1364,7 +1364,7 @@ var WoodT1HP = {
     "Name" : "Drain Life",
     "Description" : "    Cost: 10mp\n" + "    Magical Vines latch onto the target, draining them of their life force.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1416,7 +1416,7 @@ var WoodT1MP = {
     "Name" : "Drain Mind",
     "Description" : "    Cost: 10mp\n" + "    Magical Vines latch onto the target, draining them of their mental force.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1468,7 +1468,7 @@ var WoodT2Atk = {
     "Name" : "Drain Muscle",
     "Description" : "    Cost: 10mp\n" + "    Summons a swarm of insects that harmlessly transplants the target's muscles into the user.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1520,7 +1520,7 @@ var WoodT2Spd = {
     "Name" : "Drain Blood",
     "Description" : "    Cost: 10mp\n" + "    Summons a swarm of insects that harmlessly transfuses the target's blood into the user.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1572,7 +1572,7 @@ var WoodT3Def = {
     "Name" : "Drain Skin",
     "Description" : "    Cost: 10mp\n" + "    the target's skin peels itself away and layers onto the users.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1624,7 +1624,7 @@ var WoodT3Wis = {
     "Name" : "Drain Skin",
     "Description" : "    Cost: 10mp\n" + "    Mind eating fungus sprouts from the target, the spores expand the users mind.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1690,10 +1690,10 @@ var Meditate = {  //Giant Rat
             }
             user.BattleStats.HPCur+=amount;
             if(gameState == "battle") {drawBattle();}
-            dialogObj.write(user.Name + " Healed " + amount + " HP!")
+            dialogObj.write(user.Name + " Healed " + amount + " HP!");
         }
         else {
-            dialogObj.write("Not Enough MP!")
+            dialogObj.write("Not Enough MP!");
         }    
     },
     getValue(user, target){
@@ -1723,8 +1723,9 @@ var Meditate = {  //Giant Rat
 
 var AirBolt = {  //Carn Canary
     "Name" : "Air Bolt",
+    "Description" : "    Cost: 5mp\n" + "    The user conjures a powerful gust of wind.",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }
@@ -1740,7 +1741,7 @@ var AirBolt = {  //Carn Canary
             user.addMagicCon(1, 0, 0, 1, 0, 0); 
         }
         else{
-            dialogObj.write("Not Enough MP!")
+            dialogObj.write("Not Enough MP!");
         }
     },
     getValue(user, target){
@@ -1767,7 +1768,7 @@ var AirBolt = {  //Carn Canary
 var VoidBolt = {  //Giant Cent
     "Name" : "Void Bolt",
     Cast(user, target){
-        if (Object.keys(target) == 0){
+        if (typeof(target) != "object"){
             dialogObj.write("No Valid Target!");
             return;
         }

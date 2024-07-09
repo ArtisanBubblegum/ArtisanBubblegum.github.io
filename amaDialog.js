@@ -2,18 +2,18 @@ document.getElementById("DialogCanvas").textContent = "";
     
 dialogObj = {
     continue : false,
-    timeout : 100,
+    timeout : 50,
     letterTimeout: 100,
-    timeoutMulti : -1,
+    timeoutMulti : 1,
     letterTimeoutMulti: -1,
     activeTimeouts : [],
 
     async write(text){
         if (text == ""){
             //document.getElementById("DialogCanvas").textContent = "...";
-            //this.timeoutMulti += 1;
+            this.timeoutMulti += 1;
             waitingVar = await this.waitToClear();
-            this.timeoutMulti = -1;
+            this.timeoutMulti = 1;
         }
         else {
             // if (document.getElementById("DialogCanvas").textContent == "..."){
@@ -21,6 +21,7 @@ dialogObj = {
             // }
             this.timeoutMulti += 1;
             waitingVar = await this.waitToWrite(text);
+            this.timeoutMulti -= 1;
             
         }
         return true;

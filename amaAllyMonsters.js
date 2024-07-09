@@ -1,8 +1,9 @@
-
+var PartyList = []
 
 var Ally1 = {
     "Name" : "George Markus",
     "Genus" : "Giant Rat",
+    "GenusObj" : {},
     "Family" : "Beast",
     "Age" : 1,
     "Level" : 1,
@@ -45,10 +46,12 @@ var Ally1 = {
     "Tactic" : mindlessMagical,
     "Action" : "defend",
     "Target" : {},
+    "isWild" : false,
 
     populate(target){
-        this.Name = "George Markus II";
+        //this.Name = "George Markus II";
         this.Genus = target.Genus;
+        this.GenusObj = target;
         this.Family = target.Family;
         this.Age = 1;
         this.Level = 1;
@@ -97,14 +100,13 @@ var Ally1 = {
     },
     reset(){
         var PreviousAge = this.Age;
-        this.populate(Giant_Rat);
+        this.populate(this.GenusObj);
         this.Age = PreviousAge + 1;
-        MapObj.Name = ranchMap.Name;
-        MapObj.Map = ranchMap.Map;
-        MapObj.MapLevel = 0;
-        MapObj.PlayerPosition = ranchMap.PlayerPosition;
-        MapObj.PlayerPosition[0] = 3;
-        MapObj.PlayerPosition[1] = 3;
+    },
+    die(){
+        this.Name = "R.I.P."
+        this.BattleStats.HPCur = -100;
+        this.BattleStats.MPCur = -100;
     },
     levelUP(){
         dialogObj.write("-");
@@ -309,24 +311,23 @@ var Ally1 = {
     }
 }
 
-function drawStatus() {
-    document.getElementById("DialogCanvas").textContent = getStatusText();
+function drawStatus(mon) {
+    document.getElementById("DialogCanvas").textContent = getStatusText(mon);
 }
 
-function getStatusText() {
+function getStatusText(mon) {
     let text = "";
-    text += Ally1.Name + ": (" + Ally1.Genus+ ", " + Ally1.Family + ")\n";
-    text += "Level: " + Ally1.Level + " (" + Math.floor(Ally1.EXP) + "/" + Ally1.expToLevel + ")\n";
-    //text += "EXP: " + Ally1.EXP + " / " + Ally1.expToLevel + "\n";
-    text += "HP: " + Ally1.BattleStats.HPCur + " / " + Ally1.BattleStats.HPMax +"\n";
-    text += "MP:" + Ally1.BattleStats.MPCur + " / " + Ally1.BattleStats.MPMax + "\n";
-    text += "Attack: " + Ally1.BattleStats.Attack + "\n";
-    text += "Defence: " + Ally1.BattleStats.Defence + "\n";
-    text += "Wisdom: " + Ally1.BattleStats.Wisdom + "\n";
-    text += "Speed: " + Ally1.BattleStats.Speed + "\n";
-    text += "Luck: " + Ally1.BattleStats.Luck + "\n";
-    text += "Magic Contamination: Fi" + Ally1.MagicCon.FireCon + "/ Ea" + Ally1.MagicCon.EarthCon + "/ Me" + Ally1.MagicCon.MetalCon + "/ Wa" + Ally1.MagicCon.WaterCon + "/ Wo" + Ally1.MagicCon.WoodCon + "/ Vo" + Ally1.MagicCon.VoidCon + "\n";
-    text += "Generation: " + Ally1.Age + "\n";
+    text += mon.Name + ": (" + mon.Genus+ ", " + mon.Family + ")\n";
+    text += "Level: " + mon.Level + " (" + Math.floor(mon.EXP) + "/" + mon.expToLevel + ")\n";
+    text += "HP: " + mon.BattleStats.HPCur + " / " + mon.BattleStats.HPMax +"\n";
+    text += "MP:" + mon.BattleStats.MPCur + " / " + mon.BattleStats.MPMax + "\n";
+    text += "Attack: " + mon.BattleStats.Attack + "\n";
+    text += "Defence: " + mon.BattleStats.Defence + "\n";
+    text += "Wisdom: " + mon.BattleStats.Wisdom + "\n";
+    text += "Speed: " + mon.BattleStats.Speed + "\n";
+    text += "Luck: " + mon.BattleStats.Luck + "\n";
+    text += "Magic Contamination: Fi" + mon.MagicCon.FireCon + "/ Ea" + mon.MagicCon.EarthCon + "/ Me" + mon.MagicCon.MetalCon + "/ Wa" + mon.MagicCon.WaterCon + "/ Wo" + mon.MagicCon.WoodCon + "/ Vo" + mon.MagicCon.VoidCon + "\n";
+    text += "Generation: " + mon.Age + "\n";
     return text;
 }
 
@@ -334,3 +335,21 @@ function getStatusText() {
 //     //document.getElementById("DialogCanvas").textContent = "";
 // }
 //drawStatus();
+
+function LoadParty(){
+    PartyList.push({...Ally1});
+    PartyList[0].BattleStats = {...Ally1.BattleStats};
+    PartyList[0].GrowthStats = {...Ally1.GrowthStats};
+    PartyList[0].MagicCon = {...Ally1.MagicCon};
+    PartyList[0].Name = "George Markus III";
+    PartyList[0].Target = "";
+    PartyList[0].populate(Giant_Rat);
+
+    PartyList.push({...Ally1});
+    PartyList[1].BattleStats = {...Ally1.BattleStats};
+    PartyList[1].GrowthStats = {...Ally1.GrowthStats};
+    PartyList[1].MagicCon = {...Ally1.MagicCon};
+    PartyList[1].Name = "Mortus the Quick";
+    PartyList[1].Target = "";
+    PartyList[1].populate(Carnivorous_Canary);
+}

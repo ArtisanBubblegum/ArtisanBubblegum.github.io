@@ -251,8 +251,10 @@ let MapObj = {
                 case 0:
                     this.PlayerPosition[0] += dir[0];
                     this.PlayerPosition[1] += dir[1];
-                    if (Ally1.BattleStats.MPCur < Math.floor(Math.random()*(Ally1.BattleStats.MPMax+1))){
-                        Ally1.BattleStats.MPCur += 1;
+                    for (i = 0; i < PartyList.length; i++){
+                        if (PartyList[i].BattleStats.MPCur < Math.floor(Math.random()*(PartyList[i].BattleStats.MPMax+1))){
+                            PartyList[i].BattleStats.MPCur += 1;
+                        }    
                     }
                     console.log("Moved to ", this.PlayerPosition);
                     //undrawStatus();
@@ -266,10 +268,17 @@ let MapObj = {
                     newEnemy();
                     break;
                 case "H":
-                    Ally1.BattleStats.HPCur = Ally1.BattleStats.HPMax;
-                    Ally1.BattleStats.MPCur = Ally1.BattleStats.MPMax;
-                    //undrawStatus();
-                    dialogObj.write(Ally1.Name + " is fully healed!");
+                    for (i = 0; i < PartyList.length; i++){
+                        if (PartyList[i].BattleStats.HPCur > 0){
+                            PartyList[i].BattleStats.HPCur = PartyList[i].BattleStats.HPMax;
+                            PartyList[i].BattleStats.MPCur = PartyList[i].BattleStats.MPMax;
+                            dialogObj.write(PartyList[i].Name + " is fully healed!");
+                        }  
+                        else {
+                            PartyList[i].reset();
+                            dialogObj.write(PartyList[i].Name + " is reborn!");
+                        }  
+                    }
                     break;
                 case "D1" :
                     this.Name = "dungeon";
