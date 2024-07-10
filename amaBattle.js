@@ -25,7 +25,8 @@ let fleeBonus = 0;
 let fleeText = "";
 
 function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
-    AllyList = PartyList;
+    AllyList = [...PartyList];
+    AllyList.splice(0,0,Player);
     menuList = battleList;
     selection = 0;
     selectingSpell = false;
@@ -110,8 +111,13 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
 
         AllyCell.textContent = "A"+i;
 
+        if (AllyList[i] == Player){
+            AllyList[i].Action = "skip";
+        }
+        else {
+           AllyList[i].Action = "fight"; 
+        }
         AllyList[i].Target = "noValidTarget";
-        AllyList[i].Action = "fight";
         AllyList[i].BattleStats.TurnValue = 0;
         monstersList.push(AllyList[i]);
         console.log(AllyList[i].Name + " populated as Ally.");
@@ -122,12 +128,21 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     changeState("battle");
     drawBattle();
     
+    if (Player.BattleStats.HPCur <= 0){
+        OrderMonstersBySpeed();
+        BattleTurns();
+    }
+
     return;
 }
 
 function BattleCommands(input){ //Manages Menues and gates when Turn's are Exectuted by returning True
     
     fleeText = "";
+
+    if (Player.BattleStats.HPCur <= 0){
+        return true;
+    }
 
     switch(input[1]){
         case 1:
@@ -173,6 +188,7 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
             else {
                 switch (menuList[selection]){
                     case "Fight":
+                        Player.Action = "fight";
                         return true;
                     case "Defend":
                         dialogObj.write("");
@@ -187,7 +203,7 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
                         break;
                     case AllyList[0]:
                     case AllyList[1]:
-                        alert("I was Wrong")
+                        alert("Error #0hn0, tell dev amaBattle.")
                         menuList = cmdList;
                         selectingAlly = false;
                         selection = 0;
@@ -284,10 +300,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                 monstersList[index].BattleStats.TurnValue -= targetTurnValue;
                 console.log(monstersList[index].Name + " takes a turn.")
 
-                //Is this an Ally Monsters Turn?
-                if (monstersList[index] === AllyList[0] ||
-                    monstersList[index] === AllyList[1]
-                ){
+                if (monstersList[index] === Player && Player.BattleStats.HPCur > 0){
                     allyAttacked = true;
                 }
 
@@ -362,7 +375,12 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                 }
 
                 //reset variables for active monster
-                monstersList[index].Action = "fight";
+                if (monstersList[index] == Player) {
+                    monstersList[index].Action = "skip";
+                }
+                else {
+                    monstersList[index].Action = "fight";
+                }
                 monstersList[index].Target = "noValidTarget";
                 if (monstersList[index].Action != "flee"){ //Note: "flee" action is only when successful. When Failing to Flee, "skip" is the populated action.
                     checkAlive();
@@ -404,17 +422,23 @@ function checkAlive(){
 
     if (AllyAliveCount > 0 && EnemyAliveCount <= 0){
         //Win
-        dialogObj.write("-");
-        for (i = 0; i < PartyList.length; i++){
-            if (AllyList[i].BattleStats.HPCur > 0){
-                dialogObj.write(AllyList[i].Name + " has Survived the Battle!");
-            }
-        }
         for (x = 0; x < AllyList.length; x++){
             if (AllyList[x].BattleStats.HPCur > 0){
+                dialogObj.write("-");
+                dialogObj.write(AllyList[x].Name + " has Survived the Battle!");
+
+                let amount = 0;
                 for (i = 0; i < EnemyList.length; i++){
-                    AllyList[x].EXP += ((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount;
+                    if (AllyList[x] == Player){
+                        amount += (((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount)/10;
+                        AllyList[x].EXP += amount;
+                    }
+                    else {
+                        amount += (((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount);
+                        AllyList[x].EXP += amount;
+                    }
                 }
+                dialogObj.write("+"+ Math.floor(amount) + " exp!");
             }
             while (AllyList[x].EXP >= AllyList[x].expToLevel){
                 console.log("Calling Level up in checkAlive");
@@ -430,11 +454,12 @@ function checkAlive(){
         dialogObj.write("-");
         //dialogObj.write(AllyList[0].Name + " dies in battle.");
         //dialogObj.write(AllyList[1].Name + " dies in battle.");
-        dialogObj.write("You manage to escape.");
-        AllyList[0].reset();
-        AllyList[1].reset();
-        AllyList[0].Target = "noValidTarget";
-        AllyList[1].Target = "noValidTarget";
+        dialogObj.write("You and your party are Reborn.");
+
+        for (i = 0; i < AllyList.length; i++){
+            AllyList[i].reset();
+            AllyList[i].Target = "noValidTarget";
+        }
 
         MapObj.Name = ranchMap.Name;
         MapObj.Map = ranchMap.Map;

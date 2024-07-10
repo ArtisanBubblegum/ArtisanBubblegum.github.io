@@ -1,37 +1,35 @@
-var PartyList = []
-
-var Ally1 = {
-    "Name" : "George Markus",
-    "Genus" : "Giant Rat",
+var PlayerBase = {
+    "Name" : "Artisan Skeleton",
+    "Genus" : "Skeleton",
     "GenusObj" : {},
-    "Family" : "Beast",
+    "Family" : "Humanoid",
     "Age" : 1,
     "Level" : 1,
     "EXP" : 0,
-    "expToLevel" : 20,
+    "expToLevel" : 100,
     "BattleStats" : {
-        "HPMax" : 20,
-        "HPCur" : 20,
-        "MPMax" : 100,  //Water
-        "MPCur" : 100,
-        "Attack" : 16,  //Fire
-        "Defence" : 5,  //Earth
+        "HPMax" : 10,
+        "HPCur" : 10,
+        "MPMax" : 10,
+        "MPCur" : 10,
+        "Attack" : 10,
+        "Defence" : 10,
         "Defending": false,
-        "Wisdom" : 10,  //Void
-        "Speed" : 5,  //Air
+        "Wisdom" : 10,
+        "Speed" : 10,
         "TurnValue" : 0,
-        "Luck" : 1,
+        "Luck" : 10,
         "Aflictions" : []
     },
     "GrowthStats" : {
-        "HP" : 2, //+1
-        "MP" : 20, //+1
-        "Attack" : 3, //+2
-        "Defence" : 2, //+1
-        "Wisdom" : 2, //+1
+        "HP" : 1, //0
+        "MP" : 1, //0
+        "Attack" : 1, //0
+        "Defence" : 1, //0
+        "Wisdom" : 1, //0
         "Speed" : 1, //0
-        "Luck" : 0, //-1
-        "GrowthRate" : 1.25 //1+(stat_value/10)?
+        "Luck" : 1, //0
+        "GrowthRate" : 1.5 //1+(stat_value/10)?
     },
     "MagicCon" : {
         "FireCon" : 0,
@@ -41,11 +39,60 @@ var Ally1 = {
         "WoodCon" : 0,
         "VoidCon" : 0
     },
-    "Spells" : [Meditate, EarthBolt],
+    "Spells" : [],
     "LearnableSpells" : [],
-    "Tactic" : mindlessMagical,
-    "Action" : "defend",
-    "Target" : {},
+    "Tactic" : aggressivePhysical,
+    "Action" : "fight",
+    "Target" : "noValidTarget",
+    "isWild" : false
+}
+
+var Player = {
+    "Name" : "Artisan Skeleton",
+    "Genus" : "Skeleton",
+    "GenusObj" : {},
+    "Family" : "Humanoid",
+    "Age" : 1,
+    "Level" : 1,
+    "EXP" : 0,
+    "expToLevel" : 100,
+    "BattleStats" : {
+        "HPMax" : 10,
+        "HPCur" : 10,
+        "MPMax" : 10,
+        "MPCur" : 10,
+        "Attack" : 10,
+        "Defence" : 10,
+        "Defending": false,
+        "Wisdom" : 10,
+        "Speed" : 10,
+        "TurnValue" : 0,
+        "Luck" : 10,
+        "Aflictions" : []
+    },
+    "GrowthStats" : {
+        "HP" : 1, //0
+        "MP" : 1, //0
+        "Attack" : 1, //0
+        "Defence" : 1, //0
+        "Wisdom" : 1, //0
+        "Speed" : 1, //0
+        "Luck" : 1, //0
+        "GrowthRate" : 1.5 //1+(stat_value/10)?
+    },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
+    },
+    "Spells" : [],
+    "LearnableSpells" : [],
+    "Tactic" : aggressivePhysical,
+    "Action" : "skip",
+    "Target" : "noValidTarget",
     "isWild" : false,
 
     populate(target){
@@ -109,10 +156,8 @@ var Ally1 = {
         this.BattleStats.MPCur = -100;
     },
     levelUP(){
-        //dialogObj.write("-");
+        dialogObj.write("-");
         dialogObj.write(this.Name + " Gained a Level!");
-        this.Level += 1;
-        dialogObj.write("( Level: " + AllyList[x].Level + " )");
         //alert (this.Name + " Gained a Level!");
         this.BattleStats.HPMax += this.GrowthStats.HP;
         this.BattleStats.HPCur += this.GrowthStats.HP;
@@ -132,9 +177,9 @@ var Ally1 = {
                 this.LearnableSpells.splice(learnableSpellIndex, 1);
             }
         }
+        this.Level += 1;
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
         this.expToLevel = Math.floor(this.expToLevel);
-        //dialogObj.write("-");
     },
     addMagicCon (fireAdd, earthAdd, metalAdd, waterAdd, woodAdd, voidAdd){
         let startingFire = this.MagicCon.FireCon;
@@ -313,45 +358,6 @@ var Ally1 = {
     }
 }
 
-function drawStatus(mon) {
-    document.getElementById("DialogCanvas").textContent = getStatusText(mon);
-}
-
-function getStatusText(mon) {
-    let text = "";
-    text += mon.Name + ": (" + mon.Genus+ ", " + mon.Family + ")\n";
-    text += "Level: " + mon.Level + " (" + Math.floor(mon.EXP) + "/" + mon.expToLevel + ")\n";
-    text += "HP: " + mon.BattleStats.HPCur + " / " + mon.BattleStats.HPMax +"\n";
-    text += "MP:" + mon.BattleStats.MPCur + " / " + mon.BattleStats.MPMax + "\n";
-    text += "Attack: " + mon.BattleStats.Attack + "\n";
-    text += "Defence: " + mon.BattleStats.Defence + "\n";
-    text += "Wisdom: " + mon.BattleStats.Wisdom + "\n";
-    text += "Speed: " + mon.BattleStats.Speed + "\n";
-    text += "Luck: " + mon.BattleStats.Luck + "\n";
-    text += "Magic Contamination: Fi" + mon.MagicCon.FireCon + "/ Ea" + mon.MagicCon.EarthCon + "/ Me" + mon.MagicCon.MetalCon + "/ Wa" + mon.MagicCon.WaterCon + "/ Wo" + mon.MagicCon.WoodCon + "/ Vo" + mon.MagicCon.VoidCon + "\n";
-    text += "Generation: " + mon.Age + "\n";
-    return text;
-}
-
-// function undrawStatus() {
-//     //document.getElementById("DialogCanvas").textContent = "";
-// }
-//drawStatus();
-
-function LoadParty(){
-    PartyList.push({...Ally1});
-    PartyList[0].BattleStats = {...Ally1.BattleStats};
-    PartyList[0].GrowthStats = {...Ally1.GrowthStats};
-    PartyList[0].MagicCon = {...Ally1.MagicCon};
-    PartyList[0].Name = "George Markus III";
-    PartyList[0].Target = "";
-    PartyList[0].populate(Giant_Rat);
-
-    PartyList.push({...Ally1});
-    PartyList[1].BattleStats = {...Ally1.BattleStats};
-    PartyList[1].GrowthStats = {...Ally1.GrowthStats};
-    PartyList[1].MagicCon = {...Ally1.MagicCon};
-    PartyList[1].Name = "Mortus the Quick";
-    PartyList[1].Target = "";
-    PartyList[1].populate(Carnivorous_Canary);
+function LoadPlayer(){
+    Player.populate(PlayerBase);
 }

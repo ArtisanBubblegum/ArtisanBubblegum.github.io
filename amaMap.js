@@ -268,6 +268,16 @@ let MapObj = {
                     newEnemy();
                     break;
                 case "H":
+                    if (Player.BattleStats.HPCur > 0){
+                        Player.BattleStats.HPCur = Player.BattleStats.HPMax;
+                        Player.BattleStats.MPCur = Player.BattleStats.MPMax;
+                        dialogObj.write(Player.Name + " is fully healed!");
+                    }  
+                    else {
+                        Player.reset();
+                        dialogObj.write(Player.Name + " is reborn!");
+                    }
+
                     for (i = 0; i < PartyList.length; i++){
                         if (PartyList[i].BattleStats.HPCur > 0){
                             PartyList[i].BattleStats.HPCur = PartyList[i].BattleStats.HPMax;
@@ -283,14 +293,14 @@ let MapObj = {
                 case "D1" :
                     this.Name = "dungeon";
                     this.MapLevel += 1;
-                    this.mapMaker(30,30);
-                    this.spawnMonster(100);
+                    this.mapMaker(13,13);
+                    this.spawnMonster(20);
                     break
                 case "D2" :
                     this.MapLevel -= 1;
-                    this.mapMaker(30,30);
+                    this.mapMaker(13,13);
                     this.PlayerPosition[1] = 2;
-                    this.spawnMonster(100);
+                    this.spawnMonster(20);
                     break;
                 default:
                     console.log("Stopped at ", this.PlayerPosition);

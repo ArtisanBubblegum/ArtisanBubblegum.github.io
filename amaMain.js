@@ -4,6 +4,7 @@ gameState = "map" //Map, Battle, Pause
 
 function LoadGame(){
     MapObj.drawMap();
+    LoadPlayer();
     LoadParty();
     LoadPause();
 }

@@ -5,7 +5,12 @@ let partyIndex = 0;
 let selectingSpell = false;
 
 function LoadPause(){
-    pauseList = ["Resume", PartyList[0], PartyList[1], "Restart"];
+    pauseList = ["Resume"];
+    pauseList.push(Player);
+    for (i = 0; i < PartyList.length; i++){
+        pauseList.push(PartyList[i]);
+    }
+    pauseList.push("Restart");
     menuList = pauseList;
 }
 
@@ -46,7 +51,12 @@ function drawPauseMenu(){
     //Write spell descriptions in "dialog box"
     if (menuList[selection] == MonStatusSpell){
         dialogObj.write("");
-        dialogObj.write(getStatusText(PartyList[partyIndex]));
+        if (partyIndex >= 0){
+            dialogObj.write(getStatusText(PartyList[partyIndex]));
+        }
+        else {
+            dialogObj.write(getStatusText(Player));
+        }
     }
     else if (selectingSpell){
         dialogObj.write("");
@@ -78,13 +88,25 @@ function PauseMenuInputHandler(input){
         //Select Menu Item!
         case "A":
             if (selectingSpell){
-                menuList[selection].Cast(PartyList[partyIndex], PartyList[partyIndex].Target);
+                if (partyIndex >= 0){
+                    menuList[selection].Cast(PartyList[partyIndex], PartyList[partyIndex].Target);
+                }
+                else {
+                    menList[selection].Cast(Player,Player.Target);
+                }
                 break;
             }
             else {
                 switch (menuList[selection]){
                     case "Resume": //Closes Pause Menu and returns to game.
                         changeState("map");
+                        break;
+                    case Player:
+                        menuList = [...Player.Spells];
+                        menuList.splice(0,0,MonStatusSpell);
+                        selectingSpell = true;
+                        partyIndex = -1;
+                        selection = 0;
                         break;
                     case PartyList[0]: //The First Monster in your Party, this item opens the monster Status and Spells Menue
                         menuList = [...PartyList[0].Spells];
@@ -117,7 +139,7 @@ function PauseMenuInputHandler(input){
             if (selectingSpell == true){ //If we're in the spell menu, go back to the pause menu
                 selectingSpell = false;
                 menuList = pauseList;
-                selection = partyIndex+1;
+                selection = partyIndex+2;
                 drawPauseMenu();
             }
             else if (menuList == pauseList){ // if we're in the pause menu, return to the game
