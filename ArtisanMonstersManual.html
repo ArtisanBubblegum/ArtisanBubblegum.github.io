@@ -36,22 +36,27 @@
     </p>
     <h5 style="font-size: 150%;">Combat</h5>
     <p>
-        <b>Fight</b>, will allow your monster to decide what to do on the fly.<br>
-        This is generally preferable, as they can react to what other monsters do. Healing if they are suddenly hit with a heavy attack, for example.<br>
-        George Markus II has a low speed stat, so other monster will typically go first and sometimes get extra turns before your command is executed.<br>
+        <b>You</b> take the role of a young skeleton, monster wrangler.<br>
+        And will inevitably find yourself in the middle of combat, with a variety of options:<br>
+        <br>
+        <b>Fight</b>, will allow your monster to decide what to do for themselves.<br>
+        Each monster has their own set of tactics they will follow when not given orders, and they don't have to make this choice until it's their turn.<br>
+        Additionally, "Fight" let's you react based on instict rather tactic.<br>
         <br>
         <b>Commands</b>, will open the Commands Menu allowing you to give your monster orders. The current commands are "Attack", "Defend", and "Spells". each are detailed below.<br>
-        Note: for now your monster is perfectly loyal, I plan to eventually make this not the case.<br>
-        <b>Flee</b>, will allow you <i>and your monster</i> to try to run from a battle you believe to be a lost cause.<br>
+        When selecting Commands, you'll have to select who you're giving the command too, then what command to give, and who they should target.<br>
+        Note: Giving a Command to one of your monsters will use up your turn, so it is generally preferable to select "fight" or give yourself "commands".<br>
+        <br>
+        <b>Flee</b>, will allow you <i>and your monsters</i> to try to run from a battle you believe to be a lost cause.<br>
         Escape Chance is calculated below:<br>
         
         <h6 style="font-size: 100%;">Escape Chance = (AllyMonster.Speed)/(EnemyMonster.Speed * 2) + (0.1 * Failed Attempts this Battle)</h6>
         
         this means that against a faster monster, you'll need to identify a losing battle sooner to have a chance at escaping.<br>
         <br>
-        <b>Attack</b>, will order your monster to try to attack their opponent physically.<br>
-        <b>Defend</b>, will order your monster to take a defensive stance, giving them a defensive boost for 1 turn.<br>
-        <b>Spells</b>, will open the Spells Menu, letting you order your monster to cast a specific spell.<br>
+        <b>Attack</b>, will order you or your monster to try to attack a target opponent physically.<br>
+        <b>Defend</b>, will order you or your monster to take a defensive stance, giving them a defensive boost for 1 turn.<br>
+        <b>Spells</b>, will open your or your monster's Spells Menu, letting you order you or your monster to cast a specific spell. (Spell Damage Calculation in Magic Section.)<br>
         <br>
         Normal Attacks deal a random amount of damage up to the maximum calculated below:<br>
 
@@ -67,8 +72,8 @@
     <p>
         Turns are determined by Speed.<br>
         Faster monsters will sometimes get to act multiple times before their oponents get an opportunity to act.<br>
-        Currently an arbitrary timeline of 100 points is set. Then each monster takes turns progressing down this time line at their speed value.<br>
-        When a Monster reaches or passes 100 points, it retains any excess points as it's sent back to the beginning of the timeline, and get's to take an action.<br>
+        Currently an arbitrary timeline of 100 points is set. Then you and each monster takes turns progressing down this time line at their speed value.<br>
+        When you or a Monster reaches or passes 100 points, it retains any excess points as it's sent back to the beginning of the timeline, and get's to take an action.<br>
         <br>
         For example: Monster A has 25 Speed, and Monster B has 20 Speed.<br>
         their turn order will be: A, B, A, B, A, B, A, A, B, repeat.<br>
@@ -84,15 +89,13 @@
                 <td>Turn: </td> <td></td> <td></td> <td></td> <td>A</td> <td>B</td> <td></td> <td></td> <td>A</td> <td></td> <td>B</td> <td></td> <td>A</td> <td></td> <td></td> <td>B</td> <td>A</td> <td></td> <td></td> <td></td> <td>A, B</td>
             </tr>
         </table>
-        You will have an opportunity to issue your monster new orders each time it takes an action.<br>
+        You will have an opportunity to issue command at the start of battle, and only after each of YOUR turns.<br>
+        This means if you have a monster with Higher Speed than you, they will perform an issued command only on the first turn after you issue it, afterwhich they act on their innate tactics.<br>
         
 
     </p>
     <h5 style="font-size: 150%;">Magic</h5>
     <p>
-        Magic has recieved a substatial buff with the update to Effective Wisdom based on MP. Dealing Double Damage if the user has Full MP.<br>
-        This will be balanced out later, when I introduce the 'Magic Contamination' system.<br>
-        <br>
         Natural Magic is derived from the Five Pillars (Fire, Earth, Metal, Water, and Wood).<br>
         <b>Fire</b> is the element of consumption and death.<br>
         <b>Earth</b> is the element of stability and growth.<br>

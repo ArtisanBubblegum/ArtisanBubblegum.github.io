@@ -6,6 +6,8 @@ var Ally1 = {
     "GenusObj" : {},
     "Family" : "Beast",
     "Age" : 1,
+    "LifeSpan" : 1,
+    "DeathChance" : 0.5,
     "Level" : 1,
     "EXP" : 0,
     "expToLevel" : 20,
@@ -54,6 +56,8 @@ var Ally1 = {
         this.GenusObj = target;
         this.Family = target.Family;
         this.Age = 1;
+        this.LifeSpan = target.LifeSpan;
+        this.DeathChance = target.DeathChance;
         this.Level = 1;
         this.EXP = 0;
         this.expToLevel = target.expToLevel;
@@ -99,14 +103,28 @@ var Ally1 = {
         this.Tactic = target.Tactic;
     },
     reset(){
-        var PreviousAge = this.Age;
         this.populate(this.GenusObj);
-        this.Age = PreviousAge + 1;
+        this.Age = 1;
+    },
+    addAge(x){
+        let previousAge = this.Age;
+        this.Age += x;
+        if (this.Age > this.LifeSpan
+            && Math.floor(Math.random()) <= this.DeathChance)
+        {
+            this.die();
+            dialogObj.write("+++ " + this.Name + " has died due to old age. +++")
+        }
+        else if (previousAge < this.LifeSpan*0.9
+            && this.Age >= this.LifeSpan*0.9)
+        {
+            dialogObj.write("++ " + this.Name + " has grown old. ++");
+        }
     },
     die(){
-        this.Name = "R.I.P."
-        this.BattleStats.HPCur = -100;
-        this.BattleStats.MPCur = -100;
+        this.Genus = "R.I.P."
+        this.BattleStats.HPCur = -1;
+        this.BattleStats.MPCur = -1;
     },
     levelUP(){
         //dialogObj.write("-");
@@ -320,6 +338,7 @@ function drawStatus(mon) {
 function getStatusText(mon) {
     let text = "";
     text += mon.Name + ": (" + mon.Genus+ ", " + mon.Family + ")\n";
+    text += "Age: " + mon.Age + "\n";
     text += "Level: " + mon.Level + " (" + Math.floor(mon.EXP) + "/" + mon.expToLevel + ")\n";
     text += "HP: " + mon.BattleStats.HPCur + " / " + mon.BattleStats.HPMax +"\n";
     text += "MP:" + mon.BattleStats.MPCur + " / " + mon.BattleStats.MPMax + "\n";
@@ -329,7 +348,6 @@ function getStatusText(mon) {
     text += "Speed: " + mon.BattleStats.Speed + "\n";
     text += "Luck: " + mon.BattleStats.Luck + "\n";
     text += "Magic Contamination: Fi" + mon.MagicCon.FireCon + "/ Ea" + mon.MagicCon.EarthCon + "/ Me" + mon.MagicCon.MetalCon + "/ Wa" + mon.MagicCon.WaterCon + "/ Wo" + mon.MagicCon.WoodCon + "/ Vo" + mon.MagicCon.VoidCon + "\n";
-    text += "Generation: " + mon.Age + "\n";
     return text;
 }
 

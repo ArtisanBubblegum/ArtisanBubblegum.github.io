@@ -410,6 +410,16 @@ function checkAlive(){
     }
     for (i = 0; i < AllyList.length; i++){
         if (AllyList[i].BattleStats.HPCur > 0){
+            //check for Old Age
+            if (EnemyAliveCount > 0){
+                AllyList[i].addAge(0);   
+            }
+            else {
+                AllyList[i].addAge(1);
+            }
+        }
+        //check for HP again after Old Age
+        if (AllyList[i].BattleStats.HPCur > 0){
             list.push(AllyList[i]);
             AllyAliveCount += 1;
         }
@@ -426,7 +436,7 @@ function checkAlive(){
             if (AllyList[x].BattleStats.HPCur > 0){
                 dialogObj.write("-");
                 dialogObj.write(AllyList[x].Name + " has Survived the Battle!");
-
+                
                 let amount = 0;
                 for (i = 0; i < EnemyList.length; i++){
                     if (AllyList[x] == Player){
@@ -439,7 +449,7 @@ function checkAlive(){
                     }
                 }
                 dialogObj.write("+"+ Math.floor(amount) + " exp!");
-            }
+        }
             while (AllyList[x].EXP >= AllyList[x].expToLevel){
                 console.log("Calling Level up in checkAlive");
                 AllyList[x].levelUP();

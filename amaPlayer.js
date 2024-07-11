@@ -150,6 +150,9 @@ var Player = {
         this.populate(this.GenusObj);
         this.Age = PreviousAge + 1;
     },
+    addAge(x){
+        this.Age += x;
+    },
     die(){
         this.Name = "R.I.P."
         this.BattleStats.HPCur = -100;

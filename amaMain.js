@@ -1,21 +1,49 @@
 // Main Variables
-gameState = "map" //Map, Battle, Pause
-//noValidTarget = {};
+gameState = "name" //Map, Battle, Pause, Name
+var previousState = "map";
 
 function LoadGame(){
     MapObj.drawMap();
     LoadPlayer();
     LoadParty();
     LoadPause();
+    loadNameBoard("Your Name: ", Player);
+    drawNameBoard("", "Your Name: ");
 }
 LoadGame();
 
-//Common Variables
-// var menuList = [];
-// var selection = 0;
-// var selectingSpell = false;
-// var pauseList = ["Resume", PartyList[0], PartyList[1], "Restart"]
-// var partyIndex = 0;
+addEventListener("keydown", (event) => {keyboardInput(event)});
+
+function keyboardInput(keyName){
+    keyName.preventDefault();
+    //alert(keyName.code);
+    switch (keyName.code){
+        case "ArrowUp":
+            MainLoop([0,-1]);
+            break;
+        case "ArrowDown":
+            MainLoop([0,1]);
+            break;
+        case "ArrowLeft":
+            MainLoop([-1,0]);
+            break;
+        case "ArrowRight":
+            MainLoop([1,0]);
+            break;
+        case "Enter":
+            MainLoop([0,'A']);
+            break;
+        case "Space":
+            MainLoop([0,'B']);
+            break;
+        case "ShiftLeft":
+        case "ShiftRight":
+            if (gameState="name"){
+                MainLoop([0, 'Shift']);
+            }
+            break;
+    }
+}
 
 function MainLoop(input){
     switch(gameState){
@@ -27,6 +55,9 @@ function MainLoop(input){
             break;
         case "pause":
             PauseLoop(input);
+            break;
+        case "name":
+            NameLoop(input);
             break;
     }
 }
@@ -55,6 +86,13 @@ function PauseLoop(input){
     }
 }
 
+function NameLoop(input){
+    if (nameInputeHandler(checkInput(input),nameBoardHeader)){
+        ApplyNewName(nameTarget);
+        changeState(previousState);
+    }
+}
+
 function checkInput(input){
     if (typeof input == "string"){
         alert("Invalid Input Type: String.")
@@ -79,6 +117,7 @@ function checkInput(input){
 }
 
 function changeState(state){
+    previousState = gameState;
     gameState = state;
     switch (gameState){
         case "map":

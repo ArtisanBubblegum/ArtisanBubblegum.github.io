@@ -256,6 +256,14 @@ let MapObj = {
                             PartyList[i].BattleStats.MPCur += 1;
                         }    
                     }
+                    if (Math.floor(Math.random() * 10)+1 == 1){
+                        for (i = 0; i < PartyList.length; i++){
+                            if (PartyList[i].BattleStats.HPCur > 0){
+                                PartyList[i].addAge(1);
+                            }
+                        }
+                        Player.addAge(1);
+                    }
                     console.log("Moved to ", this.PlayerPosition);
                     //undrawStatus();
                     break;
