@@ -60,7 +60,7 @@ var Ally1 = {
         this.DeathChance = target.DeathChance;
         this.Level = 1;
         this.EXP = 0;
-        this.expToLevel = target.expToLevel;
+        this.expToLevel = Math.floor(target.expToLevel * target.GrowthStats.GrowthRate);
         this.BattleStats.HPMax = target.BattleStats.HPMax;
         this.BattleStats.HPCur = target.BattleStats.HPCur;
         this.BattleStats.MPMax = target.BattleStats.MPMax;
@@ -247,11 +247,12 @@ var Ally1 = {
             this.MagicCon.MetalCon -= 1;
             this.MagicCon.WaterCon -= 1;
             this.MagicCon.WoodCon -= 1;
+
             this.MagicCon.VoidCon += 1;
         }
         
         if (this.MagicCon.FireCon >= 100){
-            alert(this.Name + " combusts into acrane fire, dieing of Fire Contamination.");
+            dialogObj.write("+++ " + this.Name + " combusts into acrane fire, dieing of Fire Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -260,11 +261,11 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.Fire >= 50 && startingFire < 50){
-            alert("A visable steam starts to billow out from " + this.Name + ".")
+            dialogObj.write("++ A visable steam starts to billow out from " + this.Name + ". ++")
         }
         
         if (this.MagicCon.EarthCon >= 100){
-            alert(this.Name + " crumbles into arcane dust, dieing of Earth Contamination.");
+            dialogObj.write("+++ " + this.Name + " crumbles into arcane dust, dieing of Earth Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -273,11 +274,11 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.EarthCon >= 50 && startingEarth < 50){
-            alert(this.Name + "'s body starts to crack grind like stone.")
+            dialogObj.write("+++ " + this.Name + "'s body starts to crack grind like stone. +++")
         }
         
         if (this.MagicCon.MetalCon >= 100){
-            alert(this.Name + " suddenlty falls over lifelessly, dieing of Metal Contamination.");
+            dialogObj.write("+++ " + this.Name + " suddenlty falls over lifelessly, dieing of Metal Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -286,11 +287,11 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.MetalCon >= 50 && startingMetal < 50){
-            alert("You get an unluck feeling about " + this.Name + ".")
+            dialogObj.write("++ You get an unluck feeling about " + this.Name + ". ++")
         }
         
         if (this.MagicCon.WaterCon >= 100){
-            alert(this.Name + " slumps into a floppy piles as their inside liquefy, dieing of Water Contamination.");
+            dialogObj.write("+++ " + this.Name + " slumps into a floppy piles as their inside liquefy, dieing of Water Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -299,11 +300,11 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.WaterCon >= 50 && startingWater < 50){
-            alert("" + this.Name + " seems to wobble and jiggle as they move.")
+            dialogObj.write("++ " + this.Name + " seems to wobble and jiggle as they move. ++")
         }
         
         if (this.MagicCon.WoodCon >= 100){
-            alert(this.Name + " bursts open sprouting vines and mushrooms, dieing of Wood Contamination.");
+            dialogObj.write("+++ " + this.Name + " bursts open sprouting vines and mushrooms, dieing of Wood Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -312,11 +313,11 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.WoodCon >= 50 && startingWood < 50){
-            alert("" + this.Name + "'s body starts to bloat, and moldy oder eminates from them.")
+            dialogObj.write("++ " + this.Name + "'s body starts to bloat, and moldy oder eminates from them. ++")
         }
         
         if (this.MagicCon.VoidCon >= 100){
-            alert(this.Name + " fades out of existance, dieing of Void Contamination.");
+            dialogObj.write("+++ " + this.Name + " fades out of existance, dieing of Void Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -325,7 +326,7 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.VoidCon >= 50 && startingVoid < 50){
-            alert("" + this.Name + " become a little blurry around the edges.")
+            dialogObj.write("++ " + this.Name + " become a little blurry around the edges. ++")
         }
         
     }
@@ -341,7 +342,7 @@ function getStatusText(mon) {
     text += "Age: " + mon.Age + "\n";
     text += "Level: " + mon.Level + " (" + Math.floor(mon.EXP) + "/" + mon.expToLevel + ")\n";
     text += "HP: " + mon.BattleStats.HPCur + " / " + mon.BattleStats.HPMax +"\n";
-    text += "MP:" + mon.BattleStats.MPCur + " / " + mon.BattleStats.MPMax + "\n";
+    text += "MP: " + mon.BattleStats.MPCur + " / " + mon.BattleStats.MPMax + "\n";
     text += "Attack: " + mon.BattleStats.Attack + "\n";
     text += "Defence: " + mon.BattleStats.Defence + "\n";
     text += "Wisdom: " + mon.BattleStats.Wisdom + "\n";

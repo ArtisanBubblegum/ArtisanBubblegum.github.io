@@ -19,21 +19,27 @@ function keyboardInput(keyName){
     //alert(keyName.code);
     switch (keyName.code){
         case "ArrowUp":
+        case "KeyW":
             MainLoop([0,-1]);
             break;
         case "ArrowDown":
+        case "KeyS":
             MainLoop([0,1]);
             break;
         case "ArrowLeft":
+        case "KeyA":
             MainLoop([-1,0]);
             break;
         case "ArrowRight":
+        case "KeyD":
             MainLoop([1,0]);
             break;
         case "Enter":
+        case "KeyJ":
             MainLoop([0,'A']);
             break;
         case "Space":
+        case "KeyK":
             MainLoop([0,'B']);
             break;
         case "ShiftLeft":

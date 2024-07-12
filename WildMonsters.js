@@ -62,7 +62,7 @@ var Giant_Rat = {
         "Wisdom" : 2, //+1
         "Speed" : 1, //0
         "Luck" : 0, //-1
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.25 //??1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [Meditate, EarthBolt], // MetalBolt, WaterBolt, WoodBolt, FireBolt],
     "LearnableSpells" : [WoodBolt, FireT3, MetalT2Crit],
@@ -121,7 +121,7 @@ var Mud_Slipper = {
         "Wisdom" : 2, //+1
         "Speed" : 1, //0
         "Luck" : 2, //+1
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.3 //??1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [WaterBolt],
     "LearnableSpells" : [MetalT1Spd, EarthT3HP],
@@ -180,7 +180,7 @@ var Giant_Centipede = {
         "Wisdom" : 3, //+2
         "Speed" : 2, //+1
         "Luck" : 1, //0
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.15 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [VoidBolt],
     "LearnableSpells" : [FireT2, MetalT3Multi],
@@ -239,7 +239,7 @@ var Bed_Biter = {
         "Wisdom" : 2, //+1
         "Speed" : 1, //0
         "Luck" : 0, //-1
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.15 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
     "LearnableSpells" : [WoodT1HP, WoodT3Def, FireT1],
@@ -293,7 +293,7 @@ var Error_Ant = {
         "Wisdom" : 1, //0
         "Speed" : 2, //+1
         "Luck" : 1, //0
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.15 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
     "LearnableSpells" : [MetalT2Crit],
@@ -347,7 +347,7 @@ var Carnivorous_Canary = {
         "Wisdom" : 2, //+1
         "Speed" : 3, //+2
         "Luck" : 1, //0
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.2 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [AirBolt],
     "LearnableSpells" : [WaterBolt, WoodT2Spd, MetalT3Multi],
@@ -406,7 +406,7 @@ var Magic_Sword = {
         "Wisdom" : 0, //-1
         "Speed" : 1, //0
         "Luck" : 0, //-1
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.4 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [],
     "LearnableSpells" : [MetalBolt, MetalT1Def],
@@ -455,7 +455,7 @@ var Orange_Ooze = {
         "Wisdom" : 3, //+2
         "Speed" : 1, //0
         "Luck" : 1, //0
-        "GrowthRate" : 1.25 //1+(stat_value/10)  =  1+(5/10)
+        "GrowthRate" : 1.5 //1+(stat_value/10)  =  1+(5/10)
     },
     "Spells" : [FireBolt],
     "LearnableSpells" : [FireT1, FireT2, FireT3, MetalT1Def, WoodT3Wis],

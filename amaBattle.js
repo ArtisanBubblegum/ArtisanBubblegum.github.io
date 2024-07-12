@@ -25,6 +25,8 @@ let fleeBonus = 0;
 let fleeText = "";
 
 function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
+    combatDone = false;
+
     AllyList = [...PartyList];
     AllyList.splice(0,0,Player);
     menuList = battleList;
@@ -101,6 +103,10 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
         EnemyList[i].Target = AllyList[0];
         monstersList.push(EnemyList[i]);
         console.log(EnemyList[i].Name + " generated as Enemy.");
+
+        while (EnemyList[i].BattleStats.Speed > targetTurnValue){
+            targetTurnValue *= 10;
+        }
     }
 
     for (i = 0; i < AllyList.length; i++){
@@ -121,6 +127,10 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
         AllyList[i].BattleStats.TurnValue = 0;
         monstersList.push(AllyList[i]);
         console.log(AllyList[i].Name + " populated as Ally.");
+
+        while (AllyList[i].BattleStats.Speed > targetTurnValue){
+            targetTurnValue *= 10;
+        }
     }
 
     targetList = monstersList;
@@ -139,6 +149,13 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
 function BattleCommands(input){ //Manages Menues and gates when Turn's are Exectuted by returning True
     
     fleeText = "";
+
+    if(combatDone){
+        if (input[1] == "A" || input[1] == "B"){
+            changeState("map");
+            return true;
+        }
+    }
 
     if (Player.BattleStats.HPCur <= 0){
         return true;
@@ -296,7 +313,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
             monstersList[index].BattleStats.TurnValue += monstersList[index].BattleStats.Speed;
             }
 
-            while (monstersList[index].BattleStats.TurnValue >= targetTurnValue){
+            if (monstersList[index].BattleStats.TurnValue >= targetTurnValue && allyAttacked == false){
                 monstersList[index].BattleStats.TurnValue -= targetTurnValue;
                 console.log(monstersList[index].Name + " takes a turn.")
 
@@ -382,7 +399,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                     monstersList[index].Action = "fight";
                 }
                 monstersList[index].Target = "noValidTarget";
-                if (monstersList[index].Action != "flee"){ //Note: "flee" action is only when successful. When Failing to Flee, "skip" is the populated action.
+                if (monstersList[index].Action != "flee"){ //Note: "flee" action is only set when successful. //When Failing to Flee, "skip" is the populated action.
                     checkAlive();
                     OrderMonstersBySpeed();
                 }
@@ -403,7 +420,7 @@ function checkAlive(){
             EnemyAliveCount += 1;
         }
         else if (EnemyList[i].Genus != "R.I.P."){
-            dialogObj.write(EnemyList[i].Name + " Dies.");
+            dialogObj.write("+++ " + EnemyList[i].Name + " Dies. +++");
             EnemyList[i].Genus = "R.I.P.";
         }
         console.log(EnemyList[i].Name + " HP: " + EnemyList[i].BattleStats.HPCur);
@@ -424,7 +441,7 @@ function checkAlive(){
             AllyAliveCount += 1;
         }
         else if (AllyList[i].Genus != "R.I.P."){
-            dialogObj.write(AllyList[i].Name + " Dies.");
+            dialogObj.write("+++ " + AllyList[i].Name + " Dies. +++");
             AllyList[i].Genus = "R.I.P.";
         }
         console.log(AllyList[i].Name + " HP: " + AllyList[i].BattleStats.HPCur);
@@ -438,17 +455,20 @@ function checkAlive(){
                 dialogObj.write(AllyList[x].Name + " has Survived the Battle!");
                 
                 let amount = 0;
+                let totalAmount = 0;
                 for (i = 0; i < EnemyList.length; i++){
                     if (AllyList[x] == Player){
-                        amount += (((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount)/10;
+                        amount = (((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount)/10;
+                        totalAmount += amount;
                         AllyList[x].EXP += amount;
                     }
                     else {
-                        amount += (((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount);
+                        amount = (((EnemyList[i].Level * 10) * (EnemyList[i].Level/AllyList[x].Level))/AllyAliveCount);
+                        totalAmount += amount;
                         AllyList[x].EXP += amount;
                     }
                 }
-                dialogObj.write("+"+ Math.floor(amount) + " exp!");
+                dialogObj.write("+"+ Math.floor(totalAmount) + " exp!");
         }
             while (AllyList[x].EXP >= AllyList[x].expToLevel){
                 console.log("Calling Level up in checkAlive");
@@ -456,8 +476,9 @@ function checkAlive(){
             }
             AllyList[x].Target = "noValidTarget";
         }
-        changeState("map");
+        //changeState("map");
         combatDone = true;
+        menuList = ["Continue"];
     }
     else if (AllyAliveCount <= 0){
         //Lose
@@ -478,8 +499,9 @@ function checkAlive(){
         MapObj.PlayerPosition[0] = 3;
         MapObj.PlayerPosition[1] = 3;
 
-        changeState("map");
+        //changeState("map");
         combatDone = true;
+        menuList = ["Continue"];
     }
 
     OrderMonstersBySpeed();

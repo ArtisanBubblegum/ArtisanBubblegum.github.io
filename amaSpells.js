@@ -62,7 +62,14 @@ var FireBolt = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 5 &&
+            Mon.BattleStats.MPMax >= 15 &&
+            Mon.BattleStats.Attack >= 20 &&
+            Mon.BattleStats.Defence >= 5 &&
+            Mon.BattleStats.Wisdom >= 15 &&
+            Mon.BattleStats.Speed >= 5 &&
+            Mon.BattleStats.Luck >= 5
+        ){    
             return true;
         }
         return false;
@@ -113,7 +120,14 @@ var FireT1 = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 50 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -168,7 +182,14 @@ var FireT2 = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 75 &&
+            Mon.BattleStats.Defence >= 30 &&
+            Mon.BattleStats.Wisdom >= 45 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -229,8 +250,13 @@ var FireT3 = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 15 &&
-            Mon.BattleStats.Wis >= 20
+        if (Mon.BattleStats.HPMax >= 20 &&
+            Mon.BattleStats.MPMax >= 60 &&
+            Mon.BattleStats.Attack >= 100 &&
+            Mon.BattleStats.Defence >= 40 &&
+            Mon.BattleStats.Wisdom >= 60 &&
+            Mon.BattleStats.Speed >= 20 &&
+            Mon.BattleStats.Luck >= 20
         ){    
             return true;
         }
@@ -284,8 +310,13 @@ var EarthBolt = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5 &&
-            Mon.BattleStats.HPMax >= 5
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 15 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 5 &&
+            Mon.BattleStats.Wisdom >= 15 &&
+            Mon.BattleStats.Speed >= 5 &&
+            Mon.BattleStats.Luck >= 5
         ){    
             return true;
         }
@@ -328,7 +359,14 @@ var EarthT1Def = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 30 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -370,7 +408,14 @@ var EarthT1Spd = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 30 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -412,7 +457,14 @@ var EarthT2Atk = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 45 &&
+            Mon.BattleStats.Defence >= 15 &&
+            Mon.BattleStats.Wisdom >= 45 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -454,7 +506,14 @@ var EarthT2Wis = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 15 &&
+            Mon.BattleStats.Defence >= 15 &&
+            Mon.BattleStats.Wisdom >= 75 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -498,7 +557,14 @@ var EarthT3HP = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 60 &&
+            Mon.BattleStats.MPMax >= 60 &&
+            Mon.BattleStats.Attack >= 20 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 60 &&
+            Mon.BattleStats.Speed >= 20 &&
+            Mon.BattleStats.Luck >= 20
+        ){    
             return true;
         }
         return false;
@@ -542,7 +608,14 @@ var EarthT3MP = {  //Giant Rat
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.HPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 20 &&
+            Mon.BattleStats.MPMax >= 100 &&
+            Mon.BattleStats.Attack >= 20 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 60 &&
+            Mon.BattleStats.Speed >= 20 &&
+            Mon.BattleStats.Luck >= 20
+        ){    
             return true;
         }
         return false;
@@ -588,7 +661,14 @@ var MetalBolt = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 5 &&
+            Mon.BattleStats.MPMax >= 15 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 5 &&
+            Mon.BattleStats.Wisdom >= 15 &&
+            Mon.BattleStats.Speed >= 5 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -639,7 +719,14 @@ var MetalT1Def = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 30
+        ){    
             return true;
         }
         return false;
@@ -690,7 +777,14 @@ var MetalT1Atk = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 40 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 30
+        ){    
             return true;
         }
         return false;
@@ -741,7 +835,14 @@ var MetalT1Spd = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 20 &&
+            Mon.BattleStats.Luck >= 30
+        ){    
             return true;
         }
         return false;
@@ -792,7 +893,14 @@ var MetalT1Wis = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 40 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 30
+        ){    
             return true;
         }
         return false;
@@ -846,8 +954,13 @@ var MetalT2Crit = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10 &&
-            Mon.BattleStats.Luck >= 10
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 45 &&
+            Mon.BattleStats.Defence >= 15 &&
+            Mon.BattleStats.Wisdom >= 45 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 75
         ){    
             return true;
         }
@@ -912,7 +1025,14 @@ var MetalT3Multi = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 15){    
+        if (Mon.BattleStats.HPMax >= 20 &&
+            Mon.BattleStats.MPMax >= 60 &&
+            Mon.BattleStats.Attack >= 80 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 60 &&
+            Mon.BattleStats.Speed >= 60 &&
+            Mon.BattleStats.Luck >= 100
+        ){    
             return true;
         }
         return false;
@@ -968,7 +1088,14 @@ var WaterBolt = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 5 &&
+            Mon.BattleStats.MPMax >= 15 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 5 &&
+            Mon.BattleStats.Wisdom >= 15 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 5
+        ){    
             return true;
         }
         return false;
@@ -1005,7 +1132,14 @@ var WaterT1DeftoSpd = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 40 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 30 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1042,7 +1176,14 @@ var WaterT1SpdtoDef = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 40 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 40 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1079,7 +1220,14 @@ var WaterT1DeftoStr = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 40 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1116,7 +1264,14 @@ var WaterT1StrtoDef = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 40 &&
+            Mon.BattleStats.Defence >= 30 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1153,7 +1308,14 @@ var WaterT1SpdtoStr = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 40 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1190,7 +1352,14 @@ var WaterT1StrtoSpd = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 40 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 30 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1227,7 +1396,14 @@ var WaterT2WistoDef = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 15 &&
+            Mon.BattleStats.Defence >= 45 &&
+            Mon.BattleStats.Wisdom >= 75 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -1264,7 +1440,14 @@ var WaterT2WistoSpd = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 15 &&
+            Mon.BattleStats.Defence >= 15 &&
+            Mon.BattleStats.Wisdom >= 75 &&
+            Mon.BattleStats.Speed >= 45 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -1301,7 +1484,14 @@ var WaterT2WistoStr = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 45 &&
+            Mon.BattleStats.Defence >= 15 &&
+            Mon.BattleStats.Wisdom >= 75 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -1353,7 +1543,14 @@ var WoodBolt = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 5){    
+        if (Mon.BattleStats.HPMax >= 5 &&
+            Mon.BattleStats.MPMax >= 15 &&
+            Mon.BattleStats.Attack >= 10 &&
+            Mon.BattleStats.Defence >= 10 &&
+            Mon.BattleStats.Wisdom >= 15 &&
+            Mon.BattleStats.Speed >= 5 &&
+            Mon.BattleStats.Luck >= 5
+        ){    
             return true;
         }
         return false;
@@ -1405,7 +1602,14 @@ var WoodT1HP = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10 ){    
+        if (Mon.BattleStats.HPMax >= 40 &&
+            Mon.BattleStats.MPMax >= 30 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1457,7 +1661,14 @@ var WoodT1MP = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 10 &&
+            Mon.BattleStats.MPMax >= 50 &&
+            Mon.BattleStats.Attack >= 30 &&
+            Mon.BattleStats.Defence >= 20 &&
+            Mon.BattleStats.Wisdom >= 30 &&
+            Mon.BattleStats.Speed >= 10 &&
+            Mon.BattleStats.Luck >= 10
+        ){    
             return true;
         }
         return false;
@@ -1509,7 +1720,14 @@ var WoodT2Atk = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 75 &&
+            Mon.BattleStats.Defence >= 45 &&
+            Mon.BattleStats.Wisdom >= 45 &&
+            Mon.BattleStats.Speed >= 15 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -1561,7 +1779,14 @@ var WoodT2Spd = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 15 &&
+            Mon.BattleStats.MPMax >= 45 &&
+            Mon.BattleStats.Attack >= 45 &&
+            Mon.BattleStats.Defence >= 45 &&
+            Mon.BattleStats.Wisdom >= 45 &&
+            Mon.BattleStats.Speed >= 60 &&
+            Mon.BattleStats.Luck >= 15
+        ){    
             return true;
         }
         return false;
@@ -1613,7 +1838,14 @@ var WoodT3Def = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 20 &&
+            Mon.BattleStats.MPMax >= 60 &&
+            Mon.BattleStats.Attack >= 60 &&
+            Mon.BattleStats.Defence >= 100 &&
+            Mon.BattleStats.Wisdom >= 60 &&
+            Mon.BattleStats.Speed >= 20 &&
+            Mon.BattleStats.Luck >= 20
+        ){    
             return true;
         }
         return false;
@@ -1665,7 +1897,14 @@ var WoodT3Wis = {
         return value;
     },
     CanLearn(Mon){
-        if (Mon.BattleStats.MPMax >= 10){    
+        if (Mon.BattleStats.HPMax >= 20 &&
+            Mon.BattleStats.MPMax >= 60 &&
+            Mon.BattleStats.Attack >= 60 &&
+            Mon.BattleStats.Defence >= 60 &&
+            Mon.BattleStats.Wisdom >= 100 &&
+            Mon.BattleStats.Speed >= 20 &&
+            Mon.BattleStats.Luck >= 20
+        ){    
             return true;
         }
         return false;
