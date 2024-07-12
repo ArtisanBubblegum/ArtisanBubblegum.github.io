@@ -296,7 +296,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
             monstersList[index].BattleStats.TurnValue += monstersList[index].BattleStats.Speed;
             }
 
-            if (monstersList[index].BattleStats.TurnValue >= targetTurnValue){
+            while (monstersList[index].BattleStats.TurnValue >= targetTurnValue){
                 monstersList[index].BattleStats.TurnValue -= targetTurnValue;
                 console.log(monstersList[index].Name + " takes a turn.")
 
