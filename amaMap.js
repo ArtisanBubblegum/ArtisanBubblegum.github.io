@@ -145,6 +145,29 @@ let MapObj = {
             quantity--;
         }
     },
+    spawnItem (quantity, items){
+        let curIndex = 1;
+        let spawnLocations = []; //list of locations that are open
+        while (curIndex < this.Map.length){
+            switch(this.GetMapID(curIndex)[0]){
+                case 0:
+                    if (curIndex!=this.locationToIndex(this.PlayerPosition)){
+                        spawnLocations.push(curIndex);    
+                    }
+                    break;
+            }
+            curIndex++;
+        }
+        let spawnIndex = 0;
+        let mapIndex = 0;
+        while (quantity > 0){
+            spawnIndex = Math.floor(Math.random()*spawnLocations.length);
+            mapIndex = spawnLocations[spawnIndex];
+            this.Map[mapIndex] = ["item", items[Math.floor(Math.random()*items.length)]];
+            spawnLocations.splice(spawnIndex, 1);
+            quantity--;
+        }
+    },
     drawMap (){
         let mapText = "";
         let curIndex = 1;
@@ -182,6 +205,9 @@ let MapObj = {
                 }
                 else if (this.GetMapID(curIndex)[0] == "M"){
                     mapText += "[ M ]";
+                }
+                else if (this.GetMapID(curIndex)[0] == "item"){
+                    mapText += "[ $ ]"
                 }
                 else if (this.GetMapID(curIndex)[0] == "H"){
                     mapText += "<H>"
@@ -275,6 +301,15 @@ let MapObj = {
                     //changeState("battle"); This is done in newEnemy();
                     newEnemy();
                     break;
+                case "item":
+                    let result = Player.addItem(this.GetMapID(location)[1]);
+                    if (result == true){
+                        this.Map[this.locationToIndex(location)]=[0,0];
+                    }
+                    else {
+                        alert("OH NO");
+                    }
+                    break;
                 case "H":
                     if (Player.BattleStats.HPCur > 0){
                         Player.BattleStats.HPCur = Player.BattleStats.HPMax;
@@ -303,12 +338,38 @@ let MapObj = {
                     this.MapLevel += 1;
                     this.mapMaker(13,13);
                     this.spawnMonster(20);
+                    let items = [];
+                    for (i=0; i<100; i++){
+                        if (i < 45){
+                            items.push(HealingPotion);
+                        }
+                        else if (i < 90){
+                            items.push(MagicEnergyPotion);
+                        }
+                        else {
+                            items.push(RebirthCyrstal);
+                        }
+                    }
+                    this.spawnItem(Math.floor((Math.random()*3) + 1), items);
                     break
                 case "D2" :
                     this.MapLevel -= 1;
                     this.mapMaker(13,13);
                     this.PlayerPosition[1] = 2;
                     this.spawnMonster(20);
+                    items = [];
+                    for (i=0; i<100; i++){
+                        if (i < 45){
+                            items.push(HealingPotion);
+                        }
+                        else if (i < 90){
+                            items.push(MagicEnergyPotion);
+                        }
+                        else {
+                            items.push(RebirthCyrstal);
+                        }
+                    }
+                    this.spawnItem(Math.floor((Math.random()*3) + 1), items);
                     break;
                 default:
                     console.log("Stopped at ", this.PlayerPosition);

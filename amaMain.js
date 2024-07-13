@@ -11,6 +11,12 @@ function LoadGame(){
     drawNameBoard("", "Your Name: ");
 }
 LoadGame();
+for (i = 0; i < 2; i++){
+    Player.addItem(HealingPotion);
+}
+for (i = 0; i < 1; i++){
+    Player.addItem(MagicEnergyPotion);
+}
 
 addEventListener("keydown", (event) => {keyboardInput(event)});
 

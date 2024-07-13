@@ -155,6 +155,9 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
             changeState("map");
             return true;
         }
+        else {
+            return false;
+        }
     }
 
     if (Player.BattleStats.HPCur <= 0){
@@ -478,7 +481,9 @@ function checkAlive(){
         }
         //changeState("map");
         combatDone = true;
+        allyAttacked = true;
         menuList = ["Continue"];
+        drawBattle();
     }
     else if (AllyAliveCount <= 0){
         //Lose
@@ -499,9 +504,9 @@ function checkAlive(){
         MapObj.PlayerPosition[0] = 3;
         MapObj.PlayerPosition[1] = 3;
 
-        //changeState("map");
+        changeState("map");
         combatDone = true;
-        menuList = ["Continue"];
+        //menuList = ["Continue"];
     }
 
     OrderMonstersBySpeed();

@@ -95,6 +95,32 @@ var Player = {
     "Target" : "noValidTarget",
     "isWild" : false,
 
+    "inventory" : [],
+    "MaxMass" : 18150, //18,150g ~= 40lbs ~= Reccomended Pack Size for Average Hiker
+    "MaxVolume" : 20000, //20,000cm^3 ~= 20L ~= Small Backpack
+    addItem(item){
+        let curMass = 0;
+        let curVolume = 0;
+        for (i=0; i<this.inventory.length; i++){
+            curMass += this.inventory[i].Mass;
+            curVolume += this.inventory[i].Volume;
+        }
+        if (curMass + item.Mass <= this.MaxMass && curVolume + item.Volume <= this.MaxVolume){
+            dialogObj.write("Picked up a " + item.Name + "!")
+            this.inventory.push(item);
+            return true;
+        }
+        else{
+            if (curMass + item.Mass > this.MaxMass){
+                dialogObj.write("Carrying too much weight already!");
+            }
+            if (curVolume + item.Volume > this.MaxVolume){
+                dialogObj.write("Pack is too Full!");
+            }
+            return false;
+        }
+    },
+
     populate(target){
         //this.Name = "George Markus II";
         this.Genus = target.Genus;
