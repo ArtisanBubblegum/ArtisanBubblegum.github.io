@@ -307,9 +307,6 @@ let MapObj = {
                     if (result == true){
                         this.Map[this.locationToIndex(location)]=[0,0];
                     }
-                    else {
-                        alert("OH NO");
-                    }
                     break;
                 case "H":
                     if (Player.BattleStats.HPCur > 0){
