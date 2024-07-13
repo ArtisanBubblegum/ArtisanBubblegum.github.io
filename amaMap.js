@@ -273,6 +273,7 @@ let MapObj = {
             if (gameState == "map"){
                 dialogObj.write("");    
             }
+            let items = [];
             switch(this.GetMapID(location)[0]){
                 case 0:
                     this.PlayerPosition[0] += dir[0];
@@ -338,7 +339,7 @@ let MapObj = {
                     this.MapLevel += 1;
                     this.mapMaker(13,13);
                     this.spawnMonster(20);
-                    let items = [];
+                    items = [];
                     for (i=0; i<100; i++){
                         if (i < 45){
                             items.push(HealingPotion);
