@@ -16,36 +16,34 @@
             text-align: center;
             border: 1px solid black;
         }
+        p {
+            text-align: left;
+        }
 
         /* Style the button that is used to open and close the collapsible content */
         .collapsible {
-            background-color: #eee;
-            color: #444;
+            color: #222;
             cursor: pointer;
-            padding: 18px;
-            width: 100%;
+            width: 0px;
             border: none;
-            text-align: left;
             outline: none;
             font-size: 15px;
         }
 
         /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
         .active, .collapsible:hover {
-            background-color: #ccc;
+            color: #777;
         }
 
         /* Style the collapsible content. Note: hidden by default */
         .content {
-            padding: 0 18px;
             display: none;
             overflow: hidden;
-            background-color: #f1f1f1;
         }
     </style>
     <link rel="stylesheet" href="/assets/index-45778437.css">
 </head>
-<body style="background-color: pink; overflow: auto;">
+<body style="background-color: pink; overflow: auto; max-width: 900px; margin-left: auto; margin-right: auto;">
     <h1>Interactive Media</h1>
     <h2 id="readonly"> 
         | <a href="/passive-media.html">Passive Media</a> |
@@ -56,214 +54,250 @@
     <h3>Artisan Monsters: Alpha</h3>
     <a href="javascript:history.back()">Return to Game</a>
 
-    <button type="button" class="collapsible">Open Collapsible</button>
-    <div class="content">
-        <p>Lorem ipsum...</p>
-    </div>
-
     <h4>User Manual</h4>
     <p>
-        This is a work in progress, these sections are to help illucidate systems and concepts that don't have proper in game explination.<br>
-        Many of these systems are likely to change drasticly as development continues.<br>
+        This is a work in progress, all material is subject to drastic change, no final art is in use at this state, some sections of this page may be describing features that are not yet developed.
     </p>
+    <p>
+        Artisan Monsters: Alpha, is a game that answers the question, “What if Dragon Quest Monsters was more player hostile like Wizardry, and more systematically obtuse like Dwarf Fortress”.<br>
+        This is a game for those that are tired of the boring played out Pokemon Clones that plague the Monster Tamer Genre. If you’re happy with the state of Monster Tamers, get out!
+    </p>
+    <p>
+        You’re a young Skeleton Person, given only a Giant Rat and a Carnivorous Canary, you’re tasked with finding a way to succeed in this harsh world. Train them into fighting machines, Butcher them for parts, or Start a monster ranch to breed, raise, butcher, and sell monsters. you choose your own path.
+    </p>
+    <br>
+
     <h5 style="font-size: 150%;">Combat</h5>
-    <p>
-        <b>You</b> take the role of a young skeleton, monster wrangler.<br>
-        And will inevitably find yourself in the middle of combat, with a variety of options:<br>
-        <br>
-        <b>Fight</b>, will allow your monster to decide what to do for themselves.<br>
-        Each monster has their own set of tactics they will follow when not given orders, and they don't have to make this choice until it's their turn.<br>
-        Additionally, "Fight" let's you react based on instict rather tactic.<br>
-        <br>
-        <b>Commands</b>, will open the Commands Menu allowing you to give your monster orders. The current commands are "Attack", "Defend", and "Spells". each are detailed below.<br>
-        When selecting Commands, you'll have to select who you're giving the command too, then what command to give, and who they should target.<br>
-        Note: Giving a Command to one of your monsters will use up your turn, so it is generally preferable to select "fight" or give yourself "commands".<br>
-        <br>
-        <b>Flee</b>, will allow you <i>and your monsters</i> to try to run from a battle you believe to be a lost cause.<br>
-        Escape Chance is calculated below:<br>
-        
-        <h6 style="font-size: 100%;">Escape Chance = (AllyMonster.Speed)/(EnemyMonster.Speed * 2) + (0.1 * Failed Attempts this Battle)</h6>
-        
-        this means that against a faster monster, you'll need to identify a losing battle sooner to have a chance at escaping.<br>
-        <br>
-        <b>Attack</b>, will order you or your monster to try to attack a target opponent physically.<br>
-        <b>Defend</b>, will order you or your monster to take a defensive stance, giving them a defensive boost for 1 turn.<br>
-        <b>Spells</b>, will open your or your monster's Spells Menu, letting you order you or your monster to cast a specific spell. (Spell Damage Calculation in Magic Section.)<br>
-        <br>
-        Normal Attacks deal a random amount of damage up to the maximum calculated below:<br>
 
-        <h6 style="font-size: 100%;">Maximum Attack Damage = (Attacker.EffectiveAttack/2) - (Defender.EffectiveDefence/4)</h6>
-        
-        Effective attack is: <i>Attack * ( HP/( MaxHP/2 ) )</i><br>
-        Effective defence is: <i>Defence * ( HP/( MaxHP/2 ) )</i><br>
-        Each monster also has a Luck Stat, when a monster attacks they have a (Luck/1000) chance to score a critical hit, tripling the damage that attack would deal.<br>
-        (Note: Minimum Damage roll is normally 0. But on a critical attack, a roll of 0 is increased to 1, before multiplying.)<br>
-        <br>
-    </p>
+    <div type="button" class="collapsible">Expand</div>
+    <div class="content">
+        <p>
+            <b>You</b> take the role of a young skeleton, monster wrangler.<br>
+            And will inevitably find yourself in the middle of combat, with a variety of options:<br>
+            <br>
+            <b>Fight</b>, will allow your monster to decide what to do for themselves.<br>
+            Each monster has their own set of tactics they will follow when not given orders, and they don't have to make this choice until it's their turn.<br>
+            Additionally, "Fight" let's you react based on instict rather tactic.<br>
+            <br>
+            <b>Commands</b>, will open the Commands Menu allowing you to give your monster orders. The current commands are "Attack", "Defend", and "Spells". each are detailed below.<br>
+            When selecting Commands, you'll have to select who you're giving the command too, then what command to give, and who they should target.<br>
+            Note: Giving a Command to one of your monsters will use up your turn, so it is generally preferable to select "fight" or give yourself "commands".<br>
+            <br>
+            <b>Flee</b>, will allow you <i>and your monsters</i> to try to run from a battle you believe to be a lost cause.<br>
+            Escape Chance is calculated below:<br>
+        </p>
+            <h6 style="font-size: 100%;">Escape Chance = (AllyMonster.Speed)/(EnemyMonster.Speed * 2) + (0.1 * Failed Attempts this Battle)</h6>
+        <p>
+            this means that you'll typically have to make multiple attempts to get away from a fight you don't want to be in.<br>
+            <br>
+            <b>Attack</b>, will order you or your monster to try to attack a target opponent physically.<br>
+            <b>Defend</b>, will order you or your monster to take a defensive stance, giving them a defensive boost for 1 turn.<br>
+            <b>Spells</b>, will open your or your monster's Spells Menu, letting you order you or your monster to cast a specific spell. (Spell Damage Calculation in Magic Section.)<br>
+            <br>
+            Normal Attacks deal a random amount of damage up to the maximum calculated below:<br>
+        </p>
+            <h6 style="font-size: 100%;">Maximum Attack Damage = (Attacker.EffectiveAttack/2) - (Defender.EffectiveDefence/4)</h6>
+        <p>
+            Effective attack is: <i>Attack * ( HP/( MaxHP/2 ) )</i><br>
+            Effective defence is: <i>Defence * ( HP/( MaxHP/2 ) )</i><br>
+            Each monster also has a Luck Stat, when a monster attacks they have a (Luck/1000) chance to score a critical hit, tripling the damage that attack would deal.<br>
+            (Note: Minimum Damage roll is normally 0. But on a critical attack, a roll of 0 is increased to 1, before multiplying.)<br>
+            <br>
+        </p>
+    </div>
+
     <h5 style="font-size: 150%;">Turn Order / Speed</h5>
-    <p>
-        Turns are determined by Speed.<br>
-        Faster monsters will sometimes get to act multiple times before their oponents get an opportunity to act.<br>
-        Currently an arbitrary timeline of 100 points is set. Then you and each monster takes turns progressing down this time line at their speed value.<br>
-        When you or a Monster reaches or passes 100 points, it retains any excess points as it's sent back to the beginning of the timeline, and get's to take an action.<br>
-        <br>
-        For example: Monster A has 25 Speed, and Monster B has 20 Speed.<br>
-        their turn order will be: A, B, A, B, A, B, A, A, B, repeat.<br>
-        <table>
-            <th></th><th>Step 1</th><th>Step 2</th><th>Step 3</th><th>Step 4</th><th>Step 5</th><th>Step 6</th><th>Step 7</th><th>Step 8</th><th>Step 9</th><th>Step 10</th><th>Step 11</th><th>Step 12</th><th>Step 13</th><th>Step 14</th><th>Step 15</th><th>Step 16</th><th>Step 17</th><th>Step 18</th><th>Step 19</th><th>Step 20</th>
-            <tr>
-                <td>Monster A: </td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td>
-            </tr>
-            <tr>
-                <td>Monster B: </td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td>
-            </tr>
-            <tr>
-                <td>Turn: </td> <td></td> <td></td> <td></td> <td>A</td> <td>B</td> <td></td> <td></td> <td>A</td> <td></td> <td>B</td> <td></td> <td>A</td> <td></td> <td></td> <td>B</td> <td>A</td> <td></td> <td></td> <td></td> <td>A, B</td>
-            </tr>
-        </table>
-        You will have an opportunity to issue command at the start of battle, and only after each of YOUR turns.<br>
-        This means if you have a monster with Higher Speed than you, they will perform an issued command only on the first turn after you issue it, afterwhich they act on their innate tactics.<br>
-        <br>
-        Note: if a Monster has a higher speed stat than the arbitrary timeline value, then the arbitrary timeline value is increased by a factor of 10 until it is greater.<br>
-        
+    <div type="button" class="collapsible">Expand</div>
+    <div class="content">
+        <p>
+            Turns are determined by Speed.<br>
+            Faster monsters will sometimes get to act multiple times before their oponents get an opportunity to act.<br>
+            Currently an arbitrary timeline of 100 points is set. Then you and each monster takes turns progressing down this time line at their speed value.<br>
+            When you or a Monster reaches or passes 100 points, it retains any excess points as it's sent back to the beginning of the timeline, and get's to take an action.<br>
+            <br>
+            For example: Monster A has 25 Speed, and Monster B has 20 Speed.<br>
+            their turn order will be: A, B, A, B, A, B, A, A, B, repeat.<br>
+        </p>
+            <table>
+                <th></th><th>Step 1</th><th>Step 2</th><th>Step 3</th><th>Step 4</th><th>Step 5</th><th>Step 6</th><th>Step 7</th><th>Step 8</th><th>Step 9</th><th>Step 10</th><th>Step 11</th><th>Step 12</th><th>Step 13</th><th>Step 14</th><th>Step 15</th><th>Step 16</th><th>Step 17</th><th>Step 18</th><th>Step 19</th><th>Step 20</th>
+                <tr>
+                    <td>Monster A: </td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td> <td>25</td> <td>50</td> <td>75</td> <td>100</td>
+                </tr>
+                <tr>
+                    <td>Monster B: </td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td> <td>20</td> <td>40</td> <td>60</td> <td>80</td> <td>100</td>
+                </tr>
+                <tr>
+                    <td>Turn: </td> <td></td> <td></td> <td></td> <td>A</td> <td>B</td> <td></td> <td></td> <td>A</td> <td></td> <td>B</td> <td></td> <td>A</td> <td></td> <td></td> <td>B</td> <td>A</td> <td></td> <td></td> <td></td> <td>A, B</td>
+                </tr>
+            </table>
+        <p>
+            You will have an opportunity to issue command at the start of battle, and only after each of YOUR turns.<br>
+            This means if you have a monster with Higher Speed than you, they will perform an issued command only on the first turn after you issue it, afterwhich they act on their innate tactics.<br>
+            <br>
+            Note: if a Monster has a higher speed stat than the arbitrary timeline value, then the arbitrary timeline value is increased by a factor of 10 until it is greater.<br>
+        </p>
+    </div>
 
-    </p>
     <h5 style="font-size: 150%;">Magic</h5>
-    <p>
-        Natural Magic is derived from the Five Pillars (Fire, Earth, Metal, Water, and Wood).<br>
-        <b>Fire</b> is the element of consumption and death.<br>
-        <b>Earth</b> is the element of stability and growth.<br>
-        <b>Metal</b> is the element of division and luck.<br>
-        <b>Water</b> is the element of change and adaptability.<br>
-        <b>Wood</b> is the element of life and theft.<br>
-        <br>
-        Spells cost MP to cast. (Some spells also cost HP) If you command your monster to cast a spell that it can't afford, it will waste it's turn trying!<br>
-        Outside of battle, your monster will regain MP. Each time you take a step there is a % Chance to regain 1MP, based on how much MP is missing. (MP Missing/MP Maximum)<br>
-        <br>
-        Spells deal a random amount of damage up to the maximum calculated below:<br>
-
-        <h6 style="font-size: 100%;">Amount = (Caster.EffectiveWisdom/2) - (Target.EffectiveWisdom/8) - (Target.EffectiveDefence/8) </h6>
-        
-        Effective wisdom is: <i>Wisdom * ( MP/( MaxMP/2 ) )</i><br>
-        Most Spells do <i>NOT</i> benefit from critical hits.<br>
-        <br>
-    </p>
-
+    <div type="button" class="collapsible">Expand</div>
+    <div class="content">
+        <p>
+            Natural Magic is derived from the Five Pillars (Fire, Earth, Metal, Water, and Wood).<br>
+        </p>
+        <p style="text-align: center;">
+            <b>Fire</b> is the element of consumption and death.<br>
+            <b>Earth</b> is the element of stability and growth.<br>
+            <b>Metal</b> is the element of division and luck.<br>
+            <b>Water</b> is the element of change and adaptability.<br>
+            <b>Wood</b> is the element of life and theft.<br>
+            <br>
+        </p>
+        <p>
+            Spells cost MP to cast. (Some spells also cost HP) If you command your monster to cast a spell that it can't afford, it will waste it's turn trying!<br>
+            Outside of battle, your monster will regain MP. Each time you take a step there is a % Chance to regain 1MP, based on how much MP is missing. (MP Missing/MP Maximum)<br>
+            <br>
+            Spells deal a random amount of damage up to the maximum calculated below:<br>
+        </p>
+            <h6 style="font-size: 100%;">Amount = (Caster.EffectiveWisdom/2) - (Target.EffectiveWisdom/8) - (Target.EffectiveDefence/8) </h6>
+        <p>
+            Effective wisdom is: <i>Wisdom * ( MP/( MaxMP/2 ) )</i><br>
+            Most Spells do <i>NOT</i> benefit from critical hits.<br>
+            <br>
+        </p>
+    </div>
     
     <h5 style="font-size: 150%;">Magic Contamination:</h5>
-    <p>
-        Each time a monster Casts a spell, they build up a small amount of Contamination. There is no known way to remove contamination from a monster, but there are methods manage it.<br>
-        Each of the Five Pillars are associated to two other pillers, via Generation and Subjugation.<br>
-        <br>
-        
-        <b>Fire</b> generates Earth, and Subjugates Metal.<br>
-        <b>Earth</b> generates Metal, and Subjugates Water.<br>
-        <b>Metal</b> generates Water, and Subjugates Wood.<br>
-        <b>Water</b> generates Wood, and Subjugates Fire.<br>
-        <b>Wood</b> generates Fire, and Subjugates Earth.<br>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Wu_Xing.png" width="300px" alt="Diagram of elemental progression already described above.">
-        <br>
-        When a monster acumulates new contamination, that contamination will try to subjugate it's appropriate element, consuming both and causing the subjugated element to generate the next element.<br>
-        <table style="border: 1px;">
-            <td style="text-align: left;">
-                <b>Example:</b> <i>If Monster A has the following Contamination: Fi0/Ea15/Me2/Wa7/Wo20, and gains 5 Earth Contamination. The 5 new Earth Contamination reacts with the 5 of the 7 Water Contamination and generates 5 Wood Contamination. resulting is a final Contamination of Fi0/Ea15/Me2/Wa2/Wo25</i><br>
-                <b>start:</b> Fi0/Ea15/Me2/Wa7/Wo20<br>
-                <b>New:</b> 5 Earth, (Earth Subjugates Water, Water Generates Wood)<br>
-                <b>Change:</b> +0 Earth, -5 Water, +5 Wood<br>
-                <b>end:</b> Fi0/Ea15/Me2/Wa2/Wo25<br>
-            </td>  
-        </table>
-        <br>
-        <table style="border: 1px;">
-            <td style="text-align: left;">
-                <b>start:</b> Fi0/Ea15/Me2/Wa2/Wo25<br>
-                <b>New:</b> 20 Wood, (Wood Subjugates Earth, Earth Generates Metal) but this time there is less Earth to subjugate, so some Wood remains.<br>
-                <b>Change:</b> +5 Wood, -15 Earth, +15 Metal<br>
-                <b>end:</b> Fi0/Ea0/Me17/Wa2/Wo30<br>
-            </td>  
-        </table>
-        <br>
-        As you can see, by ensuring that any new contamination can subjugate another contamination, the total stays the same. (Example 1 had a net change of 0, but Example 2 hat a net change of +5 because they took on more Wood Contamination than they had Earth for it to subjugate)<br>
-        <br>
-        While each type of contamination can be managed by subjugating and generating the 5 pillars, there is another type of contamination that cannot be Subjugated.<br>
-        <b><i>Void Contamination:</i></b> is generated when a monster has at least 1 Contamination in all 5 Pillars (after a new contamination has subjugated pre-existing contamination).<br>
-        <table style="border: 1px;">
-            <td style="text-align: left;">
-                <b>Example:</b> Fi0/Ea50/Me40/Wa30/Wo20<br>
-                <b>New:</b> 15 Metal, (Metal Subjugates Wood, Wood Generates Fire)<br>
-                <b>Change:</b> +0 Metal, -15 Wood, +15 Fire<br>
-                <b>result:</b> Fi15/Ea50/Me40/Wa30/Wo5<br>
-                <b>Finally:</b> All five pillars have more than 0 Contamination, so we -1 from each pillar and +1 Void Contamination. (Repeat until at least one pillar is back to 0 Contamination)<br>
-                <b>Change:</b> -5 each Pillar, +5 Void<br>
-            </td>  
-        </table>
-        <br>
-        The net change to Contamination was -20 this time, but 5 more of this monsters contamination can never again be subjugated.<br>
-        If a monster has a really high contamination that makes it hard to manage, converting it into Void Contamination can give you more breathing room, but doing this will inevitably kill your monster.<br>
-        Good Management of Magic Contamination is the best approach, and will prolong the life of your monster.<br>
-    </p>
+    <div type="button" class="collapsible">Expand</div>
+    <div class="content">
+        <p>
+            Each time a monster Casts a spell, they build up a small amount of Contamination. There is no known way to remove contamination from a monster, but there are methods manage it.<br>
+            Each of the Five Pillars are associated to two other pillers, via Generation and Subjugation.<br>
+            <br>
+        </p>
+        <p style="text-align: center;">
+            <b>Fire</b> generates Earth, and Subjugates Metal.<br>
+            <b>Earth</b> generates Metal, and Subjugates Water.<br>
+            <b>Metal</b> generates Water, and Subjugates Wood.<br>
+            <b>Water</b> generates Wood, and Subjugates Fire.<br>
+            <b>Wood</b> generates Fire, and Subjugates Earth.<br>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Wu_Xing.png" width="300px" alt="Diagram of elemental progression already described above.">
+        </p>
+        <p>
+            <br>
+            When a monster acumulates new contamination, that contamination will try to subjugate it's appropriate element, consuming both and causing the subjugated element to generate the next element.<br>
+        </p>
+            <table style="border: 1px;">
+                <td style="text-align: left;">
+                    <b>Example:</b> <i>If Monster A has the following Contamination: Fi0/Ea15/Me2/Wa7/Wo20, and gains 5 Earth Contamination. The 5 new Earth Contamination reacts with the 5 of the 7 Water Contamination and generates 5 Wood Contamination. resulting is a final Contamination of Fi0/Ea15/Me2/Wa2/Wo25</i><br>
+                    <b>start:</b> Fi0/Ea15/Me2/Wa7/Wo20<br>
+                    <b>New:</b> 5 Earth, (Earth Subjugates Water, Water Generates Wood)<br>
+                    <b>Change:</b> +0 Earth, -5 Water, +5 Wood<br>
+                    <b>end:</b> Fi0/Ea15/Me2/Wa2/Wo25<br>
+                </td>  
+            </table>
+            <br>
+            <table style="border: 1px;">
+                <td style="text-align: left;">
+                    <b>start:</b> Fi0/Ea15/Me2/Wa2/Wo25<br>
+                    <b>New:</b> 20 Wood, (Wood Subjugates Earth, Earth Generates Metal) but this time there is less Earth to subjugate, so some Wood remains.<br>
+                    <b>Change:</b> +5 Wood, -15 Earth, +15 Metal<br>
+                    <b>end:</b> Fi0/Ea0/Me17/Wa2/Wo30<br>
+                </td>  
+            </table>
+            <br>
+        <p>
+            As you can see, by ensuring that any new contamination can subjugate another contamination, the total stays the same. (Example 1 had a net change of 0, but Example 2 hat a net change of +5 because they took on more Wood Contamination than they had Earth for it to subjugate)<br>
+            <br>
+            While each type of contamination can be managed by subjugating and generating the 5 pillars, there is another type of contamination that cannot be Subjugated.<br>
+            <b><i>Void Contamination:</i></b> is generated when a monster has at least 1 Contamination in all 5 Pillars (after a new contamination has subjugated pre-existing contamination).<br>
+        </p>
+            <table style="border: 1px;">
+                <td style="text-align: left;">
+                    <b>Example:</b> Fi0/Ea50/Me40/Wa30/Wo20<br>
+                    <b>New:</b> 15 Metal, (Metal Subjugates Wood, Wood Generates Fire)<br>
+                    <b>Change:</b> +0 Metal, -15 Wood, +15 Fire<br>
+                    <b>result:</b> Fi15/Ea50/Me40/Wa30/Wo5<br>
+                    <b>Finally:</b> All five pillars have more than 0 Contamination, so we -1 from each pillar and +1 Void Contamination. (Repeat until at least one pillar is back to 0 Contamination)<br>
+                    <b>Change:</b> -5 each Pillar, +5 Void<br>
+                </td>  
+            </table>
+            <br>
+        <p>
+            The net change to Contamination was -20 this time, but 5 more of this monsters contamination can never again be subjugated.<br>
+            If a monster has a really high contamination that makes it hard to manage, converting it into Void Contamination can give you more breathing room, but doing this will inevitably kill your monster.<br>
+            Good Management of Magic Contamination is the best approach, and will prolong the life of your monster.<br>
+        </p>
+    </div>
 
     <h5 style="font-size: 150%;">Monsters</h5>
-    <p>
-        For now I have a few stand-in monsters. When I start to develop the Breeding and Phylogeny systems, I'll expand this section.<br>
-        <br>
+    <div type="button" class="collapsible">Expand</div>
+    <div class="content">
+        <p>
+            For now I have a few stand-in monsters. When I start to develop the Fusion, Breeding, and Phylogeny systems, I'll expand this section.<br>
+            <br>
 
-        <b>Giant Rat</b> (Beast)<br>
-        A dog sized rat.<br>
-        This bulky creature is surprisingly resilient and packs a hefty wallop, though it is slow to act.<br>
-        Starting Spells: Meditation, Earth Bolt<br>
-        <br>
+            <b>Giant Rat</b> (Beast)<br>
+            A dog sized rat.<br>
+            This bulky creature is surprisingly resilient and packs a hefty wallop, though it is slow to act.<br>
+            Starting Spells: Meditation, Earth Bolt<br>
+            <br>
 
-        <b>Mud Slipper</b> (Aquatic)<br>
-        This small fish has the surprising ability to live on land for short periods of time, thanks to a special organ that can store dissolved oxygen.<br>
-        What they lack in power, they make up in Smarts and Agility.<br>
-        Starting Spells: Water Bolt<br>  
-        <br>
+            <b>Mud Slipper</b> (Aquatic)<br>
+            This small fish has the surprising ability to live on land for short periods of time, thanks to a special organ that can store dissolved oxygen.<br>
+            What they lack in power, they make up in Smarts and Agility.<br>
+            Starting Spells: Water Bolt<br>  
+            <br>
 
-        <b>Giant Centipede</b> (Insect)<br>
-        This man sized bug with a hundred legs, is well rounded with physical might and magical force.<br>
-        Though it's chitin is a bit flimsy, it is very territorial.<br>
-        Starting Spells: Void Bolt,<br>
-        <br>
+            <b>Giant Centipede</b> (Insect)<br>
+            This man sized bug with a hundred legs, is well rounded with physical might and magical force.<br>
+            Though it's chitin is a bit flimsy, it is very territorial.<br>
+            Starting Spells: Void Bolt,<br>
+            <br>
 
-        <b>Bed Biter</b> (Insect)<br>
-        This insect is about the size of a small cat, and can be as feisty too when backed into a corner.<br>
-        It has the potential for strong magics, but doesn't know any spells naturally.<br>
-        Starting Spells:<br>
-        <br>
+            <b>Bed Biter</b> (Insect)<br>
+            This insect is about the size of a small cat, and can be as feisty too when backed into a corner.<br>
+            It has the potential for strong magics, but doesn't know any spells naturally.<br>
+            Starting Spells:<br>
+            <br>
 
-        <b>Error Ant</b> (Insect)<br>
-        Legends say that when an army ant is separated from it's colony, if it can survive eight years, it will grow to the size of a baby bear and gain the intelligence of small human.<br>
-        In reality, the Error Ant was an unfortunate result of a magical experiment turned invasive species.<br>
-        Despite their magical origin, they don't possess any spells, but instead have an exceptional strength and a deadly aggression.<br>
-        Starting Spells:<br>
-        <br>
+            <b>Error Ant</b> (Insect)<br>
+            Legends say that when an army ant is separated from it's colony, if it can survive eight years, it will grow to the size of a baby bear and gain the intelligence of small human.<br>
+            In reality, the Error Ant was an unfortunate result of a magical experiment turned invasive species.<br>
+            Despite their magical origin, they don't possess any spells, but instead have an exceptional strength and a deadly aggression.<br>
+            Starting Spells:<br>
+            <br>
 
-        <b>Carnivorous Canary</b> (Avian)<br>
-        Despite it's name, the Carniverous Canary is not actually a Canary.<br>
-        Thanks to convergent evolution, this bird has incidentally evolved to appear almost indistinguishable from canaries.<br>
-        These teritorial birds are exceptionally agile, and have a bespoke magic ability to weaponize air. But their frail form means that, <i>if you can hit them</i>, they crumple easily.<br>
-        Starting Spells: Air Bolt<br>
-        <br>
+            <b>Carnivorous Canary</b> (Avian)<br>
+            Despite it's name, the Carniverous Canary is not actually a Canary.<br>
+            Thanks to convergent evolution, this bird has incidentally evolved to appear almost indistinguishable from canaries.<br>
+            These teritorial birds are exceptionally agile, and have a bespoke magic ability to weaponize air. But their frail form means that, <i>if you can hit them</i>, they crumple easily.<br>
+            Starting Spells: Air Bolt<br>
+            <br>
 
-        <b>Magic Sword</b> (Material)<br>
-        It is believed that the emotions of a person are imbued into the tools they use.<br>
-        Magic Swords are typically thought to be brought to life from an ancient warrior's angry or regret.<br>
-        Though most magic swords are actually carving knives, parring knives, and other such tools.<br>
-        Starting Spells:<br>
-        <br>
+            <b>Magic Sword</b> (Material)<br>
+            It is believed that the emotions of a person are imbued into the tools they use.<br>
+            Magic Swords are typically thought to be brought to life from an ancient warrior's angry or regret.<br>
+            Though most magic swords are actually carving knives, parring knives, and other such tools.<br>
+            Starting Spells:<br>
+            <br>
 
-        <b>Orange Ooze</b> (Slime)<br>
-        This glob of orange-yellow ooze is actually alive, but lacks an sign of conscious thought.<br>
-        Despite it's mindlessness, it still manages to infuse it's Citric Acid with Arcane Fire, flinging off-brand fire bolts at any detected stimuli.<br>
-        This ooze is often used as an resource for supplement manufacturing, and like most slimes is also studied for it's inexplicable magic ability.<br>
-        Starting Spells: Fire Bolt<br>
-        <br>
-        
-        
-    </p>
+            <b>Orange Ooze</b> (Slime)<br>
+            This glob of orange-yellow ooze is actually alive, but lacks an sign of conscious thought.<br>
+            Despite it's mindlessness, it still manages to infuse it's Citric Acid with Arcane Fire, flinging off-brand fire bolts at any detected stimuli.<br>
+            This ooze is often used as an resource for supplement manufacturing, and like most slimes is also studied for it's inexplicable magic ability.<br>
+            Starting Spells: Fire Bolt<br>
+            <br>
+            
+            
+        </p>
+    </div>
 
+    <br>
+    <br>
     <a href="javascript:history.back()">Return to Game</a>
+    <div style="height: 50px;">
+
+    </div>
 
     <script src="collapsible.js"></script>
     
