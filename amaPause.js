@@ -6,6 +6,8 @@ let selectingSpell = false;
 let selectingItem = false;
 let selectedItemIndex = 0;
 
+let menuState = "PauseList"; //
+
 function LoadPause(){
     selection = 0;
     pauseList = ["Resume", "Party"];
@@ -242,6 +244,7 @@ function PauseMenuInputHandler(input){
                 for (i=0; i < Player.inventory.length; i++){
                     menuList.push(Player.inventory[i]);
                 }
+                selection = 0;
                 drawPauseMenu();
             }
             else if (selectingItem == false && selectingTarget == true){

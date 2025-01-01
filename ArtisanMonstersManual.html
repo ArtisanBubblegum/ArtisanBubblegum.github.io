@@ -16,6 +16,32 @@
             text-align: center;
             border: 1px solid black;
         }
+
+        /* Style the button that is used to open and close the collapsible content */
+        .collapsible {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active, .collapsible:hover {
+            background-color: #ccc;
+        }
+
+        /* Style the collapsible content. Note: hidden by default */
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
     </style>
     <link rel="stylesheet" href="/assets/index-45778437.css">
 </head>
@@ -28,8 +54,13 @@
     </h2>
     <br>
     <h3>Artisan Monsters: Alpha</h3>
-    <a href="/ArtisanMonstersAlpha.html">Return to Game</a>
-    <a href="javascript:history.back()">Go Back</a>
+    <a href="javascript:history.back()">Return to Game</a>
+
+    <button type="button" class="collapsible">Open Collapsible</button>
+    <div class="content">
+        <p>Lorem ipsum...</p>
+    </div>
+
     <h4>User Manual</h4>
     <p>
         This is a work in progress, these sections are to help illucidate systems and concepts that don't have proper in game explination.<br>
@@ -232,6 +263,9 @@
         
     </p>
 
-    <a href="/ArtisanMonstersAlpha.html">Return to Game</a>
+    <a href="javascript:history.back()">Return to Game</a>
+
+    <script src="collapsible.js"></script>
+    
 </body>
 </html>
