@@ -64,6 +64,9 @@ function nameInputeHandler(input,header){
         case "A":
             switch(AlphabetList[selection]){
                 case "✓":
+                    if (newName == ""){
+                        newName = "?name?";
+                    }
                     return true;
                     break;
                 case "⌫":
