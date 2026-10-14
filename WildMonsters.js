@@ -7,16 +7,16 @@
 //     "EXP" : 0,
 //     "expToLevel" : 20,
 //     "BattleStats" : {
-//         "HPMax" : 10,
+//         "HPMax" : 10, // 1p
 //         "HPCur" : 10,
-//         "MPMax" : 100,
-//         "MPCur" : 100,
-//         "Attack" : 10,
-//         "Defence" : 10,
+//         "MPMax" : 10, // 1p
+//         "MPCur" : 10,
+//         "Attack" : 10, // 1p
+//         "Defence" : 10, // 1p
 //         "Defending": false,
-//         "Wisdom" : 10,
-//         "Speed" : 10,
-//         "Luck" : 5,
+//         "Wisdom" : 10, // 1p
+//         "Speed" : 10, // 1p
+//         "Luck" : 5, // 1p
 //         "Aflictions" : []
 //     },
 //     "Action" : "defend",
@@ -29,6 +29,70 @@
 // }
 
 
+
+var Earth_Pony = {
+    "Name" : "Earth Pony",
+    "Genus" : "Earth Pony",
+    "Family" : "Beast",
+    "Age" : 1,
+    "LifeSpan" : 10950,       //How many days before a Monster starts to roll their Death Chance
+    "DeathChance" : 0.00125,  // % Chance to Die. Rolled each time age is increased over LifeSpan.
+                                // 60% Chance to die by  733 Days  ~2 Years
+                                // 90% Chance to die by 1841 Days  ~5 Years
+                                // 96% Chance to die by 2574 Days  ~7 Years
+                                // 99% Chance to die by 3682 Days ~10 Years
+    "Level" : 1,
+    "EXP" : 0,
+    "expToLevel" : 28,      // 1+( (BattleStats_Total^3) / 50 ) = expToLevel (First Level) = 1+( (10^3) / 50 ) = 27.62
+                            // expToLevel * GrowthRate = Initial expToLevel (Rounded Up)
+    "BattleStats" : {       //Total: 11
+        "HPMax" : 20,       //+10
+        "HPCur" : 20, 
+        "MPMax" : 1,        //-9
+        "MPCur" : 1,
+        "Attack" : 10,      //+0
+        "Defence" : 20,     //+10
+        "Defending": false,
+        "Wisdom" : 10,      //+0
+        "Speed" : 10,       //+0
+        "TurnValue" : 0,
+        "Luck" : 5,         //+0
+        "Aflictions" : []
+    },
+    "GrowthStats" : {       //Total: 6 // 2 is VERY FAST, 3 is Fast, 4 is Normal, 5 is Slow, 6 is VERY SLOW
+        "HP" : 4,           //+3
+        "MP" : 0,           //-1
+        "Attack" : 1,       //+0
+        "Defence" : 3,      //+2
+        "Wisdom" : 1,       //+0
+        "Speed" : 2,        //+1
+        "Luck" : 2,         //+1
+        "GrowthRate" : 1.6 //(10+GrowthStats_Total)/100  =  (10+6)/100 = 0.16 //expToLevel * GrowthRate = expToLevel (next Level, round up)
+    },
+    "Spells" : [Meditate, EarthBolt],
+    "LearnableSpells" : [WoodBolt, FireT3, MetalT2Crit],
+    "Tactic" : aggressivePhysical,
+    Tactics(){ //Aggressive
+        if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
+            this.Action = "attack";
+        }
+        else {
+            if (Math.random() <= this.BattleStats.MPCur/this.BattleStats.MPMax){
+                this.Action = Meditate;
+            }
+            else {
+                this.Action = "defend";
+            }
+        }
+    },
+    "Action" : "fight",
+    "Target" : {},
+
+    reset(){
+        this.BattleStats.HPCur = this.BattleStats.HPMax;
+        this.BattleStats.Defending = false;
+    }
+}
 
 var Giant_Rat = {
     "Name" : "Giant Rat",

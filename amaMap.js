@@ -18,7 +18,7 @@ cityMap = {
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
-        [1,0], [1,0], [1,0], [1,0], [1,0], [1,0], [1,0],
+        [1,0], [1,0], [1,0], ["R",0], [1,0], [1,0], [1,0],
         [1,0],["Pla"], ["ce"], [" H"], ["old"], ["er"], [1,0],
             ],
     MapLevel : 0,
@@ -195,7 +195,12 @@ let MapObj = {
                 }
                 
                 if ( curIndex == playerIndex){
-                    mapText += "[ P ]";
+                    if (Player.Name.toLowerCase() == "aku"){
+                        mapText += " ☠ ";
+                    }
+                    else {
+                        mapText += "[ P ]";
+                    }
                 }
                 else if (this.GetMapID(curIndex)[0] == 1){
                     mapText += "[|||]";
@@ -211,6 +216,9 @@ let MapObj = {
                 }
                 else if (this.GetMapID(curIndex)[0] == "H"){
                     mapText += "<H>"
+                }
+                else if (this.GetMapID(curIndex)[0] == "R"){
+                    mapText += "[ R ]"
                 }
                 else if (this.GetMapID(curIndex)[0] == "D1" || this.GetMapID(curIndex)[0] == "D2"){
                     mapText += "[ D ]";
@@ -309,9 +317,15 @@ let MapObj = {
                     break;
                 case "H":
                     if (Player.BattleStats.HPCur > 0){
-                        Player.BattleStats.HPCur = Player.BattleStats.HPMax;
-                        Player.BattleStats.MPCur = Player.BattleStats.MPMax;
-                        dialogObj.write(Player.Name + " is fully healed!");
+                        if (Player.BattleStats.HPCur < Player.BattleStats.HPMax){
+                            Player.BattleStats.HPCur = Player.BattleStats.HPMax;
+                            Player.BattleStats.MPCur = Player.BattleStats.MPMax;
+                            dialogObj.write(Player.Name + " is fully healed!");
+                        }
+                        else{
+                            //dialogObj.write(Player.Name + " doesn't need healing.");
+                            dialogObj.write("...");
+                        }
                     }  
                     else {
                         Player.reset();
@@ -320,15 +334,24 @@ let MapObj = {
 
                     for (i = 0; i < PartyList.length; i++){
                         if (PartyList[i].BattleStats.HPCur > 0){
-                            PartyList[i].BattleStats.HPCur = PartyList[i].BattleStats.HPMax;
-                            PartyList[i].BattleStats.MPCur = PartyList[i].BattleStats.MPMax;
-                            dialogObj.write(PartyList[i].Name + " is fully healed!");
+                            if (PartyList[i].BattleStats.HPCur < PartyList[i].BattleStats.HPMax){
+                                PartyList[i].BattleStats.HPCur = PartyList[i].BattleStats.HPMax;
+                                PartyList[i].BattleStats.MPCur = PartyList[i].BattleStats.MPMax;
+                                dialogObj.write(PartyList[i].Name + " is fully healed!");
+                            }
+                            else{
+                                //dialogObj.write(PartyList[i].Name + " doesn't need healing.");
+                                dialogObj.write("...");
+                            }
                         }  
                         else {
                             PartyList[i].reset();
                             dialogObj.write(PartyList[i].Name + " is reborn!");
                         }  
                     }
+                    break;
+                case "R" :
+                    dialogObj.write("Horse Races to be Added Soon.")
                     break;
                 case "D1" :
                     this.Name = "dungeon";

@@ -65,7 +65,7 @@ function nameInputeHandler(input,header){
             switch(AlphabetList[selection]){
                 case "✓":
                     if (newName == ""){
-                        newName = "?name?";
+                        newName = "Player001";
                     }
                     return true;
                     break;

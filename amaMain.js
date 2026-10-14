@@ -50,7 +50,7 @@ function keyboardInput(keyName){
             break;
         case "ShiftLeft":
         case "ShiftRight":
-            if (gameState="name"){
+            if (gameState=="name"){
                 MainLoop([0, 'Shift']);
             }
             break;
@@ -102,6 +102,12 @@ function NameLoop(input){
     if (nameInputeHandler(checkInput(input),nameBoardHeader)){
         ApplyNewName(nameTarget);
         changeState(previousState);
+
+        //Remove this if and replace with manual way to name monsters.
+        if (Player.Name.toLowerCase() == "megan williams" || Player.Name.toLowerCase() == "megan"){
+            PartyList[0].Name = "Apple Jack";
+            PartyList[1].Name = "Pinkie Pie";
+        }
     }
 }
 

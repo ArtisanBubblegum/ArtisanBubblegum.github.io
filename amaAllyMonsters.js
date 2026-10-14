@@ -60,7 +60,7 @@ var Ally1 = {
         this.DeathChance = target.DeathChance;
         this.Level = 1;
         this.EXP = 0;
-        this.expToLevel = Math.floor(target.expToLevel * target.GrowthStats.GrowthRate);
+        this.expToLevel = Math.ceil(target.expToLevel * target.GrowthStats.GrowthRate);
         this.BattleStats.HPMax = target.BattleStats.HPMax;
         this.BattleStats.HPCur = target.BattleStats.HPCur;
         this.BattleStats.MPMax = target.BattleStats.MPMax;
@@ -151,7 +151,7 @@ var Ally1 = {
             }
         }
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
-        this.expToLevel = Math.floor(this.expToLevel);
+        this.expToLevel = Math.ceil(this.expToLevel);
         //dialogObj.write("-");
     },
     addMagicCon (fireAdd, earthAdd, metalAdd, waterAdd, woodAdd, voidAdd){
@@ -252,7 +252,7 @@ var Ally1 = {
         }
         
         if (this.MagicCon.FireCon >= 100){
-            dialogObj.write("+++ " + this.Name + " combusts into acrane fire, dieing of Fire Contamination. +++");
+            dialogObj.write("+++ " + this.Name + " combusts into arcane fire, dieing of Fire Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -326,7 +326,7 @@ var Ally1 = {
             }
         }
         else if (this.MagicCon.VoidCon >= 50 && startingVoid < 50){
-            dialogObj.write("++ " + this.Name + " become a little blurry around the edges. ++")
+            dialogObj.write("++ " + this.Name + " became a little blurry around the edges. ++")
         }
         
     }
@@ -364,7 +364,7 @@ function LoadParty(){
     PartyList[0].MagicCon = {...Ally1.MagicCon};
     PartyList[0].Name = "George Markus III";
     PartyList[0].Target = "";
-    PartyList[0].populate(Giant_Rat);
+    PartyList[0].populate(Earth_Pony);
 
     PartyList.push({...Ally1});
     PartyList[1].BattleStats = {...Ally1.BattleStats};
@@ -372,5 +372,5 @@ function LoadParty(){
     PartyList[1].MagicCon = {...Ally1.MagicCon};
     PartyList[1].Name = "Mortus the Quick";
     PartyList[1].Target = "";
-    PartyList[1].populate(Carnivorous_Canary);
+    PartyList[1].populate(Earth_Pony);
 }
