@@ -35,8 +35,8 @@
     </h2>
     <br>
     <h3>Artisan Monsters: Alpha</h3>
-    <table id="PrimaryTable" style="width: 500px; min-height: 500px; margin-left: auto; margin-right: auto;"> <!-- aspect-ratio: 1/1; -->
-        <tr style="height: 100%;">
+    <table id="PrimaryTable" style="width: 360px; min-height: 360px; margin-left: auto; margin-right: auto;"> <!-- aspect-ratio: 1/1; -->
+        <tr style="height: 360px;">
             <td id="MapCanvas" style="white-space: pre; width: auto;">
                 <!-- <p id="MapCanvas" style="white-space: pre; width: auto;">
                     MapCanvis.
@@ -44,32 +44,30 @@
             </td>
             <!-- <td>
                 <p id="MonCanvas" style="white-space: pre; text-align: left; width: auto;">
-                    MonCavis.
+                    MonCavis. 
                 </p>
             </td> -->
         </tr>
         <tr style="height: auto; width: 100%;">
             <td colspan="2">
-                <p id="DialogCanvas" style="white-space: pre; min-width: 500px; margin-bottom: 1px; margin-top: 1px; margin-left: auto; margin-right: auto;">
+                <p id="DialogCanvas" style="white-space: pre; min-width: 360px; margin-bottom: 1px; margin-top: 1px; margin-left: auto; margin-right: auto;">
                     Dialog.
                 </p>
             </td>
         </tr>
         <tr style="height: 0;">
             <td colspan="2">
-                <table id="InputsTable" style="width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 1px; margin-top: 1px;">
+                <table id="InputsTable" style="width: 360px; margin-left: auto; margin-right: auto; margin-bottom: 1px; margin-top: 1px;">
                     <tr>
-                        <td style="width: 100px;"></td>
-                        <td style="width: 100px;">
+                        <td style="width: 60px;"></td>
+                        <td style="width: 60px;">
                             <!-- <input type="button" value="Up" onclick="MapObj.update([0,-1])"> -->
                             <input type="button" value="Up" onclick="MainLoop([0,-1])">
                         </td>
-                        <td style="width: 100px;"></td>
-
-                        <td style="width: 100px;"></td>
-                        <td style="width: 100px;"></td>
-                        <td style="width: 100px;"></td>
-                        <td style="width: 100px;"></td>
+                        <td style="width: 60px;"></td>
+                        <td style="width: 60px;"></td>
+                        <td style="width: 60px;"></td>
+                        <td style="width: 60px;"></td>
                     </tr>
                     <tr>
                         <td>
@@ -81,14 +79,12 @@
                             <!-- <input type="button" value="Right" onclick="MapObj.update([1,0])"> -->
                             <input type="button" value="Right" onclick="MainLoop([1,0])">
                         </td>
-                        
                         <td></td>
                         <td></td>
                         <td>
                             <!-- <input type="button" value="B" onclick="StepBattle('defend')"> -->
                             <input type="button" value="B" onclick="MainLoop([0,'B'])">
                         </td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -97,7 +93,6 @@
                             <input type="button" value="Down" onclick="MainLoop([0,1])">
                         </td>
                         <td></td>
-                        
                         <td>
                             Artisan
                         </td>
@@ -105,7 +100,6 @@
                             <!-- <input type="button" value="A" onclick="StepBattle('attack')"> -->
                             <input type="button" value="A" onclick="MainLoop([0,'A'])">
                         </td>
-                        <td></td>
                         <td></td>
                     </tr>
                 </table>
