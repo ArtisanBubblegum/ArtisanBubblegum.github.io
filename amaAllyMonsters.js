@@ -1,7 +1,7 @@
 var PartyList = []
 
 var Ally1 = {
-    "Name" : "George Markus",
+    "Name" : "George",
     "Genus" : "Giant Rat",
     "GenusObj" : {},
     "Family" : "Beast",
@@ -362,7 +362,7 @@ function LoadParty(){
     PartyList[0].BattleStats = {...Ally1.BattleStats};
     PartyList[0].GrowthStats = {...Ally1.GrowthStats};
     PartyList[0].MagicCon = {...Ally1.MagicCon};
-    PartyList[0].Name = "George Markus III";
+    PartyList[0].Name = "George";
     PartyList[0].Target = "";
     PartyList[0].populate(Earth_Pony);
 
@@ -370,7 +370,7 @@ function LoadParty(){
     PartyList[1].BattleStats = {...Ally1.BattleStats};
     PartyList[1].GrowthStats = {...Ally1.GrowthStats};
     PartyList[1].MagicCon = {...Ally1.MagicCon};
-    PartyList[1].Name = "Mortus the Quick";
+    PartyList[1].Name = "Mortus";
     PartyList[1].Target = "";
     PartyList[1].populate(Earth_Pony);
 }

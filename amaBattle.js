@@ -566,8 +566,8 @@ function drawBattle(){
     let text = "";
     for (i = 0; i < EnemyList.length; i++){
         if (EnemyList[i].BattleStats.HPCur > 0){
-            text += EnemyList[i].Name + " (Level: " + EnemyList[i].Level + "):<br>HP: " + EnemyList[i].BattleStats.HPCur + " / " + EnemyList[i].BattleStats.HPMax + "<br>";
-            text += "MP: "+ EnemyList[i].BattleStats.MPCur +" / "+ EnemyList[i].BattleStats.MPMax + "<br><br>";    
+            text += EnemyList[i].Name + "<br>(Level: " + EnemyList[i].Level + ")<br>HP: " + EnemyList[i].BattleStats.HPCur + "/" + EnemyList[i].BattleStats.HPMax + "<br>";
+            text += "MP: "+ EnemyList[i].BattleStats.MPCur +"/"+ EnemyList[i].BattleStats.MPMax + "<br><br>";    
         }
         else {
             text = "R.I.P."
@@ -578,8 +578,8 @@ function drawBattle(){
     
     for (i = 0; i < AllyList.length; i++){
         if (AllyList[i].BattleStats.HPCur > 0){
-            text += AllyList[i].Name + " (Level: " + AllyList[i].Level + "):<br>HP: " + AllyList[i].BattleStats.HPCur + " / " + AllyList[i].BattleStats.HPMax + "<br>";
-            text += "MP: "+ AllyList[i].BattleStats.MPCur +" / "+ AllyList[i].BattleStats.MPMax + "<br><br>";    
+            text += AllyList[i].Name + "<br>(Level: " + AllyList[i].Level + ")<br>HP: " + AllyList[i].BattleStats.HPCur + "/" + AllyList[i].BattleStats.HPMax + "<br>";
+            text += "MP: "+ AllyList[i].BattleStats.MPCur +"/"+ AllyList[i].BattleStats.MPMax + "<br><br>";    
         }
         else {
             text = "R.I.P."

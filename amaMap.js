@@ -1,11 +1,11 @@
 ranchMap = {
     Name : "ranchMap",
     Map : [[5,5],
-        [1,0], [1,0], ["D1",0], [1,0], [1,0], 
-        [1,0], [0,0], [0,0], ["H",0], [1,0], 
-        [1,0], [0,0], [0,0], [0,0], [1,0], 
-        [1,0], [0,0], [0,0], [0,0], [1,0], 
-        [1,0], [1,0], ["cityMap",0], [1,0], [1,0], 
+        [1,0], 	[1,0], 	["D1",0], 			[1,0], 	[1,0], 
+        [1,0], 	[0,0], 	[0,0], 				["H",0], [1,0], 
+        [1,0], 	[0,0], 	[0,0], 				[0,0], 	[1,0], 
+        [1,0], 	[0,0], 	[0,0], 				[0,0], 	[1,0], 
+        [1,0], 	[1,0], 	["cityMap",0], 	[1,0], 	[1,0], 
             ],
     MapLevel : 0,
     PlayerPosition : [3, 3]
@@ -13,13 +13,14 @@ ranchMap = {
 
 cityMap = {
     Name : "cityMap",
-    Map : [[7,6],
+    Map : [[7,7],
         [1,0], [1,0], [1,0], [ranchMap,0], [1,0], [1,0], [1,0],
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
         [1,0], [1,0], [1,0], ["R",0], [1,0], [1,0], [1,0],
-        [1,0],["Pla"], ["ce"], [" H"], ["old"], ["er"], [1,0],
+        [1,0],[" Pla"], ["ce"], ["  H"], ["old"], ["er "], [1,0],
+        [1,0], [1,0], [1,0], [1,0], [1,0], [1,0], [1,0],
             ],
     MapLevel : 0,
     PlayerPosition : [4, 2]
@@ -32,7 +33,8 @@ let MapObj = {
     Map : ranchMap.Map,
     MapLevel : 0,
     PlayerPosition : ranchMap.PlayerPosition,
-    ViewRange : 3,
+    ViewRange : 4,
+    itemList: [],
 
     mapMaker(x, y){
         if (x < 5) { x = 5;}
@@ -92,7 +94,7 @@ let MapObj = {
         }
         let index = location[1]*this.Map[0][0]; //location[Y] * map[Width] "+Y=South, -Y=North"
         index -= this.Map[0][0]; //-map[width]
-        index += location[0]; // +location[X] "+X=East, -Y=West"  
+        index += location[0]; // +location[X] "+X=East, -X=West"  
         return index;
     },
     indexToLocation(index){
@@ -174,8 +176,16 @@ let MapObj = {
         let playerIndex = this.locationToIndex(this.PlayerPosition)
         if (this.PlayerPosition[1] < this.ViewRange + 1){
             count = this.ViewRange - this.PlayerPosition[1] + 1;
+            //xcount = this.ViewRange - this.PlayerPosition[0] + 1;
+            //xcount += this.PlayerPosition[0] - (this.Map[0][0] - this.ViewRange);
             while (count > 0){
-                mapText += "\r\n";
+				xcount = this.ViewRange * 2;
+				xcount ++;
+				while (xcount > 0){
+					mapText += "+++"; //above view range, Fill in.
+					xcount--;
+				}
+                mapText += "\r\n"; //above view range, line return until in range
                 count--;
             }
         }
@@ -189,46 +199,46 @@ let MapObj = {
                 if (this.PlayerPosition[0] < this.ViewRange + 1 && (curIndex == 1 || (curIndex-1) % this.Map[0][0] == 0) ){
                     count = this.ViewRange - this.PlayerPosition[0] + 1;
                     while (count > 0){
-                        mapText += "        ";
+                        mapText += "+++"; //left-side out-of-bounds fill
                         count--;
                     }
                 }
                 
                 if ( curIndex == playerIndex){
                     if (Player.Name.toLowerCase() == "aku"){
-                        mapText += " ☠ ";
+                        mapText += "-☠-";
                     }
                     else {
-                        mapText += "[ P ]";
+                        mapText += "-P-";
                     }
                 }
                 else if (this.GetMapID(curIndex)[0] == 1){
-                    mapText += "[|||]";
+                    mapText += "[Ж]";
                 }
                 else if (this.GetMapID(curIndex)[0] == 0){
-                    mapText += "        ";
+                    mapText += " • ";
                 }
                 else if (this.GetMapID(curIndex)[0] == "M"){
-                    mapText += "[ M ]";
+                    mapText += "-M-";
                 }
                 else if (this.GetMapID(curIndex)[0] == "item"){
-                    mapText += "[ $ ]"
+                    mapText += "-$-"
                 }
                 else if (this.GetMapID(curIndex)[0] == "H"){
                     mapText += "<H>"
                 }
                 else if (this.GetMapID(curIndex)[0] == "R"){
-                    mapText += "[ R ]"
+                    mapText += "[ ]"
                 }
                 else if (this.GetMapID(curIndex)[0] == "D1" || this.GetMapID(curIndex)[0] == "D2"){
-                    mapText += "[ D ]";
+                    mapText += "[ ]";
                 }
                 else if (typeof(this.GetMapID(curIndex)[0]) == "object"){
                     if (this.Name == "dungeon"){
-                        mapText += "[ E ]"
+                        mapText += "[ ]"
                     }
                     else {
-                        mapText += "[     ]"
+                        mapText += "[ ]"
                     }
                 }
                 else {
@@ -239,10 +249,10 @@ let MapObj = {
                     count = this.Map[0][0] - this.ViewRange;
                     count = this.PlayerPosition[0] - count;
                     while (count > 0){
-                        mapText += "        ";
+                        mapText += "+++"; //right side out-of-bounds fill
                         count--;
                     }
-                    mapText += "\r\n";
+                    mapText += "\r\n"; //end of line return
                 }
             }
             curIndex++;
@@ -251,7 +261,13 @@ let MapObj = {
             count = this.Map[0][1] - this.ViewRange;
             count = this.PlayerPosition[1] - count;
             while (count > 0){
-                mapText += "\r\n";
+                xcount = this.ViewRange * 2;
+				xcount ++;
+				while (xcount > 0){
+					mapText += "+++"; //below view range, Fill in.
+					xcount--;
+				}
+                mapText += "\r\n"; //below view range, line return until in range
                 count--;
             }
         }
@@ -358,38 +374,38 @@ let MapObj = {
                     this.MapLevel += 1;
                     this.mapMaker(13,13);
                     this.spawnMonster(20);
-                    let items = [];
+                    this.itemList = [];
                     for (i=0; i<100; i++){
                         if (i < 45){
-                            items.push(HealingPotion);
+                            this.itemList.push(HealingPotion);
                         }
                         else if (i < 90){
-                            items.push(MagicEnergyPotion);
+                            this.itemList.push(MagicEnergyPotion);
                         }
                         else {
-                            items.push(RebirthCyrstal);
+                            this.itemList.push(RebirthCyrstal);
                         }
                     }
-                    this.spawnItem(Math.floor((Math.random()*3) + 1), items);
-                    break
+                    this.spawnItem(Math.floor((Math.random()*3) + 1), this.itemList);
+                    break;
                 case "D2" :
                     this.MapLevel -= 1;
                     this.mapMaker(13,13);
                     this.PlayerPosition[1] = 2;
                     this.spawnMonster(20);
-                    items = [];
+                    this.itemList = [];
                     for (i=0; i<100; i++){
                         if (i < 45){
-                            items.push(HealingPotion);
+                            this.itemList.push(HealingPotion);
                         }
                         else if (i < 90){
-                            items.push(MagicEnergyPotion);
+                            this.itemList.push(MagicEnergyPotion);
                         }
                         else {
-                            items.push(RebirthCyrstal);
+                            this.itemList.push(RebirthCyrstal);
                         }
                     }
-                    this.spawnItem(Math.floor((Math.random()*3) + 1), items);
+                    this.spawnItem(Math.floor((Math.random()*3) + 1), this.itemList);
                     break;
                 default:
                     console.log("Stopped at ", this.PlayerPosition);

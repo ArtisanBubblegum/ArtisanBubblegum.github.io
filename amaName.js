@@ -1,7 +1,9 @@
-var AlphabetList = ["A","B","C","D","E","F","G","H","I","J",
-                    "K","L","M","N","0","P","Q","R","S","T",
-                    "U","V","W","X","Y","Z"," ",".","?","!",
-                    "⇧","⌫","✓"," "," "," "];
+var AlphabetList = [	"A","B","C","D","E","F","G","H",
+								"I","J","K","L","M","N","0","P",
+								"Q","R","S","T","U","V","W","X",
+								"Y","Z",".","?","!"," "," "," ",
+								"|","-","+"," "," "," "," "," "];
+var alphaWidth = 8;
 var isCapped = true;
 var newName = "";
 var nameBoardHeader = "Your Name: "
@@ -22,57 +24,57 @@ function ApplyNewName(monster){
 function nameInputeHandler(input,header){
     switch(input[1]){
         case -1:
-            selection -= 10;
-            if (selection < 0 && selection > -8){
-                selection += 30;
+            selection -= alphaWidth;
+            if (selection < 0 && selection > -6){
+                selection += alphaWidth*4;
             }
-            else if (selection <= -8){
-                selection += 40;
+            else if (selection <= -6){
+                selection += alphaWidth*5;
             }
             break;
         case 1:
-            selection += 10;
-            if (selection > 32 && selection < 40){
-                selection = 32;
+            selection += alphaWidth;
+            if (selection >= 35 && selection <= 39){
+                selection = 34;
             }
             else if (selection >= 40){
-                selection -= 40;
+                selection -= alphaWidth*5;
             }
             break;
         case 0:
             switch(input[0]){
                 case -1:
                     selection -= 1;
-                    if (selection == -1 || selection == 9 || selection == 19){
-                        selection += 10;
+                    if (selection == -1 || selection == alphaWidth-1 || selection == (alphaWidth*2)-1 || selection == (alphaWidth*3)-1){
+                        selection += alphaWidth;
                     }
-                    else if (selection == 29){
-                        selection = 32
+                    else if (selection == 31){
+                        selection = 34
                     }
                     break;
                 case 1:
                     selection += 1;
-                    if (selection == 10 || selection == 20 || selection == 30){
-                        selection -= 10;
+                    if (selection == alphaWidth || selection == alphaWidth*2 || selection == alphaWidth*3 || selection == alphaWidth*4){
+                        selection -= 8;
                     }
-                    else if (selection == 33){
-                        selection = 30;
+                    else if (selection == 35){
+                        selection = 32;
                     }
                     break;
             }
             break;
         case "A":
             switch(AlphabetList[selection]){
-                case "✓":
+                case "+":
                     if (newName == ""){
                         newName = "Player001";
                     }
                     return true;
                     break;
-                case "⌫":
+                case "-":
                     newName = newName.slice(0,-1);
                     break;
-                case "⇧":
+                case "|":
                     for (i=0;i < AlphabetList.length - 4; i++){
                         if (isCapped){
                             AlphabetList[i] = AlphabetList[i].toLowerCase();
@@ -89,6 +91,9 @@ function nameInputeHandler(input,header){
                     }
                     break;
                 default:
+					if (newName.length+1 > 8) { //Kee the name legnth maxed at 8 Characters
+						newName = newName.slice(0,-1);
+					}
                     newName += AlphabetList[selection];
                     break;
             }
@@ -119,26 +124,26 @@ function nameInputeHandler(input,header){
 
 function drawNameBoard(name, header){
     text = "Enter " + header + "\n\n";
-    for (i = 0; i < AlphabetList.length-3; i++){
+    for (i = 0; i < AlphabetList.length-5; i++){
         if (selection == i){
-            text += "> ";
+            text += ">";
         }
         else {
-            text += "[ ";
+            text += "[";
         }
         text += AlphabetList[i];
         if (selection == i){
-            text += " <";
+            text += "<";
         }
         else {
-            text += " ]";
+            text += "]";
         }
-        if(i == 9 || i == 19 || i == 29){
+        if(i == 7 || i == 15 || i == 23 || i == 31){
             text += "\n";
         }
     }
-    text += "                                             \n\n";
-    text += "Controls:\n Arrow Keys = Navigate\n EnterKey = A/Pause/Select\n SpaceKey = B/Back/Cancel"
+    text += "               \n\n";
+    text += "Controls:\n WASD/Arrows = Navigate\n J/Enter = A/Pause/Select\n K/Space = B/Back/Cancel"
     document.getElementById("MapCanvas").textContent = text;
 
     document.getElementById("DialogCanvas").textContent = header + name;
