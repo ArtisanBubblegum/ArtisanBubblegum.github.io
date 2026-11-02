@@ -1,8 +1,8 @@
-var AlphabetList = [	"A","B","C","D","E","F","G","H",
-								"I","J","K","L","M","N","0","P",
-								"Q","R","S","T","U","V","W","X",
-								"Y","Z",".","?","!"," "," "," ",
-								"|","-","+"," "," "," "," "," "];
+var AlphabetList = [	"Ａ",	"Ｂ",	"Ｃ",	"Ｄ",	"Ｅ",	"Ｆ",	"Ｇ",	"Ｈ",
+								"Ｉ",	"Ｊ",	"Ｋ",	"Ｌ",	"Ｍ",	"Ｎ",	"Ｏ",	"Ｐ",
+								"Ｑ",	"Ｒ",	"Ｓ",	"Ｔ",	"Ｕ",	"Ｖ",	"Ｗ",	"Ｘ",
+								"Ｙ",	"Ｚ",	"．",	"？",	"！",		"　",		"　",		"　",
+								"↑",	"←",	"✓",	"　",		"　",		"　",		"　",		"　"];
 var alphaWidth = 8;
 var isCapped = true;
 var newName = "";
@@ -65,16 +65,16 @@ function nameInputeHandler(input,header){
             break;
         case "A":
             switch(AlphabetList[selection]){
-                case "+":
+                case "✓": //Done
                     if (newName == ""){
                         newName = "Player001";
                     }
                     return true;
                     break;
-                case "-":
+                case "←": //Backspace
                     newName = newName.slice(0,-1);
                     break;
-                case "|":
+                case "↑": //Shift
                     for (i=0;i < AlphabetList.length - 4; i++){
                         if (isCapped){
                             AlphabetList[i] = AlphabetList[i].toLowerCase();
@@ -91,10 +91,18 @@ function nameInputeHandler(input,header){
                     }
                     break;
                 default:
-					if (newName.length+1 > 8) { //Kee the name legnth maxed at 8 Characters
-						newName = newName.slice(0,-1);
+					if (newName.length+1 > 8) { //Keep the name legnth maxed at 8 Characters
+						newName = newName.slice(1,8);
 					}
-                    newName += AlphabetList[selection];
+					if (selection >= 0 && selection <= 28) {  // 28 is the final character before the " "'s and Buttons
+						newName += String.fromCharCode(AlphabetList[selection].charCodeAt(0) - 65248); //Convert the Full Width Characters to Half Width.
+					}
+					else if (selection > 28 && selection <= 31){
+						newName += " ";
+					}
+                    else {
+						newName += AlphabetList[selection];
+                    }
                     break;
             }
             break;
@@ -142,9 +150,17 @@ function drawNameBoard(name, header){
             text += "\n";
         }
     }
-    text += "               \n\n";
+    text += " 　  　  　  　  　 \n\n";
     text += "Controls:\n WASD/Arrows = Navigate\n J/Enter = A/Pause/Select\n K/Space = B/Back/Cancel"
     document.getElementById("MapCanvas").textContent = text;
 
     document.getElementById("DialogCanvas").textContent = header + name;
+    if (name.length < 8) {
+		let count = 8 - name.length;
+		while ( count > 0 ) {
+			document.getElementById("DialogCanvas").textContent += "_";
+			count --;
+		}
+	}
+	
 }

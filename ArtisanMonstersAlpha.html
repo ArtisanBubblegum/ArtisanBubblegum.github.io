@@ -8,16 +8,13 @@
     <link rel="stylesheet" href="/style.css">
     <style>
 		@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono");
+		@import url("https://fonts.googleapis.com/css2?family=Iosevka+Charon+Mono");
+		@import url("https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC");
 
         table {
-            border: 1px solid red;
-        }
-        tr {
-            border: 1px solid green;
         }
         td {
             text-align: center;
-            border: 1px solid black;
         }
         #padding {
 			border: none;
@@ -44,11 +41,11 @@
     <br>
     <h3>Artisan Monsters: Alpha</h3>
     
-    <table id="PrimaryTable" style="width: 250px; min-height: 500px; margin-left: auto; margin-right: auto; font-family: 'IBM Plex Mono'"> <!-- aspect-ratio: 1/1; -->
+    <table id="PrimaryTable" style="width: 250px; min-height: 500px; margin-left: auto; margin-right: auto; font-family: 'LXGW WenKai Mono TC', 'Iosevka Charon Mono', 'IBM Plex Mono'; background-color: purple; border-radius: 10px; border: 5px solid purple;"> <!-- aspect-ratio: 1/1; -->
         <tr style="width: 250px; height: 230px;">
             <!-- <td Id="padding"></td> -->
-            <td id="MapCanvas" style="white-space: pre; width: 10px; height: 10px;">
-                <!-- <p id="MapCanvas" style="white-space: pre; width: 10px;">
+            <td id="MapCanvas" style="white-space: pre; width: 10px; height: 10px; background-color: LightBlue; border: 1px solid black; border-radius: 5px;">
+                <!-- <p id="MapCanvas" style="white-space: pre; width: 10px; height: 10px; border: 1px solid black; border-radius: 5px;">
                     MapCanvis.
                 </p> -->
             </td>
@@ -61,14 +58,14 @@
         </tr>
         <tr style="height: auto; width: 250px;">
             <td colspan="3">
-                <p id="DialogCanvas" style="white-space: pre-wrap; width: 250px; margin-bottom: 1px; margin-top: 1px; margin-left: auto; margin-right: auto;">
+                <p id="DialogCanvas" style="min-height: 20px; white-space: pre-wrap; width: 250px; margin-bottom: 1px; margin-top: 1px; margin-left: auto; margin-right: auto; background-color: lightblue; border: 1px solid black; border-radius: 5px;">
                     Dialog.
                 </p>
             </td>
         </tr>
         <tr style="height: auto;">
             <td colspan="3">
-                <table id="InputsTable" style="width: 250px; margin-left: auto; margin-right: auto; margin-bottom: 1px; margin-top: 1px;">
+                <table id="InputsTable" style="width: 250px; margin-left: auto; margin-right: auto; margin-bottom: 1px; margin-top: 1px; color: white;">
                     <tr>
                         <td Id="padding" style="width: 100px;"></td>
                         <td Id="padding" style="width: 100px;">
@@ -112,8 +109,8 @@
 						<td Id="padding" colspan="5" style="white-space: pre;"> </td>
                     </tr>
                     <tr>
-						<td Id="padding" colspan="4">Artisan Color</td>
-						<td Id="padding">#</td>
+						<td Id="padding" colspan="4">Artisan <span style="color: red;">C</span><span style="color: light purple;">o</span><span style="color: green;">l</span><span style="color: yellow;">o</span><span style="color: teal;">r</span></td>
+						<td Id="padding" style="color: black;">#</td>
                     </tr>
                 </table>
             </td>

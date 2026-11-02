@@ -182,7 +182,7 @@ let MapObj = {
 				xcount = this.ViewRange * 2;
 				xcount ++;
 				while (xcount > 0){
-					mapText += "+++"; //above view range, Fill in.
+					mapText += "░░░"; //above view range, Fill in.
 					xcount--;
 				}
                 mapText += "\r\n"; //above view range, line return until in range
@@ -199,39 +199,39 @@ let MapObj = {
                 if (this.PlayerPosition[0] < this.ViewRange + 1 && (curIndex == 1 || (curIndex-1) % this.Map[0][0] == 0) ){
                     count = this.ViewRange - this.PlayerPosition[0] + 1;
                     while (count > 0){
-                        mapText += "+++"; //left-side out-of-bounds fill
+                        mapText += "░░░"; //left-side out-of-bounds fill
                         count--;
                     }
                 }
                 
                 if ( curIndex == playerIndex){
                     if (Player.Name.toLowerCase() == "aku"){
-                        mapText += "-☠-";
+                        mapText += "☠";
                     }
                     else {
-                        mapText += "-P-";
+                        mapText += " 🯅 "; // player
                     }
                 }
                 else if (this.GetMapID(curIndex)[0] == 1){
-                    mapText += "[Ж]";
+                    mapText += "[Ж]"; // Wall?
                 }
                 else if (this.GetMapID(curIndex)[0] == 0){
-                    mapText += " • ";
+                    mapText += " • "; // Ground
                 }
                 else if (this.GetMapID(curIndex)[0] == "M"){
-                    mapText += "-M-";
+                    mapText += "-M-"; // Monster
                 }
                 else if (this.GetMapID(curIndex)[0] == "item"){
-                    mapText += "-$-"
+                    mapText += "-$-" // Item
                 }
                 else if (this.GetMapID(curIndex)[0] == "H"){
-                    mapText += "<H>"
+                    mapText += "<H>" // Healing Crystal
                 }
                 else if (this.GetMapID(curIndex)[0] == "R"){
-                    mapText += "[ ]"
+                    mapText += "[ ]" //Doorway to the Ranch
                 }
                 else if (this.GetMapID(curIndex)[0] == "D1" || this.GetMapID(curIndex)[0] == "D2"){
-                    mapText += "[ ]";
+                    mapText += "[ ]"; //Doorway into the Dungeon (Or Deeper)
                 }
                 else if (typeof(this.GetMapID(curIndex)[0]) == "object"){
                     if (this.Name == "dungeon"){
@@ -249,7 +249,7 @@ let MapObj = {
                     count = this.Map[0][0] - this.ViewRange;
                     count = this.PlayerPosition[0] - count;
                     while (count > 0){
-                        mapText += "+++"; //right side out-of-bounds fill
+                        mapText += "░░░"; //right side out-of-bounds fill
                         count--;
                     }
                     mapText += "\r\n"; //end of line return
@@ -264,7 +264,7 @@ let MapObj = {
                 xcount = this.ViewRange * 2;
 				xcount ++;
 				while (xcount > 0){
-					mapText += "+++"; //below view range, Fill in.
+					mapText += "░░░"; //below view range, Fill in.
 					xcount--;
 				}
                 mapText += "\r\n"; //below view range, line return until in range

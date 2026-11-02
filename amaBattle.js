@@ -153,6 +153,7 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
     if(combatDone){
         if (input[1] == "A" || input[1] == "B"){
             changeState("map");
+            dialogObj.unwrite();
             return true;
         }
         else {
