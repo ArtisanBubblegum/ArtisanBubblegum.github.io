@@ -69,8 +69,16 @@ var Earth_Pony = {
         "Luck" : 2,         //+1
         "GrowthRate" : 1.6 //(10+GrowthStats_Total)/100  =  (10+6)/100 = 0.16 //expToLevel * GrowthRate = expToLevel (next Level, round up)
     },
-    "Spells" : [Meditate, EarthBolt],
-    "LearnableSpells" : [WoodBolt, FireT3, MetalT2Crit],
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
+    },
+    "Spells" : [],
+    "LearnableSpells" : [],
     "Tactic" : aggressivePhysical,
     Tactics(){ //Aggressive
         if (Math.random() <= this.BattleStats.HPCur/this.BattleStats.HPMax){
@@ -127,6 +135,14 @@ var Giant_Rat = {
         "Speed" : 1, //0
         "Luck" : 0, //-1
         "GrowthRate" : 1.25 //??1+(stat_value/10)  =  1+(5/10)
+    },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
     },
     "Spells" : [Meditate, EarthBolt], // MetalBolt, WaterBolt, WoodBolt, FireBolt],
     "LearnableSpells" : [WoodBolt, FireT3, MetalT2Crit],
@@ -187,6 +203,14 @@ var Mud_Slipper = {
         "Luck" : 2, //+1
         "GrowthRate" : 1.3 //??1+(stat_value/10)  =  1+(5/10)
     },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
+    },
     "Spells" : [WaterBolt],
     "LearnableSpells" : [MetalT1Spd, EarthT3HP],
     "Tactic" : aggressiveMagical,
@@ -245,6 +269,14 @@ var Giant_Centipede = {
         "Speed" : 2, //+1
         "Luck" : 1, //0
         "GrowthRate" : 1.15 //1+(stat_value/10)  =  1+(5/10)
+    },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
     },
     "Spells" : [VoidBolt],
     "LearnableSpells" : [FireT2, MetalT3Multi],
@@ -305,6 +337,14 @@ var Bed_Biter = {
         "Luck" : 0, //-1
         "GrowthRate" : 1.15 //1+(stat_value/10)  =  1+(5/10)
     },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
+    },
     "Spells" : [],
     "LearnableSpells" : [WoodT1HP, WoodT3Def, FireT1],
     "Tactic" : defensivePhysical,
@@ -359,6 +399,14 @@ var Error_Ant = {
         "Luck" : 1, //0
         "GrowthRate" : 1.15 //1+(stat_value/10)  =  1+(5/10)
     },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
+    },
     "Spells" : [],
     "LearnableSpells" : [MetalT2Crit],
     "Tactic" : mindlessPhysical,
@@ -412,6 +460,14 @@ var Carnivorous_Canary = {
         "Speed" : 3, //+2
         "Luck" : 1, //0
         "GrowthRate" : 1.2 //1+(stat_value/10)  =  1+(5/10)
+    },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
     },
     "Spells" : [AirBolt],
     "LearnableSpells" : [WaterBolt, WoodT2Spd, MetalT3Multi],
@@ -472,6 +528,14 @@ var Magic_Sword = {
         "Luck" : 0, //-1
         "GrowthRate" : 1.4 //1+(stat_value/10)  =  1+(5/10)
     },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
+    },
     "Spells" : [],
     "LearnableSpells" : [MetalBolt, MetalT1Def],
     "Tactic" : mindlessPhysical,
@@ -520,6 +584,14 @@ var Orange_Ooze = {
         "Speed" : 1, //0
         "Luck" : 1, //0
         "GrowthRate" : 1.5 //1+(stat_value/10)  =  1+(5/10)
+    },
+    "MagicCon" : {
+        "FireCon" : 0,
+        "EarthCon" : 0,
+        "MetalCon" : 0,
+        "WaterCon" : 0,
+        "WoodCon" : 0,
+        "VoidCon" : 0
     },
     "Spells" : [FireBolt],
     "LearnableSpells" : [FireT1, FireT2, FireT3, MetalT1Def, WoodT3Wis],

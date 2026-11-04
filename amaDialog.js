@@ -3,7 +3,7 @@ document.getElementById("DialogCanvas").textContent = "";
 dialogObj = {
     continue : false,
     timeout : 50,
-    letterTimeout: 100,
+    letterTimeout: 1000,
     timeoutMulti : 1,
     letterTimeoutMulti: -1,
     activeTimeouts : [],

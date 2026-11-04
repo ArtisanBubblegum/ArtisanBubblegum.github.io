@@ -13,9 +13,7 @@ function LoadPause(){
     pauseList = ["Resume", "Party"];
     //pauseList.push(Player);
     pauseList.push("Inventory");
-    // for (i = 0; i < PartyList.length; i++){
-    //     pauseList.push(PartyList[i]);
-    // }
+    pauseList.push("Save");
     //pauseList.push("Restart");
     menuList = pauseList;
 }
@@ -85,6 +83,8 @@ function drawPauseMenu(){
         dialogObj.write("");
         dialogObj.write(getStatusText(menuList[selection]));
     }
+    else if (menuList[selection] == "Save"){
+	}
     else{
         dialogObj.write("");
     }
@@ -156,36 +156,6 @@ function PauseMenuInputHandler(input){
                         selection = 0;
                         selectingTarget = true;
                         break;
-                    case Player:
-                        menuList = [...Player.Spells];
-                        if (menuList.length <= 0){
-                            menuList = ["Empty <"];
-                        }
-                        //menuList.splice(0,0,MonStatusSpell);
-                        selectingSpell = true;
-                        partyIndex = -1;
-                        selection = 0;
-                        break;
-                    case PartyList[0]: //The First Monster in your Party, this item opens the monster Status and Spells Menue
-                        menuList = [...PartyList[0].Spells];
-                        if (menuList.length <= 0){
-                            menuList = ["Empty <"];
-                        }
-                        //menuList.splice(0,0,MonStatusSpell);
-                        selectingSpell = true;
-                        partyIndex = 0;
-                        selection = 0;
-                        break;
-                    case PartyList[1]: //The Second Monster in your Party, this item opens the monster Status and Spells Menue
-                        menuList = [...PartyList[1].Spells];
-                        if (menuList.length <= 0){
-                            menuList = ["Empty <"];
-                        }
-                        //menuList.splice(0,0,MonStatusSpell);
-                        selectingSpell = true;
-                        partyIndex = 1;
-                        selection = 0;
-                        break;
                     case "Inventory":
                         selectingItem = true;
                         if (Player.inventory.length > 0){
@@ -200,6 +170,11 @@ function PauseMenuInputHandler(input){
                         selectedItemIndex = 0;
                         selection = 0;
                         break;
+                    case "Save":
+						LoadSavePlayer("Save");
+						LoadSaveParty("Save");
+						dialogObj.write("Saved Game in Cookies.");
+						break;
                     case "Restart": //Refreshes the Page, (Currently No Save Data to worry about.)
                         location.reload();
                         break;

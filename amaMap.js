@@ -8,6 +8,8 @@ ranchMap = {
         [1,0], 	[1,0], 	["cityMap",0], 	[1,0], 	[1,0], 
             ],
     MapLevel : 0,
+    MonsterSpawnChance : 0.2,
+    ItemSpawnChance : 0.1,
     PlayerPosition : [3, 3]
 }
 
@@ -23,6 +25,8 @@ cityMap = {
         [1,0], [1,0], [1,0], [1,0], [1,0], [1,0], [1,0],
             ],
     MapLevel : 0,
+    MonsterSpawnChance : 0.2,
+    ItemSpawnChance : 0.1,
     PlayerPosition : [4, 2]
 }
 
@@ -32,6 +36,8 @@ let MapObj = {
     Name : ranchMap.Name,
     Map : ranchMap.Map,
     MapLevel : 0,
+    MonsterSpawnChance : 0.25,
+    ItemSpawnChance : 1,
     PlayerPosition : ranchMap.PlayerPosition,
     ViewRange : 4,
     itemList: [],
@@ -320,7 +326,9 @@ let MapObj = {
                 case "M":
                     console.log("Fight Monster.");
                     this.Map[this.locationToIndex(location)]=[0,0];
-                    this.spawnMonster(1);
+                    if ( Math.random() <= this.MonsterSpawnChance){
+						this.spawnMonster(1);
+					}
                     dialogObj.write("A Wild Monster Attacks!");
                     //changeState("battle"); This is done in newEnemy();
                     newEnemy();
@@ -373,7 +381,7 @@ let MapObj = {
                     this.Name = "dungeon";
                     this.MapLevel += 1;
                     this.mapMaker(13,13);
-                    this.spawnMonster(20);
+                    this.spawnMonster(25);
                     this.itemList = [];
                     for (i=0; i<100; i++){
                         if (i < 45){
@@ -392,7 +400,7 @@ let MapObj = {
                     this.MapLevel -= 1;
                     this.mapMaker(13,13);
                     this.PlayerPosition[1] = 2;
-                    this.spawnMonster(20);
+                    this.spawnMonster(15);
                     this.itemList = [];
                     for (i=0; i<100; i++){
                         if (i < 45){

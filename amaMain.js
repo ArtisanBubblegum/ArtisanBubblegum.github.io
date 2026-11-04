@@ -1,14 +1,25 @@
 // Main Variables
-gameState = "name" //Map, Battle, Pause, Name
+gameState = "name" //map, battle, pause, name
 var previousState = "map";
 
 function LoadGame(){
+	//localStorage.clear();
     MapObj.drawMap();
     LoadPlayer();
     LoadParty();
     LoadPause();
-    loadNameBoard("Your Name: ", Player);
-    drawNameBoard("", "Your Name: ");
+    if (localStorage.getItem("PlayerData") == null){
+		console.log("No Player Data detected.");
+		loadNameBoard("Your Name: ", Player);
+		drawNameBoard("", "Your Name: ");
+	}
+	else {
+		LoadSavePlayer("Load");
+		LoadSaveParty("Load");
+		console.log("PlayTime: " + seconds);
+		gameState = "map";
+	}
+    //testObject.animTest();
 }
 LoadGame();
 

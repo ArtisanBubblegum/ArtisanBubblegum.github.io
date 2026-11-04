@@ -153,12 +153,10 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
     if(combatDone){
         if (input[1] == "A" || input[1] == "B"){
             changeState("map");
-            dialogObj.unwrite();
-            return true;
+            dialogObj.write("");
+            //dialogObj.unwrite();
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     if (Player.BattleStats.HPCur <= 0){
@@ -298,7 +296,10 @@ function BattleCommands(input){ //Manages Menues and gates when Turn's are Exect
             }
             break;
     }
-    drawBattle();
+    
+    if(combatDone == false){
+		drawBattle();
+	}
 }
 
 function OrderMonstersBySpeed(){
@@ -371,6 +372,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
 
                 //Check active monster's Action
                 if (monstersList[index].Action == "fight"){
+					console.log(monstersList[index].Name + " Thinks");
                     monstersList[index].Tactic.think(monstersList[index]);
                     if (monstersList[index].Action == "fight"){
                         alert("Error, Fialed to think.");

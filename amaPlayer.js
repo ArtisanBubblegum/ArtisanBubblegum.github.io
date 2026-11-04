@@ -44,7 +44,11 @@ var PlayerBase = {
     "Tactic" : aggressivePhysical,
     "Action" : "fight",
     "Target" : "noValidTarget",
-    "isWild" : false
+    "isWild" : false,
+    
+    "inventory" : [],
+    "MaxMass" : 18150,
+    "MaxVolume" : 20000,
 }
 
 var Player = {
@@ -122,13 +126,13 @@ var Player = {
     },
 
     populate(target){
-        //this.Name = "George Markus II";
+        this.Name = target.Name;
         this.Genus = target.Genus;
         this.GenusObj = target;
         this.Family = target.Family;
-        this.Age = 1;
-        this.Level = 1;
-        this.EXP = 0;
+        this.Age = target.Age;
+        this.Level = target.Level;
+        this.EXP = target.EXP;
         this.expToLevel = target.expToLevel;
         this.BattleStats.HPMax = target.BattleStats.HPMax;
         this.BattleStats.HPCur = target.BattleStats.HPCur;
@@ -148,12 +152,12 @@ var Player = {
         this.GrowthStats.Speed = target.GrowthStats.Speed;
         this.GrowthStats.Luck = target.GrowthStats.Luck;
         this.GrowthStats.GrowthRate = target.GrowthStats.GrowthRate;
-        this.MagicCon.FireCon = 0;
-        this.MagicCon.EarthCon = 0;
-        this.MagicCon.MetalCon = 0;
-        this.MagicCon.WaterCon = 0;
-        this.MagicCon.WoodCon = 0;
-        this.MagicCon.VoidCon = 0;
+        this.MagicCon.FireCon = target.MagicCon.FireCon; //0;
+        this.MagicCon.EarthCon = target.MagicCon.EarthCon; //0;
+        this.MagicCon.MetalCon = target.MagicCon.MetalCon; //0;
+        this.MagicCon.WaterCon = target.MagicCon.WaterCon; //0;
+        this.MagicCon.WoodCon = target.MagicCon.WoodCon; //0;
+        this.MagicCon.VoidCon = target.MagicCon.VoidCon; //0;
         this.Spells = [];
         for (const spell in target.Spells){
             if (target.Spells[spell].CanLearn(this)){
@@ -170,6 +174,9 @@ var Player = {
         }
         console.log("Total Learnable Spells " + this.LearnableSpells.length);
         this.Tactic = target.Tactic;
+        this.inventory = target.inventory;
+		this.MaxMass = target.MaxMass;
+		this.MaxVolume = target.MaxVolume;
     },
     reset(){
         var PreviousAge = this.Age;
@@ -389,4 +396,20 @@ var Player = {
 
 function LoadPlayer(){
     Player.populate(PlayerBase);
+}
+
+function LoadSavePlayer(input){
+	if (input == "Load"){
+		playerString = localStorage.getItem("PlayerData");
+		PlayerBase = JSON.parse(playerString);
+		console.log(PlayerBase.Name);
+		Player.populate(PlayerBase);
+		Player.Tactic = aggressivePhysical;
+	}
+	else if (input == "Save"){
+		localStorage.setItem("PlayerData", JSON.stringify(this.Player));
+	}
+	else {
+		console.log("amaPlayer: Error: Invalid Input on LoadSavePlayer() " + input );
+	}
 }

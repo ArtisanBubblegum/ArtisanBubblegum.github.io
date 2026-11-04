@@ -1,0 +1,5 @@
+let testLimit = 20
+
+async animTest(){
+	setTimeout(() => {document.getElementById("DialogCanvas").textContent += text + "\n";}, (this.timeout * this.timeoutMulti));
+}

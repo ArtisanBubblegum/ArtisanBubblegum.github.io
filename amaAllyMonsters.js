@@ -51,16 +51,16 @@ var Ally1 = {
     "isWild" : false,
 
     populate(target){
-        //this.Name = "George Markus II";
+        this.Name = target.Name;
         this.Genus = target.Genus;
         this.GenusObj = target;
         this.Family = target.Family;
-        this.Age = 1;
+        this.Age = target.Age;
         this.LifeSpan = target.LifeSpan;
         this.DeathChance = target.DeathChance;
-        this.Level = 1;
-        this.EXP = 0;
-        this.expToLevel = Math.ceil(target.expToLevel * target.GrowthStats.GrowthRate);
+        this.Level = target.Level;
+        this.EXP = target.EXP;
+        this.expToLevel = target.expToLevel; //Math.ceil(target.expToLevel * target.GrowthStats.GrowthRate);
         this.BattleStats.HPMax = target.BattleStats.HPMax;
         this.BattleStats.HPCur = target.BattleStats.HPCur;
         this.BattleStats.MPMax = target.BattleStats.MPMax;
@@ -79,12 +79,12 @@ var Ally1 = {
         this.GrowthStats.Speed = target.GrowthStats.Speed;
         this.GrowthStats.Luck = target.GrowthStats.Luck;
         this.GrowthStats.GrowthRate = target.GrowthStats.GrowthRate;
-        this.MagicCon.FireCon = 0;
-        this.MagicCon.EarthCon = 0;
-        this.MagicCon.MetalCon = 0;
-        this.MagicCon.WaterCon = 0;
-        this.MagicCon.WoodCon = 0;
-        this.MagicCon.VoidCon = 0;
+        this.MagicCon.FireCon = target.MagicCon.FireCon; //0;
+        this.MagicCon.EarthCon = target.MagicCon.EarthCon; //0;
+        this.MagicCon.MetalCon = target.MagicCon.MetalCon; //0;
+        this.MagicCon.WaterCon = target.MagicCon.WaterCon; //0;
+        this.MagicCon.WoodCon = target.MagicCon.WoodCon; //0;
+        this.MagicCon.VoidCon = target.MagicCon.VoidCon; //0;
         this.Spells = [];
         for (const spell in target.Spells){
             if (target.Spells[spell].CanLearn(this)){
@@ -359,18 +359,41 @@ function getStatusText(mon) {
 
 function LoadParty(){
     PartyList.push({...Ally1});
-    PartyList[0].BattleStats = {...Ally1.BattleStats};
-    PartyList[0].GrowthStats = {...Ally1.GrowthStats};
-    PartyList[0].MagicCon = {...Ally1.MagicCon};
-    PartyList[0].Name = "George";
-    PartyList[0].Target = "";
+    //PartyList[0].BattleStats = {...Ally1.BattleStats};
+    //PartyList[0].GrowthStats = {...Ally1.GrowthStats};
+    //PartyList[0].MagicCon = {...Ally1.MagicCon};
     PartyList[0].populate(Earth_Pony);
-
+	PartyList[0].Name = "George";
+    PartyList[0].Target = "";
+    
     PartyList.push({...Ally1});
-    PartyList[1].BattleStats = {...Ally1.BattleStats};
-    PartyList[1].GrowthStats = {...Ally1.GrowthStats};
-    PartyList[1].MagicCon = {...Ally1.MagicCon};
+    //PartyList[1].BattleStats = {...Ally1.BattleStats};
+    //PartyList[1].GrowthStats = {...Ally1.GrowthStats};
+    //PartyList[1].MagicCon = {...Ally1.MagicCon};
+	PartyList[1].populate(Earth_Pony);
     PartyList[1].Name = "Mortus";
     PartyList[1].Target = "";
-    PartyList[1].populate(Earth_Pony);
+}
+
+function LoadSaveParty(input){
+	if (input == "Load"){
+		ally1String = localStorage.getItem("Ally1Data");
+		ally1Base = JSON.parse(ally1String);
+		console.log(ally1Base);
+		PartyList[0].populate(ally1Base);
+		PartyList[0].Tactic = aggressivePhysical;
+	
+		ally2String = localStorage.getItem("Ally2Data");
+		ally2Base = JSON.parse(ally2String);
+		console.log(ally2Base);
+		PartyList[1].populate(ally2Base);
+		PartyList[1].Tactic = aggressivePhysical;
+	}
+	else if (input == "Save"){
+		localStorage.setItem("Ally1Data", JSON.stringify(this.PartyList[0]));
+		localStorage.setItem("Ally2Data", JSON.stringify(this.PartyList[1]));
+	}
+	else {
+		console.log("amaPlayer: Error: Invalid Input on LoadSavePlayer() " + input );
+	}
 }
