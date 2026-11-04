@@ -3,7 +3,7 @@ gameState = "name" //map, battle, pause, name
 var previousState = "map";
 
 function LoadGame(){
-	//localStorage.clear();
+	localStorage.clear();
     MapObj.drawMap();
     LoadPlayer();
     LoadParty();

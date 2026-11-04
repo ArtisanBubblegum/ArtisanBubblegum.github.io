@@ -1,35 +1,39 @@
-var PlayerBase = {
-    "Name" : "Artisan Skeleton",
-    "Genus" : "Skeleton",
+var PartyList = []
+
+var Ally1 = {
+    "Name" : "George",
+    "Genus" : "Giant Rat",
     "GenusObj" : {},
-    "Family" : "Humanoid",
+    "Family" : "Beast",
     "Age" : 1,
+    "LifeSpan" : 1,
+    "DeathChance" : 0.5,
     "Level" : 1,
     "EXP" : 0,
-    "expToLevel" : 100,
+    "expToLevel" : 20,
     "BattleStats" : {
-        "HPMax" : 10,
-        "HPCur" : 10,
-        "MPMax" : 10,
-        "MPCur" : 10,
-        "Attack" : 10,
-        "Defence" : 10,
+        "HPMax" : 20,
+        "HPCur" : 20,
+        "MPMax" : 100,  //Water
+        "MPCur" : 100,
+        "Attack" : 16,  //Fire
+        "Defence" : 5,  //Earth
         "Defending": false,
-        "Wisdom" : 10,
-        "Speed" : 10,
+        "Wisdom" : 10,  //Void
+        "Speed" : 5,  //Air
         "TurnValue" : 0,
-        "Luck" : 10,
+        "Luck" : 1,
         "Aflictions" : []
     },
     "GrowthStats" : {
-        "HP" : 1, //0
-        "MP" : 1, //0
-        "Attack" : 1, //0
-        "Defence" : 1, //0
-        "Wisdom" : 1, //0
+        "HP" : 2, //+1
+        "MP" : 20, //+1
+        "Attack" : 3, //+2
+        "Defence" : 2, //+1
+        "Wisdom" : 2, //+1
         "Speed" : 1, //0
-        "Luck" : 1, //0
-        "GrowthRate" : 1.5 //1+(stat_value/10)?
+        "Luck" : 0, //-1
+        "GrowthRate" : 1.25 //1+(stat_value/10)?
     },
     "MagicCon" : {
         "FireCon" : 0,
@@ -39,91 +43,12 @@ var PlayerBase = {
         "WoodCon" : 0,
         "VoidCon" : 0
     },
-    "Spells" : [],
+    "Spells" : [Meditate, EarthBolt],
     "LearnableSpells" : [],
-    "Tactic" : aggressivePhysical,
-    "Action" : "fight",
-    "Target" : "noValidTarget",
+    "Tactic" : mindlessMagical,
+    "Action" : "defend",
+    "Target" : {},
     "isWild" : false,
-    
-    "inventory" : [],
-    "MaxMass" : 18150,
-    "MaxVolume" : 20000,
-}
-
-var Player = {
-    "Name" : "Artisan Skeleton",
-    "Genus" : "Skeleton",
-    "GenusObj" : {},
-    "Family" : "Humanoid",
-    "Age" : 1,
-    "Level" : 1,
-    "EXP" : 0,
-    "expToLevel" : 100,
-    "BattleStats" : {
-        "HPMax" : 10,
-        "HPCur" : 10,
-        "MPMax" : 10,
-        "MPCur" : 10,
-        "Attack" : 10,
-        "Defence" : 10,
-        "Defending": false,
-        "Wisdom" : 10,
-        "Speed" : 10,
-        "TurnValue" : 0,
-        "Luck" : 10,
-        "Aflictions" : []
-    },
-    "GrowthStats" : {
-        "HP" : 1, //0
-        "MP" : 1, //0
-        "Attack" : 1, //0
-        "Defence" : 1, //0
-        "Wisdom" : 1, //0
-        "Speed" : 1, //0
-        "Luck" : 1, //0
-        "GrowthRate" : 1.5 //1+(stat_value/10)?
-    },
-    "MagicCon" : {
-        "FireCon" : 0,
-        "EarthCon" : 0,
-        "MetalCon" : 0,
-        "WaterCon" : 0,
-        "WoodCon" : 0,
-        "VoidCon" : 0
-    },
-    "Spells" : [],
-    "LearnableSpells" : [],
-    "Tactic" : aggressivePhysical,
-    "Action" : "skip",
-    "Target" : "noValidTarget",
-    "isWild" : false,
-
-    "inventory" : [],
-    "MaxMass" : 18150, //18,150g ~= 40lbs ~= Reccomended Pack Size for Average Hiker
-    "MaxVolume" : 20000, //20,000cm^3 ~= 20L ~= Small Backpack
-    addItem(item){
-        let curMass = 0;
-        let curVolume = 0;
-        for (i=0; i<this.inventory.length; i++){
-            curMass += this.inventory[i].Mass;
-            curVolume += this.inventory[i].Volume;
-        }
-        if (curMass + item.Mass <= this.MaxMass && curVolume + item.Volume <= this.MaxVolume){
-            dialogObj.write("Picked up a " + item.Name + "!")
-            this.inventory.push(item);
-            return true;
-        }
-        else{
-            if (curMass + item.Mass > this.MaxMass){
-                dialogObj.write("Carrying too much weight already!");
-            }
-            if (curVolume + item.Volume > this.MaxVolume){
-                dialogObj.write("Pack is too Full!");
-            }
-            return false;
-        }
-    },
 
     populate(target){
         this.Name = target.Name;
@@ -131,9 +56,11 @@ var Player = {
         this.GenusObj = target;
         this.Family = target.Family;
         this.Age = target.Age;
+        this.LifeSpan = target.LifeSpan;
+        this.DeathChance = target.DeathChance;
         this.Level = target.Level;
         this.EXP = target.EXP;
-        this.expToLevel = target.expToLevel;
+        this.expToLevel = target.expToLevel; //Math.ceil(target.expToLevel * target.GrowthStats.GrowthRate);
         this.BattleStats.HPMax = target.BattleStats.HPMax;
         this.BattleStats.HPCur = target.BattleStats.HPCur;
         this.BattleStats.MPMax = target.BattleStats.MPMax;
@@ -174,26 +101,38 @@ var Player = {
         }
         console.log("Total Learnable Spells " + this.LearnableSpells.length);
         this.Tactic = target.Tactic;
-        this.inventory = target.inventory;
-		this.MaxMass = target.MaxMass;
-		this.MaxVolume = target.MaxVolume;
     },
     reset(){
-        var PreviousAge = this.Age;
+		var saveName = this.Name;
         this.populate(this.GenusObj);
-        this.Age = PreviousAge + 1;
+        this.Age = 1;
+        this.Name = saveName;
     },
     addAge(x){
+        let previousAge = this.Age;
         this.Age += x;
+        if (this.Age > this.LifeSpan
+            && Math.floor(Math.random()) <= this.DeathChance)
+        {
+            this.die();
+            dialogObj.write("+++ " + this.Name + " has died due to old age. +++")
+        }
+        else if (previousAge < this.LifeSpan*0.9
+            && this.Age >= this.LifeSpan*0.9)
+        {
+            dialogObj.write("++ " + this.Name + " has grown old. ++");
+        }
     },
     die(){
-        this.Name = "R.I.P."
-        this.BattleStats.HPCur = -100;
-        this.BattleStats.MPCur = -100;
+        this.Genus = "R.I.P."
+        this.BattleStats.HPCur = -1;
+        this.BattleStats.MPCur = -1;
     },
     levelUP(){
-        dialogObj.write("-");
+        //dialogObj.write("-");
         dialogObj.write(this.Name + " Gained a Level!");
+        this.Level += 1;
+        dialogObj.write("( Level: " + AllyList[x].Level + " )");
         //alert (this.Name + " Gained a Level!");
         this.BattleStats.HPMax += this.GrowthStats.HP;
         this.BattleStats.HPCur += this.GrowthStats.HP;
@@ -213,9 +152,9 @@ var Player = {
                 this.LearnableSpells.splice(learnableSpellIndex, 1);
             }
         }
-        this.Level += 1;
         this.expToLevel += this.expToLevel * this.GrowthStats.GrowthRate;
-        this.expToLevel = Math.floor(this.expToLevel);
+        this.expToLevel = Math.ceil(this.expToLevel);
+        //dialogObj.write("-");
     },
     addMagicCon (fireAdd, earthAdd, metalAdd, waterAdd, woodAdd, voidAdd){
         let startingFire = this.MagicCon.FireCon;
@@ -310,11 +249,12 @@ var Player = {
             this.MagicCon.MetalCon -= 1;
             this.MagicCon.WaterCon -= 1;
             this.MagicCon.WoodCon -= 1;
+
             this.MagicCon.VoidCon += 1;
         }
         
         if (this.MagicCon.FireCon >= 100){
-            alert(this.Name + " combusts into acrane fire, dieing of Fire Contamination.");
+            dialogObj.write("+++ " + this.Name + " combusts into arcane fire, dieing of Fire Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -323,11 +263,11 @@ var Player = {
             }
         }
         else if (this.MagicCon.Fire >= 50 && startingFire < 50){
-            alert("A visable steam starts to billow out from " + this.Name + ".")
+            dialogObj.write("++ A visable steam starts to billow out from " + this.Name + ". ++")
         }
         
         if (this.MagicCon.EarthCon >= 100){
-            alert(this.Name + " crumbles into arcane dust, dieing of Earth Contamination.");
+            dialogObj.write("+++ " + this.Name + " crumbles into arcane dust, dieing of Earth Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -336,11 +276,11 @@ var Player = {
             }
         }
         else if (this.MagicCon.EarthCon >= 50 && startingEarth < 50){
-            alert(this.Name + "'s body starts to crack grind like stone.")
+            dialogObj.write("+++ " + this.Name + "'s body starts to crack grind like stone. +++")
         }
         
         if (this.MagicCon.MetalCon >= 100){
-            alert(this.Name + " suddenlty falls over lifelessly, dieing of Metal Contamination.");
+            dialogObj.write("+++ " + this.Name + " suddenlty falls over lifelessly, dieing of Metal Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -349,11 +289,11 @@ var Player = {
             }
         }
         else if (this.MagicCon.MetalCon >= 50 && startingMetal < 50){
-            alert("You get an unluck feeling about " + this.Name + ".")
+            dialogObj.write("++ You get an unluck feeling about " + this.Name + ". ++")
         }
         
         if (this.MagicCon.WaterCon >= 100){
-            alert(this.Name + " slumps into a floppy piles as their inside liquefy, dieing of Water Contamination.");
+            dialogObj.write("+++ " + this.Name + " slumps into a floppy piles as their inside liquefy, dieing of Water Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -362,11 +302,11 @@ var Player = {
             }
         }
         else if (this.MagicCon.WaterCon >= 50 && startingWater < 50){
-            alert("" + this.Name + " seems to wobble and jiggle as they move.")
+            dialogObj.write("++ " + this.Name + " seems to wobble and jiggle as they move. ++")
         }
         
         if (this.MagicCon.WoodCon >= 100){
-            alert(this.Name + " bursts open sprouting vines and mushrooms, dieing of Wood Contamination.");
+            dialogObj.write("+++ " + this.Name + " bursts open sprouting vines and mushrooms, dieing of Wood Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -375,11 +315,11 @@ var Player = {
             }
         }
         else if (this.MagicCon.WoodCon >= 50 && startingWood < 50){
-            alert("" + this.Name + "'s body starts to bloat, and moldy oder eminates from them.")
+            dialogObj.write("++ " + this.Name + "'s body starts to bloat, and moldy oder eminates from them. ++")
         }
         
         if (this.MagicCon.VoidCon >= 100){
-            alert(this.Name + " fades out of existance, dieing of Void Contamination.");
+            dialogObj.write("+++ " + this.Name + " fades out of existance, dieing of Void Contamination. +++");
             if (gameState = "battle"){
                 this.BattleStats.HPCur = 0;
             }
@@ -388,26 +328,72 @@ var Player = {
             }
         }
         else if (this.MagicCon.VoidCon >= 50 && startingVoid < 50){
-            alert("" + this.Name + " become a little blurry around the edges.")
+            dialogObj.write("++ " + this.Name + " became a little blurry around the edges. ++")
         }
         
     }
 }
 
-function LoadPlayer(){
-    Player.populate(PlayerBase);
+function drawStatus(mon) {
+    document.getElementById("DialogCanvas").textContent = getStatusText(mon);
 }
 
-function LoadSavePlayer(input){
+function getStatusText(mon) {
+    let text = "";
+    text += mon.Name + ": (" + mon.Genus+ ", " + mon.Family + ")\n";
+    text += "Age: " + mon.Age + "\n";
+    text += "Level: " + mon.Level + " (" + Math.floor(mon.EXP) + "/" + mon.expToLevel + ")\n";
+    text += "HP: " + mon.BattleStats.HPCur + " / " + mon.BattleStats.HPMax +"\n";
+    text += "MP: " + mon.BattleStats.MPCur + " / " + mon.BattleStats.MPMax + "\n";
+    text += "Attack: " + mon.BattleStats.Attack + "\n";
+    text += "Defence: " + mon.BattleStats.Defence + "\n";
+    text += "Wisdom: " + mon.BattleStats.Wisdom + "\n";
+    text += "Speed: " + mon.BattleStats.Speed + "\n";
+    text += "Luck: " + mon.BattleStats.Luck + "\n";
+    text += "Magic Contamination: Fi" + mon.MagicCon.FireCon + "/ Ea" + mon.MagicCon.EarthCon + "/ Me" + mon.MagicCon.MetalCon + "/ Wa" + mon.MagicCon.WaterCon + "/ Wo" + mon.MagicCon.WoodCon + "/ Vo" + mon.MagicCon.VoidCon + "\n";
+    return text;
+}
+
+// function undrawStatus() {
+//     //document.getElementById("DialogCanvas").textContent = "";
+// }
+//drawStatus();
+
+function LoadParty(){
+    PartyList.push({...Ally1});
+    //PartyList[0].BattleStats = {...Ally1.BattleStats};
+    //PartyList[0].GrowthStats = {...Ally1.GrowthStats};
+    //PartyList[0].MagicCon = {...Ally1.MagicCon};
+    PartyList[0].populate(Earth_Pony);
+	PartyList[0].Name = "George";
+    PartyList[0].Target = "";
+    
+    PartyList.push({...Ally1});
+    //PartyList[1].BattleStats = {...Ally1.BattleStats};
+    //PartyList[1].GrowthStats = {...Ally1.GrowthStats};
+    //PartyList[1].MagicCon = {...Ally1.MagicCon};
+	PartyList[1].populate(Earth_Pony);
+    PartyList[1].Name = "Mortus";
+    PartyList[1].Target = "";
+}
+
+function LoadSaveParty(input){
 	if (input == "Load"){
-		playerString = localStorage.getItem("PlayerData");
-		PlayerBase = JSON.parse(playerString);
-		console.log(PlayerBase.Name);
-		Player.populate(PlayerBase);
-		Player.Tactic = aggressivePhysical;
+		ally1String = localStorage.getItem("Ally1Data");
+		ally1Base = JSON.parse(ally1String);
+		console.log(ally1Base);
+		PartyList[0].populate(ally1Base);
+		PartyList[0].Tactic = aggressivePhysical;
+	
+		ally2String = localStorage.getItem("Ally2Data");
+		ally2Base = JSON.parse(ally2String);
+		console.log(ally2Base);
+		PartyList[1].populate(ally2Base);
+		PartyList[1].Tactic = aggressivePhysical;
 	}
 	else if (input == "Save"){
-		localStorage.setItem("PlayerData", JSON.stringify(this.Player));
+		localStorage.setItem("Ally1Data", JSON.stringify(this.PartyList[0]));
+		localStorage.setItem("Ally2Data", JSON.stringify(this.PartyList[1]));
 	}
 	else {
 		console.log("amaPlayer: Error: Invalid Input on LoadSavePlayer() " + input );

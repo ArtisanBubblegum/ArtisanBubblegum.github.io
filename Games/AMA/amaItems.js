@@ -71,6 +71,7 @@ var RebirthCyrstal = {
     use (target){
         if (target.BattleStats.HPCur <= 0 && target.isWild == false){
             target.reset();
+            target.EXP = Math.floor((target.EXP+target.Level) / 2);
             dialogObj.write("A baby " + target.Name + " emerges from the corpse.");
             return true;
         }
