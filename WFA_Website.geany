@@ -27,9 +27,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
+current_page=0
 FILE_NAME_0=302;HTML;0;EUTF-8;1;1;0;%2Fhome%2Ftc%2FProjectFiles%2FWFA_Website%2FGames%2FArtisanMonstersAlpha.html;0;4
-FILE_NAME_1=121;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftc%2FProjectFiles%2FWFA_Website%2FGames%2FAMA%2FamaMain.js;0;4
+FILE_NAME_1=522;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftc%2FProjectFiles%2FWFA_Website%2FGames%2FAMA%2FamaMain.js;0;4
 FILE_NAME_2=3557;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftc%2FProjectFiles%2FWFA_Website%2FGames%2FAMA%2FamaDialog.js;0;4
 FILE_NAME_3=114;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftc%2FProjectFiles%2FWFA_Website%2FGames%2FAMA%2FamaTestingScript.js;0;4
 FILE_NAME_4=17312;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftc%2FProjectFiles%2FWFA_Website%2FGames%2FAMA%2FamaBattle.js;0;4

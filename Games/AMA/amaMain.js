@@ -4,7 +4,6 @@ var previousState = "map";
 
 function LoadGame(){
 	//localStorage.clear();
-    //MapObj.drawMap();
     LoadPlayer();
     LoadParty();
     LoadPause();
@@ -18,6 +17,7 @@ function LoadGame(){
 		LoadSaveParty("Load");
 		console.log("PlayTime: " + seconds);
 		gameState = "map";
+		MapObj.drawMap();
 	}
     //testObject.animTest();
 }
