@@ -92,5 +92,5 @@ dialogObj = {
     // }
 }
 
-setInterval( () => {document.getElementById("TestCanvas3").textContent = dialogObj.dialogQueue.length;}, 100);
+//setInterval( () => {document.getElementById("TestCanvas3").textContent = dialogObj.dialogQueue.length;}, 100);
 //var dialogWriter = setInterval( () => {dialogObj.postLine();}, dialogObj.timeout);
