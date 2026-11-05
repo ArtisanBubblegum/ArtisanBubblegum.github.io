@@ -42,12 +42,17 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     BattleTable.setAttribute("id", "BattleTable");
     BattleTable.setAttribute("width", "100%");
     
-    //Build Enemy Row under Battle Table
+    //Build Enemy Row in Battle Table
     let EnemyRow = document.createElement("tr");
     EnemyRow.setAttribute("id","EnemyRow");
     BattleTable.appendChild(EnemyRow);
+    
+    //Build BattleAnimCanvas in Battle Table between Enemy and Ally Row
+    let BattleAnimRow = document.createElement("tr");
+    BattleAnimRow.setAttribute("id","BattleAnimCanvas");
+    BattleTable.appendChild(BattleAnimRow);
 
-    //Build Ally Row under Battle Table
+    //Build Ally Row in Battle Table
     let AllyRow = document.createElement("tr");
     AllyRow.setAttribute("id","AllyRow");
     BattleTable.appendChild(AllyRow);
@@ -69,6 +74,11 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
     //Reset lists
     EnemyList = [];
     monstersList = [];
+
+	let BattleAnimCell = document.createElement("td");
+	BattleAnimCell.setAttribute("id","BattleAnimCell");
+	BattleAnimCell.setAttribute("colspan",AllyList.length * enemyCount);
+	BattleAnimRow.appendChild(BattleAnimCell);
 
     let CommandRow = document.createElement("tr");
     CommandRow.setAttribute("id","CommandRow");
@@ -102,7 +112,7 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
         }
         EnemyList[i].Target = AllyList[0];
         monstersList.push(EnemyList[i]);
-        console.log(EnemyList[i].Name + " generated as Enemy.");
+        //console.log(EnemyList[i].Name + " generated as Enemy.");
 
         while (EnemyList[i].BattleStats.Speed > targetTurnValue){
             targetTurnValue *= 10;
@@ -126,7 +136,7 @@ function newEnemy(){ //Called in amaMap.js when Moving into a cell marked M.
         AllyList[i].Target = "noValidTarget";
         AllyList[i].BattleStats.TurnValue = 0;
         monstersList.push(AllyList[i]);
-        console.log(AllyList[i].Name + " populated as Ally.");
+        //console.log(AllyList[i].Name + " populated as Ally.");
 
         while (AllyList[i].BattleStats.Speed > targetTurnValue){
             targetTurnValue *= 10;
@@ -320,7 +330,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
 
             if (monstersList[index].BattleStats.TurnValue >= targetTurnValue && allyAttacked == false){
                 monstersList[index].BattleStats.TurnValue -= targetTurnValue;
-                console.log(monstersList[index].Name + " takes a turn.")
+                //console.log(monstersList[index].Name + " takes a turn.")
 
                 if (monstersList[index] === Player && Player.BattleStats.HPCur > 0){
                     allyAttacked = true;
@@ -372,7 +382,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
 
                 //Check active monster's Action
                 if (monstersList[index].Action == "fight"){
-					console.log(monstersList[index].Name + " Thinks");
+					//console.log(monstersList[index].Name + " Thinks");
                     monstersList[index].Tactic.think(monstersList[index]);
                     if (monstersList[index].Action == "fight"){
                         alert("Error, Fialed to think.");
@@ -389,7 +399,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
                         dialogObj.write(monstersList[index].Name + " takes a Defensive Stance!");
                         break;
                     case "flee":
-                        console.log("flee successful, skipping check alive and order by speed.");
+                        //console.log("flee successful, skipping check alive and order by speed.");
                     case "skip":
                         break;
                     default:
@@ -416,7 +426,7 @@ function BattleTurns(){ //alled in BattleLoop in amaMain.js after OrderMonstersB
 }
 
 function checkAlive(){
-    console.log("checking Alive.");
+    //console.log("checking Alive.");
     let list = [];
     let AllyAliveCount = 0;
     let EnemyAliveCount = 0;
@@ -429,7 +439,7 @@ function checkAlive(){
             dialogObj.write("+++ " + EnemyList[i].Name + " Dies. +++");
             EnemyList[i].Genus = "R.I.P.";
         }
-        console.log(EnemyList[i].Name + " HP: " + EnemyList[i].BattleStats.HPCur);
+        //console.log(EnemyList[i].Name + " HP: " + EnemyList[i].BattleStats.HPCur);
     }
     for (i = 0; i < AllyList.length; i++){
         if (AllyList[i].BattleStats.HPCur > 0){
@@ -450,7 +460,7 @@ function checkAlive(){
             dialogObj.write("+++ " + AllyList[i].Name + " Dies. +++");
             AllyList[i].Genus = "R.I.P.";
         }
-        console.log(AllyList[i].Name + " HP: " + AllyList[i].BattleStats.HPCur);
+        //console.log(AllyList[i].Name + " HP: " + AllyList[i].BattleStats.HPCur);
     }
 
     if (AllyAliveCount > 0 && EnemyAliveCount <= 0){
@@ -477,7 +487,7 @@ function checkAlive(){
                 dialogObj.write("+"+ Math.floor(totalAmount) + " exp!");
         }
             while (AllyList[x].EXP >= AllyList[x].expToLevel){
-                console.log("Calling Level up in checkAlive");
+                //console.log("Calling Level up in checkAlive");
                 AllyList[x].levelUP();
             }
             AllyList[x].Target = "noValidTarget";
@@ -569,23 +579,27 @@ function drawBattle(){
     let text = "";
     for (i = 0; i < EnemyList.length; i++){
         if (EnemyList[i].BattleStats.HPCur > 0){
-            text += EnemyList[i].Name + "<br>(Level: " + EnemyList[i].Level + ")<br>HP: " + EnemyList[i].BattleStats.HPCur + "/" + EnemyList[i].BattleStats.HPMax + "<br>";
-            text += "MP: "+ EnemyList[i].BattleStats.MPCur +"/"+ EnemyList[i].BattleStats.MPMax + "<br><br>";    
+            text += EnemyList[i].Name.slice(0,7) + EnemyList[i].Name.slice(-1) + "<br>Lvl: " + EnemyList[i].Level + "<br>HP: " + EnemyList[i].BattleStats.HPCur + "<br>"; //" + EnemyList[i].BattleStats.HPMax + "<br>";
+            text += "MP: "+ EnemyList[i].BattleStats.MPCur +"<br>" //"+ EnemyList[i].BattleStats.MPMax + "<br><br>";    
         }
         else {
-            text = "R.I.P."
+            text = "R.I.P.<br>"
         }
         document.getElementById("E"+i).innerHTML = text;
         text = "";
     }
     
+    text = "⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔";
+    document.getElementById("BattleAnimCell").innerHTML = text;
+    text = "";
+    
     for (i = 0; i < AllyList.length; i++){
         if (AllyList[i].BattleStats.HPCur > 0){
-            text += AllyList[i].Name + "<br>(Level: " + AllyList[i].Level + ")<br>HP: " + AllyList[i].BattleStats.HPCur + "/" + AllyList[i].BattleStats.HPMax + "<br>";
-            text += "MP: "+ AllyList[i].BattleStats.MPCur +"/"+ AllyList[i].BattleStats.MPMax + "<br><br>";    
+            text += AllyList[i].Name + "<br>Lvl: " + AllyList[i].Level + "<br>HP: " + AllyList[i].BattleStats.HPCur + "/" + AllyList[i].BattleStats.HPMax + "<br>";
+            text += "MP: "+ AllyList[i].BattleStats.MPCur +"/"+ AllyList[i].BattleStats.MPMax + "<br>";    
         }
         else {
-            text = "R.I.P."
+            text = "R.I.P.<br>"
         }
         document.getElementById("A"+i).innerHTML = text;
         text = "";
@@ -598,13 +612,14 @@ function drawBattle(){
     
     text = drawMenu();
     document.getElementById("CommandCell").innerHTML = text;
+    //document.getElementById("DialogCanvas").innerHTML = text;
     
     //document.getElementById("MapCanvas").textContent = text;
 }
 
 function drawMenu(){
     let menuText = "";
-    for (menuIndex = 0; menuIndex<menuList.length; menuIndex += 1){
+    for (menuIndex = 0; menuIndex<menuList.length; menuIndex ++){
         if (menuIndex == selection){
             menuText += "+ ";
         }
@@ -615,7 +630,9 @@ function drawMenu(){
         if (selectingSpell && menuIndex == selection){
             menuText += "<br>  " + menuList[menuIndex].Description;
         }
-        menuText += "<br>"
+        if (menuIndex+1 <menuList.length){
+			menuText += "<br>"
+		}
     }
     return menuText;
 }

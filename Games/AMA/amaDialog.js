@@ -1,41 +1,57 @@
 document.getElementById("DialogCanvas").textContent = "";
     
+//setInterval( () => {document.getElementById("TestCanvas2").textContent = dialogObj.timeoutMulti;}, 100);
+ 
 dialogObj = {
     continue : false,
     timeout : 50,
     letterTimeout: 1000,
     timeoutMulti : 1,
     letterTimeoutMulti: -1,
-    activeTimeouts : [],
+    dialogQueue : [],
+    dialogWriter : setInterval( () => {console.log("dialogWriter Waiting.")}, this.timeout),
 
-    async write(text){
+	async write(text){
         if (text == ""){
-            //document.getElementById("DialogCanvas").textContent = "...";
-            this.timeoutMulti += 1;
-            waitingVar = await this.waitToClear();
-            this.timeoutMulti = 1;
+            this.dialogQueue = [];
+            document.getElementById("DialogCanvas").textContent = "";
+            clearInterval(this.dialogWriter);
+			console.log("Queue Emptied");
         }
         else {
-            // if (document.getElementById("DialogCanvas").textContent == "..."){
-            //     document.getElementById("DialogCanvas").textContent = "";
-            // }
-            this.timeoutMulti += 1;
-            waitingVar = await this.waitToWrite(text);
-            this.timeoutMulti -= 1;
-            
+            this.dialogQueue.push(text);
+            console.log(this.dialogQueue.length + "# - " + this.dialogQueue.at(-1));
+            if (this.dialogQueue.length == 1){
+				document.getElementById("DialogCanvas").textContent = this.dialogQueue[0] + "\n";
+				clearInterval(this.dialogWriter);
+				this.dialogWriter = setInterval( () => {dialogObj.postLine();}, dialogObj.timeout);
+			}
         }
         return true;
     },
-
+	
+	postLine(){
+		if (this.dialogQueue.length > 1){
+			console.log("posting Line");
+			document.getElementById("DialogCanvas").textContent += this.dialogQueue[1] + "\n";
+			this.dialogQueue.shift();
+		}
+		else {
+			console.log("clearing Line");
+			this.dialogQueue = [];
+			clearInterval(this.dialogWriter);
+			this.dialogWriter = setInterval( () => {console.log("dialogWriter Waiting. again")}, dialogObj.timeout)
+		}
+	},
+	
     waitToWrite(text){
-        console.log("TimeoutMulti: " + this.timeoutMulti + " " + text);
         setTimeout(() => {document.getElementById("DialogCanvas").textContent += text + "\n";}, (this.timeout * this.timeoutMulti));
-        //setTimeout(() => {this.oneLetterLoop(text);}, (this.timeout * this.timeoutMulti));
+		this.timeoutMulti -= 1;
         return true;
     },
     waitToClear(){
-        console.log("TimeoutMulti: " + this.timeoutMulti + " ");
         setTimeout(() => {document.getElementById("DialogCanvas").textContent = "";}, (this.timeout * this.timeoutMulti));
+        this.timeoutMulti = 1;
         return true;
     },
     // async oneLetterLoop(text){
@@ -75,3 +91,6 @@ dialogObj = {
     //     }, timeout);
     // }
 }
+
+setInterval( () => {document.getElementById("TestCanvas3").textContent = dialogObj.dialogQueue.length;}, 100);
+//var dialogWriter = setInterval( () => {dialogObj.postLine();}, dialogObj.timeout);

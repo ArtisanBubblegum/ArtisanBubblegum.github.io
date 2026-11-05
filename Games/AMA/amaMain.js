@@ -4,7 +4,7 @@ var previousState = "map";
 
 function LoadGame(){
 	localStorage.clear();
-    MapObj.drawMap();
+    //MapObj.drawMap();
     LoadPlayer();
     LoadParty();
     LoadPause();
@@ -24,59 +24,67 @@ function LoadGame(){
 LoadGame();
 
 addEventListener("keydown", (event) => {keyboardInput(event)});
+var inputActive = true;
+var inputSpeed = 100; // 1000 = 1 second;
+setInterval( () => {inputActive = true;}, inputSpeed);
 
 function keyboardInput(keyName){
     keyName.preventDefault();
     //alert(keyName.code);
-    switch (keyName.code){
-        case "ArrowUp":
-        case "KeyW":
-            MainLoop([0,-1]);
-            break;
-        case "ArrowDown":
-        case "KeyS":
-            MainLoop([0,1]);
-            break;
-        case "ArrowLeft":
-        case "KeyA":
-            MainLoop([-1,0]);
-            break;
-        case "ArrowRight":
-        case "KeyD":
-            MainLoop([1,0]);
-            break;
-        case "Enter":
-        case "KeyJ":
-            MainLoop([0,'A']);
-            break;
-        case "Space":
-        case "KeyK":
-            MainLoop([0,'B']);
-            break;
-        case "ShiftLeft":
-        case "ShiftRight":
-            if (gameState=="name"){
-                MainLoop([0, 'Shift']);
-            }
-            break;
-    }
+    if (inputActive){
+		switch (keyName.code){
+			case "ArrowUp":
+			case "KeyW":
+				MainLoop([0,-1]);
+				break;
+			case "ArrowDown":
+			case "KeyS":
+				MainLoop([0,1]);
+				break;
+			case "ArrowLeft":
+			case "KeyA":
+				MainLoop([-1,0]);
+				break;
+			case "ArrowRight":
+			case "KeyD":
+				MainLoop([1,0]);
+				break;
+			case "Enter":
+			case "KeyJ":
+				MainLoop([0,'A']);
+				break;
+			case "Space":
+			case "KeyK":
+				MainLoop([0,'B']);
+				break;
+			case "ShiftLeft":
+			case "ShiftRight":
+				if (gameState=="name"){
+					MainLoop([0, 'Shift']);
+				}
+				break;
+		}
+		inputActive = false;
+	}
 }
 
 function MainLoop(input){
-    switch(gameState){
-        case "map":
-            MapLoop(input);
-            break;
-        case "battle":
-            BattleLoop(input);
-            break;
-        case "pause":
-            PauseLoop(input);
-            break;
-        case "name":
-            NameLoop(input);
-            break;
-    }
+    if (dialogObj.dialogQueue == 0){
+		switch(gameState){
+			case "map":
+				MapLoop(input);
+				break;
+			case "battle":
+				BattleLoop(input);
+				break;
+			case "pause":
+				PauseLoop(input);
+				break;
+			case "name":
+				NameLoop(input);
+				break;
+		}
+	}
 }
 
 function MapLoop(input){
@@ -114,6 +122,7 @@ function NameLoop(input){
             PartyList[0].Name = "Apple Jack";
             PartyList[1].Name = "Pinkie Pie";
         }
+        dialogObj.write("");
     }
 }
 

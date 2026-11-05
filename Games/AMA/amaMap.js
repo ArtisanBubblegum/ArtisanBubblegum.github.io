@@ -1,5 +1,5 @@
 ranchMap = {
-    Name : "ranchMap",
+    Name : "Ranch", //ranchMap
     Map : [[5,5],
         [1,0], 	[1,0], 	["D1",0], 			[1,0], 	[1,0], 
         [1,0], 	[0,0], 	[0,0], 				["H",0], [1,0], 
@@ -14,7 +14,7 @@ ranchMap = {
 }
 
 cityMap = {
-    Name : "cityMap",
+    Name : "City", //cityMap
     Map : [[7,7],
         [1,0], [1,0], [1,0], [ranchMap,0], [1,0], [1,0], [1,0],
         [1,0], [0,0], [0,0], [0,0], [0,0], [0,0], [1,0],
@@ -41,6 +41,8 @@ let MapObj = {
     PlayerPosition : ranchMap.PlayerPosition,
     ViewRange : 4,
     itemList: [],
+    
+    bottomText: "",
 
     mapMaker(x, y){
         if (x < 5) { x = 5;}
@@ -277,6 +279,35 @@ let MapObj = {
                 count--;
             }
         }
+        if (this.MapLevel > 0){
+			let playerPercent = Math.floor( 100 * (Player.BattleStats.HPCur / Player.BattleStats.HPMax));
+			if (playerPercent <= 0 && Player.BattleStats.HPCur <= 0) {
+				playerPercent = "✝";
+			}
+			else {
+				playerPercent = Player.Name[0] + ":" + playerPercent + "%";
+			}
+			let ally1Percent = Math.floor( 100 * (PartyList[0].BattleStats.HPCur / PartyList[0].BattleStats.HPMax));
+			if (ally1Percent <= 0 && PartyList[0].BattleStats.HPCur <= 0) {
+				ally1Percent = "✝";
+			}
+			else {
+				ally1Percent = PartyList[0].Name[0] + ":" + ally1Percent + "%";
+			}
+			let ally2Percent = Math.floor( 100 * (PartyList[1].BattleStats.HPCur / PartyList[0].BattleStats.HPMax));
+			if (ally2Percent <= 0 && PartyList[1].BattleStats.HPCur <= 0) {
+				ally2Percent = "✝";
+			}
+			else {
+				ally2Percent = PartyList[1].Name[0] + ":" + ally2Percent + "%";
+			}
+			bottomText = this.Name[0].toUpperCase() + this.Name.slice(1,3) + this.MapLevel + "/" + playerPercent + "/" + ally1Percent + "/" + ally2Percent + "";
+		}
+		else {
+			bottomText = this.Name;
+		}
+        mapText += "│" + bottomText + "│";
+        
         document.getElementById("MapCanvas").textContent = mapText;
         return mapText;
     },
